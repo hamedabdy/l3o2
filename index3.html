@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>Page Title</title>
+
+    <script type="text/javascript" src="jquery.js"></script>
+    <script type="text/javascript" src="autoSuggestv14/jquery.autoSuggest.js" ></script>
+    <link rel="stylesheet" type="text/css" href="autoSuggestv14/autoSuggest.css">
+    <script type="text/javascript">
+        
+        
+        $(document).ready(function(){
+            
+            $("a").click(function(){
+                alert("hello world");
+            });
+
+var data = {items: [
+{value: "21", name: "Mick Jagger"},
+{value: "43", name: "Johnny Storm"},
+{value: "46", name: "Richard Hatch"},
+{value: "54", name: "Kelly Slater"},
+{value: "55", name: "Rudy Hamilton"},
+{value: "79", name: "Michael Jordan"}
+]};
+$("input[type=text]").autoSuggest(data.items, {selectedItemProp: "name", searchObjProps: "name"});
+            
+        });
+        
+    </script>
+
+
+    <style type="text/css">
+
+.cf:before, .cf:after{
+    content:"";
+    display:table;
+}
+ 
+.cf:after{
+    clear:both;
+}
+ 
+.cf{
+    zoom:1;
+}
+
+    </style>
+
+
+    <link rel="stylesheet" type="text/css" href="style.css">
+    
+</head>
+
+<body>
+
+
+<div>
+
+<form class="form-wrapper cf">
+        <input type="text" placeholder="Search here..." required>
+        <button type="submit">Search</button>
+
+</form> 
+
+
+</div>
+
+
+</body>
+</html>

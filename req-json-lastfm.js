@@ -19,7 +19,16 @@ request(url, function(err, res, results) {
         myobject = parsedJSON.events.event[0];
             console.log('id: ' + myobject.id);
             console.log('title: ' + myobject.title);
-            console.log('artists: ' + util.inspect(myobject.artists));
+            console.log('artists: ' + myobject.artists.artist);
+            console.log('address: ' + myobject.venue.name + '\n' + myobject.venue.location.street + '\n' + myobject.venue.location.postalcode + ' ' + myobject.venue.location.city + ' ' + myobject.venue.location.country);
+            console.log('latitude: ' + myobject.venue.location['geo:point']['geo:lat'] +' longitude: '+ myobject.venue.location['geo:point']['geo:long']);
+            console.log('URL: ' + myobject.url);
+            console.log('Date and Time: ' + myobject.startDate);
+            if(myobject.website != '')
+            console.log('WebSite: ' + myobject.website);
+            else
+            console.log('Website: none provided');
+            
     }
     else 
     console.log('error occured');

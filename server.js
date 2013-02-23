@@ -1,7 +1,7 @@
 /*
  * this file shows a html page and using method post logs
  * the response
- * */
+ */
 
 
 var http = require('http'),
@@ -16,19 +16,19 @@ fs.readFile('./newpage.html', function (err, html) {
     http.createServer(function(request, response) {  
         response.writeHeader(200, {"Content-Type": "text/html"});  
         response.write(html);
-            var chunk = '';
+        var chunk = '';
             
-            request.on('data', function(data){
-                chunk += data;
-            });
-            request.on('end', function(){
-                console.log(chunk + ' <-post data here');
-                
+        request.on('data', function(data){
+            chunk += data;
+        });
+        
+        request.on('end', function(){
+            console.log(chunk + ' <-post data here');       
             var p = util.inspect(querystring.parse(chunk));
-                
-            //response.end(util.inspect(qs.parse(chunk)));
-            console.log(p + ' <-parse data here');
+            response.end(p + ' <- write in html page');
+            console.log(p + ' <-parsed data here');
+            response.write(p + ' <- parsed in html page');
             });
-        response.end();  
+        //response.end(' <- write in html page');  
     }).listen(8000);
 });

@@ -10,7 +10,7 @@ var util = require('util');
 var querystring = require('querystring');
 
 //importing parsedChunk from red-json-lastfm.js
-var mymodule = require('./req-json-lastfm');
+var reqJsonLastfm = require('./req-json-lastfm');
 
 //opening html page
 fs.readFile('./newpage.html', function (err, html) {
@@ -23,13 +23,15 @@ http.createServer(function(request, response) {
     response.write(html);
     
     var chunk = '';
-    var parsedChunk = mymodule.parsedChunk;
+    var parsedChunk = reqJsonLastfm.parsedChunk;
+    //var jsonExp = reqJsonLastfm.jsonExp;
             
     request.on('data', function(data){
         chunk += data;
     });
         
     request.on('end', function(){
+        console.log('json: ' + jsonExp);
         console.log(chunk + ' <-post data here');       
         var p = util.inspect(querystring.parse(chunk));
         console.log(p + ' <-parsed data here');

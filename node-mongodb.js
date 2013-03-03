@@ -1,15 +1,24 @@
 #!/usr/bin/env node
 
+//importing JSON from req-json-lastfm.js
+var reqJsonLastfm = require('./req-json-lastfm');
+//storing JSON from req-json-lastfm.js
+var jsonExp = reqJsonLastfm.jsonExp;
+var jsonObj = reqJsonLastfm.jsonObj;
+
+var concert = require('./concert');
+
+var fs = require('fs');
+
 var Db = require('mongodb').Db;
 var Server = require('mongodb').Server;
 
-//importing parsedChunk from red-json-lastfm.js
-var mymodule = require('./req-json-lastfm');
-
+//establishing new connection
 var client = new Db('test', new Server('127.0.0.1', 27017), {safe:false});
 
 var insertData = function(err, collection){
-    collection.insert({name: 'hamed abdy'});
+    collection.insert({name: 'something'});
+    collection.insert({'jsonObj' : jsonObj});
 };
 
 var listAllData = function(err, collection){
@@ -20,6 +29,12 @@ var listAllData = function(err, collection){
 };
 
 client.open(function(err,pClient){
-    client.collection("test", insertData);
-    client.collection('test', listAllData);
+    if(!err){
+        //console.log('jsonObj: ' + jsonObj);
+        console.log('json: ' + jsonExp);
+        console.log('concert: ' + concert);
+        client.collection("test", insertData);
+        client.collection('test', listAllData);    
+    }
+    else console.log('error occured in node-mongodb.js');
 });

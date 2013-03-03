@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="gamr">
+    <head>
+        <meta charset="utf-8">
+        <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+    </head>
+    <body>
+    	<div id="content"></div>
+        <script>
+            $.ajax({
+                type: 'GET',
+                url: '/concert',
+                dataType: 'json',
+                contentType: 'application/json',
+                success: function(response) {
+                	$('#content').html(response[0].artist);
+                }
+            });
+        </script>
+    </body>
+</html>

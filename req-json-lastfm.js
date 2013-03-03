@@ -8,16 +8,20 @@ var util = require('util');
 var url = 'http://ws.audioscrobbler.com/2.0/?method=geo.getevents&location=madrid&api_key=dbc287366d92998e7f5fb5ba6fb7e7f1&format=json';
 
 request(url, function(err, res, results) {
-    
+    //chunk to store info captured from LastFm
     var chunk= '';
+    //var to store parsed chunk info
     var parsedJSON = '';
+    //var to store each parsed selection (object) from captured info
     var myobject = '';
     //storing all useful information on concerts
     var parsedChunk = '';
-    //storin concert information on jsonObj
+    //storing concert information on jsonObj
     var jsonObj = {};
     //creating output file to save json
     var outputFileName = './concert.json';
+    //variable for storing stringify JSON
+    var jsonExp = '';
     
     if(!err){
         //console.log(results);
@@ -39,7 +43,7 @@ request(url, function(err, res, results) {
         parsedChunk += '<hr> id: ' + myobject.id + '<hr>title: ' + myobject.title + '<br> artists: ' + myobject.artists.artist + '<hr> address: ' + myobject.venue.name + '<br>' + myobject.venue.location.street + '<br>' + myobject.venue.location.postalcode + ' ' + myobject.venue.location.city + ' ' + myobject.venue.location.country + '<hr>latitude: ' + myobject.venue.location['geo:point']['geo:lat'] +'<br> longitude: '+ myobject.venue.location['geo:point']['geo:long'] + '<hr>URL: ' + myobject.url + '<hr>Date and Time: ' + myobject.startDate;
         //console.log('parsedchunk: ' + parsedChunk);
         
-        //creating JSON
+        //creating JSON and adding stuff to it
         jsonObj.id = myobject.id;
         jsonObj.title =  myobject.title;
         jsonObj.artist = myobject.artists.artist;
@@ -54,8 +58,6 @@ request(url, function(err, res, results) {
         jsonObj.address['geo:point']['geo:long'] = myobject.venue.location['geo:point']['geo:long'];
         jsonObj.url = myobject.url;
         jsonObj.startDate = myobject.startDate;
-        
-        
         if(myobject.website != ''){
             //console.log('WebSite: ' + myobject.website);
             parsedChunk += '<hr>WebSite: ' + myobject.website;
@@ -67,11 +69,11 @@ request(url, function(err, res, results) {
             jsonObj.website = 'none provided';
         }
         
-        var json = JSON.stringify(jsonObj, null, 8);
-        //console.log(json);
+        jsonExp = JSON.stringify(jsonObj, null, 8);
+        console.log(jsonObj);
         
-        //writing into file
-        fs.writeFile(outputFileName, json, function(err) {
+        //writing them into file
+        fs.writeFile(outputFileName, jsonExp, function(err) {
             if(err) {
                 console.log(err);
             } else {
@@ -79,8 +81,11 @@ request(url, function(err, res, results) {
     }
         });
         
+        exports.jsonObj = jsonObj;
+        exports.jsonExp = jsonExp;
         //exporting concert information
         exports.parsedChunk = parsedChunk;
+        //console.log('json: ' + json);
     }
     else 
     console.log('error occured');

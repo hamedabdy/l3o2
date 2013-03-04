@@ -69,7 +69,9 @@ request(url, function(err, res, results) {
             jsonObj.website = 'none provided';
         }
         
-        jsonExp = JSON.stringify(jsonObj, null, 0);
+        //jsonObj contains some information in json (non-stringify-d)
+        //jsonExp stores stringify-d jsonObj
+        jsonExp = JSON.stringify(jsonObj, null, 8);
         //console.log(jsonExp);
         
         //writing them into file
@@ -81,12 +83,12 @@ request(url, function(err, res, results) {
     }
         });
         
-        exports.jsonObj = jsonObj;
+        //exporting stringify-d jsonObj
         exports.jsonExp = jsonExp;
         //exporting concert information
         exports.parsedChunk = parsedChunk;
         //console.log('json req-json-lastfm: ' + jsonExp);
     }
     else 
-    console.log('error occured');
+    console.log('\n ***error occured in req-json-lastfm.js***');
 });

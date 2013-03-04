@@ -4,7 +4,6 @@
 var reqJsonLastfm = require('./req-json-lastfm');
 //storing JSON from req-json-lastfm.js
 var jsonExp = reqJsonLastfm.jsonExp;
-var jsonObj = reqJsonLastfm.jsonObj;
 
 //importing concert.json file
 var concert = require('./concert');
@@ -16,7 +15,7 @@ var Server = require('mongodb').Server;
 var client = new Db('test', new Server('127.0.0.1', 27017), {safe:false});
 
 var insertData = function(err, collection){
-    collection.insert({name: 'something'});
+    //collection.insert({name: 'something'});
     collection.insert({'concert' : concert});
 };
 
@@ -35,5 +34,5 @@ client.open(function(err,pClient){
         client.collection("test", insertData);
         client.collection('test', listAllData);    
     }
-    else console.log('error occured in node-mongodb.js');
+    else console.log('\n ***error occured in node-mongodb.js***');
 });

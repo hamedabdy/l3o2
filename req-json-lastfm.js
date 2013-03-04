@@ -44,7 +44,7 @@ request(url, function(err, res, results) {
         //console.log('parsedchunk: ' + parsedChunk);
         
         //creating JSON and adding stuff to it
-        jsonObj.id = myobject.id;
+        //jsonObj.id = myobject.id;
         jsonObj.title =  myobject.title;
         jsonObj.artist = myobject.artists.artist;
         jsonObj.address = {};
@@ -69,8 +69,8 @@ request(url, function(err, res, results) {
             jsonObj.website = 'none provided';
         }
         
-        jsonExp = JSON.stringify(jsonObj, null, 8);
-        console.log(jsonObj);
+        jsonExp = JSON.stringify(jsonObj, null, 0);
+        //console.log(jsonExp);
         
         //writing them into file
         fs.writeFile(outputFileName, jsonExp, function(err) {
@@ -85,7 +85,7 @@ request(url, function(err, res, results) {
         exports.jsonExp = jsonExp;
         //exporting concert information
         exports.parsedChunk = parsedChunk;
-        //console.log('json: ' + json);
+        //console.log('json req-json-lastfm: ' + jsonExp);
     }
     else 
     console.log('error occured');

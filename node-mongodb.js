@@ -6,9 +6,8 @@ var reqJsonLastfm = require('./req-json-lastfm');
 var jsonExp = reqJsonLastfm.jsonExp;
 var jsonObj = reqJsonLastfm.jsonObj;
 
+//importing concert.json file
 var concert = require('./concert');
-
-var fs = require('fs');
 
 var Db = require('mongodb').Db;
 var Server = require('mongodb').Server;
@@ -18,7 +17,7 @@ var client = new Db('test', new Server('127.0.0.1', 27017), {safe:false});
 
 var insertData = function(err, collection){
     collection.insert({name: 'something'});
-    collection.insert({'jsonObj' : jsonObj});
+    collection.insert({'concert' : concert});
 };
 
 var listAllData = function(err, collection){
@@ -31,8 +30,8 @@ var listAllData = function(err, collection){
 client.open(function(err,pClient){
     if(!err){
         //console.log('jsonObj: ' + jsonObj);
-        console.log('json: ' + jsonExp);
-        console.log('concert: ' + concert);
+        //console.log('jsonExp: ' + jsonExp);
+        //console.log('concert: ' + concert);
         client.collection("test", insertData);
         client.collection('test', listAllData);    
     }

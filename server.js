@@ -12,6 +12,8 @@ var querystring = require('querystring');
 //importing parsedChunk from red-json-lastfm.js
 var reqJsonLastfm = require('./req-json-lastfm');
 
+var mongoExpress = require('mongo-express');
+
 //opening html page
 fs.readFile('./newpage.html', function (err, html) {
     if (err) {
@@ -31,7 +33,7 @@ http.createServer(function(request, response) {
     });
         
     request.on('end', function(){
-        console.log('json: ' + jsonExp);
+        //console.log('json: ' + jsonExp);
         console.log(chunk + ' <-post data here');       
         var p = util.inspect(querystring.parse(chunk));
         console.log(p + ' <-parsed data here');

@@ -34,9 +34,9 @@ http.createServer(function(request, response) {
         
     request.on('end', function(){
         //console.log('json: ' + jsonExp);
-        console.log(chunk + ' <-post data here');       
+        //console.log(chunk + ' <-post data here');       
         var p = util.inspect(querystring.parse(chunk));
-        console.log(p + ' <-parsed data here');
+        //console.log(p + ' <-parsed data here');
         response.write(p + ' <- parsed in html page');
         response.write(' imported data: ' + parsedChunk);
         //console.log('parsedchunk: ' + parsedChunk);

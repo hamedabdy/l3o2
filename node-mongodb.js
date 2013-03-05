@@ -3,7 +3,7 @@
 //importing JSON from req-json-lastfm.js
 var reqJsonLastfm = require('./req-json-lastfm');
 //storing JSON from req-json-lastfm.js
-var jsonExp = reqJsonLastfm.jsonExp;
+var jsonStringify = reqJsonLastfm.jsonStringify;
 
 //importing concert.json file
 var concert = require('./concert');

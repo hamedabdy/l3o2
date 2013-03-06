@@ -12,6 +12,7 @@ var querystring = require('querystring');
 //importing parsedChunk from red-json-lastfm.js
 var reqJsonLastfm = require('./req-json-lastfm');
 
+//visual presentation of mongo dataBase
 var mongoExpress = require('mongo-express');
 
 //opening html page

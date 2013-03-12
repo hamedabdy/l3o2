@@ -37,7 +37,7 @@ client.open(function(err,pClient){
         //calling function insertData on collection 'test'
         client.collection("test", insertData);
         //calling fucntion listAllDta on collection 'test'
-        client.collection('test', listAllData);    
+        client.collection('test', listAllData);
     }
     else console.log('\n ***error occured in node-mongodb.js***');
 });

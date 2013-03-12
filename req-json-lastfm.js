@@ -3,7 +3,7 @@
 var fs = require('fs');
 
 var request = require('request');
-var util = require('util');
+//var util = require('util');
 
 var url = 'http://ws.audioscrobbler.com/2.0/?method=geo.getevents&location=madrid&api_key=dbc287366d92998e7f5fb5ba6fb7e7f1&format=json';
 

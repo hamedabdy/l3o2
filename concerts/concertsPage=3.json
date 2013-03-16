@@ -1,0 +1,2143 @@
+{
+    "event": [
+        {
+            "id": "3413753",
+            "title": "Stratovarius",
+            "artist": [
+                "Stratovarius",
+                "Amaranthe",
+                "Seven Kingdoms"
+            ],
+            "address": {
+                "name": "La Cigale",
+                "street": "120 bd Rochechouart",
+                "postalcode": "75018",
+                "city": "Paris",
+                "country": "France",
+                "geo:point": {
+                    "geo:lat": "48.882238",
+                    "geo:long": "2.340115"
+                }
+            },
+            "url": "http://www.last.fm/event/3413753+Stratovarius+at+La+Cigale+on+31+March+2013",
+            "startDate": "Sun, 31 Mar 2013 15:24:01",
+            "website": ""
+        },
+        {
+            "id": "3475547",
+            "title": "DEATH PROFANATION FEST – Part II",
+            "artist": [
+                "Profanal",
+                "Affliction Gate",
+                "Funeral Whore",
+                "Necroblood"
+            ],
+            "address": {
+                "name": "Le Klub",
+                "street": "14, rue Saint-Denis",
+                "postalcode": "75001",
+                "city": "Paris",
+                "country": "France",
+                "geo:point": {
+                    "geo:lat": "48.859008",
+                    "geo:long": "2.347799"
+                }
+            },
+            "url": "http://www.last.fm/event/3475547+DEATH+PROFANATION+FEST+%E2%80%93+Part+II",
+            "startDate": "Sun, 31 Mar 2013 18:30:00",
+            "website": "http://www.facebook.com/events/453470818046694/"
+        },
+        {
+            "id": "3438273",
+            "title": "Testament",
+            "artist": [
+                "Testament",
+                "Dew-Scented",
+                "As They Burn"
+            ],
+            "address": {
+                "name": "La Machine du Moulin Rouge",
+                "street": "90, boulevard de Clichy",
+                "postalcode": "75018",
+                "city": "Paris",
+                "country": "France",
+                "geo:point": {
+                    "geo:lat": "48.884008",
+                    "geo:long": "2.332258"
+                }
+            },
+            "url": "http://www.last.fm/event/3438273+Testament+at+La+Machine+du+Moulin+Rouge+on+31+March+2013",
+            "startDate": "Sun, 31 Mar 2013 19:00:00",
+            "website": "http://www.facebook.com/events/480848735299047/"
+        },
+        {
+            "id": "3434964",
+            "title": "Jessie Ware",
+            "artist": "Jessie Ware",
+            "address": {
+                "name": "Nouveau Casino",
+                "street": "109 rue Oberkampf",
+                "postalcode": "75011",
+                "city": "Paris",
+                "country": "France",
+                "geo:point": {
+                    "geo:lat": "48.865865",
+                    "geo:long": "2.3778"
+                }
+            },
+            "url": "http://www.last.fm/event/3434964+Jessie+Ware+at+Nouveau+Casino+on+31+March+2013",
+            "startDate": "Sun, 31 Mar 2013 19:30:00",
+            "website": ""
+        },
+        {
+            "id": "3540682",
+            "title": "L'arbre à kiwis",
+            "artist": "L'arbre à kiwis",
+            "address": {
+                "name": "Au Chat Noir",
+                "street": "",
+                "postalcode": "",
+                "city": "Paris",
+                "country": "France",
+                "geo:point": {
+                    "geo:lat": "48.867306",
+                    "geo:long": "2.376166"
+                }
+            },
+            "url": "http://www.last.fm/event/3540682+L%27arbre+%C3%A0+kiwis+at+Au+Chat+Noir+on+31+March+2013",
+            "startDate": "Sun, 31 Mar 2013 20:30:00",
+            "website": ""
+        },
+        {
+            "id": "3487010",
+            "title": "PaperScissors Post-Rock Fest",
+            "artist": [
+                "Toundra",
+                "The Pirate Ship Quintet",
+                "My Education",
+                "Petrels",
+                "Lost in Kiev",
+                "The Random Monsters"
+            ],
+            "address": {
+                "name": "Espace B",
+                "street": "16, rue Barbanègre",
+                "postalcode": "75019",
+                "city": "Paris",
+                "country": "France",
+                "geo:point": {
+                    "geo:lat": "48.89322",
+                    "geo:long": "2.384374"
+                }
+            },
+            "url": "http://www.last.fm/festival/3487010+PaperScissors+Post-Rock+Fest",
+            "startDate": "Sun, 31 Mar 2013 20:31:01",
+            "website": "http://www.facebook.com/events/508833335827749/"
+        },
+        {
+            "id": "3520068",
+            "title": "REKIDS night",
+            "artist": [
+                "Radio Slave",
+                "Francois K"
+            ],
+            "address": {
+                "name": "Rex Club",
+                "street": "5 boulevard Poissonnière",
+                "postalcode": "75002",
+                "city": "Paris",
+                "country": "France",
+                "geo:point": {
+                    "geo:lat": "48.87071",
+                    "geo:long": "2.347308"
+                }
+            },
+            "url": "http://www.last.fm/event/3520068+REKIDS+night",
+            "startDate": "Sun, 31 Mar 2013 23:30:00",
+            "website": "http://www.rexclub.com"
+        },
+        {
+            "id": "3525245",
+            "title": "Syncrophone Label Night #3",
+            "artist": [
+                "Blaise",
+                "Innerspace Halflife",
+                "2400 Operator",
+                "John Sill",
+                "Didier Allyne"
+            ],
+            "address": {
+                "name": "Batofar",
+                "street": "11 Quai François Mauriac",
+                "postalcode": "75013",
+                "city": "Paris",
+                "country": "France",
+                "geo:point": {
+                    "geo:lat": "48.833326",
+                    "geo:long": "2.379248"
+                }
+            },
+            "url": "http://www.last.fm/event/3525245+Syncrophone+Label+Night+%233",
+            "startDate": "Sun, 31 Mar 2013 23:30:00",
+            "website": "http://www.batofar.org/Agenda/Evenement/Club/Syncrophone-Label-Night--3-1197.sls"
+        },
+        {
+            "id": "3467759",
+            "title": "End Of Disclosure Tour 2013",
+            "artist": [
+                "Hypocrisy",
+                "Essence",
+                "Hate"
+            ],
+            "address": {
+                "name": "Le Trabendo",
+                "street": "211 Avenue Jean-Jaurès Parc de la Villette",
+                "postalcode": "75019",
+                "city": "Paris",
+                "country": "France",
+                "geo:point": {
+                    "geo:lat": "48.892586",
+                    "geo:long": "2.393904"
+                }
+            },
+            "url": "http://www.last.fm/event/3467759+End+Of+Disclosure+Tour+2013",
+            "startDate": "Mon, 01 Apr 2013 19:00:00",
+            "website": "http://www.facebook.com/events/440022939404001"
+        },
+        {
+            "id": "3329365",
+            "title": "Joe Bonamassa",
+            "artist": "Joe Bonamassa",
+            "address": {
+                "name": "Le Grand Rex",
+                "street": "1, bd Poissonnière",
+                "postalcode": "75002",
+                "city": "Paris",
+                "country": "France",
+                "geo:point": {
+                    "geo:lat": "48.870587",
+                    "geo:long": "2.347681"
+                }
+            },
+            "url": "http://www.last.fm/event/3329365+Joe+Bonamassa+at+Le+Grand+Rex+on+1+April+2013",
+            "startDate": "Mon, 01 Apr 2013 20:00:00",
+            "website": "http://www.legrandrex.com/home.php"
+        },
+        {
+            "id": "3484335",
+            "title": "Inc.",
+            "artist": [
+                "Inc.",
+                "Andrea Balency"
+            ],
+            "address": {
+                "name": "Point Ephémère",
+                "street": "200 quai de Valmy",
+                "postalcode": "75010",
+                "city": "Paris",
+                "country": "France",
+                "geo:point": {
+                    "geo:lat": "48.881467",
+                    "geo:long": "2.368648"
+                }
+            },
+            "url": "http://www.last.fm/event/3484335+Inc.+at+Point+Eph%C3%A9m%C3%A8re+on+1+April+2013",
+            "startDate": "Mon, 01 Apr 2013 20:00:00",
+            "website": ""
+        },
+        {
+            "id": "3538929",
+            "title": "Manu Delago Handmade",
+            "artist": [
+                "Manu Delago Handmade",
+                "Manu Delago"
+            ],
+            "address": {
+                "name": "Cirque Électrique",
+                "street": "Place du maquis du Vercors",
+                "postalcode": "75020",
+                "city": "Paris",
+                "country": "France",
+                "geo:point": {
+                    "geo:lat": "48.897313",
+                    "geo:long": "2.39294"
+                }
+            },
+            "url": "http://www.last.fm/event/3538929+Manu+Delago+Handmade+at+Cirque+%C3%89lectrique+on+1+April+2013",
+            "startDate": "Mon, 01 Apr 2013 21:00:00",
+            "website": "http://www.manudelago.com"
+        },
+        {
+            "id": "3430987",
+            "title": "An Pierlé",
+            "artist": "An Pierlé",
+            "address": {
+                "name": "Café de la Danse",
+                "street": "5 passage Louis Philippe",
+                "postalcode": "75011",
+                "city": "Paris",
+                "country": "France",
+                "geo:point": {
+                    "geo:lat": "48.853741",
+                    "geo:long": "2.372818"
+                }
+            },
+            "url": "http://www.last.fm/event/3430987+An+Pierl%C3%A9+at+Caf%C3%A9+de+la+Danse+on+2+April+2013",
+            "startDate": "Tue, 02 Apr 2013 19:30:00",
+            "website": ""
+        },
+        {
+            "id": "3422155",
+            "title": "Walk Off The Earth",
+            "artist": "Walk Off The Earth",
+            "address": {
+                "name": "Bataclan",
+                "street": "50, boulevard Voltaire",
+                "postalcode": "75011",
+                "city": "Paris",
+                "country": "France",
+                "geo:point": {
+                    "geo:lat": "48.863113",
+                    "geo:long": "2.371051"
+                }
+            },
+            "url": "http://www.last.fm/event/3422155+Walk+Off+The+Earth+at+Bataclan+on+2+April+2013",
+            "startDate": "Tue, 02 Apr 2013 19:30:00",
+            "website": "http://www.onlytalentproductions.com"
+        },
+        {
+            "id": "3262697",
+            "title": "The Australian Pink Floyd Show",
+            "artist": "The Australian Pink Floyd Show",
+            "address": {
+                "name": "Palais des Sports",
+                "street": "1, Place Porte de Versailles",
+                "postalcode": "75015",
+                "city": "Paris",
+                "country": "France",
+                "geo:point": {
+                    "geo:lat": "48.832268",
+                    "geo:long": "2.287851"
+                }
+            },
+            "url": "http://www.last.fm/event/3262697+The+Australian+Pink+Floyd+Show+at+Palais+des+Sports+on+2+April+2013",
+            "startDate": "Tue, 02 Apr 2013 20:00:00",
+            "website": ""
+        },
+        {
+            "id": "3488685",
+            "title": "Sinkane",
+            "artist": "Sinkane",
+            "address": {
+                "name": "Point Ephémère",
+                "street": "200 quai de Valmy",
+                "postalcode": "75010",
+                "city": "Paris",
+                "country": "France",
+                "geo:point": {
+                    "geo:lat": "48.881467",
+                    "geo:long": "2.368648"
+                }
+            },
+            "url": "http://www.last.fm/event/3488685+Sinkane+at+Point+Eph%C3%A9m%C3%A8re+on+2+April+2013",
+            "startDate": "Tue, 02 Apr 2013 20:00:00",
+            "website": ""
+        },
+        {
+            "id": "3390816",
+            "title": "Rock the Gibus",
+            "artist": [
+                "Razorlight",
+                "Deuce",
+                "The Blow Up"
+            ],
+            "address": {
+                "name": "l'Olympia",
+                "street": "28 Boulevard des Capucines",
+                "postalcode": "75009",
+                "city": "Paris",
+                "country": "France",
+                "geo:point": {
+                    "geo:lat": "48.870036",
+                    "geo:long": "2.328476"
+                }
+            },
+            "url": "http://www.last.fm/festival/3390816+Rock+the+Gibus",
+            "startDate": "Wed, 03 Apr 2013 09:38:01",
+            "website": ""
+        },
+        {
+            "id": "3495981",
+            "title": "La Gale",
+            "artist": [
+                "La Gale",
+                "The Procussions",
+                "Smokey Joe and The Kid"
+            ],
+            "address": {
+                "name": "La Maroquinerie",
+                "street": "23 Rue Boyer",
+                "postalcode": "75020",
+                "city": "Paris",
+                "country": "France",
+                "geo:point": {
+                    "geo:lat": "48.868348",
+                    "geo:long": "2.392217"
+                }
+            },
+            "url": "http://www.last.fm/event/3495981+La+Gale+at+La+Maroquinerie+on+3+April+2013",
+            "startDate": "Wed, 03 Apr 2013 19:00:00",
+            "website": ""
+        },
+        {
+            "id": "3479444",
+            "title": "Shout Out Louds",
+            "artist": "Shout Out Louds",
+            "address": {
+                "name": "Café de la Danse",
+                "street": "5 passage Louis Philippe",
+                "postalcode": "75011",
+                "city": "Paris",
+                "country": "France",
+                "geo:point": {
+                    "geo:lat": "48.853741",
+                    "geo:long": "2.372818"
+                }
+            },
+            "url": "http://www.last.fm/event/3479444+Shout+Out+Louds+at+Caf%C3%A9+de+la+Danse+on+3+April+2013",
+            "startDate": "Wed, 03 Apr 2013 19:30:00",
+            "website": ""
+        },
+        {
+            "id": "3495074",
+            "title": "Matthew E. White",
+            "artist": [
+                "Matthew E. White",
+                "Night Beds"
+            ],
+            "address": {
+                "name": "La Flèche d'Or",
+                "street": "102bis Rue de Bagnolet",
+                "postalcode": "75020",
+                "city": "Paris",
+                "country": "France",
+                "geo:point": {
+                    "geo:lat": "48.859423",
+                    "geo:long": "2.402919"
+                }
+            },
+            "url": "http://www.last.fm/event/3495074+Matthew+E.+White+at+La+Fl%C3%A8che+d%27Or+on+3+April+2013",
+            "startDate": "Wed, 03 Apr 2013 19:30:00",
+            "website": ""
+        },
+        {
+            "id": "3521739",
+            "title": "Paul Thomas Saunders",
+            "artist": "Paul Thomas Saunders",
+            "address": {
+                "name": "Point Ephémère",
+                "street": "200 quai de Valmy",
+                "postalcode": "75010",
+                "city": "Paris",
+                "country": "France",
+                "geo:point": {
+                    "geo:lat": "48.881467",
+                    "geo:long": "2.368648"
+                }
+            },
+            "url": "http://www.last.fm/event/3521739+Paul+Thomas+Saunders+at+Point+Eph%C3%A9m%C3%A8re+on+3+April+2013",
+            "startDate": "Wed, 03 Apr 2013 20:00:00",
+            "website": ""
+        },
+        {
+            "id": "3505195",
+            "title": "The Australian Pink Floyd Show",
+            "artist": "The Australian Pink Floyd Show",
+            "address": {
+                "name": "Palais des Sports",
+                "street": "1, Place Porte de Versailles",
+                "postalcode": "75015",
+                "city": "Paris",
+                "country": "France",
+                "geo:point": {
+                    "geo:lat": "48.832268",
+                    "geo:long": "2.287851"
+                }
+            },
+            "url": "http://www.last.fm/event/3505195+The+Australian+Pink+Floyd+Show+at+Palais+des+Sports+on+3+April+2013",
+            "startDate": "Wed, 03 Apr 2013 20:00:00",
+            "website": ""
+        },
+        {
+            "id": "3512818",
+            "title": "Qwartz Electronic Music Awards #9",
+            "artist": [
+                "Philippe Petit",
+                "dDamage",
+                "Sylvgheist Maëlström",
+                "Mika Martini",
+                "Kučka",
+                "zoiBand",
+                "Yoann Durant",
+                "The Water Project"
+            ],
+            "address": {
+                "name": "La Machine du Moulin Rouge",
+                "street": "90, boulevard de Clichy",
+                "postalcode": "75018",
+                "city": "Paris",
+                "country": "France",
+                "geo:point": {
+                    "geo:lat": "48.884008",
+                    "geo:long": "2.332258"
+                }
+            },
+            "url": "http://www.last.fm/event/3512818+Qwartz+Electronic+Music+Awards+%239",
+            "startDate": "Thu, 04 Apr 2013 18:00:00",
+            "website": "http://qwartz.fr/"
+        },
+        {
+            "id": "3496454",
+            "title": "Nine Eleven",
+            "artist": [
+                "Nine Eleven",
+                "aussitot mort",
+                "Wolf Down"
+            ],
+            "address": {
+                "name": "La Miroiterie",
+                "street": "88 rue de Ménilmontant",
+                "postalcode": "75020",
+                "city": "Paris",
+                "country": "France",
+                "geo:point": {
+                    "geo:lat": "48.884671",
+                    "geo:long": "2.401745"
+                }
+            },
+            "url": "http://www.last.fm/event/3496454+Nine+Eleven+at+La+Miroiterie+on+4+April+2013",
+            "startDate": "Thu, 04 Apr 2013 19:30:00",
+            "website": "http://www.facebook.com/events/596075713755926/?ref=3"
+        },
+        {
+            "id": "3460568",
+            "title": "Rocket from the Crypt",
+            "artist": "Rocket from the Crypt",
+            "address": {
+                "name": "Le Trabendo",
+                "street": "211 Avenue Jean-Jaurès Parc de la Villette",
+                "postalcode": "75019",
+                "city": "Paris",
+                "country": "France",
+                "geo:point": {
+                    "geo:lat": "48.892586",
+                    "geo:long": "2.393904"
+                }
+            },
+            "url": "http://www.last.fm/event/3460568+Rocket+from+the+Crypt+at+Le+Trabendo+on+4+April+2013",
+            "startDate": "Thu, 04 Apr 2013 19:50:01",
+            "website": "http://www.3emeacte.com/ospectacles/Seances.aspx?manif=00000000-0000-0000-0533-000000000077"
+        },
+        {
+            "id": "3464795",
+            "title": "Sébastien Tellier",
+            "artist": "Sébastien Tellier",
+            "address": {
+                "name": "l'Olympia",
+                "street": "28 Boulevard des Capucines",
+                "postalcode": "75009",
+                "city": "Paris",
+                "country": "France",
+                "geo:point": {
+                    "geo:lat": "48.870036",
+                    "geo:long": "2.328476"
+                }
+            },
+            "url": "http://www.last.fm/event/3464795+S%C3%A9bastien+Tellier+at+l%27Olympia+on+4+April+2013",
+            "startDate": "Thu, 04 Apr 2013 20:00:00",
+            "website": "http://www.olympiahall.com/rock-electro/sebastien-tellier.html"
+        },
+        {
+            "id": "3486315",
+            "title": "Maserati",
+            "artist": [
+                "Maserati",
+                "Zero Absolu",
+                "Le Réveil des Tropiques"
+            ],
+            "address": {
+                "name": "Point Ephémère",
+                "street": "200 quai de Valmy",
+                "postalcode": "75010",
+                "city": "Paris",
+                "country": "France",
+                "geo:point": {
+                    "geo:lat": "48.881467",
+                    "geo:long": "2.368648"
+                }
+            },
+            "url": "http://www.last.fm/event/3486315+Maserati+at+Point+Eph%C3%A9m%C3%A8re+on+4+April+2013",
+            "startDate": "Thu, 04 Apr 2013 20:00:00",
+            "website": ""
+        },
+        {
+            "id": "3463153",
+            "title": "Verdun",
+            "artist": [
+                "Verdun",
+                "We Insist!",
+                "Cafe Flesh",
+                "Ultracoït"
+            ],
+            "address": {
+                "name": "Le Klub",
+                "street": "14, rue Saint-Denis",
+                "postalcode": "75001",
+                "city": "Paris",
+                "country": "France",
+                "geo:point": {
+                    "geo:lat": "48.859008",
+                    "geo:long": "2.347799"
+                }
+            },
+            "url": "http://www.last.fm/event/3463153+Verdun+at+Le+Klub+on+4+April+2013",
+            "startDate": "Thu, 04 Apr 2013 20:00:00",
+            "website": "http://www.facebook.com/photo.php?fbid=10151189804721523&set=a.39897261522.54026.590831522&type=1&relevant_count=1&ref=nf"
+        },
+        {
+            "id": "3416712",
+            "title": "Skip The Use",
+            "artist": "Skip The Use",
+            "address": {
+                "name": "Le Zénith",
+                "street": "Parc de la Villette",
+                "postalcode": "75019",
+                "city": "Paris",
+                "country": "France",
+                "geo:point": {
+                    "geo:lat": "48.894123",
+                    "geo:long": "2.393131"
+                }
+            },
+            "url": "http://www.last.fm/event/3416712+Skip+The+Use+at+Le+Z%C3%A9nith+on+4+April+2013",
+            "startDate": "Thu, 04 Apr 2013 20:00:00",
+            "website": ""
+        },
+        {
+            "id": "3516073",
+            "title": "European Reggae Contest",
+            "artist": "The Skints",
+            "address": {
+                "name": "La Bellevilloise",
+                "street": "19-21 Rue Boyer",
+                "postalcode": "75020",
+                "city": "Paris",
+                "country": "France",
+                "geo:point": {
+                    "geo:lat": "48.868139",
+                    "geo:long": "2.392338"
+                }
+            },
+            "url": "http://www.last.fm/event/3516073+European+Reggae+Contest",
+            "startDate": "Thu, 04 Apr 2013 20:00:00",
+            "website": ""
+        },
+        {
+            "id": "3537124",
+            "title": "Qwartz Dancefloor Heroes",
+            "artist": [
+                "Derrick May",
+                "Electronic Resistance",
+                "The Soul Monkey",
+                "Blacktoys",
+                "CANI GIGANTI",
+                "Karim Sahraoui",
+                "ZoiD Band Trio"
+            ],
+            "address": {
+                "name": "La Machine du Moulin Rouge",
+                "street": "90, boulevard de Clichy",
+                "postalcode": "75018",
+                "city": "Paris",
+                "country": "France",
+                "geo:point": {
+                    "geo:lat": "48.884008",
+                    "geo:long": "2.332258"
+                }
+            },
+            "url": "http://www.last.fm/event/3537124+Qwartz+Dancefloor+Heroes",
+            "startDate": "Thu, 04 Apr 2013 23:30:00",
+            "website": "http://qwartz.fr/2013/03/11/qwartz-all-night-long-04042013-18h-6h00/"
+        },
+        {
+            "id": "3537939",
+            "title": "Les Banquettes arrières",
+            "artist": "Les Banquettes arrières",
+            "address": {
+                "name": "La Menuiserie",
+                "street": "77 rue Jules Auffret",
+                "postalcode": "93500",
+                "city": "Pantin",
+                "country": "France",
+                "geo:point": {
+                    "geo:lat": "48.884558",
+                    "geo:long": "2.41132"
+                }
+            },
+            "url": "http://www.last.fm/event/3537939+Les+Banquettes+arri%C3%A8res+at+La+Menuiserie+on+5+April+2013",
+            "startDate": "Fri, 05 Apr 2013 10:19:01",
+            "website": "http://www.lamenuiserie.org/contact/"
+        },
+        {
+            "id": "3440761",
+            "title": "Black Veil Brides",
+            "artist": "Black Veil Brides",
+            "address": {
+                "name": "Le Trabendo",
+                "street": "211 Avenue Jean-Jaurès Parc de la Villette",
+                "postalcode": "75019",
+                "city": "Paris",
+                "country": "France",
+                "geo:point": {
+                    "geo:lat": "48.892586",
+                    "geo:long": "2.393904"
+                }
+            },
+            "url": "http://www.last.fm/event/3440761+Black+Veil+Brides+at+Le+Trabendo+on+5+April+2013",
+            "startDate": "Fri, 05 Apr 2013 14:21:01",
+            "website": ""
+        },
+        {
+            "id": "3398752",
+            "title": "Présences électronique 2013",
+            "artist": [
+                "Leila",
+                "Ben Frost",
+                "Keith Fullerton Whitman",
+                "Felix Kubin",
+                "Morton Subotnick",
+                "KTL",
+                "Goran Vejvoda",
+                "Robert Hampson",
+                "Helena Gough",
+                "Jean-Claude Eloy",
+                "Tomoko Sauvage",
+                "Edward Perraud",
+                "Edgardo Canton",
+                "Laurent Dailleau",
+                "Martin Neukom",
+                "David Chiesa",
+                "Kazuyuki Kishino",
+                "Frederik GALIAY"
+            ],
+            "address": {
+                "name": "104 / Cent Quatre",
+                "street": "104 rue d'Aubervilliers / 5 rue Curial",
+                "postalcode": "75019",
+                "city": "Paris",
+                "country": "France",
+                "geo:point": {
+                    "geo:lat": "48.891069",
+                    "geo:long": "2.372084"
+                }
+            },
+            "url": "http://www.last.fm/festival/3398752+Pr%C3%A9sences+%C3%A9lectronique+2013",
+            "startDate": "Fri, 05 Apr 2013 18:00:00",
+            "website": "http://www.inagrm.com/presences-electronique-2013"
+        },
+        {
+            "id": "3484104",
+            "title": "Supuration - The Cube",
+            "artist": [
+                "Supuration",
+                "Gorod"
+            ],
+            "address": {
+                "name": "Divan du Monde",
+                "street": "75 rue des Martyrs",
+                "postalcode": "75018",
+                "city": "Paris",
+                "country": "France",
+                "geo:point": {
+                    "geo:lat": "48.882632",
+                    "geo:long": "2.339606"
+                }
+            },
+            "url": "http://www.last.fm/event/3484104+Supuration+-+The+Cube",
+            "startDate": "Fri, 05 Apr 2013 18:30:00",
+            "website": "http://www.facebook.com/events/552273358140985/"
+        },
+        {
+            "id": "3541088",
+            "title": "Aesthetic Perfection",
+            "artist": [
+                "Aesthetic Perfection",
+                "C-Lekktor",
+                "iVardensphere"
+            ],
+            "address": {
+                "name": "La Scène Bastille",
+                "street": "2bis Rue des Taillandiers",
+                "postalcode": "75011",
+                "city": "Paris",
+                "country": "France",
+                "geo:point": {
+                    "geo:lat": "48.853445",
+                    "geo:long": "2.375693"
+                }
+            },
+            "url": "http://www.last.fm/event/3541088+Aesthetic+Perfection+at+La+Sc%C3%A8ne+Bastille+on+5+April+2013",
+            "startDate": "Fri, 05 Apr 2013 19:00:00",
+            "website": "http://www.la-scene.com/"
+        },
+        {
+            "id": "3540148",
+            "title": "Dusty Mush + Loulou Bécane + Karl Bang + The Stalls // 5 AVRIL // LA MIROITERIE, PARIS",
+            "artist": [
+                "Dusty Mush",
+                "The Stalls",
+                "Karl Bang",
+                "Loulou Bécane"
+            ],
+            "address": {
+                "name": "La Miroiterie",
+                "street": "88 rue de Ménilmontant",
+                "postalcode": "75020",
+                "city": "Paris",
+                "country": "France",
+                "geo:point": {
+                    "geo:lat": "48.884671",
+                    "geo:long": "2.401745"
+                }
+            },
+            "url": "http://www.last.fm/event/3540148+Dusty+Mush+-+Loulou+B%C3%A9cane+-+Karl+Bang+-+The+Stalls+--+5+AVRIL+--+LA+MIROITERIE,+PARIS",
+            "startDate": "Fri, 05 Apr 2013 19:00:00",
+            "website": ""
+        },
+        {
+            "id": "3485276",
+            "title": "Palma Violets",
+            "artist": "Palma Violets",
+            "address": {
+                "name": "La Flèche d'Or",
+                "street": "102bis Rue de Bagnolet",
+                "postalcode": "75020",
+                "city": "Paris",
+                "country": "France",
+                "geo:point": {
+                    "geo:lat": "48.859423",
+                    "geo:long": "2.402919"
+                }
+            },
+            "url": "http://www.last.fm/event/3485276+Palma+Violets+at+La+Fl%C3%A8che+d%27Or+on+5+April+2013",
+            "startDate": "Fri, 05 Apr 2013 20:00:00",
+            "website": ""
+        },
+        {
+            "id": "3460039",
+            "title": "Pauline Croze",
+            "artist": "Pauline Croze",
+            "address": {
+                "name": "La Maroquinerie",
+                "street": "23 Rue Boyer",
+                "postalcode": "75020",
+                "city": "Paris",
+                "country": "France",
+                "geo:point": {
+                    "geo:lat": "48.868348",
+                    "geo:long": "2.392217"
+                }
+            },
+            "url": "http://www.last.fm/event/3460039+Pauline+Croze+at+La+Maroquinerie+on+5+April+2013",
+            "startDate": "Fri, 05 Apr 2013 20:00:00",
+            "website": ""
+        },
+        {
+            "id": "3318518",
+            "title": "Mass Hysteria",
+            "artist": [
+                "Mass Hysteria",
+                "Punish Yourself",
+                "The Arrs"
+            ],
+            "address": {
+                "name": "l'Olympia",
+                "street": "28 Boulevard des Capucines",
+                "postalcode": "75009",
+                "city": "Paris",
+                "country": "France",
+                "geo:point": {
+                    "geo:lat": "48.870036",
+                    "geo:long": "2.328476"
+                }
+            },
+            "url": "http://www.last.fm/event/3318518+Mass+Hysteria+at+l%27Olympia+on+5+April+2013",
+            "startDate": "Fri, 05 Apr 2013 20:30:00",
+            "website": "http://www.masshysteriaofficial.com"
+        },
+        {
+            "id": "3519403",
+            "title": "xViciousx",
+            "artist": [
+                "xViciousx",
+                "Wolfpack",
+                "Disloyal"
+            ],
+            "address": {
+                "name": "La Miroiterie",
+                "street": "88 rue de Ménilmontant",
+                "postalcode": "75020",
+                "city": "Paris",
+                "country": "France",
+                "geo:point": {
+                    "geo:lat": "48.884671",
+                    "geo:long": "2.401745"
+                }
+            },
+            "url": "http://www.last.fm/event/3519403+xViciousx+at+La+Miroiterie+on+5+April+2013",
+            "startDate": "Fri, 05 Apr 2013 20:30:00",
+            "website": "http://www.facebook.com/events/486667428037611/"
+        },
+        {
+            "id": "3507860",
+            "title": "kayenn",
+            "artist": "kayenn",
+            "address": {
+                "name": "le cavern café",
+                "street": "21, rue Dauphine",
+                "postalcode": "75006",
+                "city": "Paris",
+                "country": "France",
+                "geo:point": {
+                    "geo:lat": "48.891302",
+                    "geo:long": "2.339503"
+                }
+            },
+            "url": "http://www.last.fm/event/3507860+kayenn+at+le+cavern+caf%C3%A9+on+5+April+2013",
+            "startDate": "Fri, 05 Apr 2013 20:30:00",
+            "website": "http://www.lecavernclub.com/"
+        },
+        {
+            "id": "3495741",
+            "title": "A Hawk and a Hacksaw",
+            "artist": [
+                "A Hawk and a Hacksaw",
+                "Athanase Granson",
+                "Teachers Florida"
+            ],
+            "address": {
+                "name": "Espace B",
+                "street": "16, rue Barbanègre",
+                "postalcode": "75019",
+                "city": "Paris",
+                "country": "France",
+                "geo:point": {
+                    "geo:lat": "48.89322",
+                    "geo:long": "2.384374"
+                }
+            },
+            "url": "http://www.last.fm/event/3495741+A+Hawk+and+a+Hacksaw+at+Espace+B+on+5+April+2013",
+            "startDate": "Fri, 05 Apr 2013 21:00:00",
+            "website": ""
+        },
+        {
+            "id": "3536508",
+            "title": "Yellow Radio",
+            "artist": [
+                "Yellow Radio",
+                "The Locomotive Sound Corporation",
+                "Hopsy"
+            ],
+            "address": {
+                "name": "Le Bus Palladium",
+                "street": "",
+                "postalcode": "",
+                "city": "Paris",
+                "country": "France",
+                "geo:point": {
+                    "geo:lat": "48.880806",
+                    "geo:long": "2.334872"
+                }
+            },
+            "url": "http://www.last.fm/event/3536508+Yellow+Radio+at+Le+Bus+Palladium+on+5+April+2013",
+            "startDate": "Fri, 05 Apr 2013 21:00:00",
+            "website": ""
+        },
+        {
+            "id": "3531468",
+            "title": "w-h-y 10 ans",
+            "artist": [
+                "Ivan Smagghe",
+                "Joakim",
+                "I:Cube",
+                "Spitzer",
+                "Barker & Baumecker",
+                "South London Ordnance",
+                "Paleman",
+                "X_j"
+            ],
+            "address": {
+                "name": "La Machine du Moulin Rouge",
+                "street": "90, boulevard de Clichy",
+                "postalcode": "75018",
+                "city": "Paris",
+                "country": "France",
+                "geo:point": {
+                    "geo:lat": "48.884008",
+                    "geo:long": "2.332258"
+                }
+            },
+            "url": "http://www.last.fm/event/3531468+w-h-y+10+ans",
+            "startDate": "Fri, 05 Apr 2013 23:30:00",
+            "website": "http://www.w-h-y.org/"
+        },
+        {
+            "id": "3539228",
+            "title": "9th Wonder",
+            "artist": [
+                "9th Wonder",
+                "DJ Enjay",
+                "Just Dizle"
+            ],
+            "address": {
+                "name": "Nouveau Casino",
+                "street": "109 rue Oberkampf",
+                "postalcode": "75011",
+                "city": "Paris",
+                "country": "France",
+                "geo:point": {
+                    "geo:lat": "48.865865",
+                    "geo:long": "2.3778"
+                }
+            },
+            "url": "http://www.last.fm/event/3539228+9th+Wonder+at+Nouveau+Casino+on+5+April+2013",
+            "startDate": "Fri, 05 Apr 2013 23:30:00",
+            "website": ""
+        },
+        {
+            "id": "3528326",
+            "title": "DROPS OF SWEAT #13 ",
+            "artist": [
+                "Bar9",
+                "Trampa",
+                "Adam Polo",
+                "Tee'N Tits",
+                "DEF..."
+            ],
+            "address": {
+                "name": "Glazart",
+                "street": "7/15 avenue de la Porte de la Villette",
+                "postalcode": "75019",
+                "city": "Paris",
+                "country": "France",
+                "geo:point": {
+                    "geo:lat": "48.899382",
+                    "geo:long": "2.386851"
+                }
+            },
+            "url": "http://www.last.fm/event/3528326+DROPS+OF+SWEAT+%2313+",
+            "startDate": "Fri, 05 Apr 2013 23:30:00",
+            "website": "http://www.facebook.com/events/349566131825780/"
+        },
+        {
+            "id": "3501656",
+            "title": "Appollonia",
+            "artist": [
+                "Appollonia",
+                "Agrion Splendens"
+            ],
+            "address": {
+                "name": "La Cantine de Belleville",
+                "street": "108, boulevard de Belleville",
+                "postalcode": "75020",
+                "city": "Paris",
+                "country": "France",
+                "geo:point": {
+                    "geo:lat": "48.860818",
+                    "geo:long": "2.367256"
+                }
+            },
+            "url": "http://www.last.fm/event/3501656+Appollonia+at+La+Cantine+de+Belleville+on+6+April+2013",
+            "startDate": "Sat, 06 Apr 2013 10:50:01",
+            "website": ""
+        },
+        {
+            "id": "3539067",
+            "title": "TIO MANUEL \"FOUR STONES\"",
+            "artist": [
+                "Tio Manuel",
+                "The Penny Black Remedy"
+            ],
+            "address": {
+                "name": "Les Combustibles",
+                "street": "14, rue Abel",
+                "postalcode": "75012",
+                "city": "Paris",
+                "country": "France",
+                "geo:point": {
+                    "geo:lat": "48.847412",
+                    "geo:long": "2.375414"
+                }
+            },
+            "url": "http://www.last.fm/event/3539067+TIO+MANUEL+%22FOUR+STONES%22",
+            "startDate": "Sat, 06 Apr 2013 11:33:01",
+            "website": "http://www.tiomanuel.com"
+        },
+        {
+            "id": "3522713",
+            "title": "Le Grand Méchant Beat 8",
+            "artist": [
+                "DJ Promo",
+                "Rotator",
+                "Ak47",
+                "Sinister Souls",
+                "N-Vitral",
+                "Max Rush"
+            ],
+            "address": {
+                "name": "Glazart",
+                "street": "7/15 avenue de la Porte de la Villette",
+                "postalcode": "75019",
+                "city": "Paris",
+                "country": "France",
+                "geo:point": {
+                    "geo:lat": "48.899382",
+                    "geo:long": "2.386851"
+                }
+            },
+            "url": "http://www.last.fm/event/3522713+Le+Grand+M%C3%A9chant+Beat+8",
+            "startDate": "Sat, 06 Apr 2013 14:27:01",
+            "website": "http://www.partyuniq.com"
+        },
+        {
+            "id": "3507330",
+            "title": "Devil Sold His Soul",
+            "artist": [
+                "Devil Sold His Soul",
+                "Merge",
+                "Our Theory",
+                "Serments",
+                "Hot School"
+            ],
+            "address": {
+                "name": "Divan du Monde",
+                "street": "75 rue des Martyrs",
+                "postalcode": "75018",
+                "city": "Paris",
+                "country": "France",
+                "geo:point": {
+                    "geo:lat": "48.882632",
+                    "geo:long": "2.339606"
+                }
+            },
+            "url": "http://www.last.fm/event/3507330+Devil+Sold+His+Soul+at+Divan+du+Monde+on+6+April+2013",
+            "startDate": "Sat, 06 Apr 2013 16:21:01",
+            "website": ""
+        },
+        {
+            "id": "3511301",
+            "title": "The Computers",
+            "artist": [
+                "The Computers",
+                "DEAD PENGUINS SPORTING CLUB"
+            ],
+            "address": {
+                "name": "La Flèche d'Or",
+                "street": "102bis Rue de Bagnolet",
+                "postalcode": "75020",
+                "city": "Paris",
+                "country": "France",
+                "geo:point": {
+                    "geo:lat": "48.859423",
+                    "geo:long": "2.402919"
+                }
+            },
+            "url": "http://www.last.fm/event/3511301+The+Computers+at+La+Fl%C3%A8che+d%27Or+on+6+April+2013",
+            "startDate": "Sat, 06 Apr 2013 20:00:00",
+            "website": ""
+        },
+        {
+            "id": "3440035",
+            "title": "Michael Jackson THE IMMORTAL World Tour",
+            "artist": "Cirque du Soleil",
+            "address": {
+                "name": "POPB / Palais Omnisports de Paris-Bercy",
+                "street": "8, boulevard de Bercy",
+                "postalcode": "75012",
+                "city": "Paris",
+                "country": "France",
+                "geo:point": {
+                    "geo:lat": "48.839112",
+                    "geo:long": "2.379443"
+                }
+            },
+            "url": "http://www.last.fm/event/3440035+Michael+Jackson+THE+IMMORTAL+World+Tour",
+            "startDate": "Sat, 06 Apr 2013 20:00:00",
+            "website": "http://www.cirquedusoleil.com/fr/shows/michael-jackson-tour/"
+        },
+        {
+            "id": "3297170",
+            "title": "Juan Diego Florez",
+            "artist": "Juan Diego Florez",
+            "address": {
+                "name": "Théâtre des Champs-Élysées",
+                "street": "15 avenue Montaigne",
+                "postalcode": "75008",
+                "city": "Paris",
+                "country": "France",
+                "geo:point": {
+                    "geo:lat": "48.865619",
+                    "geo:long": "2.303189"
+                }
+            },
+            "url": "http://www.last.fm/event/3297170+Juan+Diego+Florez+at+Th%C3%A9%C3%A2tre+des+Champs-%C3%89lys%C3%A9es+on+6+April+2013",
+            "startDate": "Sat, 06 Apr 2013 20:00:00",
+            "website": "http://www.lesgrandesvoix.fr"
+        },
+        {
+            "id": "3512872",
+            "title": "Renata Rosa (BR)",
+            "artist": "Renata Rosa",
+            "address": {
+                "name": "La Bellevilloise",
+                "street": "19-21 Rue Boyer",
+                "postalcode": "75020",
+                "city": "Paris",
+                "country": "France",
+                "geo:point": {
+                    "geo:lat": "48.868139",
+                    "geo:long": "2.392338"
+                }
+            },
+            "url": "http://www.last.fm/event/3512872+Renata+Rosa+(BR)",
+            "startDate": "Sat, 06 Apr 2013 20:00:00",
+            "website": "http://www.enmemetemps.com"
+        },
+        {
+            "id": "3437763",
+            "title": "António Zambujo",
+            "artist": "António Zambujo",
+            "address": {
+                "name": "Institut du Monde Arabe",
+                "street": "1, rue des fossés Saint-Bernard",
+                "postalcode": "75005",
+                "city": "Paris",
+                "country": "France",
+                "geo:point": {
+                    "geo:lat": "48.849302",
+                    "geo:long": "2.355838"
+                }
+            },
+            "url": "http://www.last.fm/event/3437763+Ant%C3%B3nio+Zambujo+at+Institut+du+Monde+Arabe+on+6+April+2013",
+            "startDate": "Sat, 06 Apr 2013 20:30:00",
+            "website": "http://www.imarabe.org/musique/le-fado-metisse-de-lisbonne"
+        },
+        {
+            "id": "3534647",
+            "title": "La mal coiffée",
+            "artist": "La mal coiffée",
+            "address": {
+                "name": "La Menuiserie",
+                "street": "77 rue Jules Auffret",
+                "postalcode": "93500",
+                "city": "Pantin",
+                "country": "France",
+                "geo:point": {
+                    "geo:lat": "48.884558",
+                    "geo:long": "2.41132"
+                }
+            },
+            "url": "http://www.last.fm/event/3534647+La+mal+coiff%C3%A9e+at+La+Menuiserie+on+6+April+2013",
+            "startDate": "Sat, 06 Apr 2013 20:30:00",
+            "website": "http://www.lamenuiserie.org/contact/"
+        },
+        {
+            "id": "3537623",
+            "title": "BLOC # 005",
+            "artist": [
+                "Sawf",
+                "Ascion",
+                "Ventress"
+            ],
+            "address": {
+                "name": "Le Trabendo",
+                "street": "211 Avenue Jean-Jaurès Parc de la Villette",
+                "postalcode": "75019",
+                "city": "Paris",
+                "country": "France",
+                "geo:point": {
+                    "geo:lat": "48.892586",
+                    "geo:long": "2.393904"
+                }
+            },
+            "url": "http://www.last.fm/event/3537623+BLOC+%23+005",
+            "startDate": "Sat, 06 Apr 2013 23:00:00",
+            "website": ""
+        },
+        {
+            "id": "3537226",
+            "title": "ME. 011",
+            "artist": [
+                "Pachanga Boys",
+                "Chloé",
+                "Jennifer Cardini"
+            ],
+            "address": {
+                "name": "Cabaret Sauvage",
+                "street": "Parc de la Villette",
+                "postalcode": "75019",
+                "city": "Paris",
+                "country": "France",
+                "geo:point": {
+                    "geo:lat": "48.895569",
+                    "geo:long": "2.392402"
+                }
+            },
+            "url": "http://www.last.fm/event/3537226+ME.+011",
+            "startDate": "Sat, 06 Apr 2013 23:30:00",
+            "website": ""
+        },
+        {
+            "id": "3451063",
+            "title": "Black Rainbows",
+            "artist": [
+                "Black Rainbows",
+                "La Otracina"
+            ],
+            "address": {
+                "name": "Les Combustibles",
+                "street": "14, rue Abel",
+                "postalcode": "75012",
+                "city": "Paris",
+                "country": "France",
+                "geo:point": {
+                    "geo:lat": "48.847412",
+                    "geo:long": "2.375414"
+                }
+            },
+            "url": "http://www.last.fm/event/3451063+Black+Rainbows+at+Les+Combustibles+on+7+April+2013",
+            "startDate": "Sun, 07 Apr 2013 11:35:01",
+            "website": "http://www.facebook.com/photo.php?fbid=314593385321675&set=a.194981737282841.42849.144900648957617&type=1&relevant_count=1&ref=nf"
+        },
+        {
+            "id": "3401265",
+            "title": "Johnny Winter",
+            "artist": "Johnny Winter",
+            "address": {
+                "name": "l'Olympia",
+                "street": "28 Boulevard des Capucines",
+                "postalcode": "75009",
+                "city": "Paris",
+                "country": "France",
+                "geo:point": {
+                    "geo:lat": "48.870036",
+                    "geo:long": "2.328476"
+                }
+            },
+            "url": "http://www.last.fm/event/3401265+Johnny+Winter+at+l%27Olympia+on+7+April+2013",
+            "startDate": "Sun, 07 Apr 2013 19:00:00",
+            "website": "http://en.olympiahall.com/rock-electro/johnny-winter-alvin-lee.html"
+        },
+        {
+            "id": "3406383",
+            "title": "Hellish Rock Tour Part II",
+            "artist": [
+                "Helloween",
+                "Gamma Ray",
+                "Shadowside"
+            ],
+            "address": {
+                "name": "l'Olympia",
+                "street": "28 Boulevard des Capucines",
+                "postalcode": "75009",
+                "city": "Paris",
+                "country": "France",
+                "geo:point": {
+                    "geo:lat": "48.870036",
+                    "geo:long": "2.328476"
+                }
+            },
+            "url": "http://www.last.fm/event/3406383+Hellish+Rock+Tour+Part+II",
+            "startDate": "Mon, 08 Apr 2013 11:58:01",
+            "website": ""
+        },
+        {
+            "id": "3468477",
+            "title": "Gojira",
+            "artist": [
+                "Gojira",
+                "Kruger",
+                "Hypno5e"
+            ],
+            "address": {
+                "name": "Bataclan",
+                "street": "50, boulevard Voltaire",
+                "postalcode": "75011",
+                "city": "Paris",
+                "country": "France",
+                "geo:point": {
+                    "geo:lat": "48.863113",
+                    "geo:long": "2.371051"
+                }
+            },
+            "url": "http://www.last.fm/event/3468477+Gojira+at+Bataclan+on+9+April+2013",
+            "startDate": "Tue, 09 Apr 2013 12:45:01",
+            "website": ""
+        },
+        {
+            "id": "3340498",
+            "title": "Asaf Avidan & Band",
+            "artist": "Asaf Avidan",
+            "address": {
+                "name": "l'Olympia",
+                "street": "28 Boulevard des Capucines",
+                "postalcode": "75009",
+                "city": "Paris",
+                "country": "France",
+                "geo:point": {
+                    "geo:lat": "48.870036",
+                    "geo:long": "2.328476"
+                }
+            },
+            "url": "http://www.last.fm/event/3340498+Asaf+Avidan+-+Band",
+            "startDate": "Tue, 09 Apr 2013 20:00:00",
+            "website": ""
+        },
+        {
+            "id": "3487526",
+            "title": "Tall Ships",
+            "artist": "Tall Ships",
+            "address": {
+                "name": "Point Ephémère",
+                "street": "200 quai de Valmy",
+                "postalcode": "75010",
+                "city": "Paris",
+                "country": "France",
+                "geo:point": {
+                    "geo:lat": "48.881467",
+                    "geo:long": "2.368648"
+                }
+            },
+            "url": "http://www.last.fm/event/3487526+Tall+Ships+at+Point+Eph%C3%A9m%C3%A8re+on+9+April+2013",
+            "startDate": "Tue, 09 Apr 2013 20:00:00",
+            "website": ""
+        },
+        {
+            "id": "3508524",
+            "title": "Jacco Gardner",
+            "artist": "Jacco Gardner",
+            "address": {
+                "name": "Espace B",
+                "street": "16, rue Barbanègre",
+                "postalcode": "75019",
+                "city": "Paris",
+                "country": "France",
+                "geo:point": {
+                    "geo:lat": "48.89322",
+                    "geo:long": "2.384374"
+                }
+            },
+            "url": "http://www.last.fm/event/3508524+Jacco+Gardner+at+Espace+B+on+9+April+2013",
+            "startDate": "Tue, 09 Apr 2013 20:30:00",
+            "website": ""
+        },
+        {
+            "id": "3539464",
+            "title": "The Biters + Fire! Fire! Fire! en concert au Klub",
+            "artist": [
+                "The Biters",
+                "Fire! Fire! Fire!"
+            ],
+            "address": {
+                "name": "Le Klub",
+                "street": "14, rue Saint-Denis",
+                "postalcode": "75001",
+                "city": "Paris",
+                "country": "France",
+                "geo:point": {
+                    "geo:lat": "48.859008",
+                    "geo:long": "2.347799"
+                }
+            },
+            "url": "http://www.last.fm/event/3539464+The+Biters+-+Fire!+Fire!+Fire!+en+concert+au+Klub",
+            "startDate": "Tue, 09 Apr 2013 21:00:00",
+            "website": "http://www.facebook.com/events/346956028742718/"
+        },
+        {
+            "id": "3451064",
+            "title": "Baby Woodrose",
+            "artist": [
+                "Baby Woodrose",
+                "Elder",
+                "Pet The Preacher"
+            ],
+            "address": {
+                "name": "Les Combustibles",
+                "street": "14, rue Abel",
+                "postalcode": "75012",
+                "city": "Paris",
+                "country": "France",
+                "geo:point": {
+                    "geo:lat": "48.847412",
+                    "geo:long": "2.375414"
+                }
+            },
+            "url": "http://www.last.fm/event/3451064+Baby+Woodrose+at+Les+Combustibles+on+10+April+2013",
+            "startDate": "Wed, 10 Apr 2013 11:37:01",
+            "website": "http://www.facebook.com/photo.php?fbid=314593385321675&set=a.194981737282841.42849.144900648957617&type=1&relevant_count=1&ref=nf"
+        },
+        {
+            "id": "3522802",
+            "title": "Evening Hymns",
+            "artist": [
+                "Evening Hymns",
+                "Anouk Aiata",
+                "I.S.L.A."
+            ],
+            "address": {
+                "name": "Les Trois Baudets",
+                "street": "64, boulevard de Clichy",
+                "postalcode": "75018",
+                "city": "Paris",
+                "country": "France",
+                "geo:point": {
+                    "geo:lat": "48.88341",
+                    "geo:long": "2.334352"
+                }
+            },
+            "url": "http://www.last.fm/event/3522802+Evening+Hymns+at+Les+Trois+Baudets+on+10+April+2013",
+            "startDate": "Wed, 10 Apr 2013 16:10:01",
+            "website": ""
+        },
+        {
+            "id": "3519311",
+            "title": "Verity Susman",
+            "artist": [
+                "Verity Susman",
+                "Kool Thing"
+            ],
+            "address": {
+                "name": "Point Ephémère",
+                "street": "200 quai de Valmy",
+                "postalcode": "75010",
+                "city": "Paris",
+                "country": "France",
+                "geo:point": {
+                    "geo:lat": "48.881467",
+                    "geo:long": "2.368648"
+                }
+            },
+            "url": "http://www.last.fm/event/3519311+Verity+Susman+at+Point+Eph%C3%A9m%C3%A8re+on+10+April+2013",
+            "startDate": "Wed, 10 Apr 2013 17:04:01",
+            "website": ""
+        },
+        {
+            "id": "3483327",
+            "title": "Claude Semal",
+            "artist": [
+                "Claude Semal",
+                "Franck Wuyts"
+            ],
+            "address": {
+                "name": "Au Magique",
+                "street": "42 rue de Gergovie",
+                "postalcode": "75014",
+                "city": "Paris",
+                "country": "France",
+                "geo:point": {
+                    "geo:lat": "48.853121",
+                    "geo:long": "2.361227"
+                }
+            },
+            "url": "http://www.last.fm/event/3483327+Claude+Semal+at+Au+Magique+on+10+April+2013",
+            "startDate": "Wed, 10 Apr 2013 17:43:01",
+            "website": ""
+        },
+        {
+            "id": "3538671",
+            "title": "Moriarty Meets Mama Rosin",
+            "artist": [
+                "Moriarty",
+                "Mama Rosin"
+            ],
+            "address": {
+                "name": "La Flèche d'Or",
+                "street": "102bis Rue de Bagnolet",
+                "postalcode": "75020",
+                "city": "Paris",
+                "country": "France",
+                "geo:point": {
+                    "geo:lat": "48.859423",
+                    "geo:long": "2.402919"
+                }
+            },
+            "url": "http://www.last.fm/event/3538671+Moriarty+Meets+Mama+Rosin",
+            "startDate": "Wed, 10 Apr 2013 19:30:00",
+            "website": ""
+        },
+        {
+            "id": "3540293",
+            "title": "An Acoustic Evening Of Antimatter",
+            "artist": "Antimatter",
+            "address": {
+                "name": "Le Klub",
+                "street": "14, rue Saint-Denis",
+                "postalcode": "75001",
+                "city": "Paris",
+                "country": "France",
+                "geo:point": {
+                    "geo:lat": "48.859008",
+                    "geo:long": "2.347799"
+                }
+            },
+            "url": "http://www.last.fm/event/3540293+An+Acoustic+Evening+Of+Antimatter",
+            "startDate": "Wed, 10 Apr 2013 19:39:01",
+            "website": "http://www.facebook.com/photo.php?fbid=10151406052133763&set=a.10150116714738763.280543.9803498762&type=1&theater"
+        },
+        {
+            "id": "3490344",
+            "title": "Gojira",
+            "artist": [
+                "Gojira",
+                "Kruger",
+                "Hypno5e"
+            ],
+            "address": {
+                "name": "Bataclan",
+                "street": "50, boulevard Voltaire",
+                "postalcode": "75011",
+                "city": "Paris",
+                "country": "France",
+                "geo:point": {
+                    "geo:lat": "48.863113",
+                    "geo:long": "2.371051"
+                }
+            },
+            "url": "http://www.last.fm/event/3490344+Gojira+at+Bataclan+on+10+April+2013",
+            "startDate": "Wed, 10 Apr 2013 19:45:01",
+            "website": ""
+        },
+        {
+            "id": "3432265",
+            "title": "Melody Gardot",
+            "artist": "Melody Gardot",
+            "address": {
+                "name": "l'Olympia",
+                "street": "28 Boulevard des Capucines",
+                "postalcode": "75009",
+                "city": "Paris",
+                "country": "France",
+                "geo:point": {
+                    "geo:lat": "48.870036",
+                    "geo:long": "2.328476"
+                }
+            },
+            "url": "http://www.last.fm/event/3432265+Melody+Gardot+at+l%27Olympia+on+10+April+2013",
+            "startDate": "Wed, 10 Apr 2013 20:00:00",
+            "website": "http://www.olympiahall.com/jazz-blues-classique/melody-gardot.html"
+        },
+        {
+            "id": "3483967",
+            "title": "Peace",
+            "artist": "Peace",
+            "address": {
+                "name": "Petit Bain",
+                "street": "7, port de la gare",
+                "postalcode": "75013",
+                "city": "Paris",
+                "country": "France",
+                "geo:point": {
+                    "geo:lat": "48.836715",
+                    "geo:long": "2.374238"
+                }
+            },
+            "url": "http://www.last.fm/event/3483967+Peace+at+Petit+Bain+on+10+April+2013",
+            "startDate": "Wed, 10 Apr 2013 20:00:00",
+            "website": ""
+        },
+        {
+            "id": "3493184",
+            "title": "Psychic Ills",
+            "artist": [
+                "Psychic Ills",
+                "K-X-P"
+            ],
+            "address": {
+                "name": "Espace B",
+                "street": "16, rue Barbanègre",
+                "postalcode": "75019",
+                "city": "Paris",
+                "country": "France",
+                "geo:point": {
+                    "geo:lat": "48.89322",
+                    "geo:long": "2.384374"
+                }
+            },
+            "url": "http://www.last.fm/event/3493184+Psychic+Ills+at+Espace+B+on+11+April+2013",
+            "startDate": "Thu, 11 Apr 2013 09:04:01",
+            "website": ""
+        },
+        {
+            "id": "3509082",
+            "title": "Caino",
+            "artist": "Caino",
+            "address": {
+                "name": "Café de Paris",
+                "street": "158 rue Oberkampf",
+                "postalcode": "75011",
+                "city": "Paris",
+                "country": "France",
+                "geo:point": {
+                    "geo:lat": "48.866864",
+                    "geo:long": "2.382372"
+                }
+            },
+            "url": "http://www.last.fm/event/3509082+Caino+at+Caf%C3%A9+de+Paris+on+11+April+2013",
+            "startDate": "Thu, 11 Apr 2013 10:27:01",
+            "website": "http://www.facebook.com/photo.php?fbid=10151297979201939&set=a.10150949437106939.412026.249784316938&type=1&relevant_count=1&ref=nf"
+        },
+        {
+            "id": "3507481",
+            "title": "Yasiin Bey",
+            "artist": [
+                "Yasiin Bey",
+                "Robert Glasper",
+                "Robert Glasper Experiment"
+            ],
+            "address": {
+                "name": "Bataclan",
+                "street": "50, boulevard Voltaire",
+                "postalcode": "75011",
+                "city": "Paris",
+                "country": "France",
+                "geo:point": {
+                    "geo:lat": "48.863113",
+                    "geo:long": "2.371051"
+                }
+            },
+            "url": "http://www.last.fm/event/3507481+Yasiin+Bey+at+Bataclan+on+11+April+2013",
+            "startDate": "Thu, 11 Apr 2013 19:00:00",
+            "website": ""
+        },
+        {
+            "id": "3450610",
+            "title": "fun.",
+            "artist": "fun.",
+            "address": {
+                "name": "Le Trianon",
+                "street": "80, boulevard de Rochechouart",
+                "postalcode": "75018",
+                "city": "Paris",
+                "country": "France",
+                "geo:point": {
+                    "geo:lat": "48.882809",
+                    "geo:long": "2.343156"
+                }
+            },
+            "url": "http://www.last.fm/event/3450610+fun.+at+Le+Trianon+on+11+April+2013",
+            "startDate": "Thu, 11 Apr 2013 19:30:00",
+            "website": ""
+        },
+        {
+            "id": "3495439",
+            "title": "Portico Quartet",
+            "artist": "Portico Quartet",
+            "address": {
+                "name": "La Maroquinerie",
+                "street": "23 Rue Boyer",
+                "postalcode": "75020",
+                "city": "Paris",
+                "country": "France",
+                "geo:point": {
+                    "geo:lat": "48.868348",
+                    "geo:long": "2.392217"
+                }
+            },
+            "url": "http://www.last.fm/event/3495439+Portico+Quartet+at+La+Maroquinerie+on+11+April+2013",
+            "startDate": "Thu, 11 Apr 2013 20:00:00",
+            "website": ""
+        },
+        {
+            "id": "3463005",
+            "title": "Pink Martini",
+            "artist": "Pink Martini",
+            "address": {
+                "name": "Le Grand Rex",
+                "street": "1, bd Poissonnière",
+                "postalcode": "75002",
+                "city": "Paris",
+                "country": "France",
+                "geo:point": {
+                    "geo:lat": "48.870587",
+                    "geo:long": "2.347681"
+                }
+            },
+            "url": "http://www.last.fm/event/3463005+Pink+Martini+at+Le+Grand+Rex+on+11+April+2013",
+            "startDate": "Thu, 11 Apr 2013 20:00:00",
+            "website": ""
+        },
+        {
+            "id": "3456957",
+            "title": "Abraham Inc.",
+            "artist": "Abraham Inc.",
+            "address": {
+                "name": "104 / Cent Quatre",
+                "street": "104 rue d'Aubervilliers / 5 rue Curial",
+                "postalcode": "75019",
+                "city": "Paris",
+                "country": "France",
+                "geo:point": {
+                    "geo:lat": "48.891069",
+                    "geo:long": "2.372084"
+                }
+            },
+            "url": "http://www.last.fm/event/3456957+Abraham+Inc.+at+104+-+Cent+Quatre+on+11+April+2013",
+            "startDate": "Thu, 11 Apr 2013 20:30:00",
+            "website": "http://www.104.fr/programmation/evenement.html?evenement=180"
+        },
+        {
+            "id": "3460092",
+            "title": "From&Ziel",
+            "artist": "From&Ziel",
+            "address": {
+                "name": "Le Limonaire",
+                "street": "18 cité Bergère",
+                "postalcode": "75009",
+                "city": "Paris",
+                "country": "France",
+                "geo:point": {
+                    "geo:lat": "48.872334",
+                    "geo:long": "2.344893"
+                }
+            },
+            "url": "http://www.last.fm/event/3460092+From-Ziel+at+Le+Limonaire+on+11+April+2013",
+            "startDate": "Thu, 11 Apr 2013 22:00:00",
+            "website": "http://www.from-ziel.com/"
+        },
+        {
+            "id": "3419291",
+            "title": "Debout sur le zinc",
+            "artist": "Debout sur le zinc",
+            "address": {
+                "name": "Le Trianon",
+                "street": "80, boulevard de Rochechouart",
+                "postalcode": "75018",
+                "city": "Paris",
+                "country": "France",
+                "geo:point": {
+                    "geo:lat": "48.882809",
+                    "geo:long": "2.343156"
+                }
+            },
+            "url": "http://www.last.fm/event/3419291+Debout+sur+le+zinc+at+Le+Trianon+on+12+April+2013",
+            "startDate": "Fri, 12 Apr 2013 08:21:01",
+            "website": ""
+        },
+        {
+            "id": "3523786",
+            "title": "Chill Bump",
+            "artist": "Chill Bump",
+            "address": {
+                "name": "L'International",
+                "street": "5/7 rue Moret",
+                "postalcode": "75011",
+                "city": "Paris",
+                "country": "France",
+                "geo:point": {
+                    "geo:lat": "48.866715",
+                    "geo:long": "2.379807"
+                }
+            },
+            "url": "http://www.last.fm/event/3523786+Chill+Bump+at+L%27International+on+12+April+2013",
+            "startDate": "Fri, 12 Apr 2013 09:35:01",
+            "website": ""
+        },
+        {
+            "id": "3537940",
+            "title": "Bea Tristan",
+            "artist": "Bea Tristan",
+            "address": {
+                "name": "La Menuiserie",
+                "street": "77 rue Jules Auffret",
+                "postalcode": "93500",
+                "city": "Pantin",
+                "country": "France",
+                "geo:point": {
+                    "geo:lat": "48.884558",
+                    "geo:long": "2.41132"
+                }
+            },
+            "url": "http://www.last.fm/event/3537940+Bea+Tristan+at+La+Menuiserie+on+12+April+2013",
+            "startDate": "Fri, 12 Apr 2013 10:21:01",
+            "website": "http://www.lamenuiserie.org/contact/"
+        },
+        {
+            "id": "3460093",
+            "title": "From&Ziel",
+            "artist": "From&Ziel",
+            "address": {
+                "name": "Le Limonaire",
+                "street": "18 cité Bergère",
+                "postalcode": "75009",
+                "city": "Paris",
+                "country": "France",
+                "geo:point": {
+                    "geo:lat": "48.872334",
+                    "geo:long": "2.344893"
+                }
+            },
+            "url": "http://www.last.fm/event/3460093+From-Ziel+at+Le+Limonaire+on+12+April+2013",
+            "startDate": "Fri, 12 Apr 2013 19:00:00",
+            "website": "http://www.from-ziel.com/"
+        },
+        {
+            "id": "3513293",
+            "title": "Dawn Richard",
+            "artist": "Dawn Richard",
+            "address": {
+                "name": "Nouveau Casino",
+                "street": "109 rue Oberkampf",
+                "postalcode": "75011",
+                "city": "Paris",
+                "country": "France",
+                "geo:point": {
+                    "geo:lat": "48.865865",
+                    "geo:long": "2.3778"
+                }
+            },
+            "url": "http://www.last.fm/event/3513293+Dawn+Richard+at+Nouveau+Casino+on+12+April+2013",
+            "startDate": "Fri, 12 Apr 2013 19:30:00",
+            "website": "http://www.nouveaucasino.net/index.php/2013/04/12/2190-dawn-richard"
+        },
+        {
+            "id": "3454922",
+            "title": "It's a Man World Tour",
+            "artist": "Anastacia",
+            "address": {
+                "name": "l'Olympia",
+                "street": "28 Boulevard des Capucines",
+                "postalcode": "75009",
+                "city": "Paris",
+                "country": "France",
+                "geo:point": {
+                    "geo:lat": "48.870036",
+                    "geo:long": "2.328476"
+                }
+            },
+            "url": "http://www.last.fm/event/3454922+It%27s+a+Man+World+Tour",
+            "startDate": "Fri, 12 Apr 2013 20:00:00",
+            "website": "http://www.anastacia.com/"
+        },
+        {
+            "id": "3505432",
+            "title": "The Courteeners",
+            "artist": "The Courteeners",
+            "address": {
+                "name": "Point Ephémère",
+                "street": "200 quai de Valmy",
+                "postalcode": "75010",
+                "city": "Paris",
+                "country": "France",
+                "geo:point": {
+                    "geo:lat": "48.881467",
+                    "geo:long": "2.368648"
+                }
+            },
+            "url": "http://www.last.fm/event/3505432+The+Courteeners+at+Point+Eph%C3%A9m%C3%A8re+on+12+April+2013",
+            "startDate": "Fri, 12 Apr 2013 20:00:00",
+            "website": ""
+        },
+        {
+            "id": "3433741",
+            "title": "Booba",
+            "artist": "Booba",
+            "address": {
+                "name": "Le Zénith",
+                "street": "Parc de la Villette",
+                "postalcode": "75019",
+                "city": "Paris",
+                "country": "France",
+                "geo:point": {
+                    "geo:lat": "48.894123",
+                    "geo:long": "2.393131"
+                }
+            },
+            "url": "http://www.last.fm/event/3433741+Booba+at+Le+Z%C3%A9nith+on+12+April+2013",
+            "startDate": "Fri, 12 Apr 2013 20:30:00",
+            "website": ""
+        },
+        {
+            "id": "3512173",
+            "title": "Dead Cowboy's Sluts",
+            "artist": [
+                "Dead Cowboy's Sluts",
+                "FuryKane",
+                "In Arkadia",
+                "Apolline",
+                "Dreadful Silence"
+            ],
+            "address": {
+                "name": "Batofar",
+                "street": "11 Quai François Mauriac",
+                "postalcode": "75013",
+                "city": "Paris",
+                "country": "France",
+                "geo:point": {
+                    "geo:lat": "48.833326",
+                    "geo:long": "2.379248"
+                }
+            },
+            "url": "http://www.last.fm/event/3512173+Dead+Cowboy%27s+Sluts+at+Batofar+on+12+April+2013",
+            "startDate": "Fri, 12 Apr 2013 20:36:01",
+            "website": ""
+        },
+        {
+            "id": "3494581",
+            "title": "Cheikh Sidi Bémol",
+            "artist": [
+                "Cheikh Sidi Bémol",
+                "Cheikh Sidi Bemol"
+            ],
+            "address": {
+                "name": "Studio de l'Ermitage",
+                "street": "8 rue de l’Ermitage",
+                "postalcode": "75020",
+                "city": "Paris",
+                "country": "France",
+                "geo:point": {
+                    "geo:lat": "48.869809",
+                    "geo:long": "2.391642"
+                }
+            },
+            "url": "http://www.last.fm/event/3494581+Cheikh+Sidi+B%C3%A9mol+at+Studio+de+l%27Ermitage+on+12+April+2013",
+            "startDate": "Fri, 12 Apr 2013 21:30:00",
+            "website": "http://www.sidibemol.com/"
+        },
+        {
+            "id": "3537946",
+            "title": "Megaphone tour",
+            "artist": [
+                "Armelle Dumoulin",
+                "From & Ziel",
+                "La Mauvaise Graine"
+            ],
+            "address": {
+                "name": "La Menuiserie",
+                "street": "77 rue Jules Auffret",
+                "postalcode": "93500",
+                "city": "Pantin",
+                "country": "France",
+                "geo:point": {
+                    "geo:lat": "48.884558",
+                    "geo:long": "2.41132"
+                }
+            },
+            "url": "http://www.last.fm/event/3537946+Megaphone+tour",
+            "startDate": "Sat, 13 Apr 2013 10:27:01",
+            "website": "http://www.lamenuiserie.org/contact/"
+        },
+        {
+            "id": "3538961",
+            "title": "DISCO KAOS FESTIVAL",
+            "artist": [
+                "Martial Canterel",
+                "Position Parallele",
+                "Schadenfreude",
+                ":codes"
+            ],
+            "address": {
+                "name": "La Miroiterie",
+                "street": "88 rue de Ménilmontant",
+                "postalcode": "75020",
+                "city": "Paris",
+                "country": "France",
+                "geo:point": {
+                    "geo:lat": "48.884671",
+                    "geo:long": "2.401745"
+                }
+            },
+            "url": "http://www.last.fm/event/3538961+DISCO+KAOS+FESTIVAL",
+            "startDate": "Sat, 13 Apr 2013 15:00:00",
+            "website": ""
+        },
+        {
+            "id": "3488764",
+            "title": "Edna Stern",
+            "artist": "Edna Stern",
+            "address": {
+                "name": "Théâtre Adyar",
+                "street": "4 square Rapp",
+                "postalcode": "75007",
+                "city": "Paris",
+                "country": "France",
+                "geo:point": {
+                    "geo:lat": "48.858667",
+                    "geo:long": "2.30093"
+                }
+            },
+            "url": "http://www.last.fm/event/3488764+Edna+Stern+at+Th%C3%A9%C3%A2tre+Adyar+on+13+April+2013",
+            "startDate": "Sat, 13 Apr 2013 20:00:00",
+            "website": ""
+        },
+        {
+            "id": "3512421",
+            "title": "Fear of Men",
+            "artist": "Fear of Men",
+            "address": {
+                "name": "Espace B",
+                "street": "16, rue Barbanègre",
+                "postalcode": "75019",
+                "city": "Paris",
+                "country": "France",
+                "geo:point": {
+                    "geo:lat": "48.89322",
+                    "geo:long": "2.384374"
+                }
+            },
+            "url": "http://www.last.fm/event/3512421+Fear+of+Men+at+Espace+B+on+13+April+2013",
+            "startDate": "Sat, 13 Apr 2013 20:30:00",
+            "website": ""
+        },
+        {
+            "id": "3460094",
+            "title": "From&Ziel",
+            "artist": "From&Ziel",
+            "address": {
+                "name": "La Menuiserie",
+                "street": "77 rue Jules Auffret",
+                "postalcode": "93500",
+                "city": "Pantin",
+                "country": "France",
+                "geo:point": {
+                    "geo:lat": "48.884558",
+                    "geo:long": "2.41132"
+                }
+            },
+            "url": "http://www.last.fm/event/3460094+From-Ziel+at+La+Menuiserie+on+13+April+2013",
+            "startDate": "Sat, 13 Apr 2013 20:30:00",
+            "website": "http://www.from-ziel.com/"
+        },
+        {
+            "id": "3490927",
+            "title": "Pour une âme souveraine",
+            "artist": [
+                "Lizz Wright",
+                "Me'Shell Ndegéocello"
+            ],
+            "address": {
+                "name": "Espace Lumière",
+                "street": "6,av.de Lattre de Tassigny",
+                "postalcode": "93800",
+                "city": "Epinay sur Seine",
+                "country": "France",
+                "geo:point": {
+                    "geo:lat": "48.87502",
+                    "geo:long": "2.308074"
+                }
+            },
+            "url": "http://www.last.fm/event/3490927+Pour+une+%C3%A2me+souveraine",
+            "startDate": "Sat, 13 Apr 2013 20:30:00",
+            "website": ""
+        }
+    ]
+}

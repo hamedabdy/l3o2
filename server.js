@@ -4,7 +4,7 @@
  */
 
 //making http server
-var http = require('http'),
+var http = require('http');
     fs = require('fs');
 var util = require('util');
 var querystring = require('querystring');
@@ -13,10 +13,10 @@ var querystring = require('querystring');
 var reqJsonLastfm = require('./req-json-lastfm');
 
 //visual presentation of mongo dataBase
-var mongoExpress = require('mongo-express');
+//var mongoExpress = require('mongo-express');
 
 //opening html page
-fs.readFile('./newpage.html', function (err, html) {
+fs.readFile('./index.html', function (err, html) {
     if (err) {
         throw err; 
     }
@@ -27,7 +27,7 @@ http.createServer(function(request, response) {
     
     var chunk = '';
     var parsedChunk = reqJsonLastfm.parsedChunk;
-    //var jsonExp = reqJsonLastfm.jsonExp;
+    var jsonExp = reqJsonLastfm.jsonExp;
             
     request.on('data', function(data){
         chunk += data;

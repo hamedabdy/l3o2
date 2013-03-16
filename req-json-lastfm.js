@@ -3,10 +3,6 @@
 var fs = require('fs');
 var request = require('request');
 
-//var initiate = require('./initiate-request');
-//var totalPages = initiate.totalPages;
-//console.log('totalpages: '+totalPages);
-
 //used for inspect method to go through lasfm geo.getEvent API JSON tree
 //var util = require('util');
 

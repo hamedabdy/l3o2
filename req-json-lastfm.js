@@ -10,6 +10,10 @@ var request = require('request');
 //used for inspect method to go through lasfm geo.getEvent API JSON tree
 //var util = require('util');
 
+//TODO
+//here goes an JSON file that contains names of cities that program would fetch info for
+//here goes a for loop to gather info for every city in CITIESJSON
+
 function getAttr(url, callback){
     var parsedRslts ='';
     var totalPages = 0;

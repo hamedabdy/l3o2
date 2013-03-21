@@ -26,20 +26,17 @@ http.createServer(function(request, response) {
     response.write(html);
     
     var chunk = '';
-    var parsedChunk = reqJsonLastfm.parsedChunk;
-    var jsonExp = reqJsonLastfm.jsonExp;
             
     request.on('data', function(data){
         chunk += data;
     });
         
     request.on('end', function(){
-        //console.log('json: ' + jsonExp);
         //console.log(chunk + ' <-post data here');       
         var p = util.inspect(querystring.parse(chunk));
         //console.log(p + ' <-parsed data here');
         response.write(p + ' <- parsed in html page');
-        response.write(' imported data: ' + parsedChunk);
+        //response.write(' imported data: ' + parsedChunk);
         //console.log('parsedchunk: ' + parsedChunk);
         response.end();  
         });

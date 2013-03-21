@@ -1,7 +1,11 @@
 {
-	"name":"hello-node",
-	"version":"0.0.1",
-	"dependencies":{
-	"express":""
-	}
+  "name": "hello-node",
+  "version": "0.0.1",
+  "dependencies": {
+    "express": "",
+    "request": "~2.16.6",
+    "http": "0.0.0",
+    "mongo-express": "~0.18.0",
+    "mongodb": "~1.2.14"
+  }
 }

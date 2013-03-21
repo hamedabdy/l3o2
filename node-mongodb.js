@@ -1,15 +1,6 @@
 #!/usr/bin/env node
 
-//importing JSON from req-json-lastfm.js
-//var reqJsonLastfm = require('./req-json-lastfm');
-//storing JSON from req-json-lastfm.js
-//var jsonStringify = reqJsonLastfm.jsonStringify;
-
-//importing concert.json file
-//var concert = require('./concerts/');
-//var dir = requireDir('./concerts');
-//var directory = require('./concerts');
-//var util = require('util');
+//Visual mongoDB
 var mongoExpress = require('mongo-express');
 
 var Db = require('mongodb').Db;

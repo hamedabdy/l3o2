@@ -16,7 +16,6 @@ var insertData = function(err, collection){
     require("fs").readdirSync("./concerts").forEach(function(file, i) {
             var test = [];
             test[i] = require("./concerts/" + file);
-            //console.log('index.js:' + util.inspect(test[i]));
             collection.insert(test[i]);
         });
 };
@@ -37,7 +36,7 @@ client.open(function(err,pClient){
         client.collection("test", insertData);
         console.log('fin de insert ');
         //calling fucntion listAllDta on collection 'test'
-        client.collection('test', listAllData);
+        //client.collection('test', listAllData);
     }
     else console.log('\n ***error occured in node-mongodb.js***');
 });

@@ -34,7 +34,7 @@ client.open(function(err,pClient){
         console.log('concert: ');
         //calling function insertData on collection 'test'
         client.collection("test", insertData);
-        console.log('fin de insert ');
+        console.log('fin d insert ');
         //calling fucntion listAllDta on collection 'test'
         //client.collection('test', listAllData);
     }

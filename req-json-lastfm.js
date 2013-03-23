@@ -42,7 +42,6 @@ function pushEvents(parsedJSON, location, total){
         myobject = parsedJSON.events.event[i];
     //adding data to JSON
     event.push({
-        number : i+1,
         title : myobject.title,
         artist : myobject.artists.artist,
         address : {name: myobject.venue.name, street : myobject.venue.location.street,
@@ -53,7 +52,7 @@ function pushEvents(parsedJSON, location, total){
         url : myobject.url,
         startDate : myobject.startDate,
         website : myobject.website,
-        image : myobject.image[2]["#text"],
+        image : myobject.image[1]["#text"],
         description : myobject.description
         });
     };

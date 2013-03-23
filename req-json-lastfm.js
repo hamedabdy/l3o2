@@ -31,15 +31,6 @@ function getAttr(url, city){
     });
 }
 
-function writeJsonToFile(jsonStringify, outputFileName){
-    fs.writeFile(outputFileName, jsonStringify, function(err) {
-        if(err) {
-            console.log(err);
-        } else
-            console.log("JSON saved to " + outputFileName);
-    });
-}
-
 function pushEvents(parsedJSON, location, total){
     var myobject = '';
     //var events = {};
@@ -61,7 +52,9 @@ function pushEvents(parsedJSON, location, total){
                     'geo:long' : myobject.venue.location['geo:point']['geo:long'],
         url : myobject.url,
         startDate : myobject.startDate,
-        website : myobject.website
+        website : myobject.website,
+        image : myobject.image[2]["#text"],
+        description : myobject.description
         });
     };
     //events['@attr'] = {"location": location, "total" : total};
@@ -73,7 +66,6 @@ function getConcerts(url, limit, location){
     console.log('url: ' +url2 + '\n');
     request(url2, function(err, res, results) {
         var parsedJSON = '';
-        //var outputFileName = './concerts/('+location+')concerts.json';
         parsedJSON = JSON.parse(results);
         pushEvents(parsedJSON, location, limit);
     });

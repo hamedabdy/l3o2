@@ -5,21 +5,24 @@ var request = require('request');
 var villes = require('./liste-villes');
 console.log('*** Total number of cities to process= ' + villes.france.length + ' ***');
 
+var errorChunk ='';
+    
 function iterateCities(url, cities){
     for(i=0; i<cities.france.length; i++){
         url1 = url + '&location=' + cities.france[i] + ',france';
-        getAttr(url1);
+        getAttr(url1, cities.france[i]);
     };
 }
 
-function getAttr(url){
+function getAttr(url, city){
     var parsedRslts ='';
-    var totalPages = 0;
+    var total = 0;
     var location ='';
     request(url, function(err, res, results){
         parsedRslts = JSON.parse(results);
         if(parsedRslts.error){
-            console.log('\n***error could not fetch results for the this city!***\n');
+            errorChunk += ' '+ city + ', ';
+            //console.log('\n***error could not fetch results for '+city+'!***\n');
         }
         else {
         total = parsedRslts.events['@attr'].total;
@@ -42,30 +45,30 @@ function writeJsonToFile(jsonStringify, outputFileName){
 
 function pushEvents(parsedJSON, location, total){
     var myobject = '';
-    var events = {};
-    events.event = [];
+    //var events = {};
+    event = [];
     var legnth =0;
         length = (parsedJSON.events.event).length;
         //creating JSON
     for(i =0; i<length; i++){
         myobject = parsedJSON.events.event[i];
     //adding data to JSON
-    events.event.push({
+    event.push({
         number : i+1,
         title : myobject.title,
         artist : myobject.artists.artist,
         address : {name: myobject.venue.name, street : myobject.venue.location.street,
                     postalcode : myobject.venue.location.postalcode,
-                    city : myobject.venue.location.city, country : myobject.venue.location.country,
-                    'geo:point' : { 'geo:lat' : myobject.venue.location['geo:point']['geo:lat'],
-                                    'geo:long' : myobject.venue.location['geo:point']['geo:long']}},
+                    city : myobject.venue.location.city, country : myobject.venue.location.country},
+                    'geo:lat' : myobject.venue.location['geo:point']['geo:lat'],
+                    'geo:long' : myobject.venue.location['geo:point']['geo:long'],
         url : myobject.url,
         startDate : myobject.startDate,
         website : myobject.website
         });
     };
-    events['@attr'] = {"location": location, "total" : total};
-        callMongo(events, location);
+    //events['@attr'] = {"location": location, "total" : total};
+        callMongo(event, location);
 }
 
 function getConcerts(url, limit, location){
@@ -85,6 +88,12 @@ function callMongo(data, location) {
     nodeGo.openClient(data);
 }
 
+function showErrors(errors) {
+    console.log('\n***error could not fetch results for these cities :' + errors + '***\n');
+
+}
+
 var apiKey = 'dbc287366d92998e7f5fb5ba6fb7e7f1';
 var url = 'http://ws.audioscrobbler.com/2.0/?method=geo.getevents&api_key='+apiKey+'&format=json';
 iterateCities(url, villes);
+showErrors(errorChunk);

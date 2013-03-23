@@ -5,8 +5,6 @@ var request = require('request');
 var villes = require('./liste-villes');
 console.log('*** Total number of cities to process= ' + villes.france.length + ' ***');
 
-var errorChunk ='';
-    
 function iterateCities(url, cities){
     for(i=0; i<cities.france.length; i++){
         url1 = url + '&location=' + cities.france[i] + ',france';
@@ -21,8 +19,7 @@ function getAttr(url, city){
     request(url, function(err, res, results){
         parsedRslts = JSON.parse(results);
         if(parsedRslts.error){
-            errorChunk += ' '+ city + ', ';
-            //console.log('\n***error could not fetch results for '+city+'!***\n');
+            console.log('\n***error could not fetch results for '+city+'!***\n');
         }
         else {
         total = parsedRslts.events['@attr'].total;
@@ -88,12 +85,6 @@ function callMongo(data, location) {
     nodeGo.openClient(data);
 }
 
-function showErrors(errors) {
-    console.log('\n***error could not fetch results for these cities :' + errors + '***\n');
-
-}
-
 var apiKey = 'dbc287366d92998e7f5fb5ba6fb7e7f1';
 var url = 'http://ws.audioscrobbler.com/2.0/?method=geo.getevents&api_key='+apiKey+'&format=json';
 iterateCities(url, villes);
-showErrors(errorChunk);

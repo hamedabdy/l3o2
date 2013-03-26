@@ -14,7 +14,7 @@ Aide d'utilisation
 ------------------
 <dl>
 <dt>Fichier necessaire</dt>
-<dd>`server.js`, `node-mongodb.js`, `req-json-lastfm.js`, `newpage.html`. </dd>
+<dd>`server.js`, `node-mongodb.js`, `req-json-lastfm.js`, `index.html`. </dd>
 
 <dt>Dependencies</dt>
 <dd>`mongodb`, `request`, `http`, `util` et `querystring`.</dd>

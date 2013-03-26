@@ -1,9 +1,9 @@
 #!/usr/bin/env node
 
-var fs = require('fs');
 var request = require('request');
 var villes = require('./liste-villes');
-console.log('*** Total number of cities to process= ' + villes.france.length + ' ***');
+console.log('\n*** Total number of cities to process= ' + villes.france.length + ' ***\n');
+console.log('*** Please be patient while sending requests this may take a while... ****\n');
 
 function iterateCities(url, cities){
     for(i=0; i<cities.france.length; i++){
@@ -18,14 +18,15 @@ function getAttr(url, city){
     var location ='';
     request(url, function(err, res, results){
         parsedRslts = JSON.parse(results);
-        if(parsedRslts.error){
+        if(!parsedRslts.events){
             console.log('\n***error could not fetch results for '+city+'!***\n');
+            console.log(results);
         }
         else {
-        total = parsedRslts.events['@attr'].total;
-        location = parsedRslts.events['@attr'].location;
-        console.log('location: ' + location);
-        console.log("total concerts in this city to process: " + total);
+            total = parsedRslts.events['@attr'].total;
+            location = parsedRslts.events['@attr'].location;
+            console.log('location: ' + location);
+            console.log("total concerts in this city to process: " + total);
             getConcerts(url, total, location);
         };
     });
@@ -42,13 +43,14 @@ function pushEvents(parsedJSON, location, total){
         myobject = parsedJSON.events.event[i];
     //adding data to JSON
     event.push({
+        "_id" : myobject.id,
         title : myobject.title,
         artist : myobject.artists.artist,
         address : {name: myobject.venue.name, street : myobject.venue.location.street,
                     postalcode : myobject.venue.location.postalcode,
                     city : myobject.venue.location.city, country : myobject.venue.location.country},
-                    'geo:lat' : myobject.venue.location['geo:point']['geo:lat'],
-                    'geo:long' : myobject.venue.location['geo:point']['geo:long'],
+        latlong : [ parseFloat(myobject.venue.location['geo:point']['geo:lat']),
+                   parseFloat(myobject.venue.location['geo:point']['geo:long'])],
         url : myobject.url,
         startDate : myobject.startDate,
         website : myobject.website,
@@ -66,16 +68,18 @@ function getConcerts(url, limit, location){
     request(url2, function(err, res, results) {
         var parsedJSON = '';
         parsedJSON = JSON.parse(results);
-        pushEvents(parsedJSON, location, limit);
+        if (parsedJSON.events) {
+            pushEvents(parsedJSON, location, limit);
+        }
     });
 }
 
 function callMongo(data, location) {
-    var nodeGo = require('./node-mongodb');
     console.log('processing database for: ' + location);
-    nodeGo.openClient(data);
+    nodeGo.getData(data);
 }
 
+var nodeGo = require('./node-mongodb');
 var apiKey = 'dbc287366d92998e7f5fb5ba6fb7e7f1';
 var url = 'http://ws.audioscrobbler.com/2.0/?method=geo.getevents&api_key='+apiKey+'&format=json';
 iterateCities(url, villes);

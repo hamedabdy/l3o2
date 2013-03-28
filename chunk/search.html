@@ -1,0 +1,165 @@
+<html>
+<head>
+    <title>search</title>
+	<link rel="stylesheet" type="text/css" href="style.css" media="screen" />
+	
+	  <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+  <style type="text/css">
+    html { height: 100% }
+    body { height: 100%; margin: 0px; padding: 0px }
+    #carte { height: 100% ; width:100%;}
+  </style>
+  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.0/jquery.min.js"></script>
+  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.15/jquery-ui.min.js"></script>
+  <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true"></script>
+  <script type="text/javascript">  
+    
+$(document).ready(function() {
+//Init Geocoder
+var geocoder = new google.maps.Geocoder();
+//Autocomplete
+$('input#address').autocomplete({
+source: function(request,response) {
+geocoder.geocode( { 'address': $('input#address').val() }, function(results, status) {
+response($.map(results, function(item) {
+return {value: item.formatted_address}
+}));
+});
+},
+select: function(event, ui) {$('input#address').val(ui.item['value']);},minLength: 2
+});
+});
+
+
+function initialiser() {
+  var latlng = new google.maps.LatLng(48.8551171, 2.330785600000013);
+  //objet contenant des propriétés avec des identificateurs prédéfinis dans Google Maps permettant
+  //de définir des options d'affichage de notre carte
+  var options = {
+    center: latlng,
+    zoom: 12,
+    mapTypeId: google.maps.MapTypeId.ROADMAP
+  };
+  //constructeur de la carte qui prend en paramêtre le conteneur HTML
+  //dans lequel la carte doit s'afficher et les options
+  carte = new google.maps.Map(document.getElementById("carte"), options);
+} 
+
+function geoLocate() {
+  if (navigator.geolocation)
+  var watchId = navigator.geolocation.watchPosition(successCallback,null,{enableHighAccuracy:true});
+else
+  alert("Votre navigateur ne prend pas en compte la géolocalisation HTML5");
+}
+
+function successCallback(position){
+    document.getElementById("Lat").value = position.coords.latitude;
+    document.getElementById("Lng").value = position.coords.longitude;
+  carte.panTo(new google.maps.LatLng(position.coords.latitude, position.coords.longitude));
+  var marker = new google.maps.Marker({
+    position: new google.maps.LatLng(position.coords.latitude, position.coords.longitude),
+    map: carte
+  });
+}
+
+//c'est ma fonction qui actualise la maps a chaque fois qu'on click dessus !
+//pour tester mettez bien des cordonnées qui son en france!!!
+function overlay() {
+  var  geocoder = new google.maps.Geocoder();
+  if ( document.getElementById('address').value != '' ){
+    geocoder.geocode({ 'address' : document.getElementById('address').value }, function ( results, status ){
+      if (status == google.maps.GeocoderStatus.OK){
+	var latlng = results[0].geometry.location + "";
+	var tab_latlng = latlng.split(',');
+	var latitude = tab_latlng[0].replace('(', '' );
+	var longitude = tab_latlng[1].replace(')', '' );
+	//alert(latitude);
+	document.getElementById("Lat").value = latitude;
+	document.getElementById("Lng").value = longitude;
+	}
+	else{
+	  alert("Aucune Adresse de ce type n'existe");
+	  }
+	  });
+    }
+$.ajax({
+  type: 'GET',
+  url: '/concert?lat='+parseFloat(document.getElementById("Lat").value)+'&long='+parseFloat(document.getElementById("Lng").value)+'&rayon='+parseFloat(document.getElementById("Rayon").value),
+  dataType: 'json',
+  contentType: 'application/json',
+  success: function(response) {
+var latlng = new google.maps.LatLng(parseFloat(document.getElementById("Lat").value), parseFloat(document.getElementById("Lng").value));
+		//objet contenant des propriétés avec des identificateurs prédéfinis dans Google Maps permettant
+		//de définir des options d'affichage de notre carte
+		var options = {
+		    center: latlng,
+		    zoom: 12,
+		    mapTypeId: google.maps.MapTypeId.ROADMAP
+		};
+		//constructeur de la carte qui prend en paramêtre le conteneur HTML
+		//dans lequel la carte doit s'afficher et les options
+		var carte = new google.maps.Map(document.getElementById("carte"), options);
+var pinColor = "#79CDCD";
+var pinImage = new google.maps.MarkerImage("http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|" + pinColor,
+	new google.maps.Size(21, 34),
+	new google.maps.Point(0,0),
+	new google.maps.Point(10, 34));
+
+var marqueur = new google.maps.Marker({
+	position: new google.maps.LatLng(parseFloat(document.getElementById("Lat").value), parseFloat(document.getElementById("Lng").value)),
+	map: carte,
+	title: "Vous etes ici",
+	icon: pinImage
+	});
+
+var myWindowOptions = {
+  content:  '<h3>Vous etes ici</h3>'
+};
+
+var myInfoWindow = new google.maps.InfoWindow(myWindowOptions);
+google.maps.event.addListener(marqueur, 'click', function() {
+  myInfoWindow.open(carte,marqueur);
+});
+for (var i = 0 ; i < response.length; i++) {
+  var lemarqueur = new google.maps.Marker({
+    position: new google.maps.LatLng(parseFloat(response[i].latlong[0]), parseFloat(response[i].latlong[1])),
+    map: carte,
+    title: response[i].title
+    });
+var WindowOptions = {
+  content:  '<h3>'+response[i].title+' No '+i+'</h3>'
+};
+var InfoWindow = new google.maps.InfoWindow(WindowOptions);
+google.maps.event.addListener(lemarqueur, 'click', function() {
+  InfoWindow.open(carte,lemarqueur);
+});};}});}
+
+</script>
+	
+</head>
+
+<body onload="initialiser()">
+    
+    <div align="center">
+	
+    <table><tr><td>
+    <img src="documents/images/geoloc-icon32x32.png" onclick="geoLocate()" >
+      </td>
+    <td>
+
+<form class="form-wrapper cf" id="myForm">
+	<input  id="address" type="text" placeholder="Saisir une adresse..." required>
+	<button id="valider" onclick="overlay()" type="submit">Cherche</button>
+	<input name="Lat" type="Hidden" id="Lat" />
+	<input name="Lng" type="Hidden" id="Lng" />
+	<input name="Rayon" type="hidden" id="Rayon" value="3" />
+</form>
+
+</td></tr> </table>
+    
+    </div>
+
+<div id="carte"></div>
+<div id="content"></div>
+</body>
+</html>

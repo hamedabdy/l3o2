@@ -1,0 +1,135 @@
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Geocodeur Javascript</title>
+
+<link rel="stylesheet" href="geocode.css" />
+<script src="http://maps.google.com/maps/api/js?sensor=false"></script>
+<script>
+/**
+ * Exemple d'application utilisant les services de géocodage de l'API Google Maps
+ * @author  Geoffray Warnants - http://www.geoffray.be
+ * @version 1.1.20111009
+ * @version 1.0.20110216
+ */
+window.onload=function() {
+
+    var geocoder = new google.maps.Geocoder();
+    var map = new google.maps.Map(document.getElementById("map"), {
+        zoom: 15,
+        mapTypeId: google.maps.MapTypeId.ROADMAP  /* ROADMAP , SATELLITE , HYBRID , TERRAIN  */
+    });
+    var marker = new google.maps.Marker({
+        draggable: true,
+        icon: "marker.png",
+        map: map
+    });
+    var decimals = 8;   // arrondi des coordonnées
+
+    /*
+     * Geocoding
+     */
+    (document.getElementById("search_frm").onsubmit=function(e){
+
+        geocoder.geocode({"address":document.getElementById("addr").value}, function(data, status){
+
+            if (status == google.maps.GeocoderStatus.OK) {
+
+                document.getElementById("addr").value=data[0].formatted_address;
+                refreshMap(data[0].geometry.location);
+
+                // Prépare la liste des suggestions
+                if (data.length > 1) {
+                    var list=document.getElementById("list");
+                    while (list.hasChildNodes()) {
+                        list.removeChild(list.firstChild);
+                    }
+                    for (var i=0; i<data.length; i++) {
+                        var a = document.createElement("a");
+                        a.setAttribute("href", "");
+                        a.setAttribute("title", data[i].formatted_address);
+                        a.onclick=function(){
+                            document.getElementById("addr").value=this.getAttribute("title");
+                            document.getElementById("search_frm").onsubmit(false);
+                            return false;
+                        }
+                        a.appendChild(document.createTextNode(data[i].formatted_address));
+
+                        var li = document.createElement("li");
+                        li.appendChild(a);
+                        list.appendChild(li);
+                    }
+                    document.getElementById("suggest").style.display="block";
+                } else if (e !== false) {   // passer FALSE au lieu d'un Event n'efface pas les suggestions
+                    document.getElementById("suggest").style.display="none";
+                }
+
+            } else {
+                alert("Erreur: "+status);
+            }
+        });
+        return false;
+    })();
+
+    /*
+     * Reverse geocoding
+     */
+    document.getElementById("reverse_frm").onsubmit=function(){
+        var point = new google.maps.LatLng(document.getElementById("lat").value, document.getElementById("lng").value);
+        geocoder.geocode({"latLng": point}, function(data, status) {
+            if (status == google.maps.GeocoderStatus.OK && data[0]) {
+                  document.getElementById("addr").value=data[0].formatted_address;
+                  refreshMap(point);
+            } else {
+                alert("Erreur: " + status);
+            }
+        });
+        return false;
+    }
+
+    /*
+     * Drag & drop du marqueur
+     */
+    google.maps.event.addListener(marker,"dragend",function(e){
+        refreshMap(e.latLng);
+        geocoder.geocode({"latLng": e.latLng}, function(data, status) {
+            if (status == google.maps.GeocoderStatus.OK && data[0]) {
+                document.getElementById("suggest").style.display="none";
+                document.getElementById("addr").value=data=data[0].formatted_address;
+            }
+        });
+    });
+
+    /*
+     * Actualise l'affichage
+     */
+    function refreshMap(point) {
+        var b=Math.pow(10,decimals);
+        document.getElementById("lat").value=Math.round(point.lat()*b)/b;
+        document.getElementById("lng").value=Math.round(point.lng()*b)/b;
+        map.setCenter(point);
+        marker.setPosition(point);
+        marker.setTitle(point.lat()+";"+point.lng());
+    }
+}
+</script>
+</head>
+<body>
+    <form id="search_frm">
+        <input type="text" id="addr" value="huy" /><input type="submit" value="Geolocate" />
+    </form>
+    <div id="coords">
+        <form id="reverse_frm" style="float:right;">
+            <label for="lat">latitude :</label> <input id="lat" type="text" value="0" />
+            <label for="lng">longitude :</label> <input id="lng" type="text" value="0" />
+            <input type="submit" value="Reverse" />
+        </form>
+        <h2>Coordonnées</h2>
+    </div>
+    <div id="map"></div>
+    <div id="suggest">
+        <h2>Suggestions</h2>
+        <ul id="list"></ul>
+    </div>
+</body>
+</html>

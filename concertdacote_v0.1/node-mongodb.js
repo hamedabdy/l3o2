@@ -19,11 +19,9 @@ function getData(args) {
 function insertData(err, collection) {
     collection.insert(data);
     collection.ensureIndex({latlong : "2d"});
-    //client.close();
 }
 
 function openClient() {
-    //getData(arg);
     //calling function insertData on collection 'test'
     client.collection("test", insertData);
     console.log('data inserted successfully!\n');
@@ -36,6 +34,5 @@ client.open(function(err,pClient){
     }
     else console.log('\n ***error occured in node-mongodb.js***');
 });
-//openClient();
-//exports.openClient = openClient;
+
 exports.getData = getData;

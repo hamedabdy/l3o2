@@ -37,7 +37,7 @@
 	});
 
 	function initialiser() {
-		var latlng = new google.maps.LatLng(48.8551171, 2.330785600000013);
+		var latlng = new google.maps.LatLng(48.856614, 2.3522219);
 		//objet contenant des propriétés avec des identificateurs prédéfinis dans Google Maps permettant
 		//de définir des options d'affichage de notre carte
 		var options = {
@@ -55,28 +55,25 @@
 	 */
 	function geoLocate() {
 		if (navigator.geolocation)
-			var watchId = navigator.geolocation.watchPosition(successCallback,
-					null, {
-						enableHighAccuracy : false
-					});
+			var watchId = navigator.geolocation.watchPosition(successCallback, null, { enableHighAccuracy : true});
 		else
 			alert("Votre navigateur ne prend pas en compte la géolocalisation HTML5");
 	}
 
 	function successCallback(position) {
 		lat = position.coords.latitude;
-		lng = position.coords.longitude;
-		document.getElementById("Lat").value = lat;
-		document.getElementById("Lng").value = lng;
-		carte.panTo(new google.maps.LatLng(position.coords.latitude,
-				position.coords.longitude));
+		lng = position.coords.longitude;		
+		reverseGeocoding(lat, lng);
+		setUserLocation(lat, lng);
+	}
+	
+	function setUserLocation(lat, lng) {
+		carte.panTo(new google.maps.LatLng(lat, lng));
 		var marker = new google.maps.Marker({
-			position : new google.maps.LatLng(position.coords.latitude,
-					position.coords.longitude),
+			position : new google.maps.LatLng(lat, lng),
 			map : carte
 		});
-		overlay(lat, lng);
-		reverseGeocoding(lat, lng);
+		setOverlay(lat, lng);
 	}
 
 	/*
@@ -85,57 +82,50 @@
 	function reverseGeocoding(lat, lng) {
 		var geocoder = new google.maps.Geocoder();
 		var point = new google.maps.LatLng(parseFloat(lat), parseFloat(lng));
-		geocoder
-				.geocode(
-						{
-							"latLng" : point
-						},
-						function(data, status) {
-							if (status == google.maps.GeocoderStatus.OK
-									&& data[0]) {
-								document.getElementById("address").value = data[0].formatted_address;
-							} else {
-								alert("Erreur: " + status);
-							}
-						});
+		geocoder.geocode({"latLng" : point },
+				function(data, status) {
+					if (status == google.maps.GeocoderStatus.OK && data[0]) {
+						document.getElementById("address").value = data[0].formatted_address;
+					} else {
+						alert("Erreur: " + status);
+					}
+				});
 		return false;
 	}
-
-	//c'est ma fonction qui actualise la maps a chaque fois qu'on click dessus !
-	//pour tester mettez bien des cordonnées qui son en france!!!
-	function overlay(lat, lng) {
+	
+	
+	/*
+	 * Geocoding
+	 */
+	function geoCodeAddress(obj) {
 		var geocoder = new google.maps.Geocoder();
-		if (document.getElementById('address').value != '') {
-			geocoder.geocode({
-				'address' : document.getElementById('address').value
-			}, function(results, status) {
+		if (obj != '') {
+			geocoder.geocode({ "address" : obj }, function(results, status) {
 				if (status == google.maps.GeocoderStatus.OK) {
 					var latlng = results[0].geometry.location + "";
 					var tab_latlng = latlng.split(',');
 					var latitude = tab_latlng[0].replace('(', '');
 					var longitude = tab_latlng[1].replace(')', '');
-					//alert(latitude);
-					document.getElementById("Lat").value = latitude;
-					document.getElementById("Lng").value = longitude;
+					setUserLocation(latitude, longitude);
 				} else {
 					alert("Aucune Adresse de ce type n'existe");
 				}
 			});
 		}
-
-		//  url: '/concert?lat='+parseFloat(document.getElementById("Lat").value)+'&long='+parseFloat(document.getElementById("Lng").value)+'&rayon='+parseFloat(document.getElementById("Rayon").value),
-
+	}
+	
+	//c'est ma fonction qui actualise la maps a chaque fois qu'on click dessus !
+	//pour tester mettez bien des cordonnées qui son en france!!!
+	function setOverlay(lat, lng) {	
 		$.ajax({
 			type : 'GET',
 			url : '/concert?lat=' + parseFloat(lat) + '&long='
 					+ parseFloat(lng) + '&rayon='
-					+ parseFloat(document.getElementById("Rayon").value),
+					+ parseFloat(rayon),
 			dataType : 'json',
 			contentType : 'application/json',
 			success : function(response) {
-				var latlng = new google.maps.LatLng(parseFloat(document
-						.getElementById("Lat").value), parseFloat(document
-						.getElementById("Lng").value));
+				var latlng = new google.maps.LatLng(parseFloat(lat), parseFloat(lng));
 				//objet contenant des propriétés avec des identificateurs prédéfinis dans Google Maps permettant
 				//de définir des options d'affichage de notre carte
 				var options = {
@@ -155,10 +145,7 @@
 								34));
 
 				var marqueur = new google.maps.Marker({
-					//position: new google.maps.LatLng(parseFloat(document.getElementById("Lat").value), parseFloat(document.getElementById("Lng").value)),
-
-					position : new google.maps.LatLng(parseFloat(lat),
-							parseFloat(lng)),
+					position : new google.maps.LatLng(parseFloat(lat), parseFloat(lng)),
 					map : carte,
 					title : "Vous etes ici",
 					icon : pinImage
@@ -174,8 +161,6 @@
 				});
 				for ( var i = 0; i < response.length; i++) {
 					var lemarqueur = new google.maps.Marker({
-						// position: new google.maps.LatLng(parseFloat(lat), parseFloat(lng)),
-
 						position : new google.maps.LatLng(
 								parseFloat(response[i].latlong[0]),
 								parseFloat(response[i].latlong[1])),
@@ -197,6 +182,8 @@
 		});
 	}
 	
+
+	
 	$(function() {
 	$( "#rayon" ).slider({
 		range: false,
@@ -208,10 +195,8 @@
 			}
 			});
 	$( "#amount" ).val($( "#rayon" ).slider( "values", 0 ) + " Km");
+		rayon = $("#rayon").slider("values", 0);
 	});
-	
-	var rayon = $("#rayon").slider("value");
-	alert("rayon: " + rayon);
 	
 </script>
 
@@ -223,17 +208,12 @@
 		<tr>
 			<td align="left"><a href="index.html"><img src="images/logo.png" style="width: 200px; height: 90px;"></a></td>
 			<td>
-			    <form class="form-wrapper cf" id="myForm">
+			    <form class="form-wrapper cf" id="myForm" onsubmit="geoCodeAddress(this.address.value); return false;">
 				<span class="form-wraper-img"><img src="images/marker.png" onclick="geoLocate()" style="width: 32px; height: 32px; padding-top: 4px;" /></span>
-				<input id="address" type="text" class="form-wrapper-input" placeholder="Saisir une adresse..." required />
-				
-				
-				<button id="valider" onclick="overlay()" type="submit">Cherche</button>
-				<input name="Lat" type="Hidden" id="Lat" />
-				<input name="Lng" type="Hidden" id="Lng" />
-				<!--<input name="Rayon" type="hidden" id="Rayon" value="100" /> -->
-				
-				<input type="text" id="amount" class="form-wraper-amount"/> <span class="form-wrapper-amount-before"></span>
+				<input id="address" name="address" type="text" class="form-wrapper-input" placeholder="Saisir une adresse..." required />
+				<button id="valider" type="submit">Cherche</button>				
+				<input type="text" id="amount" class="form-wraper-amount"/>
+				<!-- <span class="form-wrapper-amount-before"></span> -->
 				<div id="rayon" class="form-wraper-range"></div>
 			    </form>
 			    

@@ -169,7 +169,17 @@ body {
 	border-top: 1px solid #eee;
 	border-radius: 0 0 3px 0;
         text-shadow: 0 -1px 0 rgba(0, 0 ,0, .3);
-
+	text-align: center;
+    }
+    
+        .form-wrapper-amount-before {
+        content: '';
+        position: absolute;
+        border-width: 8px 8px 8px 0;
+        border-style: solid solid solid none;
+        border-color: transparent #d83c3c transparent;
+        top: 12px;
+        left: -6px;
     }
     
     .form-wraper-range {
@@ -182,6 +192,5 @@ body {
 	margin-left: 32px;
 	border-radius: 0 0 0 3px;
 	background: #eee;
-
     }
     

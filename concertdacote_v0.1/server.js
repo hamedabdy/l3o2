@@ -10,16 +10,11 @@ console.log('Starting server...');
 console.log('server listening on port 3000');
 
 app.get('/concert', function(req, res){
-	db.test.find({ latlong : {$near:[parseFloat(req.query.lat), parseFloat(req.query.long)] , $maxDistance: parseFloat(req.query.rayon)/111.12}}, function(err, concert) {
+	db.test.find({ latlong : {$near:[parseFloat(req.query.lat), parseFloat(req.query.long)] , $maxDistance: parseFloat(req.query.rayon)/111.12}}, {}, { limit : 100 }, function(err, concert) {
 		res.send(concert);
-	}).limit(3000);
+	});
 });
 
-app.get('/test', function(req, res){
-
-        res.send(req.query.id);
-    
-});
 //Partie Mettant a jour la base de données en creant le fichier concert.json et en inserant les datas
 
 app.get('/maj', function(req, res){

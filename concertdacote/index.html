@@ -1,9 +1,11 @@
 <html>
 <head>
-<title>..::| Le Concert d'à Côté |::..</title>
+	
+<title> Le Concert d'&#224 C&#244t&#233 </title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+<link rel="icon" type="image/png" href="images/favicon.png">
 <link rel="stylesheet" type="text/css" href="css/style.css" media="screen" />
-
 
 <link rel="stylesheet" href="css/slider.css" />
 <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
@@ -68,12 +70,13 @@
 	}
 	
 	function setUserLocation(lat, lng) {
+		var rayon = parseFloat((document.getElementById("amount").value).replace(' Km', ''));
 		carte.panTo(new google.maps.LatLng(lat, lng));
 		var marker = new google.maps.Marker({
 			position : new google.maps.LatLng(lat, lng),
 			map : carte
 		});
-		setOverlay(lat, lng);
+		setOverlay(lat, lng, rayon);
 	}
 
 	/*
@@ -92,7 +95,6 @@
 				});
 		return false;
 	}
-	
 	
 	/*
 	 * Geocoding
@@ -114,14 +116,27 @@
 		}
 	}
 	
+	
+	function newPoint(carte, response, i ){
+		var lemarqueur = new google.maps.Marker({
+		position: new google.maps.LatLng(parseFloat(response.latlong[0]), parseFloat(response.latlong[1])),
+		map: carte,
+		title: response.title
+		});
+		var WindowOptions = { content:'<p style="font-size: 13px">'+response.title+'</p> <p style="font-size: 10px"><b>Artistes:</b> '+response.artist+'<br><b>Date:</b> '+response.startDate+'<br><a target="_blank" href ='+response.url+'>Plus d\'infos</a></p>'};
+		var InfoWindow = new google.maps.InfoWindow(WindowOptions);
+		google.maps.event.addListener(lemarqueur, 'click', function() {
+			InfoWindow.open(carte,lemarqueur);
+		});
+        }
+	
+	
 	//c'est ma fonction qui actualise la maps a chaque fois qu'on click dessus !
 	//pour tester mettez bien des cordonnées qui son en france!!!
-	function setOverlay(lat, lng) {	
+	function setOverlay(lat, lng, rayon) {
 		$.ajax({
 			type : 'GET',
-			url : '/concert?lat=' + parseFloat(lat) + '&long='
-					+ parseFloat(lng) + '&rayon='
-					+ parseFloat(rayon),
+			url : '/concert?lat=' + parseFloat(lat) + '&long='+ parseFloat(lng) + '&rayon='+ parseFloat(rayon),
 			dataType : 'json',
 			contentType : 'application/json',
 			success : function(response) {
@@ -135,14 +150,11 @@
 				};
 				//constructeur de la carte qui prend en paramêtre le conteneur HTML
 				//dans lequel la carte doit s'afficher et les options
-				carte = new google.maps.Map(document.getElementById("carte"),
-						options);
+				carte = new google.maps.Map(document.getElementById("carte"), options);
 				var pinColor = "#79CDCD";
-				var pinImage = new google.maps.MarkerImage(
-						"http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|"
+				var pinImage = new google.maps.MarkerImage("http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|"
 								+ pinColor, new google.maps.Size(21, 34),
-						new google.maps.Point(0, 0), new google.maps.Point(10,
-								34));
+						new google.maps.Point(0, 0), new google.maps.Point(10,34));
 
 				var marqueur = new google.maps.Marker({
 					position : new google.maps.LatLng(parseFloat(lat), parseFloat(lng)),
@@ -159,30 +171,17 @@
 				google.maps.event.addListener(marqueur, 'click', function() {
 					myInfoWindow.open(carte, marqueur);
 				});
-				for ( var i = 0; i < response.length; i++) {
-					var lemarqueur = new google.maps.Marker({
-						position : new google.maps.LatLng(
-								parseFloat(response[i].latlong[0]),
-								parseFloat(response[i].latlong[1])),
-						map : carte,
-						title : response[i].title
-					});
-					var WindowOptions = {
-						content : '<h3>' + response[i].title + ' No ' + i
-								+ '</h3>'
-					};
-					var InfoWindow = new google.maps.InfoWindow(WindowOptions);
-					google.maps.event.addListener(lemarqueur, 'click',
-							function() {
-								InfoWindow.open(carte, lemarqueur);
-							});
-				}
-				;
+				
+				for (var i = 0 ; i < response.length; i++) {
+					newPoint(carte, response[i], i);
+				};  
 			}
 		});
-	}
-	
+        }
 
+	function getRayon(args) {
+		return args;
+	}
 	
 	$(function() {
 	$( "#rayon" ).slider({
@@ -195,7 +194,8 @@
 			}
 			});
 	$( "#amount" ).val($( "#rayon" ).slider( "values", 0 ) + " Km");
-		rayon = $("#rayon").slider("values", 0);
+		//get rayon value
+		//rayon = $("#rayon").slider("values", 0);
 	});
 	
 </script>
@@ -206,21 +206,20 @@
 
 	<table style="width: 100%;">
 		<tr>
-			<td align="left"><a href="index.html"><img src="images/logo.png" style="width: 200px; height: 90px;"></a></td>
+			<td align="left"><a href="index.html"><img src="images/logored2.png" style="width: 200px; height: 90px;"></a></td>
 			<td>
 			    <form class="form-wrapper cf" id="myForm" onsubmit="geoCodeAddress(this.address.value); return false;">
 				<span class="form-wraper-img"><img src="images/marker.png" onclick="geoLocate()" style="width: 32px; height: 32px; padding-top: 4px;" /></span>
 				<input id="address" name="address" type="text" class="form-wrapper-input" placeholder="Saisir une adresse..." required />
 				<button id="valider" type="submit">Cherche</button>				
 				<input type="text" id="amount" class="form-wraper-amount"/>
-				<!-- <span class="form-wrapper-amount-before"></span> -->
 				<div id="rayon" class="form-wraper-range"></div>
+				<span class="form-wrapper-amount-before"></span>
 			    </form>
 			    
 			</td>
 		</tr>
 	</table>
 	<div id="carte"></div>
-	<div id="content"></div>
 </body>
 </html>

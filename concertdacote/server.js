@@ -4,16 +4,18 @@ var express = require('express'),
     mongojs = require('mongojs'),
 	db = mongojs('mongodb://localhost/test', ['test']);
 
+app.use(express.favicon(__dirname + 'images/favicon.ico'));
 app.use(express.static(__dirname+'/'));
 console.log('Starting server...');
 console.log('server listening on port 3000');
 
-app.get('/concert', function(req, res){
+app.post('/concert', function(req, res){
 	db.test.find({ latlong : {$near:[parseFloat(req.query.lat), parseFloat(req.query.long)],
 		$maxDistance: parseFloat(req.query.rayon)/111.12}}, {},
-		{ limit : 100 },
+		{ limit : 5000 },
 		function(err, concert) {
-		res.send(concert);
+			console.log(concert.length);
+		res.send(concert); 
 	});
 });
 

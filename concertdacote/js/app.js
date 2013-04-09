@@ -1,26 +1,6 @@
-$(document).ready(function() {
-    //Init Geocoder
-    var geocoder = new google.maps.Geocoder();
-    //Autocomplete
-    $('input#address').autocomplete({
-        source : function(request, response) {
-            geocoder.geocode({
-                    'address' : $('input#address').val()
-            }, function(results, status) {
-                response($.map(results, function(item) {
-                    return {
-                        value : item.formatted_address
-                    }
-                }));
-            });
-        },
-        select : function(event, ui) {
-            $('input#address').val(ui.item['value']);
-        },
-        minLength : 2
-    });
-});
-
+/*
+ * Google Map Initialiser
+ */
 function initialiser() {
         var latlng = new google.maps.LatLng(48.856614, 2.3522219);
         //objet contenant des propriétés avec des identificateurs prédéfinis dans Google Maps permettant
@@ -36,7 +16,7 @@ function initialiser() {
 }
 
 /*
- * GeoLocalization
+ * GeoLocalization, using html5 geolocalization
  */
 function geoLocate() {
     if (navigator.geolocation)
@@ -45,6 +25,9 @@ function geoLocate() {
         alert("Votre navigateur ne prend pas en compte la géolocalisation HTML5");
 }
 
+/*
+ * This function is called on GeoLocalization success. ref. geoLocate()
+ */
 function successCallback(position) {
     lat = position.coords.latitude;
     lng = position.coords.longitude;		
@@ -52,6 +35,9 @@ function successCallback(position) {
     setUserLocation(lat, lng);
 }
 
+/*
+ * This fucntion sets the user location on the map. ref. successCallback()
+ */
 function setUserLocation(lat, lng) {
     var rayon = parseFloat((document.getElementById("amount").value).replace(' Km', ''));
     carte.panTo(new google.maps.LatLng(lat, lng));
@@ -59,7 +45,7 @@ function setUserLocation(lat, lng) {
         position : new google.maps.LatLng(lat, lng),
         map : carte
     });
-    getConcerts(lat, lng, rayon);
+    interogateServer(lat, lng, rayon);
 }
 
 /*
@@ -79,7 +65,7 @@ function reverseGeocoding(lat, lng) {
 }
 
 /*
- * Geocoding
+ * Geocoding address from form after submit
  */
 function geoCodeAddress(obj) {
     var geocoder = new google.maps.Geocoder();
@@ -98,7 +84,9 @@ function geoCodeAddress(obj) {
     }
 }
 
-
+/*
+ * Map markers customization
+ */
 function newPoint(carte, response, i ){
     var lemarqueur = new google.maps.Marker({
     position: new google.maps.LatLng(parseFloat(response.latlong[0]), parseFloat(response.latlong[1])),
@@ -112,7 +100,9 @@ function newPoint(carte, response, i ){
     });
 }
 
-
+/*
+ * On AJAX call success this function is called. ref. interogateServer()
+ */
 function plotOverlay(lat, lng, response) {
     var latlng = new google.maps.LatLng(parseFloat(lat), parseFloat(lng));
     //objet contenant des propriétés avec des identificateurs prédéfinis dans Google Maps permettant
@@ -151,32 +141,18 @@ function plotOverlay(lat, lng, response) {
     };  
 }
 
-//c'est ma fonction qui actualise la maps a chaque fois qu'on click dessus !
-//pour tester mettez bien des cordonnées qui son en france!!!
-function getConcerts(lat, lng, rayon) {
+/*
+ * AJAX call to interogate server
+ */
+function interogateServer(lat, lng, rayon) {
     $.ajax({
         type : 'POST',
         url : '/concert?lat=' + parseFloat(lat) + '&long='+ parseFloat(lng) + '&rayon='+ parseFloat(rayon),
         dataType : 'json',
         contentType : 'application/json',
-        error: function(e) {console.log(e);},
+        error: function(e) {alert(" Too many concerts that I can handle!\n Reduce range please");},
         success : function(response) {
-           plotOverlay(lat, lng, response);
+                plotOverlay(lat, lng, response);
         }
     });
 }
-
-$(document).ready(function() {
-$( "#rayon" ).slider({
-        range: false,
-        min: 1,
-        max: 200,
-        values: [50],
-        slide: function( event, ui ) {
-                $( "#amount" ).val(ui.values[0] + " Km");
-                }
-            });
-$( "#amount" ).val($( "#rayon" ).slider( "values", 0 ) + " Km");
-        //get rayon value
-        //rayon = $("#rayon").slider("values", 0);
-});

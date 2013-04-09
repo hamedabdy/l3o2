@@ -2,83 +2,18 @@
 <html lang="en">
 <head>
 <meta charset="utf-8" />
-<title>jQuery UI Slider - Range slider</title>
-<link rel="stylesheet" href="slider.css" />
-<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
-<script src="http://code.jquery.com/ui/1.10.2/jquery-ui.js"></script>
+<title>test</title>
+
+<style type="text/css">
 
 
-<style media="screen" type="text/css">
-	
-	ul {
-		width: 150px;
-	opacity: 0.9;
-	position: absolute;
-	list-style-type: none;
-	margin: 2px 0 0 0;
-	padding: 10px;
-	font-size: 14px;
-	color: #000;
-	font-family: "Lucida Grande", arial, sans-serif;
-	background-color: #fff;
-	background-color: rgba(255,255,255,0.95);
-	z-index: 2;
-	box-shadow: 0 2px 12px #222;
-	-webkit-box-shadow: 0 2px 12px #222;
-	-moz-box-shadow: 0 2px 12px #222;
-	border-radius: 0 0 5px 5px;
-	-webkit-border-radius: 0 0 5px 5px;
-	-moz-border-radius: 0 0 5px 5px;
-    }
-    
-    li:hover {
-	cursor: pointer;
-	background-color: #3668d9;
-	background-image: -webkit-gradient(linear, 0% 0%, 0% 64%, from(rgb(110, 129, 245)), to(rgb(62, 82, 242)));
-	border-color: #3342e8;
-	color: #fff;
-	text-shadow: 0 1px 2px #122042;
-	border-radius: 5px;
-	-webkit-border-radius: 5px;
-	-moz-border-radius: 5px;
-}
-    
-	
+
 </style>
 
-
-<script>
-$(function() {
-	$( "#slider-range" ).slider({
-		range: false,
-		min: 1,
-		max: 500,
-		values: [1],
-		slide: function( event, ui ) {
-			$( "#amount" ).val(ui.values[0] + " Km");
-			}
-			});
-	$( "#amount" ).val($( "#slider-range" ).slider( "values", 0 ) + " Km");
-	});
-</script>
 </head>
 <body>
-<p>
-<label for="amount">Range:</label>
-<input type="text" id="amount" style="border: 0; color: #000008; font-weight: bold;" />
-</p>
-<div id="slider-range" style="width: 440px;"></div>
 
-<div style="margin: 200px;">
 
-<ul>
-	<li>hello</li>
-	<li>welcoem</li>
-	<li>jack</li>
-	<li>jill</li>
-</ul>
-	
-</div>
 
 </body>
 </html>

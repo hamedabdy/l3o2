@@ -54,8 +54,8 @@ function pushEvents(parsedJSON, location, total){
         url : myobject.url,
         startDate : myobject.startDate,
         website : myobject.website,
-        image : myobject.image[1]["#text"],
-        description : myobject.description
+        description : myobject.description,
+        image : myobject.image[1]["#text"]
         });
     };
     //events['@attr'] = {"location": location, "total" : total};

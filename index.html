@@ -25,10 +25,10 @@
 
 	<table style="width: 100%;">
 		<tr>
-			<td align="left"><a href="index.html"><img src="images/logored2.png" style="width: 200px; height: 65px; margin-top: -20; margin-left: 30";"></a></td>
+			<td align="left"><a href="index.html"><img src="images/logored2.png" id="logo"></a></td>
 			<td>
 			    <form class="form-wrapper cf" id="myForm" onsubmit="geoCodeAddress(this.address.value); return false;">
-				<span class="form-wraper-img"><img src="images/marker.png" onclick="geoLocate()" style="width: 32px; height: 32px; padding-top: 4px;" /></span>
+				<span class="form-wraper-img"><img src="images/marker.png" onclick="geoLocate()" id="geo" /></span>
 				<input id="address" name="address" type="text" class="form-wrapper-input" placeholder="Saisir une adresse..." required />
 				<button id="valider" type="submit">Cherche</button>				
 				<input type="text" id="amount" class="form-wraper-amount" disabled="disabled"/>

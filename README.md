@@ -19,7 +19,4 @@ Aide d'utilisation
 <dt>Dependencies</dt>
 <dd>`mongodb`, `request`, `http`, `util` et `querystring`.</dd>
 <dl>
-La classe `req-json-lastfm.js` recupere certains informations selectionnée des concerts en utilisant son API JSON `Geo.getEvents` du site `lastfm.com`, comme: le titre, les artistes, l'adresse, l'url de ce concert sur le site `lastfm.com` et le siteweb du concert lui meme. Egalement, `req-json-lastfm.js` stock ces informations dans un fichier `.json`. Ainsi il fait `exports` d'une variable qui contient ces informations en JSON, et une autre qui contient simplement les memes informations mais sous forme HTML.
-
-Utilisation `server.js`:
-on peut lancer le serveur avec la command sous Terminal: `node-server.js`
+La classe `req-json-lastfm.js` recupere certains informations selectionnée des concerts en utilisant son API JSON `Geo.getEvents` du site `lastfm.com`, comme: le titre, les artistes, l'adresse, l'url de ce concert sur le site `lastfm.com` et le siteweb du concert lui meme. Egalement, `req-json-lastfm.js` stock ces informations dans une base de donnée.

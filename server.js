@@ -14,7 +14,7 @@ app.get('/concert', function(req, res){
 		$maxDistance: parseFloat(req.query.rayon)/111.12}}, {},
 		{ limit : 5000 },
 		function(err, concert) {
-			console.log(concert.length);
+			//console.log(concert.length);
 		res.send(concert); 
 	});
 });

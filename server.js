@@ -10,11 +10,13 @@ console.log('Starting server...');
 console.log('server listening on port 3000');
 
 app.get('/concert', function(req, res){
+	console.log(req);
 	db.test.find({ latlong : {$near:[parseFloat(req.query.lat), parseFloat(req.query.long)],
 		$maxDistance: parseFloat(req.query.rayon)/111.12}}, {},
 		{ limit : 5000 },
 		function(err, concert) {
 			//console.log(concert.length);
+			console.log(err);
 		res.send(concert); 
 	});
 });

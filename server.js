@@ -2,7 +2,8 @@
 var express = require('express'),
     app = express(),
     mongojs = require('mongojs'),
-	db = mongojs('mongodb://localhost/test', ['test']);
+	url = process.env.MONGOHQ_URL || 'mongodb://localhost/test',
+	db = mongojs(url, ['test']);
 
 app.use(express.favicon(__dirname + 'images/favicon.ico'));
 app.use(express.static(__dirname+'/'));

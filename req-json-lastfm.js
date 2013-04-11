@@ -25,7 +25,7 @@ function getAttr(url, city){
     request(url, function(err, res, results){
         parsedRslts = JSON.parse(results);
         if(!parsedRslts.events){
-            console.log('\n***error could not fetch results for '+city+'!***\n');
+            console.log('***error could not fetch results for '+city+'!***\n');
             console.log(results);
         }
         else {

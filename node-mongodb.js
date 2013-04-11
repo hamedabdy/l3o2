@@ -1,18 +1,15 @@
 #!/usr/bin/env node
 
 var mongojs = require('mongojs'),
-    url = process.env.MONGOHQ_URL || 'mongodb://localhost/test',
-	db = mongojs(url, ['test']);
-
-var data = {};
+    url = process.env.MONGOHQ_URL || 'mongodb://localhost/concertdacote',
+	db = mongojs(url, ['concerts']);
 
 /*
  * inserting data into database
  */
-function getData(args) {
-    data = args;
-    db.test.insert(data);
-    collection.ensureIndex({latlong : "2d"});
+function getData(data) {
+    db.concerts.insert(data);
+    db.concerts.ensureIndex({latlong : "2d"});
     console.log('data inserted successfully!\n');
 }
 

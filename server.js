@@ -17,10 +17,10 @@ app.get('/concert', function(req, res){
 	db.concerts.find({ latlong : {$near:[parseFloat(req.query.lat), parseFloat(req.query.long)],
 	$maxDistance: parseFloat(req.query.rayon)/111.12}}, {},
 	{ limit : 5000 },
-	function(err, res) {
-		console.log(res.length);
+	function(err, result) {
+		console.log(result.length);
 		if(err) console.log(err);
-		res.send(res); 
+		res.send(result); 
 	});
 });
 

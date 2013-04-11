@@ -34,7 +34,6 @@ function getAttr(url, city){
 
 function pushEvents(parsedJSON, location, total){
     var myobject = '';
-    //var events = {};
     event = [];
     var legnth =0;
         length = (parsedJSON.events.event).length;
@@ -53,11 +52,11 @@ function pushEvents(parsedJSON, location, total){
                    parseFloat(myobject.venue.location['geo:point']['geo:long'])],
         url : myobject.url,
         startDate : myobject.startDate,
-        website : myobject.website,
-        description : myobject.description,
         image : myobject.image[1]["#text"]
         });
     };
+    //        description : myobject.description,
+    //        website : myobject.website,
     //events['@attr'] = {"location": location, "total" : total};
         callMongo(event, location);
 }

@@ -142,14 +142,14 @@ function plotOverlay(lat, lng, response) {
 }
 
 /*
- * AJAX call to interogate server
+ * AJAX call to server
  */
 function interogateServer(lat, lng, rayon) {
     $.ajax({
         type : 'POST',
         url : '/concert?lat=' + parseFloat(lat) + '&long='+ parseFloat(lng) + '&rayon='+ parseFloat(rayon),
         dataType : 'json',
-        contentType : 'application/json',
+        contentType : 'application/json; charset=UTF-16',
         error: function(e) {alert(" Too many concerts that I can handle!\n Reduce range please");},
         success : function(response) {
                 plotOverlay(lat, lng, response);

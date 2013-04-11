@@ -61,11 +61,11 @@ function pushEvents(parsedJSON, location, total){
                    parseFloat(myobject.venue.location['geo:point']['geo:long'])],
         url : myobject.url,
         startDate : myobject.startDate,
-        description : myobject.description,
-        website : myobject.website,
         image : myobject.image[1]["#text"]
         });
-    };  
+    };
+    //description : myobject.description,
+     //   website : myobject.website,
         callMongo(event, location);
 }
 

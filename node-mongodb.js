@@ -20,6 +20,7 @@ function getData(args) {
     data = args;
     //openClient();
     db.test.insert(data);
+    collection.ensureIndex({latlong : "2d"});
     console.log('data inserted successfully!\n');
 }
 

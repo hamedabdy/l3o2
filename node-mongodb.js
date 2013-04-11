@@ -11,7 +11,8 @@ var client = new Db('test', new Server('127.0.0.1', 27017), {safe:false});
 */
 
 var mongojs = require('mongojs'),
-    db = mongojs('mongodb://localhost/test', ['test']);
+    url = process.env.MONGOHQ_URL || 'mongodb://localhost/test',
+	db = mongojs(url, ['test']);
 
 var data = {};
 

@@ -5,7 +5,6 @@ var express = require('express'),
 	url = process.env.MONGOHQ_URL || 'mongodb://localhost/test',
 	db = mongojs(url, ['test']);
 
-app.use(express.favicon(__dirname + 'images/favicon.ico'));
 app.use(express.static(__dirname+'/'));
 console.log('Starting server...');
 console.log('server listening on port 3000');

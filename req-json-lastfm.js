@@ -5,6 +5,9 @@ var villes = require('./liste-villes');
 console.log('\n*** Total number of cities to process= ' + villes.france.length + ' ***\n');
 console.log('*** Please be patient while sending requests this may take a while... ****\n');
 
+/*
+ * iterating cities
+ */
 function iterateCities(url, cities){
     for(i=0; i<cities.france.length; i++){
         url1 = url + '&location=' + cities.france[i] + ',france';
@@ -12,6 +15,9 @@ function iterateCities(url, cities){
     };
 }
 
+/*
+ * getting the total number of concerts in each city
+ */
 function getAttr(url, city){
     var parsedRslts ='';
     var total = 0;
@@ -32,12 +38,15 @@ function getAttr(url, city){
     });
 }
 
+/*
+ * Creating JSON of the recieved concerts
+ */
 function pushEvents(parsedJSON, location, total){
     var myobject = '';
     event = [];
     var legnth =0;
         length = (parsedJSON.events.event).length;
-        //creating JSON
+    //creating JSON
     for(i =0; i<length; i++){
         myobject = parsedJSON.events.event[i];
     //adding data to JSON
@@ -52,15 +61,17 @@ function pushEvents(parsedJSON, location, total){
                    parseFloat(myobject.venue.location['geo:point']['geo:long'])],
         url : myobject.url,
         startDate : myobject.startDate,
+        description : myobject.description,
+        website : myobject.website,
         image : myobject.image[1]["#text"]
         });
-    };
-    //        description : myobject.description,
-    //        website : myobject.website,
-    //events['@attr'] = {"location": location, "total" : total};
+    };  
         callMongo(event, location);
 }
 
+/*
+ * getting concerts for each city
+ */
 function getConcerts(url, limit, location){
     var url2 = url + '&limit=' + limit;
     console.log('url: ' +url2 + '\n');
@@ -73,6 +84,9 @@ function getConcerts(url, limit, location){
     });
 }
 
+/*
+ * inserting each concert into database
+ */
 function callMongo(data, location) {
     console.log('processing database for: ' + location);
     nodeGo.getData(data);

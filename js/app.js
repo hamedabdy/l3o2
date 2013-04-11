@@ -146,7 +146,7 @@ function plotOverlay(lat, lng, response) {
  */
 function interogateServer(lat, lng, rayon) {
     $.ajax({
-        type : 'GET',
+        type : 'POST',
         url : '/concert?lat=' + parseFloat(lat) + '&long='+ parseFloat(lng) + '&rayon='+ parseFloat(rayon),
         dataType : 'json',
         contentType : 'application/json; charset=UTF-8',

@@ -13,7 +13,7 @@ console.log('server listening on port 3000 || ' + process.env.PORT);
 /*
  * getting data from database
  */
-app.get('/concert', function(req, res){
+app.post('/concert', function(req, res){
 	db.concerts.find({ latlong : {$near:[parseFloat(req.query.lat), parseFloat(req.query.long)],
 	$maxDistance: parseFloat(req.query.rayon)/111.12}}, {},
 	{ limit : 5000 },

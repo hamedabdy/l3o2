@@ -25,4 +25,4 @@ app.get('/maj', function(req, res){
 	var requestLastfm = require('./req-json-lastfm');
 	res.send("mise a jour de la base a était lancé avec succes");
 	});
-app.listen(process.env.VCAP_APP_PORT || 3000);
+app.listen(process.env.PORT || 3000);

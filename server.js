@@ -9,7 +9,7 @@ app.use(express.static(__dirname+'/'));
 console.log('Starting server...');
 console.log('server listening on port 3000');
 
-app.post('/concert', function(req, res){
+app.get('/concert', function(req, res){
 	db.test.find({ latlong : {$near:[parseFloat(req.query.lat), parseFloat(req.query.long)],
 		$maxDistance: parseFloat(req.query.rayon)/111.12}}, {},
 		{ limit : 5000 },

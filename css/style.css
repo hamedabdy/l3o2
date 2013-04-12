@@ -44,6 +44,7 @@ body {
     /*-------------------------------------*/	
     
     .form-wrapper {
+        margin-top: 15px;
         width: 588px;
         padding: 5px 10px 0px 10px ;
         background: #444;
@@ -328,8 +329,7 @@ body {
         text-shadow: 0 -1px 0 rgba(0, 0 ,0, .3);
     }   
       
-    .form-wrapper button:ho
-    er{     
+    .form-wrapper button:hover{     
         background: #e54040;
     }   
       

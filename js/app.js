@@ -93,7 +93,13 @@ function newPoint(carte, response, i ){
     map: carte,
     title: response.title
     });
-    var WindowOptions = { content:'<table><tr><td><img src="'+response.image+'"/></td><td><p style="font-size: 13px">'+response.title+'</p> <p style="font-size: 10px"><b>Artistes:</b> '+response.artist+'<br><b>Date:</b> '+response.startDate+'<br>' + response.address + '<br><a target="_blank" href =' +response.url+'>Plus d\'infos</a></p></td></tr></table>'};
+    var WindowOptions = { content:'<table><tr><td><img src="'
+    +response.image+'"/></td><td><p style="font-size: 13px">'
+    +response.title+'</p> <p style="font-size: 10px"><b>Artistes:</b> '
+    +response.artist+'<br><b>Date:</b> '+response.startDate+'<br>'
+    + response.address.name +' '+ response.address.street + '<br>'
+    + response.address.postalcode +', '+ response.address.city +', '+ response.address.country
+    + '<br><a target="_blank" href =' +response.url+'>Plus d\'infos</a></p></td></tr></table>'};
     var InfoWindow = new google.maps.InfoWindow(WindowOptions);
     google.maps.event.addListener(lemarqueur, 'click', function() {
         InfoWindow.open(carte,lemarqueur);

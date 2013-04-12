@@ -64,9 +64,7 @@ function pushEvents(parsedJSON, location, total){
         image : myobject.image[1]["#text"]
         });
     };
-    //description : myobject.description,
-     //   website : myobject.website,
-        callMongo(event, location);
+    callMongo(event, location);
 }
 
 /*

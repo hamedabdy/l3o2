@@ -45,7 +45,7 @@ function setUserLocation(lat, lng) {
         position : new google.maps.LatLng(lat, lng),
         map : carte
     });
-    interogateServer(lat, lng, rayon);
+    getConcerts(lat, lng, rayon);
 }
 
 /*
@@ -107,7 +107,7 @@ function newPoint(carte, response, i ){
 }
 
 /*
- * On AJAX call success this function is called. ref. interogateServer()
+ * On AJAX call success this function is called. ref. getConcerts()
  */
 function plotOverlay(lat, lng, response) {
     var latlng = new google.maps.LatLng(parseFloat(lat), parseFloat(lng));
@@ -141,16 +141,18 @@ function plotOverlay(lat, lng, response) {
     google.maps.event.addListener(marqueur, 'click', function() {
             myInfoWindow.open(carte, marqueur);
     });
-    
-    for (var i = 0 ; i < response.length; i++) {
+    if (response.length != 0) {
+        for (var i = 0 ; i < response.length; i++) {
             newPoint(carte, response[i], i);
-    };  
+        }; 
+    } else alert('Pas de concerts pour ces parametres (rayon/adresse)');
+     
 }
 
 /*
  * AJAX call to server
  */
-function interogateServer(lat, lng, rayon) {
+function getConcerts(lat, lng, rayon) {
     $.ajax({
         type : 'POST',
         url : '/concert?lat=' + parseFloat(lat) + '&long='+ parseFloat(lng) + '&rayon='+ parseFloat(rayon),

@@ -1,7 +1,7 @@
-l3o2
-====
+l3o2 - Concert d'à Côté
+=======================
 
-Projet L3o2 2013
+Projet L3O2 2013
 
 Introduction
 -------------

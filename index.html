@@ -46,6 +46,7 @@
 <body onload="initialiser()">
 
 <span class="logo-holder"><a href="index.html"><img src="images/logored2.png" class="logo"></a></span>
+<span class="form-holder">
 <form class="form-wrapper cf" id="myForm" onsubmit="geoCodeAddress(this.address.value); return false;">
 	<span class="form-wraper-location"><img src="images/marker.png" onclick="geoLocate()" class="location-marker" /></span>
 	<input id="address" name="address" type="text" class="form-wrapper-input" placeholder="Saisir une adresse..." required />
@@ -54,6 +55,7 @@
 	<input type="text" id="amount" class="form-wraper-amount" disabled="disabled"/>
 	<span class="form-wrapper-amount"></span>
 </form>
+</span>
 <div id="carte"></div>	
 </body>
 </html>

@@ -4,10 +4,13 @@
 <title> Le Concert d'&#224 C&#244t&#233 </title>
 
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-	
+
+<meta name="google-site-verification" content="m5FCuvjGaMBcApZXU2rBVximEygt02AM9GCsACV5JzQ" />
+
 <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
 <link rel="icon" type="image/png" href="images/favicon.ico"/>
 <link rel="stylesheet" type="text/css" href="css/style.css" media="screen" />
+<link rel="stylesheet" type="text/css" href="css/media.css" media="screen" />
 
 <link rel="stylesheet" href="css/slider.css" />
 <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
@@ -25,22 +28,15 @@
 
 <body onload="initialiser()">
 
-	<table style="width: 100%;">
-		<tr>
-			<td align="left"><a href="index.html"><img src="images/logored2.png" id="logo"></a></td>
-			<td>
-			    <form class="form-wrapper cf" id="myForm" onsubmit="geoCodeAddress(this.address.value); return false;">
-				<span class="form-wraper-img"><img src="images/marker.png" onclick="geoLocate()" id="geo" /></span>
-				<input id="address" name="address" type="text" class="form-wrapper-input" placeholder="Saisir une adresse..." required />
-				<button id="valider" type="submit">Cherche</button>				
-				<input type="text" id="amount" class="form-wraper-amount" disabled="disabled"/>
-				<div id="rayon" class="form-wraper-range"></div>
-				<span class="form-wrapper-amount-before"></span>
-			    </form>
-			    
-			</td>
-		</tr>
-	</table>
-	<div id="carte"></div>	
+<span class="logo-holder"><a href="index.html"><img src="images/logored2.png" class="logo"></a></span>
+<form class="form-wrapper cf" id="myForm" onsubmit="geoCodeAddress(this.address.value); return false;">
+	<span class="form-wraper-location"><img src="images/marker.png" onclick="geoLocate()" class="location-marker" /></span>
+	<input id="address" name="address" type="text" class="form-wrapper-input" placeholder="Saisir une adresse..." required />
+	<button id="valider" type="submit">Cherche</button>				
+	<div id="rayon" class="form-wraper-range"></div>
+	<input type="text" id="amount" class="form-wraper-amount" disabled="disabled"/>
+	<span class="form-wrapper-amount"></span>
+</form>
+<div id="carte"></div>	
 </body>
 </html>

@@ -164,6 +164,10 @@ body {
 
     }
     
+    .form-wraper-location:hover {
+        background: #e54040;
+    }
+    
     .location-marker {
 	   width: 32px;
 	   height: 32px;
@@ -198,6 +202,7 @@ body {
     }
     
     .form-wraper-range {
+        cursor: pointer;
     	border: 0;
     	position: relative;
     	float: left;

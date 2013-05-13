@@ -13,4 +13,8 @@ function getData(data) {
     console.log('data inserted successfully!\n');
 }
 
+function removeData(){
+	db.concerts.remove();
+}
+exports.removeData = removeData;
 exports.getData = getData;

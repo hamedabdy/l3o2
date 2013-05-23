@@ -23,14 +23,14 @@ function getAttr(url, city){
     var total = 0;
     var location ='';
     request(url, function(err, res, results){
-        parsedRslts = JSON.parse(results);
-        if(!parsedRslts.events){
+        //parsedRslts = JSON.parse(results);
+        if(!results.events){
             console.log('***error could not fetch results for '+city+'!***\n');
             console.log(results);
         }
         else {
-            total = parsedRslts.events['@attr'].total;
-            location = parsedRslts.events['@attr'].location;
+            total = results.events['@attr'].total;
+            location = results.events['@attr'].location;
             console.log('location: ' + location);
             console.log("total concerts in this location to process: " + total);
             getConcerts(url, total, location);
@@ -75,7 +75,7 @@ function getConcerts(url, limit, location){
     console.log('url: ' +url2 + '\n');
     request(url2, function(err, res, results) {
         var parsedJSON = '';
-        parsedJSON = JSON.parse(results);
+        //parsedJSON = JSON.parse(results);
         if (results.events) {
             pushEvents(results, location, limit);
         }

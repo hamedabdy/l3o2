@@ -71,13 +71,13 @@ function pushEvents(parsedJSON, location, total){
  * getting concerts for each city
  */
 function getConcerts(url, limit, location){
+    var parsedJSON = '';
     var url2 = url + '&limit=' + limit;
     console.log('url: ' +url2 + '\n');
     request(url2, function(err, res, results) {
-        var parsedJSON = '';
-        //parsedJSON = JSON.parse(results);
-        if (results.events) {
-            pushEvents(results, location, limit);
+        parsedJSON = JSON.parse(results);
+        if (parsedJSON.events) {
+            pushEvents(parsedJSON, location, limit);
         }
     });
 }

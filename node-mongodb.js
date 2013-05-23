@@ -12,14 +12,14 @@ function insertData(data) {
     console.log('data inserted successfully!\n');
 }
 
-function removeData(){
-	db.concerts.remove();
+function dropCollection(){
+	db.concerts.drop();
 }
 
 function ensureIndex(){
 	db.concerts.ensureIndex({latlong : "2d"});
 }
 
-exports.removeData = removeData;
+exports.dropCollection = dropCollection;
 exports.insertData = insertData;
 exports.ensureIndex = ensureIndex;

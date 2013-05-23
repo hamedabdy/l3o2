@@ -87,7 +87,7 @@ function getConcerts(url, limit, location){
  */
 function callMongo(data, location) {
     console.log('processing database for: ' + location);
-    nodeGo.getData(data);
+    nodeGo.insertData(data);
 }
 
 var nodeGo = require('./node-mongodb');

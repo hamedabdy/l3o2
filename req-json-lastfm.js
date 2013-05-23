@@ -31,7 +31,6 @@ function getAttr(url, city){
         else {
             total = parsedRslts.events['@attr'].total;
             location = parsedRslts.events['@attr'].location;
-            console.log("total= " +total + ", location= "  + location);
             console.log('location: ' + location);
             console.log("total concerts in this location to process: " + total);
             getConcerts(url, total, location);

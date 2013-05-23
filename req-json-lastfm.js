@@ -2,7 +2,7 @@
 
 var request = require('request');
 var villes = require('./liste-villes');
-console.log('\n*** Total number of cities to process= ' + villes.france.length + ' ***\n');
+console.log('\n*** Total number of locations to process= ' + villes.france.length + ' ***\n');
 console.log('*** Please be patient while sending requests this may take a while... ****\n');
 
 /*
@@ -31,8 +31,9 @@ function getAttr(url, city){
         else {
             total = parsedRslts.events['@attr'].total;
             location = parsedRslts.events['@attr'].location;
+            console.log("total= " +total + ", location= "  + location);
             console.log('location: ' + location);
-            console.log("total concerts in this city to process: " + total);
+            console.log("total concerts in this location to process: " + total);
             getConcerts(url, total, location);
         };
     });

@@ -9,9 +9,9 @@ console.log('*** Please be patient while sending requests this may take a while.
  * iterating cities
  */
 function iterateCities(url, cities){
-    for(i=0; i<cities.france.length; i++){
-        url1 = url + '&location=' + cities.france[i];
-        getAttr(url1, cities.france[i]);
+    for(i=0; i<cities.city.length; i++){
+        url1 = url + '&location=' + cities.city[i];
+        getAttr(url1, cities.city[i]);
     };
 }
 

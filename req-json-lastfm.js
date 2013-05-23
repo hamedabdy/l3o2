@@ -87,13 +87,12 @@ function getConcerts(url, limit, location){
  */
 function callMongo(data, location) {
     console.log('processing database for: ' + location);
-    nodeGo.insertData(data);
-    nodeGo.2DIndex();
+    nodeGo.getData(data);
 }
 
 var nodeGo = require('./node-mongodb');
 nodeGo.removeData();
 var apiKey = 'dbc287366d92998e7f5fb5ba6fb7e7f1';
-var distance = "distance=500";
+var distance = "distance=100";
 var url = 'http://ws.audioscrobbler.com/2.0/?method=geo.getevents&'+distance+'&api_key='+apiKey+'&format=json';
 iterateCities(url, villes);

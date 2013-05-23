@@ -7,7 +7,7 @@ var mongojs = require('mongojs'),
 /*
  * inserting data into database
  */
-function insertData(data) {
+function getData(data) {
     db.concerts.insert(data);
     console.log('data inserted successfully!\n');
 }
@@ -21,5 +21,5 @@ function 2DIndex(){
 }
 
 exports.removeData = removeData;
-exports.insertData = insertData;
+exports.getData = getData;
 exports.2DIndex = 2DIndex;

@@ -75,6 +75,7 @@ function getConcerts(url, limit, location){
     var url2 = url + '&limit=' + limit;
     console.log('url: ' +url2 + '\n');
     request(url2, function(err, res, results) {
+        console.log(results);
         parsedJSON = JSON.parse(results);
         if (parsedJSON.events) {
             pushEvents(parsedJSON, location, limit);
@@ -95,5 +96,5 @@ var nodeGo = require('./node-mongodb');
 nodeGo.dropCollection();
 var apiKey = 'dbc287366d92998e7f5fb5ba6fb7e7f1';
 var distance = "&distance=500";
-var url = 'http://ws.audioscrobbler.com/2.0/?method=geo.getevents&api_key='+apiKey+'&format=json' + distance;
+var url = 'http://ws.audioscrobbler.com/2.0/?method=geo.getevents&api_key='+apiKey+'&format=json';
 iterateCities(url, villes);

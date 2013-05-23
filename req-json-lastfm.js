@@ -76,8 +76,8 @@ function getConcerts(url, limit, location){
     request(url2, function(err, res, results) {
         var parsedJSON = '';
         parsedJSON = JSON.parse(results);
-        if (parsedJSON.events) {
-            pushEvents(parsedJSON, location, limit);
+        if (results.events) {
+            pushEvents(results, location, limit);
         }
     });
 }

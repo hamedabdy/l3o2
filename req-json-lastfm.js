@@ -93,5 +93,6 @@ function callMongo(data, location) {
 var nodeGo = require('./node-mongodb');
 nodeGo.removeData();
 var apiKey = 'dbc287366d92998e7f5fb5ba6fb7e7f1';
-var url = 'http://ws.audioscrobbler.com/2.0/?method=geo.getevents&api_key='+apiKey+'&format=json';
+var distance = 100;
+var url = 'http://ws.audioscrobbler.com/2.0/?method=geo.getevents&'+distance+'api_key='+apiKey+'&format=json';
 iterateCities(url, villes);

@@ -1,17 +1,17 @@
 #!/usr/bin/env node
 
 var request = require('request');
-var villes = require('./liste-pays');
-console.log('\n*** Total number of countries to process= ' + villes.europe.length + ' ***\n');
+var villes = require('./liste-villes');
+console.log('\n*** Total number of cities to process= ' + villes.france.length + ' ***\n');
 console.log('*** Please be patient while sending requests this may take a while... ****\n');
 
 /*
  * iterating cities
  */
 function iterateCities(url, cities){
-    for(i=0; i<cities.europe.length; i++){
-        url1 = url + '&location=' + cities.europe[i] + ',europe';
-        getAttr(url1, cities.europe[i]);
+    for(i=0; i<cities.france.length; i++){
+        url1 = url + '&location=' + cities.france[i];
+        getAttr(url1, cities.france[i]);
     };
 }
 

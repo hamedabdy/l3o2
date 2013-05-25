@@ -20,8 +20,9 @@ function iterateCities(url, cities){
  */
 function getAttr(url, city){
     var parsedRslts ='';
-    var total = 0;
     var location ='';
+    var total = 0;
+    const MAX_TOTAL = 1000;
     request(url, function(err, res, results){
         parsedRslts = JSON.parse(results);
         if(!parsedRslts.events){
@@ -33,15 +34,55 @@ function getAttr(url, city){
             location = parsedRslts.events['@attr'].location;
             console.log('location: ' + location);
             console.log("total concerts in this location to process: " + total);
-            getConcerts(url, total, location);
+            if(total <= MAX_TOTAL) getConcerts(url, total, location)
+            else getConcertsUsingPages(url, location, 1, MAX_TOTAL);
         };
+    });
+}
+
+/*
+ * getting concerts for each city if limit <= 1000
+ */
+function getConcerts(url, limit, location){
+    var parsedJSON = '';
+    var url2 = url + '&limit=' + limit;
+    console.log('url: ' +url2 + '\n');
+    request(url2, function(err, res, results) {
+        parsedJSON = JSON.parse(results);
+        if (parsedJSON.events) {
+            pushEvents(parsedJSON, location);
+        }
+    });
+}
+
+/*
+ * getting concerts for each city if limit > 1000
+ */
+function getConcertsUsingPages(url, location, page, limit){
+    var parsedJSON = '';
+    var perPage = 0;
+        totalpages = 0;
+    var url2 = url + '&limit=' + limit + '&page=' + page;
+    console.log('url: ' +url2 + '\n');
+    request(url2, function(err, res, results){
+        parsedJSON = JSON.parse(results);
+        totalpages = parsedJSON.events['@attr'].totalPages;
+        totalpages = parseInt(totalpages, 10);
+        page = parsedJSON.events['@attr'].page;
+        page = parseInt(page, 10);
+        console.log('totalpages: ' + totalpages + ' page: ' + page);
+        pushEvents(parsedJSON, location);
+        console.log(parsedJSON);
+        if(page < totalpages){ 
+            getConcertsUsingPages(url, location, page+1, limit);
+        }
     });
 }
 
 /*
  * Creating JSON of the recieved concerts
  */
-function pushEvents(parsedJSON, location, total){
+function pushEvents(parsedJSON, location){
     var myobject = '';
     event = [];
     var legnth =0;
@@ -68,22 +109,6 @@ function pushEvents(parsedJSON, location, total){
 }
 
 /*
- * getting concerts for each city
- */
-function getConcerts(url, limit, location){
-    var parsedJSON = '';
-    var url2 = url + '&limit=' + limit;
-    console.log('url: ' +url2 + '\n');
-    request(url2, function(err, res, results) {
-        console.log(results);
-        parsedJSON = JSON.parse(results);
-        if (parsedJSON.events) {
-            pushEvents(parsedJSON, location, limit);
-        }
-    });
-}
-
-/*
  * inserting each concert into database
  */
 function callMongo(data, location) {
@@ -95,6 +120,6 @@ function callMongo(data, location) {
 var nodeGo = require('./node-mongodb');
 nodeGo.dropCollection();
 var apiKey = 'dbc287366d92998e7f5fb5ba6fb7e7f1';
-var distance = "&distance=500";
+var distance = "&distance=400";
 var url = 'http://ws.audioscrobbler.com/2.0/?method=geo.getevents'+distance+'&api_key='+apiKey+'&format=json';
 iterateCities(url, villes);

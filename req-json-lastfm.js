@@ -35,7 +35,7 @@ function getAttr(url, city){
             console.log('location: ' + location);
             console.log("total concerts in this location to process: " + total);
             if(total <= MAX_TOTAL) getConcerts(url, total, location)
-            else getConcertsUsingPages(url, location, 1, 1);
+            else getConcertsUsingPages(url, location, 1, MAX_TOTAL);
         };
     });
 }
@@ -60,7 +60,7 @@ function getConcerts(url, limit, location){
  */
 function getConcertsUsingPages(url, location, page, limit){
     var parsedJSON = '';
-    var perPage = 0;
+    var perPage = 0,
         totalpages = 0;
     var url2 = url + '&limit=' + limit + '&page=' + page;
     console.log('url: ' +url2 + '\n');
@@ -84,28 +84,29 @@ function getConcertsUsingPages(url, location, page, limit){
  */
 function pushEvents(parsedJSON, location){
     var myobject = '';
-    event = [];
-    var legnth =0;
-        length = (parsedJSON.events.event).length;
+    var obj = [];
+    var length =0;
+    length = (parsedJSON.events.event).length;
     //creating JSON
     for(i =0; i<length; i++){
         myobject = parsedJSON.events.event[i];
-    //adding data to JSON
-    event.push({
-        "_id" : myobject.id,
-        title : myobject.title,
-        artist : myobject.artists.artist,
-        address : {name: myobject.venue.name, street : myobject.venue.location.street,
-                    postalcode : myobject.venue.location.postalcode,
-                    city : myobject.venue.location.city, country : myobject.venue.location.country},
-        latlong : [ parseFloat(myobject.venue.location['geo:point']['geo:lat']),
-                   parseFloat(myobject.venue.location['geo:point']['geo:long'])],
-        url : myobject.url,
-        startDate : myobject.startDate,
-        image : myobject.image[1]["#text"]
-        });
+        console.log('processing object: ' + i ' / ' + length);
+        //adding data to JSON
+        obj.push({
+            "_id" : myobject.id,
+            title : myobject.title,
+            artist : myobject.artists.artist,
+            address : {name: myobject.venue.name, street : myobject.venue.location.street,
+                        postalcode : myobject.venue.location.postalcode,
+                        city : myobject.venue.location.city, country : myobject.venue.location.country},
+            latlong : [ parseFloat(myobject.venue.location['geo:point']['geo:lat']),
+                       parseFloat(myobject.venue.location['geo:point']['geo:long'])],
+            url : myobject.url,
+            startDate : myobject.startDate,
+            image : myobject.image[1]["#text"]
+            });
     };
-    callMongo(event, location);
+    callMongo(obj, location);
 }
 
 /*

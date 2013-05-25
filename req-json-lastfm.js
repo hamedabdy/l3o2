@@ -35,7 +35,7 @@ function getAttr(url, city){
             console.log('location: ' + location);
             console.log("total concerts in this location to process: " + total);
             if(total <= MAX_TOTAL) getConcerts(url, total, location)
-            else getConcertsUsingPages(url, location, 1, MAX_TOTAL);
+            else getConcertsUsingPages(url, location, 1, 1);
         };
     });
 }
@@ -114,7 +114,7 @@ function pushEvents(parsedJSON, location){
 function callMongo(data, location) {
     console.log('processing database for: ' + location);
     nodeGo.insertData(data);
-    //nodeGo.ensureIndex();
+    nodeGo.ensureIndex();
 }
 
 var nodeGo = require('./node-mongodb');

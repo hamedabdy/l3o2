@@ -87,6 +87,7 @@ function pushEvents(parsedJSON, location){
     var obj = [];
     var length =0;
     length = (parsedJSON.events.event).length;
+    console.log('processing database for: ' + location);
     //creating JSON
     for(i =0; i<length; i++){
         myobject = parsedJSON.events.event[i];
@@ -105,21 +106,21 @@ function pushEvents(parsedJSON, location){
             startDate : myobject.startDate,
             image : myobject.image[1]["#text"]
             });
+        callMongo(obj, location);
     };
-    callMongo(obj, location);
 }
 
 /*
  * inserting each concert into database
  */
 function callMongo(data, location) {
-    console.log('processing database for: ' + location);
+    //console.log('processing database for: ' + location);
     nodeGo.insertData(data);
-    nodeGo.ensureIndex();
 }
 
 var nodeGo = require('./node-mongodb');
 nodeGo.dropCollection();
+nodeGo.ensureIndex();
 var apiKey = 'dbc287366d92998e7f5fb5ba6fb7e7f1';
 var distance = "&distance=400";
 var url = 'http://ws.audioscrobbler.com/2.0/?method=geo.getevents'+distance+'&api_key='+apiKey+'&format=json';

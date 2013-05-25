@@ -90,7 +90,7 @@ function pushEvents(parsedJSON, location){
     //creating JSON
     for(i =0; i<length; i++){
         myobject = parsedJSON.events.event[i];
-        console.log('processing object: ' + i ' / ' + length);
+        console.log('processing object: ' + i +' / ' + length);
         //adding data to JSON
         obj.push({
             "_id" : myobject.id,

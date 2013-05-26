@@ -72,7 +72,6 @@ function getConcertsUsingPages(url, location, page, limit){
         page = parseInt(page, 10);
         console.log('totalpages: ' + totalpages + ' page: ' + page);
         pushEvents(parsedJSON, location);
-        console.log(parsedJSON);
         if(page < totalpages){ 
             getConcertsUsingPages(url, location, page+1, limit);
         }

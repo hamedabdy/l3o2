@@ -107,8 +107,8 @@ function pushEvents(parsedJSON, location){
             startDate : myobject.startDate,
             image : myobject.image[1]["#text"]
             });
-        callMongo(obj, location);
     };
+    callMongo(obj, location);
 }
 
 /*

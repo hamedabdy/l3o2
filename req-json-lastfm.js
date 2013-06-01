@@ -46,7 +46,7 @@ function getAttr(url, city){
 function getConcerts(url, limit, location){
     var parsedJSON = '';
     var url2 = url + '&limit=' + limit;
-    console.log('url: ' +url2 + '\n');
+    console.log('Sending request on: ' +url2 + '\n');
     request(url2, function(err, res, results) {
         parsedJSON = JSON.parse(results);
         if (parsedJSON.events) {
@@ -60,17 +60,17 @@ function getConcerts(url, limit, location){
  */
 function getConcertsUsingPages(url, location, page, limit){
     var parsedJSON = '';
-    var perPage = 0,
-        totalpages = 0;
+    var totalpages = 0;
     var url2 = url + '&limit=' + limit + '&page=' + page;
-    console.log('url: ' +url2 + '\n');
+    console.log('page: ' + page);
+    console.log('\nSending request on: ' +url2 + '\n');
     request(url2, function(err, res, results){
         parsedJSON = JSON.parse(results);
         totalpages = parsedJSON.events['@attr'].totalPages;
         totalpages = parseInt(totalpages, 10);
         page = parsedJSON.events['@attr'].page;
         page = parseInt(page, 10);
-        console.log('totalpages: ' + totalpages + ' page: ' + page);
+        console.log('Location: ' + location + 'Page: ' +page+ ' / '+ totalpages);
         pushEvents(parsedJSON, location);
         if(page < totalpages){ 
             getConcertsUsingPages(url, location, page+1, limit);
@@ -90,8 +90,6 @@ function pushEvents(parsedJSON, location){
     //creating JSON
     for(i =0; i<length; i++){
         myobject = parsedJSON.events.event[i];
-        //console.log('processing object: ' + i +' / ' + length);
-        //console.log('with id: ' + myobject.id);
         //adding data to JSON
         obj.push({
             "_id" : myobject.id,
@@ -117,6 +115,6 @@ var database = require('./node-mongodb');
 database.dropCollection();
 database.ensureIndex();
 var apiKey = 'dbc287366d92998e7f5fb5ba6fb7e7f1';
-var distance = "&distance=400";
+var distance = "&distance=500";
 var url = 'http://ws.audioscrobbler.com/2.0/?method=geo.getevents'+ distance +'&api_key='+apiKey+'&format=json';
 iterateCities(url, villes);

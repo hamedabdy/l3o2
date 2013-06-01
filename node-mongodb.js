@@ -8,10 +8,12 @@ var mongojs = require('mongojs'),
  * inserting data into database
  */
 function insertData(data) {
-    db.concerts.insert(data, {keepGoing: true, safe: true}, function(err, docs){
-    	console.log('err: ' + err + '  docs:' + docs);
-    	if(!err) console.log('data inserted successfully!\n');
-    });
+   // try{
+        db.concerts.insert(data, {continueOnError:true}, function(err, docs){
+           console.log('err: ' + err);
+           if(!err) console.log('data inserted successfully!\n');
+       });
+   // } catch (e){ console.log(e);}
 }
 
 function dropCollection(){

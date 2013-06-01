@@ -82,7 +82,6 @@ function getConcertsUsingPages(url, location, page, limit){
  * Creating JSON of the recieved concerts
  */
 function pushEvents(parsedJSON, location){
-    //callback();
     var myobject = '';
     var obj = [];
     var length =0;
@@ -91,8 +90,8 @@ function pushEvents(parsedJSON, location){
     //creating JSON
     for(i =0; i<length; i++){
         myobject = parsedJSON.events.event[i];
-        console.log('processing object: ' + i +' / ' + length);
-        console.log('with id: ' + myobject.id);
+        //console.log('processing object: ' + i +' / ' + length);
+        //console.log('with id: ' + myobject.id);
         //adding data to JSON
         obj.push({
             "_id" : myobject.id,
@@ -108,14 +107,10 @@ function pushEvents(parsedJSON, location){
             image : myobject.image[1]["#text"]
             });
     };
+    /*
+     * inserting each concert into database
+     */
     database.insertData(obj);
-}
-
-/*
- * inserting each concert into database
- */
-function callback(data) {
-    database.getData(data);
 }
 
 var database = require('./node-mongodb');
@@ -123,5 +118,5 @@ database.dropCollection();
 database.ensureIndex();
 var apiKey = 'dbc287366d92998e7f5fb5ba6fb7e7f1';
 var distance = "&distance=400";
-var url = 'http://ws.audioscrobbler.com/2.0/?method=geo.getevents&api_key='+apiKey+'&format=json';
+var url = 'http://ws.audioscrobbler.com/2.0/?method=geo.getevents'+ distance +'&api_key='+apiKey+'&format=json';
 iterateCities(url, villes);

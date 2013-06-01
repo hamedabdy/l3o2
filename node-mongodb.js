@@ -15,8 +15,7 @@ function insertData(data) {
 }
 
 function dropCollection(){
-	//db.concerts.drop();
-	collection.drop();
+	db.concerts.drop();
 }
 
 function ensureIndex(){

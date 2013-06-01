@@ -108,7 +108,7 @@ function pushEvents(parsedJSON, location){
             image : myobject.image[1]["#text"]
             });
     };
-    database.getData(obj);
+    database.insertData(obj);
 }
 
 /*

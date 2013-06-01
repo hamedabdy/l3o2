@@ -70,7 +70,7 @@ function getConcertsUsingPages(url, location, page, limit){
         totalpages = parseInt(totalpages, 10);
         page = parsedJSON.events['@attr'].page;
         page = parseInt(page, 10);
-        console.log('Location: ' + location + 'Page: ' +page+ ' / '+ totalpages);
+        console.log('Location: ' + location + ' Page: ' +page+ ' / '+ totalpages);
         pushEvents(parsedJSON, location);
         if(page < totalpages){ 
             getConcertsUsingPages(url, location, page+1, limit);

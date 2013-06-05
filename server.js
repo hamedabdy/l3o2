@@ -3,12 +3,12 @@
 var express = require('express'),
     app = express(),
     mongojs = require('mongojs'),
-	url = process.env.MONGOHQ_URL || 'mongodb://localhost/concertdacote',
+	url = process.env.MONGOHQ_URL || 'mongodb://localhost/test',
 	db = mongojs(url, ['concerts']);
 
 app.use(express.static(__dirname+'/'));
 console.log('Starting server...');
-console.log('server listening on port 3000 || ' + process.env.PORT);
+console.log('Server listening on port 3000 || ' + process.env.PORT);
 
 /*
  * getting data from database

@@ -22,7 +22,7 @@ function geoLocate() {
     if (navigator.geolocation)
         var watchId = navigator.geolocation.watchPosition(successCallback, null, { enableHighAccuracy : true});
     else
-        alert("Votre navigateur ne prend pas en compte la géolocalisation HTML5");
+        alert("Your browser does not support HTML5 Geolocation!");
 }
 
 /*
@@ -58,7 +58,7 @@ function reverseGeocoding(lat, lng) {
             if (status == google.maps.GeocoderStatus.OK && data[0]) {
                 document.getElementById("address").value = data[0].formatted_address;
             } else {
-                alert("Erreur: " + status);
+                alert("Error: " + status);
             }
         });
     return false;
@@ -78,20 +78,21 @@ function geoCodeAddress(obj) {
                 var longitude = tab_latlng[1].replace(')', '');
                 setUserLocation(latitude, longitude);
             } else {
-                alert("Aucune Adresse de ce type n'existe");
+                alert("No such address exists!");
             }
         });
     }
 }
 
+//var openWindow = false;
+
 /*
  * Map markers customization
  */
-function newPoint(carte, response, i ){
+function newPoint(carte, response){
     var lemarqueur = new google.maps.Marker({
-    position: new google.maps.LatLng(parseFloat(response.latlong[0]), parseFloat(response.latlong[1])),
-    map: carte,
-    title: response.title
+        position: new google.maps.LatLng(response.latlong[0], response.latlong[1]),
+        title: response.title
     });
     var WindowOptions = { content:'<table><tr><td><img src="'
     +response.image+'"/></td><td><p style="font-size: 13px">'
@@ -100,10 +101,16 @@ function newPoint(carte, response, i ){
     + response.address.name +' '+ response.address.street + '<br>'
     + response.address.postalcode +', '+ response.address.city +', '+ response.address.country
     + '<br><a target="_blank" href =' +response.url+'>Plus d\'infos</a></p></td></tr></table>'};
+    
     var InfoWindow = new google.maps.InfoWindow(WindowOptions);
     google.maps.event.addListener(lemarqueur, 'click', function() {
-        InfoWindow.open(carte,lemarqueur);
+        //if(openWindow) InfoWindow.close()
+       // else {
+            InfoWindow.open(carte,lemarqueur);
+       //     openWindow = true;
+       // }
     });
+    return lemarqueur;
 }
 
 /*
@@ -111,41 +118,37 @@ function newPoint(carte, response, i ){
  */
 function plotOverlay(lat, lng, response) {
     var latlng = new google.maps.LatLng(parseFloat(lat), parseFloat(lng));
-    //objet contenant des propriétés avec des identificateurs prédéfinis dans Google Maps permettant
-    //de définir des options d'affichage de notre carte
     var options = {
             center : latlng,
             zoom : 12,
             mapTypeId : google.maps.MapTypeId.ROADMAP
     };
-    //constructeur de la carte qui prend en paramêtre le conteneur HTML
-    //dans lequel la carte doit s'afficher et les options
     carte = new google.maps.Map(document.getElementById("carte"), options);
     var pinColor = "#79CDCD";
     var pinImage = new google.maps.MarkerImage("http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|"
                                     + pinColor, new google.maps.Size(21, 34),
                     new google.maps.Point(0, 0), new google.maps.Point(10,34));
-
     var marqueur = new google.maps.Marker({
             position : new google.maps.LatLng(parseFloat(lat), parseFloat(lng)),
             map : carte,
-            title : "Vous etes ici",
+            title : "Target",
             icon : pinImage
     });
-
-    var myWindowOptions = {
-            content : '<h4>Vous etes ici</h4>'
-    };
-
+    var myWindowOptions = { content : '<h5>Your Location</h5>'};
     var myInfoWindow = new google.maps.InfoWindow(myWindowOptions);
     google.maps.event.addListener(marqueur, 'click', function() {
             myInfoWindow.open(carte, marqueur);
     });
+    var markers =[];
     if (response.length != 0) {
         for (var i = 0 ; i < response.length; i++) {
-            newPoint(carte, response[i], i);
+            markers.push(newPoint(carte, response[i]));
         }; 
-    } else alert('Pas de concerts pour ces parametres (rayon/adresse)');
+        var markerCluster = new MarkerClusterer(carte, markers);
+        markerCluster.setMaxZoom(15);
+        markerCluster.setGridSize(40);
+        google.maps.event.addDomListener(window, 'load', initialiser);
+    } else alert('No conerts found for the given parameters (range/address)');
      
 }
 

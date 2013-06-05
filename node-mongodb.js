@@ -8,7 +8,7 @@ var mongojs = require('mongojs'),
  * inserting data into database
  */
 function insertData(data) {
-    db.concerts.insert(data, {continueOnError: true, safe:{w:1, wtimeout:5000}}, function(err, docs){
+    db.concerts.insert(data, {continueOnError: true}, function(err, docs){
        if(err) console.log('err: ' + err + '\n');
        else console.log('data inserted successfully!\n');
    });

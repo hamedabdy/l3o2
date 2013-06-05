@@ -22,7 +22,7 @@ function getAttr(url, city){
     var parsedRslts ='';
     var location ='';
     var total = 0;
-    const MAX_TOTAL = 1000;
+    const MAX_TOTAL = 800;
     request(url, function(err, res, results){
         parsedRslts = JSON.parse(results);
         if(!parsedRslts.events){

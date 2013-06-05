@@ -64,8 +64,8 @@ function getConcertsUsingPages(url, location, page, limit){
     var parsedJSON = '';
     var totalpages = 0;
     var url2 = url + '&limit=' + limit + '&page=' + page;
-    console.log('Page: ' + page);
-    console.log('\nSending request on: ' +url2 + '\n');
+    console.log('\nPage: ' + page);
+    console.log('Sending request on: ' +url2 + '\n');
     request(url2, function(err, res, results){
         parsedJSON = JSON.parse(results);
         if(parsedJSON.events){

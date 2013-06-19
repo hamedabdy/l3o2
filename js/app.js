@@ -3,15 +3,11 @@
  */
 function initialiser() {
         var latlng = new google.maps.LatLng(48.856614, 2.3522219);
-        //objet contenant des propriétés avec des identificateurs prédéfinis dans Google Maps permettant
-        //de définir des options d'affichage de notre carte
         var options = {
                 center : latlng,
                 zoom : 12,
                 mapTypeId : google.maps.MapTypeId.ROADMAP
         };
-        //constructeur de la carte qui prend en paramêtre le conteneur HTML
-        //dans lequel la carte doit s'afficher et les options
         carte = new google.maps.Map(document.getElementById("carte"), options);
 }
 
@@ -84,31 +80,38 @@ function geoCodeAddress(obj) {
     }
 }
 
-//var openWindow = false;
+var infoWindows = [];
+
+function closeInfoWindows(){
+    var i = infoWindows.length;
+    while(i--)
+    {
+        infoWindows[i].close();
+    }
+}
 
 /*
  * Map markers customization
  */
-function newPoint(carte, response){
+function newPoint(carte, response, oms){
+    var loc = new google.maps.LatLng(response.latlong[0], response.latlong[1]);
     var lemarqueur = new google.maps.Marker({
-        position: new google.maps.LatLng(response.latlong[0], response.latlong[1]),
+        position: loc,
         title: response.title
     });
+    oms.addMarker(lemarqueur);
     var WindowOptions = { content:'<table><tr><td><img src="'
     +response.image+'"/></td><td><p style="font-size: 13px">'
-    +response.title+'</p> <p style="font-size: 10px"><b>Artistes:</b> '
+    +response.title+'</p> <p style="font-size: 10px"><b>Artists:</b> '
     +response.artist+'<br><b>Date:</b> '+response.startDate+'<br>'
     + response.address.name +' '+ response.address.street + '<br>'
     + response.address.postalcode +', '+ response.address.city +', '+ response.address.country
-    + '<br><a target="_blank" href =' +response.url+'>Plus d\'infos</a></p></td></tr></table>'};
-    
+    + '<br><a target="_blank" href =' +response.url+'>Plus d\'infos</a></p></td></tr></table>'};    
     var InfoWindow = new google.maps.InfoWindow(WindowOptions);
+    infoWindows.push(InfoWindow);
     google.maps.event.addListener(lemarqueur, 'click', function() {
-        //if(openWindow) InfoWindow.close()
-       // else {
-            InfoWindow.open(carte,lemarqueur);
-       //     openWindow = true;
-       // }
+        closeInfoWindows();
+        InfoWindow.open(carte,lemarqueur);
     });
     return lemarqueur;
 }
@@ -131,7 +134,7 @@ function plotOverlay(lat, lng, response) {
     var marqueur = new google.maps.Marker({
             position : new google.maps.LatLng(parseFloat(lat), parseFloat(lng)),
             map : carte,
-            title : "Target",
+            title : "Your Location",
             icon : pinImage
     });
     var myWindowOptions = { content : '<h5>Your Location</h5>'};
@@ -139,11 +142,12 @@ function plotOverlay(lat, lng, response) {
     google.maps.event.addListener(marqueur, 'click', function() {
             myInfoWindow.open(carte, marqueur);
     });
+    var oms = new OverlappingMarkerSpiderfier(carte, {keepSpiderfied:true});
     var markers =[];
     if (response.length != 0) {
         for (var i = 0 ; i < response.length; i++) {
-            markers.push(newPoint(carte, response[i]));
-        }; 
+            markers.push(newPoint(carte, response[i], oms));
+        };
         var markerCluster = new MarkerClusterer(carte, markers);
         markerCluster.setMaxZoom(15);
         markerCluster.setGridSize(40);

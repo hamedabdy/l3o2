@@ -13,8 +13,8 @@ L'objectif principal du projet est de développer une application web permettant
 
 - [Hamed] (http://github.com/freeze2ice)
 - [Kader] (https://github.com/kfresh)
-- [Cassandra]
-- [Michel]
+- Cassandra
+- Michel
 
 ## Licence
 Copyright (c) 2013 Dev Team

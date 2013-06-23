@@ -15,12 +15,12 @@
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.0/jquery.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.15/jquery-ui.min.js"></script>
 <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
-<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true"></script>
-<script type="text/javascript" src="js/markerclusterer.js"></script>
-<script type="application/x-javascript" src="js/app.min.js"></script>
-<script type="application/x-javascript" src="js/tools.min.js"></script>
-<script type="text/javascript" src="js/oms.min.js"></script>
-<script type="text/javascript">
+<script src="http://maps.google.com/maps/api/js?sensor=true"></script>
+<script src="js/markerclusterer_packed.js"></script>
+<script src="js/app.min.js"></script>
+<script src="js/tools.min.js"></script>
+<script src="js/oms.min.js"></script>
+<script>
   var _gaq = _gaq || [];
   _gaq.push(['_setAccount', 'UA-40498004-1']);
   _gaq.push(['_trackPageview']);
@@ -31,10 +31,10 @@
     var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
   })();
 </script>
-<script type="text/javascript" async="" src="http://www.google-analytics.com/ga.js"></script>
+<script async="" src="http://www.google-analytics.com/ga.js"></script>
 </head>
 <body onload="initialiser()">
-<span class="logo-holder"><a href="index.html"><img src="images/logored2.png" class="logo"></a></span>
+<span class="logo-holder"><a href="index.html"><img src="images/logored.min.png" class="logo"></a></span>
 <span class="form-holder">
 <form class="form-wrapper cf" id="myForm" onsubmit="geoCodeAddress(this.address.value); return false;">
 	<span class="form-wraper-location"><img src="images/marker.png" onclick="geoLocate()" class="location-marker" /></span>

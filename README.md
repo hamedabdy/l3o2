@@ -1,4 +1,4 @@
-Concert d'à Côté
+Le Concert d'à Côté
 ================
 
 Projet L3O2 2013 [![Build Status](https://travis-ci.org/freeze2ice/l3o2.png?branch=master)](https://travis-ci.org/freeze2ice/l3o2)

@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 var mongojs = require('mongojs'),
-    dburl = process.env.MONGOHQ_URL || 'mongodb://localhost/test',
+    dburl = process.env.MONGOHQ_URL || 'mongodb://localhost/concertdacote',
 	db = mongojs(dburl, ['concerts']);
 
 /*

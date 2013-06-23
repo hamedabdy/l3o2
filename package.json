@@ -11,6 +11,17 @@
     "ejs": "~0.8.4",
     "bcrypt": "~0.7.6"
   },
+  "contributors": [ 
+    {
+      "name": "Hamed",
+      "email": "hamed.mi@gmail.com"
+    }
+  ],
+  "main": "./l3o2",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/freeze2ice/l3o2.git"
+  },
   "engines": {
     "node": ">=0.6"
   }

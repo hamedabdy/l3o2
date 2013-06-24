@@ -6,25 +6,29 @@
 	<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
 	<script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
 	<link rel="stylesheet" href="http://jqueryui.com/resources/demos/style.css" />
+	    <!-- Loading Bootstrap -->
+    <link href="css/bootstrap.css" rel="stylesheet">
+    <!-- Loading Flat UI -->
+    <link href="css/flat-ui.css" rel="stylesheet">
 </head>
 <body>
-<div>
+<div class="center-position">
 <% if (!user) { %>
-	<h2>Welcome! Please log in.</h2>
+	<h4>If you are a admin please log in</h4>
 	<p style=" font-size: 12px;">
-	<a href="/">Home</a> |
-	<a href="/login">Log In</a>
+	<a href="/" class="btn btn-large btn-block">Home</a> |
+	<a href="/login" class="btn btn-large btn-block btn-info">Log In</a>
 	</p>
 <% } else { %>
-	<h2>Hello, <%= user.username %>.</h2>
+	<h4>Hi!</h4>
 	<p style=" font-size: 12px;">
-	<a href="/">Home</a> |
-	<a href="/account">Account</a> |
-	<a href="#" id="opener">Update Database</a> |
-	<a href="/logout">Log Out</a>
+	<a href="/" class="btn btn-large btn-block">Home</a> |
+	<a href="/account" class="btn btn-large btn-block btn-primary" style="text-transform: capitalize;"><%= user.username %></a> |
+	<a href="#" id="opener" class="btn btn-large btn-block btn-danger">Update Database</a> |
+	<a href="/logout" class="btn btn-large btn-block btn-inverse">Log Out</a>
 	</p>
 	<% if (message) { %>
-	<p style="font-size: 15px; color: red;"><%= message %></p>
+	<p class="messege"><%= message %></p>
 	<% } %>
 <% } %>
 </div>

@@ -75,7 +75,7 @@ body {
 
 a {
   color: #1abc9c;
-  text-decoration: underline;
+  text-decoration: none;
   -webkit-transition: 0.25s;
   -moz-transition: 0.25s;
   -o-transition: 0.25s;
@@ -90,6 +90,19 @@ h3 {
   font-weight: 700;
   margin-bottom: 4px;
   margin-top: 2px; }
+
+h4 {
+  color: #fff;
+}
+
+.messege {
+  font-size: 15px; 
+  color: red;
+}
+
+.center-position {
+  margin: 7% 35%;
+}
 
 @media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (-webkit-min-device-pixel-ratio: 1.5), only screen and (-moz-min-device-pixel-ratio: 2), only screen and (-o-min-device-pixel-ratio: 3 / 2), only screen and (-o-min-device-pixel-ratio: 2 / 1), only screen and (min--moz-device-pixel-ratio: 1.5), only screen and (min-device-pixel-ratio: 1.5), only screen and (min-device-pixel-ratio: 2) {}
 

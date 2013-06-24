@@ -12,13 +12,13 @@
 <% if (!user) { %>
 	<h2>Welcome! Please log in.</h2>
 	<p style=" font-size: 12px;">
-	<a href="/dashbord">Home</a> |
+	<a href="/">Home</a> |
 	<a href="/login">Log In</a>
 	</p>
 <% } else { %>
 	<h2>Hello, <%= user.username %>.</h2>
 	<p style=" font-size: 12px;">
-	<a href="/dashbord">Home</a> |
+	<a href="/">Home</a> |
 	<a href="/account">Account</a> |
 	<a href="#" id="opener">Update Database</a> |
 	<a href="/logout">Log Out</a>
@@ -28,13 +28,9 @@
 	<% } %>
 <% } %>
 </div>
-
-<!-- <button id="opener">Update Database</button> -->
-
 	<div id="dialog-confirm" title="Update Database?">
 <p><span class="ui-icon ui-icon-alert" style="float: left; margin: 0 7px 20px 0;"></span>This would update the server. Are you sure? It wasn't accidental click?</p>
 </div>
-
 	<script>
 	$(function() {
 		$( "#dialog-confirm" ).dialog({
@@ -56,6 +52,5 @@
 		$("#dialog-confirm").dialog("open");
 	});
 	</script>
-
 </body>
 </html>

@@ -1,26 +1,25 @@
 
 body {
-	background: #555 url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAB9JREFUeNpi/P//PwM6YGLAAuCCmpqacC2MRGsHCDAA+fIHfeQbO8kAAAAASUVORK5CYII=);
-	height: 100%;
-	margin: 0px;
-	padding: 0px;
-	font: bold 15px 'lucida sans', 'trebuchet MS', 'Tahoma';
-	color: #444;
+    background: #555 url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAB9JREFUeNpi/P//PwM6YGLAAuCCmpqacC2MRGsHCDAA+fIHfeQbO8kAAAAASUVORK5CYII=);
+    height: 100%;
+    margin: 0px;
+    padding: 0px;
+    font: bold 15px 'Lato', 'lucida sans', 'trebuchet MS', 'Tahoma';
+    color: #444;
     }
     
     a {
-        color: #000;
     }
     
     /*--------------------------------------*/
     
     #carte {
-	height: 84.5%;
-	width:100%;
-	position: absolute;
-	clear: both;
-	bottom: 0;
-	}
+    height: 84.5%;
+    width:100%;
+    position: absolute;
+    clear: both;
+    bottom: 0;
+    }
     
     /*-------------------------------------*/
     
@@ -37,7 +36,7 @@ body {
       zoom:1;
     }
 
-    /*-------------------------------------*/	
+    /*-------------------------------------*/   
     
     .form-holder {
         position: absolute;
@@ -66,7 +65,7 @@ body {
         height: 40px;
         padding: 10px 5px;
         float: left;
-        font: bold 15px 'lucida sans', 'trebuchet MS', 'Tahoma';
+        font: bold 15px 'Lato', 'lucida sans', 'trebuchet MS', 'Tahoma';
         border: 0;
         background: #eee;
         -moz-border-radius: 0 0 0 0;
@@ -101,7 +100,7 @@ body {
     }
     
     .form-wrapper button {
-	overflow: visible;
+    overflow: visible;
         position: relative;
         float: right;
         border: 0;
@@ -109,7 +108,7 @@ body {
         cursor: pointer;
         height: 40px;
         width: 116px;
-        font: bold 15px/40px 'lucida sans', 'trebuchet MS', 'Tahoma';
+        font: bold 15px/40px 'Lato', 'lucida sans', 'trebuchet MS', 'Tahoma';
         color: #fff;
         text-transform: uppercase;
         background: #d83c3c;
@@ -119,9 +118,9 @@ body {
         text-shadow: 0 -1px 0 rgba(0, 0 ,0, .3);
     }
       
-    .form-wrapper button:hover{	
+    .form-wrapper button:hover{ 
         background: #e54040;
-    }	
+    }   
       
     .form-wrapper button:active,
     .form-wrapper button:focus{
@@ -153,12 +152,12 @@ body {
     
     .form-wraper-location {
        cursor: pointer;
-	   position: relative;
-	   overflow: visible;
-	   float: left;
-	   background: #d83c3c;
-	   height: 40px;
-	   -moz-border-radius: 3px 0 0 3px;
+       position: relative;
+       overflow: visible;
+       float: left;
+       background: #d83c3c;
+       height: 40px;
+       -moz-border-radius: 3px 0 0 3px;
        -webkit-border-radius: 3px 0 0 3px;
        border-radius: 3px 0 0 3px;
 
@@ -169,25 +168,25 @@ body {
     }
     
     .location-marker {
-	   width: 32px;
-	   height: 32px;
-	   padding-top: 4px;
+       width: 32px;
+       height: 32px;
+       padding-top: 4px;
     }
     
     .form-wraper-amount {
-	   border: 0;
-	   float: right;
-	   position: relative;
-	   overflow: visible;
-	   width: 116px;
-	   height: 15px;
-	   font: bold 10px 'lucida sans', 'trebuchet MS', 'Tahoma';
-	   color: #fff;
-	   background: #d83c3c;
-	   border-top: 1px solid #eee;
-	   border-radius: 0 0 3px 0;
+       border: 0;
+       float: right;
+       position: relative;
+       overflow: visible;
+       width: 116px;
+       height: 15px;
+       font: bold 10px 'Lato','lucida sans', 'trebuchet MS', 'Tahoma';
+       color: #fff;
+       background: #d83c3c;
+       border-top: 1px solid #eee;
+       border-radius: 0 0 3px 0;
         text-shadow: 0 -1px 0 rgba(0, 0 ,0, .3);
-	   text-align: center;
+       text-align: center;
     }
     
     .form-wrapper-amount:before {
@@ -203,52 +202,60 @@ body {
     
     .form-wraper-range {
         cursor: pointer;
-    	border: 0;
-    	position: relative;
-    	float: left;
-    	width: 440px;
-    	height: 14px;
-    	border-top: 1px solid #d83c3c;
-    	margin-left: 32px;
-    	border-radius: 0 0 0 3px;
-    	background: #eee;
+        border: 0;
+        position: relative;
+        float: left;
+        width: 440px;
+        height: 14px;
+        border-top: 1px solid #d83c3c;
+        margin-left: 32px;
+        border-radius: 0 0 0 3px;
+        background: #eee;
     }
     
-    ul {
-    	opacity: 0.9;
-    	position: absolute;
-    	list-style-type: none;
-    	margin: 2px 0 0 0;
-    	padding: 0;
-    	font-size: 14px;
-    	color: #000;
-    	font-family: "Lucida Grande", arial, sans-serif;
-    	background-color: #fff;
-    	background-color: rgba(255,255,255,0.95);
-    	z-index: 2;
-    	box-shadow: 0 2px 12px #222;
-    	-webkit-box-shadow: 0 2px 12px #222;
-    	-moz-box-shadow: 0 2px 12px #222;
-    	border-radius: 0 0 5px 5px;
-    	-webkit-border-radius: 0 0 5px 5px;
-    	-moz-border-radius: 0 0 5px 5px;
+    .ui-autocomplete {
+        width: 440px;
+        cursor: pointer;
+        opacity: 0.9;
+        position: absolute;
+        list-style-type: none;
+        margin: 2px 0 0 0;
+        padding: 0;
+        font-size: 14px;
+        color: #000;
+        font-family: "Lato", "Lucida Grande", arial, sans-serif;
+        background-color: #fff;
+        background-color: rgba(255,255,255,0.95);
+        z-index: 2;
+        box-shadow: 0px 3px 2px 0px #222;
+        -webkit-box-shadow: 0 2px 12px #222;
+        -moz-box-shadow: 0 2px 12px #222;
+        border-radius: 0 0 5px 5px;
+        -webkit-border-radius: 0 0 5px 5px;
+        -moz-border-radius: 0 0 5px 5px;
     }
     
-    li:hover {
-    	cursor: pointer;
-    	background-color: #3668d9;
-    	background-image: -webkit-gradient(linear, 0% 0%, 0% 64%, from(rgb(110, 129, 245)), to(rgb(62, 82, 242)));
-    	border-color: #3342e8;
-    	color: #fff;
-    	text-shadow: 0 1px 2px #122042;
-    	border-radius: 5px;
-    	-webkit-border-radius: 5px;
-    	-moz-border-radius: 5px;
+    .ui-menu-item {
+        margin: 0px 10px;
+        padding: 3px 0 3px 0;
+    }
+    
+    #ui-active-menuitem {
+        padding: 1px 10px 1px 10px;
+        cursor: pointer;
+        background-color: #3668d9;
+        background-image: -webkit-gradient(linear, 0% 0%, 0% 64%, from(rgb(110, 129, 245)), to(rgb(62, 82, 242)));
+        border-color: #3342e8;
+        color: #fff;
+        text-shadow: 0 1px 2px #122042;
+        border-radius: 5px;
+        -webkit-border-radius: 5px;
+        -moz-border-radius: 5px;
     }
     
     .logo {
-    	width: 200px;
-    	height: 90px;
-    	margin-top: -10;
-    	margin-left: 30;
-	}
+        width: 200px;
+        height: 90px;
+        margin-top: -10;
+        margin-left: 30;
+    }

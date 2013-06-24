@@ -1,16 +1,32 @@
-<% if (message) { %>
-<p><%= message %></p>
-<% } %>
-<form action="/login" method="post">
-<div>
-<label>Username:</label>
-<input type="text" name="username"/><br/>
-</div>
-<div>
-<label>Password:</label>
-<input type="password" name="password"/>
-</div>
-<div>
-<input type="submit" value="Submit"/>
-</div>
-</form>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Login</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Loading Bootstrap -->
+    <link href="css/bootstrap.css" rel="stylesheet">
+    <!-- Loading Flat UI -->
+    <link href="css/flat-ui.css" rel="stylesheet">
+  </head>
+  <body>
+  	<div> <% if (message) { %>
+  		<div style="color: #fff; margin: 0 43%;"><%= message %></div>
+  		<% } %>
+  	</div>
+          <div class="login-form">
+          	<form action="/login" method="post">
+            <div class="control-group">
+              <input type="text" name="username" class="login-field" value="" placeholder="Enter your name" id="login-name" />
+              <label class="login-field-icon fui-man-16" for="login-name"></label>
+            </div>
+            <div class="control-group">
+              <input type="password" name="password" class="login-field" value="" placeholder="Password" id="login-pass" />
+              <label class="login-field-icon fui-lock-16" for="login-pass"></label>
+            </div>
+            <input type="submit" class="btn btn-primary btn-large btn-block" value="Login"/>
+            <a class="login-link" href="#">Lost your password?</a>
+               </form>
+          </div>
+  </body>
+</html>

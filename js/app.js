@@ -102,8 +102,8 @@ function newPoint(carte, response, oms){
     });
     oms.addMarker(lemarqueur);
     var WindowOptions = { content:'<table><tr><td><img src="'
-    +response.image+'"/></td><td><p style="font-size: 13px">'
-    +response.title+'</p class="info-window"> <p style="font-size: 10px"><b>Artists:</b> '
+    +response.image+'"/></td><td><p style="font-size: 14px; font-weight: bold;">'
+    +response.title+'</p class="info-window"> <p style="font-size: 13px;"><b>Artists:</b> '
     +response.artist+'<br><b>Date:</b> '+response.startDate+'<br>'
     + response.address.name +' '+ response.address.street + '<br>'
     + response.address.postalcode +', '+ response.address.city +', '+ response.address.country
@@ -153,7 +153,7 @@ function plotOverlay(lat, lng, response) {
         markerCluster.setMaxZoom(15);
         markerCluster.setGridSize(40);
         google.maps.event.addDomListener(window, 'load', initialiser);
-    } else alert('No conerts found for the given parameters (range/address)');
+    } else alert('No conerts found at this time for the given parameters (range/address/artist)');
      
 }
 

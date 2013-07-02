@@ -10,9 +10,8 @@ var express = require('express')
 	, LocalStrategy = require('passport-local').Strategy
 	, db2 = mongojs(url, ['htpasswd'])
 	, bcrypt = require('bcrypt')
-	, MongoStore = require('connect-mongo')(express)
-	, index = require('./js/app.js');
-
+	, MongoStore = require('connect-mongo')(express);
+  
 // configure Express
 app.configure(function() {
   app.use(express.logger());

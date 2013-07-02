@@ -21,12 +21,13 @@ app.configure(function() {
   app.use(express.cookieParser());
   app.use(express.bodyParser());
   app.use(express.methodOverride());
-  app.use(express.session({ 
+  /*app.use(express.session({ 
     secret: 'concert_dacote',
     maxAge: new Date(Date.now() + 3600000),
     store: new MongoStore(
       {db: url.db},
-      function(err) { if(!err) console.log('connect-mongodb setup ok!') }) }));
+      function(err) { if(!err) console.log('connect-mongodb setup ok!') }) })); */
+  app.use(express.session());
   // Initialize Passport! Also use passport.session() middleware, to support
   // persistent login sessions (recommended).
   app.use(flash());

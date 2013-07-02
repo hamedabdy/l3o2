@@ -35,13 +35,14 @@ function successCallback(position) {
  * This fucntion sets the user location on the map. ref. successCallback()
  */
 function setUserLocation(lat, lng) {
-    var rayon = parseFloat((document.getElementById("amount").value).replace(' Km', ''));
+    var range = parseFloat((document.getElementById("amount").value).replace(' Km', ''));
+    var artist = document.getElementById('artist').value;
     carte.panTo(new google.maps.LatLng(lat, lng));
     var marker = new google.maps.Marker({
         position : new google.maps.LatLng(lat, lng),
         map : carte
     });
-    getConcerts(lat, lng, rayon);
+    getConcerts(lat, lng, range, artist);
 }
 
 /*
@@ -159,14 +160,17 @@ function plotOverlay(lat, lng, response) {
 /*
  * AJAX call to server
  */
-function getConcerts(lat, lng, rayon) {
+function getConcerts(lat, lng, range, artist) {
+        var newUrl = '';
     $.ajax({
-        type : 'POST',
-        url : '/concert?lat=' + parseFloat(lat) + '&long='+ parseFloat(lng) + '&rayon='+ parseFloat(rayon),
+        type : 'GET',
+        url : '/concert?lat=' + parseFloat(lat) + '&long='+ parseFloat(lng) + '&range='+ parseFloat(range) + '&artist=' + artist,
         dataType : 'json',
         contentType : 'application/json; charset=UTF-8',
         error: function(e) {alert(" Too many concerts that I can handle!\n Reduce range please");},
         success : function(response) {
+                //newUrl = '/concert?lat=' + parseFloat(lat) + '&long='+ parseFloat(lng) + '&range='+ parseFloat(range);
+                //window.history.pushState("string", "Title", newUrl);
                 plotOverlay(lat, lng, response);
         }
     });

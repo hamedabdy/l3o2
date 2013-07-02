@@ -28,7 +28,7 @@ $(document).ready(function() {
  * Range Slider JQuery
  */
 $(document).ready(function() {
-$( "#rayon" ).slider({
+$( "#range" ).slider({
         range: false,
         min: 1,
         max: 500,
@@ -39,7 +39,7 @@ $( "#rayon" ).slider({
                 $( "#amount" ).val(ui.values[0] + " Km");
                 }
             });
-$( "#amount" ).val($( "#rayon" ).slider( "values", 0 ) + " Km");
+$( "#amount" ).val($( "#range" ).slider( "values", 0 ) + " Km");
         //get rayon value
         //rayon = $("#rayon").slider("values", 0);
 });

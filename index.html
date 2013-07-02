@@ -63,14 +63,14 @@
 <form class="form-wrapper cf" id="myForm" onsubmit="geoCodeAddress(this.address.value); return false;">
 	<span class="form-wraper-location"><img src="images/marker.png" onclick="geoLocate()" class="location-marker" /></span>
 	<input id="address" name="address" type="text" class="form-wrapper-input" placeholder="Enter address here..." required />
-	<button id="valider" type="submit">Search</button>				
+	<button id="valider" class="form-wrapper-button" type="submit">Search</button>				
 	<div id="range" class="form-wraper-range"></div>
 	<input type="text" id="amount" class="form-wraper-amount" disabled="disabled"/>
 	<span class="form-wrapper-amount"></span>
 	<div>
 	  <input type="text" name="artist" id="artist" class="hiddenInput form-wrapper-input artist-input" placeholder="Enter an artist name here..."/>
 	</div>
-	<div id="extendBtn" class="optionsBtn"></div>
+	<div><button type="button" id="extendBtn" class="optionsBtn"></button></div>
 </form>
 </span>
 <div id="carte"></div>

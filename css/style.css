@@ -109,7 +109,7 @@ body {
         font-style: italic;
     }
     
-    .form-wrapper button {
+    .form-wrapper-button {
         overflow: visible;
         position: relative;
         float: right;
@@ -128,16 +128,16 @@ body {
         text-shadow: 0 -1px 0 rgba(0, 0 ,0, .3);
     }
       
-    .form-wrapper button:hover{ 
+    .form-wrapper-button:hover{ 
         background: #e54040;
     }   
       
-    .form-wrapper button:active,
-    .form-wrapper button:focus{
+    .form-wrapper-button:active,
+    .form-wrapper-button:focus{
         background: #c42f2f;
     }
     
-    .form-wrapper button:before {
+    .form-wrapper-button:before {
         content: '';
         position: absolute;
         border-width: 8px 8px 8px;
@@ -147,15 +147,15 @@ body {
         left: -6px;
     }
     
-    .form-wrapper button:hover:before{
+    .form-wrapper-button:hover:before{
         border-right-color: #e54040;
     }
     
-    .form-wrapper button:focus:before{
+    .form-wrapper-button:focus:before{
         border-right-color: #c42f2f;
     }
     
-    .form-wrapper button::-moz-focus-inner {
+    .form-wrapper-button::-moz-focus-inner {
         border: 0;
         padding: 0;
     }
@@ -276,22 +276,29 @@ body {
     
     .optionsBtn {
         z-index: 1000;
-        opacity: 0.7;
-        width: 60px;
-        height: 12px;
+        opacity: 0.6;
+        width: 100px;
+        height: 10px;
         position: absolute;
         content: "";
-        box-shadow: 5px 5px 5px;
+        box-shadow: 2px 2px 2px;
         top: 91px;
         left: 260px;
-        background: #555;
+        background: #fff;
         border: 5px;
-        border-color: #fff;
+        border-color: #d83c3c;
         border-radius: 0px 0px 20px 20px;
         border-style: solid solid none;
         border-width: 0 10px 0px 10px;
-        cursor: s-resize;
+        cursor: pointer;
         transition: all 0.3s ease 0s;
+    }
+    
+    .optionsBtn:hover {
+        background: #d83c3c;
+        border-color: #fff;
+        opacity: 0.8;
+        box-shadow: 5px 5px 5px;
     }
     
     .optionsBtn:before {
@@ -300,9 +307,13 @@ body {
         position: relative;
         border-width: 8px 8px 8px;
         border-style: solid solid solid none;
-        border-color: transparent #fff transparent;
+        border-color: transparent #d83c3c transparent;
         top: 23px;
         transform: rotate(270deg);
+    }
+    
+    .optionsBtn:hover:before {
+        border-color: transparent #fff transparent;
     }
     
     .extendShadow {
@@ -312,11 +323,10 @@ body {
     .changeBtn {
         top: 122px;
         left: 260px;
-        cursor: n-resize;
     }
     
     .changeBtn:before {
-        top: -28px;
+        top: -31px;
         transform: rotate(90deg);
     }
     

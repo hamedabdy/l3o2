@@ -25,9 +25,9 @@ app.configure(function() {
     secret: 'concert_dacote',
     maxAge: new Date(Date.now() + 3600000),
     store: new MongoStore(
-      {db: url.db},
+      {db: 'concerydacote'},
       function(err) { if(!err) console.log('connect-mongodb setup ok!') }) })); */
-  app.use(express.session());
+  app.use(express.session({secret: 'concert_dacote'}));
   // Initialize Passport! Also use passport.session() middleware, to support
   // persistent login sessions (recommended).
   app.use(flash());

@@ -10,11 +10,11 @@
 <meta name="msvalidate.01" content="2AC4147C9C5A0F86B65BC2B41148227D" />
 <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
 <link rel="icon" type="image/png" href="images/favicon.ico"/>
-<link rel="stylesheet" type="text/css" href="css/style.css" media="screen" />
-<link rel="stylesheet" type="text/css" href="css/media.css" media="screen" />
+<link rel="stylesheet" type="text/css" href="css/style.css"/>
 <link rel="stylesheet" href="css/slider.css" />
-<link rel="stylesheet" type="text/css" href="css/default.css" />
-<link rel="stylesheet" type="text/css" href="css/component.css" />
+<link rel="stylesheet" type="text/css" href="css/default.css"/>
+<link rel="stylesheet" type="text/css" href="css/component.css"/>
+<link rel="stylesheet" type="text/css" href="css/media.css"/>
 <script src="js/modernizr.custom.js"></script>
 <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.0/jquery.min.js"></script>
@@ -54,14 +54,14 @@
     <div class="container">
       <div class="main">
         <section>
-          <button id="showBottom"><img src="images/info.png"></button>
+          <button id="showBottom"><img src="images/info.png" title="More info..." alt="More info..."></button>
         </section>
       </div>
     </div>
-<span class="logo-holder"><a href="index.html"><img src="images/logored.min.png" class="logo"></a></span>
+    <div class="logo" title="Le Concert d'à Côté"></div>
 <span class="form-holder">
 <form class="form-wrapper cf" id="myForm" onsubmit="geoCodeAddress(this.address.value); return false;">
-	<span class="form-wraper-location"><img src="images/marker.png" onclick="geoLocate()" class="location-marker" /></span>
+	<span class="form-wraper-location"><img src="images/marker.png" title="Press to get geolocated" alt="Press to get geolocated" onclick="geoLocate()" class="location-marker" /></span>
 	<input id="address" name="address" type="text" class="form-wrapper-input" placeholder="Enter address here..." required />
 	<button id="valider" class="form-wrapper-button" type="submit">Search</button>				
 	<div id="range" class="form-wraper-range"></div>
@@ -77,6 +77,8 @@
 
 <script src="js/classie.js"></script>
 <script>
+  //var wondowWidth = window.innerWidth();
+  //alert(window.innerWidth);
 var menuBottom = document.getElementById( 'cbp-spmenu-s4' ),
 showBottom = document.getElementById( 'showBottom' ),
 myForm = document.getElementById('myForm'),

@@ -87,9 +87,15 @@ a:hover {
 	color: #fff;
 	display: block;
 	cursor: pointer;
-	margin: 23px -40px;
+	margin: 23px 10px;
 	border-radius: 10px 5px 10px 5px;
 	width: 35px;
+	float: right;
+}
+
+.main > section img {
+    height: 30px;
+    margin: 0 1px;
 }
 
 .main > section button:hover {
@@ -112,7 +118,7 @@ a:hover {
 .info {
         color: rgb(255, 255, 255); 
         padding: 0.8em; 
-        width: 41%; 
+        width: 55%; 
         float: left; 
         font-size: 1.1em; 
         font-weight: 300;

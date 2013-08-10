@@ -362,7 +362,7 @@ body {
     .logo {
         background: url(../images/logored-shadow.png) no-repeat;
         width: 200px;
-        height: 90px;
+        height: 80px;
         background-size: 200px 90px;
         margin: -10px 30px;
     }

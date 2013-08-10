@@ -366,3 +366,8 @@ body {
         background-size: 200px 90px;
         margin: -10px 30px;
     }
+    
+    .mt {
+        width: 0;
+        height: 0;
+    }

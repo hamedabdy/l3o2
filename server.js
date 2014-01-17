@@ -94,6 +94,7 @@ app.get('/concert', function(req, res){
 	  console.log(result.length);
 	  if(err) console.log(err);
 	  res.send(result);
+    res.redirect("/");
 	});
 });
 

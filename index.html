@@ -42,11 +42,11 @@
   <nav class="cbp-spmenu cbp-spmenu-horizontal cbp-spmenu-bottom" id="cbp-spmenu-s4">
       <h3>About</h3>
       <div class="info"> 
-        Le Concert d'a Cote is a web-app that geolocates concerts near your place<br>
+        Le Concert d'a Cote helps you geolocate upcoming concerts near your place<br>
         Concerts worldwide: Europe, United States, Asia, Australia<br>
-        Like our Facebook page for updates and news<br>
+        Like our Facebook page for news and updates<br>
         Copyright (c) 2013 L3O2 Dev Team<br>
-        freeze2ice@gmail.com
+        concert.dacote@gmail.com
       </div>
       <a href="/dashbord">Access Admin Dashbord</a>
       <a href="https://www.facebook.com/pages/Le-Concert-d%C3%A0-C%C3%B4t%C3%A9/473390472741449" target="_blank">Like us on Facebook</a>
@@ -60,10 +60,10 @@
     </div>
     <div class="mt"><a href="/"><div class="logo" title="Le Concert d'à Côté"></div></a></div>
 <span class="form-holder">
-<form class="form-wrapper cf" id="myForm" onsubmit="geoCodeAddress(this.address.value); return false;">
+<form class="form-wrapper cf" id="myForm" name="searchBar" action="concert" onclick="geoCodeAddress(this.address.value); return false;">
 	<span class="form-wraper-location"><img src="images/marker.png" title="Press to get geolocated" alt="Press to get geolocated" onclick="geoLocate()" class="location-marker" /></span>
 	<input id="address" name="address" type="text" class="form-wrapper-input" placeholder="Enter address here..." required />
-	<button id="valider" class="form-wrapper-button" type="submit">Search</button>				
+  <input id="valider" class="form-wrapper-button" type="submit" value="Search">				
 	<div id="range" class="form-wraper-range"></div>
 	<input type="text" id="amount" class="form-wraper-amount" disabled="disabled"/>
 	<span class="form-wrapper-amount"></span>

@@ -2,13 +2,22 @@
  * Google Map Initialiser
  */
 function initialiser() {
-        var latlng = new google.maps.LatLng(48.856614, 2.3522219);
+    /*
+     *  get user's location:
+     */
+    $(document).ready( function() {
+    $.getJSON("http://freegeoip.net/json/", function(result){
+        latitude = result.latitude;
+        longitude = result.longitude;
+        var latlng = new google.maps.LatLng(latitude, longitude);
         var options = {
                 center : latlng,
-                zoom : 12,
+                zoom : 11,
                 mapTypeId : google.maps.MapTypeId.ROADMAP
         };
         carte = new google.maps.Map(document.getElementById("carte"), options);
+        });
+    });
 }
 
 /*
@@ -16,7 +25,7 @@ function initialiser() {
  */
 function geoLocate() {
     if (navigator.geolocation)
-        var watchId = navigator.geolocation.watchPosition(successCallback, null, { enableHighAccuracy : true});
+        navigator.geolocation.getCurrentPosition(successCallback);
     else
         alert("Your browser does not support HTML5 Geolocation!");
 }
@@ -73,6 +82,7 @@ function geoCodeAddress(obj) {
                 var tab_latlng = latlng.split(',');
                 var latitude = tab_latlng[0].replace('(', '');
                 var longitude = tab_latlng[1].replace(')', '');
+                window.history.pushState("something", "Title", "/concert?lat="+latitude+"&long="+longitude+"&range=5");
                 setUserLocation(latitude, longitude);
             } else {
                 alert("No such address exists!");
@@ -161,16 +171,13 @@ function plotOverlay(lat, lng, response) {
  * AJAX call to server
  */
 function getConcerts(lat, lng, range, artist) {
-        var newUrl = '';
     $.ajax({
-        type : 'GET',
+        type : 'get',
         url : '/concert?lat=' + parseFloat(lat) + '&long='+ parseFloat(lng) + '&range='+ parseFloat(range) + '&artist=' + artist,
         dataType : 'json',
         contentType : 'application/json; charset=UTF-8',
         error: function(e) {alert(" Too many concerts that I can handle!\n Reduce range please");},
         success : function(response) {
-                //newUrl = '/concert?lat=' + parseFloat(lat) + '&long='+ parseFloat(lng) + '&range='+ parseFloat(range);
-                //window.history.pushState("string", "Title", newUrl);
                 plotOverlay(lat, lng, response);
         }
     });

@@ -82,20 +82,24 @@ app.get('/concert', function(req, res){
   var dbQuery = { latlong: {
 	    $near:[parseFloat(req.query.lat), parseFloat(req.query.long)],
 	    $maxDistance: parseFloat(req.query.range)/111.12}};
-  if (req.query.artist) {
+  if (typeof req.query.artist == "string") {
     dbQuery.artist = new RegExp(req.query.artist, 'i');
     db.concerts.find( dbQuery, { limit : 5000 }, function(err, result) {
-	  console.log(result.length);
-	  if(err) console.log(err);
-	  res.send(result);
+	  if(!err) {
+      console.log(result.length);
+      //console.log(result);
+      res.send(result); 
+    } else console.log(err);
 	});
-  }
+  } else {
   db.concerts.find( dbQuery, { limit : 5000 }, function(err, result) {
-	  console.log(result.length);
-	  if(err) console.log(err);
-	  res.send(result);
-    res.redirect("/");
+	  if(!err) {
+      console.log(result.length);
+      //console.log(result);
+      res.send(result); 
+    } else console.log(err);
 	});
+}
 });
 
 app.get('/artist', function(req, res, next){

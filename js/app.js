@@ -1,21 +1,56 @@
 /*
+ *  Get URL parameters
+ */
+var QueryString = function () {
+  // This function is anonymous, is executed immediately and 
+  // the return value is assigned to QueryString!
+  var query_string = {};
+  var query = window.location.search.substring(1);
+  var vars = query.split("&");
+  for (var i=0;i<vars.length;i++) {
+    var pair = vars[i].split("=");
+        // If first entry with this name
+    if (typeof query_string[pair[0]] === "undefined") {
+      query_string[pair[0]] = pair[1];
+        // If second entry with this name
+    } else if (typeof query_string[pair[0]] === "string") {
+      var arr = [ query_string[pair[0]], pair[1] ];
+      query_string[pair[0]] = arr;
+        // If third or later entry with this name
+    } else {
+      query_string[pair[0]].push(pair[1]);
+    }
+  } 
+    return query_string;
+} ();
+
+
+/*
  * Google Map Initialiser
  */
 function initialiser() {
+    var g_latitude = parseFloat(QueryString.lat),
+    g_longitude = parseFloat(QueryString.long),
+    g_range = parseFloat(QueryString.range),
+    g_artist = QueryString.artist;
     /*
      *  get user's location:
      */
     $(document).ready( function() {
     $.getJSON("http://freegeoip.net/json/", function(result){
-        latitude = result.latitude;
-        longitude = result.longitude;
-        var latlng = new google.maps.LatLng(latitude, longitude);
+        ip_latitude = result.latitude;
+        ip_longitude = result.longitude;
+        var latlng = new google.maps.LatLng(ip_latitude, ip_longitude);
         var options = {
                 center : latlng,
                 zoom : 11,
                 mapTypeId : google.maps.MapTypeId.ROADMAP
         };
         carte = new google.maps.Map(document.getElementById("carte"), options);
+        if (g_latitude && g_longitude && g_range) {
+            reverseGeocoding(g_latitude, g_longitude);
+            setUserLocation(g_latitude, g_longitude, g_range, g_artist);
+        }
         });
     });
 }
@@ -34,24 +69,22 @@ function geoLocate() {
  * This function is called on GeoLocalization success. ref. geoLocate()
  */
 function successCallback(position) {
-    lat = position.coords.latitude;
-    lng = position.coords.longitude;		
-    reverseGeocoding(lat, lng);
-    setUserLocation(lat, lng);
+    latitude = position.coords.latitude;
+    longitude = position.coords.longitude;		
+    reverseGeocoding(latitude, longitude);
+    setUserLocation(latitude, longitude);
 }
 
 /*
  * This fucntion sets the user location on the map. ref. successCallback()
  */
-function setUserLocation(lat, lng) {
-    var range = parseFloat((document.getElementById("amount").value).replace(' Km', ''));
-    var artist = document.getElementById('artist').value;
-    carte.panTo(new google.maps.LatLng(lat, lng));
+function setUserLocation(latitude, longitude, range, artist) {
+    carte.panTo(new google.maps.LatLng(latitude, longitude));
     var marker = new google.maps.Marker({
-        position : new google.maps.LatLng(lat, lng),
+        position : new google.maps.LatLng(latitude, longitude),
         map : carte
     });
-    getConcerts(lat, lng, range, artist);
+    getConcerts(latitude, longitude, range, artist);
 }
 
 /*
@@ -73,22 +106,23 @@ function reverseGeocoding(lat, lng) {
 /*
  * Geocoding address from form after submit
  */
-function geoCodeAddress(obj) {
+function geoCodeAddress() {
+    var address = document.getElementById('address').value,
+    range = parseFloat((document.getElementById("amount").value).replace(' Km', '')),
+    artist = document.getElementById('artist').value;
     var geocoder = new google.maps.Geocoder();
-    if (obj != '') {
-        geocoder.geocode({ "address" : obj }, function(results, status) {
+        geocoder.geocode({ "address" : address }, function(results, status) {
             if (status == google.maps.GeocoderStatus.OK) {
-                var latlng = results[0].geometry.location + "";
-                var tab_latlng = latlng.split(',');
-                var latitude = tab_latlng[0].replace('(', '');
-                var longitude = tab_latlng[1].replace(')', '');
-                window.history.pushState("something", "Title", "/concert?lat="+latitude+"&long="+longitude+"&range=5");
-                setUserLocation(latitude, longitude);
+                var latlng = results[0].geometry.location + "",
+                tab_latlng = latlng.split(','),
+                latitude = tab_latlng[0].replace('(', ''),
+                longitude = tab_latlng[1].replace(')', '');
+                window.history.pushState("", "", "?lat="+parseFloat(latitude)+"&long="+parseFloat(longitude)+"&range="+range+"&artist="+artist);
+                setUserLocation(latitude, longitude, range, artist);
             } else {
                 alert("No such address exists!");
             }
         });
-    }
 }
 
 var infoWindows = [];
@@ -170,15 +204,15 @@ function plotOverlay(lat, lng, response) {
 /*
  * AJAX call to server
  */
-function getConcerts(lat, lng, range, artist) {
+function getConcerts(latitude, longitude, range, artist) {
     $.ajax({
-        type : 'get',
-        url : '/concert?lat=' + parseFloat(lat) + '&long='+ parseFloat(lng) + '&range='+ parseFloat(range) + '&artist=' + artist,
+        type : 'GET',
+        url : '/concert?lat=' + parseFloat(latitude) + '&long='+ parseFloat(longitude) + '&range='+ parseFloat(range) + '&artist=' + artist,
         dataType : 'json',
         contentType : 'application/json; charset=UTF-8',
-        error: function(e) {alert(" Too many concerts that I can handle!\n Reduce range please");},
+        error: function(e) {alert(" Too many concerts that I can handle!\n Reduce range please" + JSON.stringify(e));},
         success : function(response) {
-                plotOverlay(lat, lng, response);
+                plotOverlay(latitude, longitude, response);
         }
     });
 }

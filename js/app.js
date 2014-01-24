@@ -223,20 +223,6 @@ function getConcerts(lat, lng, range, artist) {
     });
 }
 
-/*function getConcerts(lat, lng, range, artist) {
-    var xmlhttp = new XMLHttpRequest();
-    var _responseJSON;
-    xmlhttp.onreadystatechange = function() {
-        if (xmlhttp.readyState == 4) {
-            _responseJSON = JSON.parse(xmlhttp.responseText);
-            alert("responseText : " + _responseJSON);
-            plotOverlay(lat, lng, _responseJSON);
-        }
-    }
-    xmlhttp.open('GET', '/concert?lat='+lat+'&long='+lng+'&range='+range+'&artist=' + artist, true);
-    xmlhttp.send();
-}*/
-
 
 /*
  *  Update URL

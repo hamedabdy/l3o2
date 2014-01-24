@@ -82,12 +82,11 @@ app.get('/concert', function(req, res){
   var dbQuery = { latlong: {
 	    $near:[parseFloat(req.query.lat), parseFloat(req.query.long)],
 	    $maxDistance: parseFloat(req.query.range)/111.12}};
-  if (typeof req.query.artist == "string") {
+  if (req.query.artist) {
     dbQuery.artist = new RegExp(req.query.artist, 'i');
     db.concerts.find( dbQuery, { limit : 5000 }, function(err, result) {
 	  if(!err) {
       console.log(result.length);
-      //console.log(result);
       res.send(result); 
     } else console.log(err);
 	});
@@ -95,7 +94,6 @@ app.get('/concert', function(req, res){
   db.concerts.find( dbQuery, { limit : 5000 }, function(err, result) {
 	  if(!err) {
       console.log(result.length);
-      //console.log(result);
       res.send(result); 
     } else console.log(err);
 	});

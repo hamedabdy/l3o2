@@ -144,6 +144,8 @@ function closeInfoWindows(){
  * Map markers customization
  */
 function newPoint(carte, response, oms){
+    var fb_share = '<div class="fb-share-button" data-href="http://developers.facebook.com/docs/plugins/" data-width="80" data-type="button"></div>';
+    var twitter = '<a href="https://twitter.com/share" class="twitter-share-button" data-lang="en">Tweet</a>';
     var loc = new google.maps.LatLng(response.latlong[0], response.latlong[1]);
     var lemarqueur = new google.maps.Marker({
         position: loc,
@@ -152,17 +154,25 @@ function newPoint(carte, response, oms){
     oms.addMarker(lemarqueur);
     var WindowOptions = { content:'<table><tr><td><img src="'
     +response.image+'"/></td><td><p style="font-size: 14px; font-weight: bold;">'
-    +response.title+'</p class="info-window"> <p style="font-size: 13px;"><b>Artists:</b> '
+    +response.title+'</span class="info-window"> <p style="font-size: 13px;"><b>Artists:</b> '
     +response.artist+'<br><b>Date:</b> '+response.startDate+'<br>'
     + response.address.name +' '+ response.address.street + '<br>'
     + response.address.postalcode +', '+ response.address.city +', '+ response.address.country
-    + '<br><a target="_blank" href =' +response.url+'>More Info</a></p></td></tr></table>'};    
+    + '</span><br><a target="_blank" href =' +response.url+
+    '><img src="./images/lastfm.png" alt="More Info on Last.fm"/></a>'+ twitter + fb_share + '</td></tr></table>' };
     var InfoWindow = new google.maps.InfoWindow(WindowOptions);
     infoWindows.push(InfoWindow);
     google.maps.event.addListener(lemarqueur, 'click', function() {
         closeInfoWindows();
         InfoWindow.open(carte,lemarqueur);
     });
+
+    google.maps.event.addListener(InfoWindow, 'domready', function(){
+        !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="https://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");
+
+        !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//connect.facebook.net/en_US/all.js#xfbml=1&appId=566488513446170";fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'facebook-jssdk');
+    });
+
     return lemarqueur;
 }
 
@@ -192,6 +202,7 @@ function plotOverlay(lat, lng, response) {
     google.maps.event.addListener(marqueur, 'click', function() {
             myInfoWindow.open(carte, marqueur);
     });
+
     var oms = new OverlappingMarkerSpiderfier(carte, {keepSpiderfied:true});
     var markers =[];
     if (response.length != 0) {

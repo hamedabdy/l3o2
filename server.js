@@ -9,8 +9,8 @@ var express = require('express')
 	, passport = require('passport')
 	, LocalStrategy = require('passport-local').Strategy
 	, db2 = mongojs(url, ['htpasswd'])
-	, bcrypt = require('bcrypt')
-	, MongoStore = require('connect-mongo')(express);
+	, bcrypt = require('bcrypt');
+	//, MongoStore = require('connect-mongo')(express)
   
 // configure Express
 app.configure(function() {
@@ -177,11 +177,21 @@ function findByUsername(username, fn) {
 function encryptPass(pass, fn){
   bcrypt.genSalt(10, function(err, salt) {
     bcrypt.hash(pass, salt, function(err, hash) {
-        // Store hash in your password DB.
-        //db.htpasswd.update({'username': user}, {$set: {'password': hash},});
         if(hash){ return fn(null, hash); }
         return fn(null, null);
       });
+  });
+}
+
+function addUser (user, pass) {
+  encryptPass(pass, function(err, hash){
+    db.htpasswd.insert({'username' : user, 'password' : hash});
+  });
+}
+
+function changePass (user, pass) {
+  encryptPass(pass, function(err, hash) { 
+    db.htpasswd.update({'username': user}, {$set: {'password': hash},});
   });
 }
 

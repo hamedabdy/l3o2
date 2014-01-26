@@ -144,8 +144,13 @@ function closeInfoWindows(){
  * Map markers customization
  */
 function newPoint(carte, response, oms){
-    var fb_share = '<div class="fb-share-button" data-href="http://developers.facebook.com/docs/plugins/" data-width="80" data-type="button"></div>';
-    var twitter = '<a href="https://twitter.com/share" class="twitter-share-button" data-lang="en">Tweet</a>';
+    var fb_share = '<a href="https://www.facebook.com/sharer/sharer.php?u='+document.URL
+                    +response.artist+'" target="_blank"><img width="25" src="images/fb_1.png" alt"=Share On Facebook/></a>',
+        tw_share = '<a href="https://twitter.com/share?url='+document.URL+response.artist+'&text='+response.title
+                    +'+'+response.artist+'&via=ConcertDaCote&related=concertdacote,ConcertDaCote,'
+                    +'" target="_blank"><img width="25" src="images/twitter_1.png" alt="Share On Twitter"/></a>',
+        lastfm = '<a target="_blank" href ='+response.url
+                    +'><img width="25" src="images/lastfm.png" alt="More Info on Last.fm"/></a>';
     var loc = new google.maps.LatLng(response.latlong[0], response.latlong[1]);
     var lemarqueur = new google.maps.Marker({
         position: loc,
@@ -154,25 +159,17 @@ function newPoint(carte, response, oms){
     oms.addMarker(lemarqueur);
     var WindowOptions = { content:'<table><tr><td><img src="'
     +response.image+'"/></td><td><p style="font-size: 14px; font-weight: bold;">'
-    +response.title+'</span class="info-window"> <p style="font-size: 13px;"><b>Artists:</b> '
-    +response.artist+'<br><b>Date:</b> '+response.startDate+'<br>'
-    + response.address.name +' '+ response.address.street + '<br>'
-    + response.address.postalcode +', '+ response.address.city +', '+ response.address.country
-    + '</span><br><a target="_blank" href =' +response.url+
-    '><img src="./images/lastfm.png" alt="More Info on Last.fm"/></a>'+ twitter + fb_share + '</td></tr></table>' };
+    +response.title+'</div class="info-window"><p style="font-size: 13px;"><b>Artists:</b>'
+    +response.artist+'<br><b>Date:</b>'+response.startDate+'<br>'
+    +response.address.name+' '+response.address.street + '<br>'
+    +response.address.postalcode+', '+response.address.city+', '+response.address.country
+    +'</div></td></tr><tr><td></td><td>'+lastfm+'\t'+fb_share+'\t'+tw_share+'</td></tr></table>' };
     var InfoWindow = new google.maps.InfoWindow(WindowOptions);
     infoWindows.push(InfoWindow);
     google.maps.event.addListener(lemarqueur, 'click', function() {
         closeInfoWindows();
         InfoWindow.open(carte,lemarqueur);
     });
-
-    google.maps.event.addListener(InfoWindow, 'domready', function(){
-        !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="https://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");
-
-        !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//connect.facebook.net/en_US/all.js#xfbml=1&appId=566488513446170";fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'facebook-jssdk');
-    });
-
     return lemarqueur;
 }
 

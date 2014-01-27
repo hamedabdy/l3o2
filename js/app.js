@@ -144,20 +144,22 @@ function closeInfoWindows(){
  * Map markers customization
  */
 function newPoint(carte, response, oms){
-    var summary = response.artist+'+-+'+response.startDate+'+-+'
-                    +response.address.name+',+'+response.address.street + ',+'
-                    +response.address.postalcode+',+'+response.address.city+',+'+response.address.country,
+    var image_252 = 'http://userserve-ak.last.fm/serve/252/'+response["_id"]+'.jpg'
+    summary = response.artist+' - '+response.startDate+' - '
+                    +response.address.name+', '+response.address.street + ', '
+                    +response.address.postalcode+', '+response.address.city+', '+response.address.country,
 
-        fb_share = '<a href="https://www.facebook.com/sharer/sharer.php?s=100&p[title]='+response.title
-                    +'$p[url]='+document.URL+response.artist+'&p[summary]='+summary+'&p[images][0]='+response.image
-                    +'" target="_blank"><img width="25" src="images/fb_1.png" alt"=Share On Facebook/></a>',
+        fb_share = '<a href="https://www.facebook.com/sharer/sharer.php?s=100&p[url]='
+                    +document.URL+response.artist+'&p[title]='+response.title+'&p[summary]='
+                    +summary+'&p[images][0]='+image_252
+                    +'" target="_blank"><img width="25" src="images/fb_1.png" alt"=Share On Facebook title="Share On Facebook"/></a>',
 
         tw_share = '<a href="https://twitter.com/share?url='+document.URL+response.artist+'&text='+response.title
                     +'+'+response.artist+'&via=ConcertDaCote&related=concertdacote,ConcertDaCote,'
-                    +'" target="_blank"><img width="25" src="images/twitter_1.png" alt="Share On Twitter"/></a>',
+                    +'" target="_blank"><img width="25" src="images/twitter_1.png" alt="Share On Twitter" title="Share On Twitter"/></a>',
 
         lastfm = '<a target="_blank" href ='+response.url
-                    +'><img width="25" src="images/lastfm.png" alt="More Info on Last.fm"/></a>';
+                    +'><img width="25" src="images/lastfm.png" alt="More Info On Last.fm" title="More Info On Last.fm"/></a>';
 
     var loc = new google.maps.LatLng(response.latlong[0], response.latlong[1]);
     var lemarqueur = new google.maps.Marker({

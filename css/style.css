@@ -58,74 +58,42 @@ body {
     .form-wrapper {
         transition: all 0.3s ease 0s;
         left: 350px;
-        width: 588px;
-        padding: 10px 10px 3px 10px;
+        width: 576px;
+        padding: 10px 10px 12px;
         background: #444;
         background: rgba(0,0,0,.2);
-        -moz-border-radius: 10px;
-        -webkit-border-radius: 10px;
         border-radius: 10px;
-        -moz-box-shadow: 0 1px 1px rgba(0,0,0,.4) inset, 0 1px 0 rgba(255,255,255,.2);
-        -webkit-box-shadow: 0 1px 1px rgba(0,0,0,.4) inset, 0 1px 0 rgba(255,255,255,.2);
         box-shadow: 0 1px 1px rgba(0,0,0,.4) inset, 0 1px 0 rgba(255,255,255,.2);
     }
     
     .form-wrapper-input {
-        width: 440px;
-        height: 40px;
-        padding: 10px 5px;
+        width: 575px;
+        height: 41px;
+        padding: 10px 45px;
         float: left;
-        font: bold 15px 'Lato', 'lucida sans', 'trebuchet MS', 'Tahoma';
+        font: bold 16px 'Lato', 'lucida sans', 'trebuchet MS', 'Tahoma';
         border: 0;
         background: #eee;
-        -moz-border-radius: 0 0 0 0;
-        -webkit-border-radius: 0 0 0 0;
-        border-radius: 0 0 0 0;
+        border-radius: 0;
+        border: solid 1px rgb(216, 60, 60);
     }
     
     .form-wrapper-input:focus {
         outline: 0;
         background: #fff;
-        -moz-box-shadow: 0 0 2px rgba(0,0,0,.8) inset;
-        -webkit-box-shadow: 0 0 2px rgba(0,0,0,.8) inset;
         box-shadow: 0 0 2px rgba(0,0,0,.8) inset;
     }
     
-    .form-wrapper-input::-webkit-input-placeholder {
-       color: #999;
-       font-weight: normal;
-       font-style: italic;
-    }
-    
-    .form-wrapper-input:-moz-placeholder {
-        color: #999;
-        font-weight: normal;
-        font-style: italic;
-    }
-    
-    .form-wrapper-input:-ms-input-placeholder {
-        color: #999;
-        font-weight: normal;
-        font-style: italic;
-    }
-    
     .form-wrapper-button {
-        overflow: visible;
-        position: relative;
-        float: right;
+        position: fixed;
         border: 0;
         padding: 0;
         cursor: pointer;
-        height: 40px;
-        width: 116px;
-        font: bold 15px/40px 'Lato', 'lucida sans', 'trebuchet MS', 'Tahoma';
-        color: #fff;
-        text-transform: uppercase;
+        height: 35px;
+        width: 35px;
         background: #d83c3c;
-        -moz-border-radius: 0 3px 3px 0;
-        -webkit-border-radius: 0 3px 3px 0;
-        border-radius: 0 3px 0 0;
-        text-shadow: 3px 3px 2px rgba(0, 0 ,0, .3);
+        border-radius: 3px;
+        margin: 3px -39px;
     }
       
     .form-wrapper-button:hover{ 
@@ -136,91 +104,71 @@ body {
     .form-wrapper-button:focus{
         background: #c42f2f;
     }
-    
-    .form-wrapper-button:before {
-        content: '';
-        position: absolute;
-        border-width: 8px 8px 8px;
-        border-style: solid solid solid none;
-        border-color: transparent #d83c3c transparent;
-        top: 12px;
-        left: -6px;
-    }
-    
-    .form-wrapper-button:hover:before{
-        border-right-color: #e54040;
-    }
-    
-    .form-wrapper-button:focus:before{
-        border-right-color: #c42f2f;
-    }
-    
-    .form-wrapper-button::-moz-focus-inner {
-        border: 0;
-        padding: 0;
+
+    .form-wrapper-button img {
+        margin: -4px;
     }
     
     .form-wraper-location {
+       border: 0; 
        cursor: pointer;
-       position: relative;
-       overflow: visible;
-       float: left;
+       position: fixed;
        background: #d83c3c;
-       height: 40px;
-       -moz-border-radius: 3px 0 0 3px;
-       -webkit-border-radius: 3px 0 0 3px;
-       border-radius: 3px 0 0 3px;
-
+       height: 35px;
+       width: 35px;
+       border-radius: 3px;
+       margin: 3px;
     }
     
     .form-wraper-location:hover {
         background: #e54040;
     }
     
-    .location-marker {
-       width: 32px;
-       height: 32px;
-       padding-top: 4px;
+    .form-wraper-location img {
+        position: fixed;
+        margin: 2px;
     }
     
     .form-wraper-amount {
        border: 0;
-       float: right;
-       position: relative;
-       overflow: visible;
-       width: 116px;
-       height: 15px;
+       position: fixed;
+       width: 35px;
+       height: 10px;
        font: bold 10px 'Lato','lucida sans', 'trebuchet MS', 'Tahoma';
        color: #fff;
        background: #d83c3c;
        border-top: 1px solid #eee;
-       border-radius: 0 0 3px 0;
-        text-shadow: 0 -1px 0 rgba(0, 0 ,0, .3);
+       border-radius: 3px;
+       text-shadow: 0 -1px 0 rgba(0, 0 ,0, .3);
        text-align: center;
+       margin: 42px -39px;
     }
-    
-    .form-wrapper-amount:before {
-        content: '';
-        float: right;
-        position: relative;
-        border-width: 4px 4px 4px;
-        border-style: solid solid solid none;
-        border-color: transparent #d83c3c transparent;
-        top: -11px;
-        left: -116px;
+
+    .ui-widget-header {
+        background: no-repeat scroll 0% 0% rgb(216, 60, 60);
+        border-radius: 0;
     }
-    
-    .form-wraper-range {
-        cursor: pointer;
-        border: 0;
+
+    .ui-widget-content {
+        background: none;
+        border: none;
+    }
+
+    .sliderContainer {
+        background: #eee;
+        width: 528px;
         position: relative;
         float: left;
-        width: 440px;
-        height: 14px;
-        border-top: 1px solid #d83c3c;
-        margin-left: 32px;
-        border-radius: 0 0 0 3px;
-        background: #eee;
+        padding-right: 46px;
+    }
+
+    .ui-slider-handle {
+        margin-left: -2px !important;
+        width: 11px !important;
+        height: 11px !important;
+        cursor: move !important;
+        margin: 5px 0;
+        border: 1px solid #555 !important;
     }
     
     .form-wraper-range-extended {
@@ -228,12 +176,12 @@ body {
     }
     
     .ui-autocomplete {
-        width: 440px;
+        width: 490px;
         cursor: pointer;
         opacity: 0.9;
         position: absolute;
         list-style-type: none;
-        margin: 2px 0 0 0;
+        margin: 2px 0;
         padding: 0;
         font-size: 14px;
         color: #000;
@@ -324,11 +272,11 @@ body {
     }
     
     .extendShadow {
-        padding: 10px 10px 12px;
+        padding: 10px;
     }
     
     .changeBtn {
-        top: 107px;
+        top: 104px;
         left: 250px;
     }
     
@@ -352,7 +300,6 @@ body {
     }
     
     .artist-input {
-        margin: 0px 32px;
         border-radius: 0 0 4px 4px;
         border-top: 1px solid #d83c3c;
         height: 30px;

@@ -15,49 +15,66 @@
     }
     
     .form-wrapper {
-	width: 498px;
+	   width: 350px;
     }
     
     .form-wrapper-input {
-	width: 350px;
-	height: 35px;
+	   width: 350px;
+	   height: 36px;
+       padding: 5px 40px;
     }
     
     .form-wrapper-button {
-	height: 35px;
+	   height: 30px;
+       width: 30px;
+       margin: 3px -34px;
+    }
+
+    .form-wrapper-button img {
+        margin: -4px;
     }
     
-    .form-wrapper-button:before {
-	
+    .sliderContainer {
+        width: 303px;
     }
-    
+
     .form-wraper-range {
-	width: 350px;
+	   width: 350px;
+    }
+
+    .form-wraper-amount {
+        margin: 37px -34px;
+        width: 30px;
     }
     
     .form-wraper-location {
-	height: 35px;
+	   height: 30px;
+       width: 30px;
     }
-    
-    .location-marker {
-	padding: 1px 0;
+
+    .form-wraper-location img {
+        margin: -1px;
     }
     
     .optionsBtn {
-	left: 215px;
-	top: 71px;
+	   left: 140px;
+	   top: 71px;
     }
     
     .changeBtn {
-	top: 102px;
+	   top: 98px;
+    }
+
+    .extendShadow {
+        padding: 10px;
     }
     
     .artist-input {
-	height: 30px;
+	   height: 30px;
     }
     
     .main > section button {
-	margin: 10px;
+	   margin: 10px;
     }
 }
 
@@ -83,63 +100,60 @@ body {
     .form-wrapper {
         margin-top: 0;
         width: 258px;
-        padding: 5px 5px 0px 5px ;
-        -moz-border-radius: 5px;
-        -webkit-border-radius: 5px;
+        padding: 5px 5px 6px ;
         border-radius: 5px;
     }
     
     .form-wrapper-input {
-        width: 187px;
-        height: 20px;
-        padding: 5px 2px;
+        width: 258px;
+        height: 24px;
+        padding: 5px 26px;
         font: bold 10px 'Lato', 'lucida sans', 'trebuchet MS', 'Tahoma';     
     }   
     
     .form-wrapper-button {
         height: 20px;
-        width: 51px;
+        width: 20px;
         font: bold 8px/5px 'Lato', 'lucida sans', 'trebuchet MS', 'Tahoma';
+        margin: 2px -23px;
     }
-    
-    .form-wrapper-button:before {
-        border-width: 4px 4px 4px;
-        top: 6px;
-        left: -4px;
+
+    .form-wrapper-button img {
+        height: 20px;
+        margin: -1px -3px;
     }
     
     .form-wraper-location {
         height: 20px;
+        margin: 2px;
+        width: 20px;
     }
 
-    .location-marker {
-	   width: 20px;
-	   height: 20px;
-	   margin-top: -4px;
+    .form-wraper-location img {
+        height: 20px;
+        margin: 0;
     }
     
     .form-wraper-amount {
-        width: 51px;
+        width: 20px;
         height: 8px;
         font: bold 5px 'Lato', 'lucida sans', 'trebuchet MS', 'Tahoma';
+        margin: 25px -23px;
     }
     
-    .form-wrapper-amount:before {
-        border-width: 2px 2px 2px;
-        top: -6px;
-        left: -51px;
+    .sliderContainer {
+        width: 211px;
     }
-    
+
     .form-wraper-range {
-        width: 187px;
-        height: 7px;
-        margin-left: 20px;
+        width: 221px;
+        height: 10px;
     }
     
     .ui-slider-handle {
-	top: -5px !important;
-	height: 10px !important;
-	width: 10px !important;
+	   top: -6px !important;
+	   height: 10px !important;
+	   width: 10px !important;
     }
 
     .logo {
@@ -170,7 +184,7 @@ body {
     .optionsBtn {
         width: 70px;
         height: 8px;
-        top: 37px;
+        top: 44px;
         left: 100px;
     }
     
@@ -185,7 +199,7 @@ body {
     }
     
     .changeBtn {
-        top: 56px;
+        top: 62px;
         left: 100px;
     }
     
@@ -197,8 +211,8 @@ body {
     }
     
     .artist-input {
-        margin: 0px 20px;
         height: 18px;
+        padding: 2px 5px;
     }
     
 }

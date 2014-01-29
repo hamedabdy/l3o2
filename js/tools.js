@@ -27,19 +27,20 @@ $(document).ready(function() {
 /*
  * Range Slider JQuery
  */
-$(document).ready(function() {
+$(function() {
 $( "#range" ).slider({
-        range: false,
+        range: "min",
+        orientation: "horizontal",
         min: 1,
-        max: 500,
-        step: 1,
-        values: [5],
+        value: 5,
         animate : "slow",
-        slide: function( event, ui ) {
-                $( "#amount" ).val(ui.values[0] + " Km");
+        slide: function() {
+
+                $( "#amount" ).val($( "#range" ).slider( "value") + " km");
+                },
+        change: function() {
+                $( "#amount" ).val($( "#range" ).slider( "value") + " km");
                 }
             });
-$( "#amount" ).val($( "#range" ).slider( "values", 0 ) + " Km");
-        //get rayon value
-        //rayon = $("#rayon").slider("values", 0);
+$( "#amount" ).val($( "#range" ).slider( "value") + " km");
 });

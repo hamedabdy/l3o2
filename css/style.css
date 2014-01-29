@@ -47,6 +47,20 @@ body {
 
     /*-------------------------------------*/   
     
+    .mailto a {
+        border:none !important;
+        padding:0 !important;
+        background:#fff !important;
+        width:25px !important;
+        margin-right:4px !important;
+        border-radius:5px !important;
+    }
+
+    .mailto:hover a {
+        background-color: #fff !important;
+    }
+
+
     .form-holder {
         position: absolute;
         left: 30%;

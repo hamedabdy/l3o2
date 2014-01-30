@@ -29,9 +29,11 @@ var QueryString = function () {
  */
 function initialiser() {
     var g_latitude = parseFloat(QueryString.lat),
-    g_longitude = parseFloat(QueryString.long),
-    g_range = parseFloat(QueryString.range),
-    g_artist = QueryString.artist;
+        g_longitude = parseFloat(QueryString.long),
+        g_range = parseFloat(QueryString.range),
+        g_artist = "";
+    if(exists(QueryString.artist)){ g_artist = QueryString.artist.replace('%20', ' '); }
+
     /*
      *  get user's location:
      */
@@ -253,10 +255,18 @@ function update_url (latitude, longitude, range, artist) {
     window.history.pushState("", "", "?lat="+parseFloat(latitude)+"&long="+parseFloat(longitude)+"&range="+range+"&artist="+artist);
 }
 
-
 /*
  *  Update Form fields
  */
- function update_artist (artist) {
+function update_artist (artist) {
     document.getElementById("artist").value = artist;
- }
+}
+
+/*
+ *  if a given parameter is not empty or exists
+ */
+function exists (arg) {
+    if(arg && typeof arg === "string" && arg !== null){
+        return true;
+    } else return false;    
+}

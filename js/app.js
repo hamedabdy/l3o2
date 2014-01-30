@@ -48,6 +48,7 @@ function initialiser() {
         carte = new google.maps.Map(document.getElementById("carte"), options);
         if (g_latitude && g_longitude && g_range) {
             reverseGeocoding(g_latitude, g_longitude);
+            update_artist(g_artist);
             setUserLocation(g_latitude, g_longitude, g_range, g_artist);
         }
         });
@@ -251,3 +252,11 @@ function getConcerts(lat, lng, range, artist) {
 function update_url (latitude, longitude, range, artist) {
     window.history.pushState("", "", "?lat="+parseFloat(latitude)+"&long="+parseFloat(longitude)+"&range="+range+"&artist="+artist);
 }
+
+
+/*
+ *  Update Form fields
+ */
+ function update_artist (artist) {
+    document.getElementById("artist").value = artist;
+ }

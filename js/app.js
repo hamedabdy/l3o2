@@ -235,12 +235,15 @@ function getConcerts(lat, lng, range, artist) {
         contentType : 'application/json; charset=UTF-8',
         error: function(jqxhr, status, err) {alert(" Too many concerts that I can handle!\n Reduce range please " + JSON.stringify(err) + " " + JSON.stringify(status));},
         success : function(data, status) {
-            _responseJSON = JSON.parse(data);
-            plotOverlay(lat, lng, _responseJSON);
+            if(data && typeof data === "string" && data !== null){
+                _responseJSON = JSON.parse(data);
+                plotOverlay(lat, lng, _responseJSON);
+            } else {
+                plotOverlay(lat, lng, data);
+            }
         }
     });
 }
-
 
 /*
  *  Update URL

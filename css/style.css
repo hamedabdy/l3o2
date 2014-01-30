@@ -156,6 +156,7 @@ body {
        text-shadow: 0 -1px 0 rgba(0, 0 ,0, .3);
        text-align: center;
        margin: 42px -39px;
+       padding: 0;
     }
 
     .ui-widget-header {
@@ -190,43 +191,20 @@ body {
     }
     
     .ui-autocomplete {
-        width: 490px;
         cursor: pointer;
         opacity: 0.9;
-        position: absolute;
-        list-style-type: none;
-        margin: 2px 0;
-        padding: 0;
+        padding: 5px;
         font-size: 14px;
         color: #000;
         font-family: "Lato", "Lucida Grande", arial, sans-serif;
         background-color: #fff;
-        background-color: rgba(255,255,255,0.95);
-        z-index: 2;
-        box-shadow: 0px 3px 2px 0px #222;
-        -webkit-box-shadow: 0 2px 12px #222;
-        -moz-box-shadow: 0 2px 12px #222;
-        border-radius: 0 0 5px 5px;
-        -webkit-border-radius: 0 0 5px 5px;
-        -moz-border-radius: 0 0 5px 5px;
+        z-index: 2000;
     }
     
     .ui-menu-item {
-        margin: 0px 10px;
-        padding: 3px 0 3px 0;
     }
     
     #ui-active-menuitem {
-        padding: 1px 10px 1px 10px;
-        cursor: pointer;
-        background-color: #3668d9;
-        background-image: -webkit-gradient(linear, 0% 0%, 0% 64%, from(rgb(110, 129, 245)), to(rgb(62, 82, 242)));
-        border-color: #3342e8;
-        color: #fff;
-        text-shadow: 0 1px 2px #122042;
-        border-radius: 5px;
-        -webkit-border-radius: 5px;
-        -moz-border-radius: 5px;
     }
     
     .logo-old {

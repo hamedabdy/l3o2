@@ -147,23 +147,27 @@ function closeInfoWindows(){
  * Map markers customization
  */
 function newPoint(carte, response, oms){
+    var encodedURL = encodeURIComponent(document.URL+response.artist);
     var image_252 = 'http://userserve-ak.last.fm/serve/252/'+response["_id"]+'.jpg'
     summary = response.artist+' - '+response.startDate+' - '
                     +response.address.name+', '+response.address.street + ', '
                     +response.address.postalcode+', '+response.address.city+', '+response.address.country,
 
         fb_share = '<a href="https://www.facebook.com/sharer/sharer.php?s=100&p[url]='
-                    +document.URL+response.artist+'&p[title]='+response.title+'&p[summary]='
+                    +encodedURL+'&p[title]='+response.title+'&p[summary]='
                     +summary+'&p[images][0]='+image_252
                     +'" target="_blank"><img width="25" src="images/fb_1.png" alt"=Share On Facebook title="Share On Facebook"/></a>',
 
-        tw_share = '<a href="https://twitter.com/share?url='+document.URL+response.artist+'&text='+response.title
+        tw_share = '<a href="https://twitter.com/share?url='+encodedURL+'&text='+response.title
                     +'+'+response.artist+'&via=ConcertDaCote&related=concertdacote,ConcertDaCote,'
                     +'" target="_blank"><img width="25" src="images/twitter_1.png" alt="Share On Twitter" title="Share On Twitter"/></a>',
 
         lastfm = '<a target="_blank" href ='+response.url
-                    +'><img width="25" src="images/lastfm.png" alt="More Info On Last.fm" title="More Info On Last.fm"/></a>';
-
+                    +'><img width="25" src="images/lastfm.png" alt="More Info On Last.fm" title="More Info On Last.fm"/></a>',
+        gplus = '<a href="https://plus.google.com/share?url=' + encodedURL 
+                    +'" target="_blank"><img width="25" src="images/google_plus.png" alt="Share on G+" title="Share On Google+"/></a>',
+        su = '<a href="http://stumbleupon.com/submit?url=' + encodedURL 
+                    +'" target="_blank"><img width="25" src="images/stumble_upon.png" alt="Stumble" title="Stumble"/></a>';
     var loc = new google.maps.LatLng(response.latlong[0], response.latlong[1]);
     var lemarqueur = new google.maps.Marker({
         position: loc,
@@ -176,7 +180,8 @@ function newPoint(carte, response, oms){
     +response.artist+'<br><b>Date:</b>'+response.startDate+'<br>'
     +response.address.name+' '+response.address.street + '<br>'
     +response.address.postalcode+', '+response.address.city+', '+response.address.country
-    +'</div></td></tr><tr><td></td><td>'+lastfm+'\t'+fb_share+'\t'+tw_share+'</td></tr></table>' };
+    +'</div></td></tr><tr><td></td><td>'+lastfm+'\t'+fb_share+'\t'+tw_share+'\t'+gplus
+    +'\t'+su+'</td></tr></table>' };
     var InfoWindow = new google.maps.InfoWindow(WindowOptions);
     infoWindows.push(InfoWindow);
     google.maps.event.addListener(lemarqueur, 'click', function() {
@@ -236,7 +241,7 @@ function getConcerts(lat, lng, range, artist) {
         type : 'GET',
         url : '/concert?lat='+lat+'&long='+lng+'&range='+range+'&artist=' + artist,
         contentType : 'application/json; charset=UTF-8',
-        error: function(jqxhr, status, err) {alert(" Too many concerts that I can handle!\n Reduce range please " + JSON.stringify(err) + " " + JSON.stringify(status));},
+        error: function(jqxhr, status, err) {console.log(SON.stringify(err) + " " + JSON.stringify(status));},
         success : function(data, status) {
             if(data && typeof data === "string" && data !== null){
                 _responseJSON = JSON.parse(data);

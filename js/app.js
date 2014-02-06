@@ -50,7 +50,7 @@ function initialiser() {
         carte = new google.maps.Map(document.getElementById("carte"), options);
         if (g_latitude && g_longitude && g_range) {
             reverseGeocoding(g_latitude, g_longitude);
-            update_artist(g_range, g_artist);
+            update_params(g_range, g_artist);
             setUserLocation(g_latitude, g_longitude, g_range, g_artist);
         }
         });
@@ -263,9 +263,9 @@ function update_url (latitude, longitude, range, artist) {
 /*
  *  Update Form fields
  */
-function update_artist (range, artist) {
+function update_params (range, artist) {
     document.getElementById("artist").value = artist;
-    document.getElementById("range").value = range;
+    $('#range').slider('value', range);
 }
 
 /*

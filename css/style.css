@@ -22,12 +22,12 @@ body {
     }
 
     .info-window-title {
-        font-size: 14px;
-        font-weight: bold;
+        font-size: 14px !important;
+        font-weight: bold !important;
     }
 
-    .info-window-content {
-        font-size: 12px;
+    .info-window-body {
+        font-size: 13px !important;
     }
     
     /*-------------------------------------*/

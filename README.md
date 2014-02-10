@@ -10,7 +10,7 @@ L'objectif principal du projet est de développer une application web permettant
 
 ## Credits
 
-- [Hamed] (http://github.com/freeze2ice)
+- [Hamed] (http://github.com/hamedabdy)
 - [Kader] (https://github.com/kfresh)
 - Cassandra
 - Michel

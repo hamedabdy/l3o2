@@ -28,11 +28,10 @@ var QueryString = function () {
  * Google Map Initialiser
  */
 function initialiser() {
-    var g_latitude = parseFloat(QueryString.lat),
-        g_longitude = parseFloat(QueryString.long),
-        g_range = parseFloat(QueryString.range),
-        g_artist = "";
-    if(exists(QueryString.artist)){ g_artist = QueryString.artist.replace('%20', ' '); }
+    var _address = QueryString.address,
+        _range = parseFloat(QueryString.range),
+        _artist = "";
+    if(exists(QueryString.artist)){ _artist = QueryString.artist.replace('%20', ' '); }
 
     /*
      *  get user's location:
@@ -48,10 +47,9 @@ function initialiser() {
                 mapTypeId : google.maps.MapTypeId.ROADMAP
         };
         carte = new google.maps.Map(document.getElementById("carte"), options);
-        if (g_latitude && g_longitude && g_range) {
-            reverseGeocoding(g_latitude, g_longitude);
-            update_params(g_range, g_artist);
-            setUserLocation(g_latitude, g_longitude, g_range, g_artist);
+        if (_address && _range) {
+            update_params(_address, _range, _artist);
+            geoCodeAddress(_address, _range, _artist);
         }
         });
     });
@@ -71,12 +69,11 @@ function geoLocate() {
  * This function is called on GeoLocalization success. ref. geoLocate()
  */
 function successCallback(position) {
-    latitude = position.coords.latitude;
-    longitude = position.coords.longitude;
-    var range = parseFloat((document.getElementById("amount").value).replace(' Km', '')),
-    artist = document.getElementById('artist').value;
-    update_url(latitude, longitude, range, artist);
-    reverseGeocoding(latitude, longitude);
+    var latitude = position.coords.latitude,
+        longitude = position.coords.longitude,
+        range = parseFloat($('#range').slider('value')),
+        artist = document.getElementById('artist').value;
+    reverseGeocoding(latitude, longitude, range, artist);
     setUserLocation(latitude, longitude, range, artist);
 }
 
@@ -95,12 +92,13 @@ function setUserLocation(latitude, longitude, range, artist) {
 /*
  * Reverse geocoding
  */
-function reverseGeocoding(lat, lng) {
+function reverseGeocoding(lat, lng, range, artist) {
     var geocoder = new google.maps.Geocoder();
     var point = new google.maps.LatLng(parseFloat(lat), parseFloat(lng));
     geocoder.geocode({"latLng" : point }, function(data, status) {
             if (status == google.maps.GeocoderStatus.OK && data[0]) {
                 document.getElementById("address").value = data[0].formatted_address;
+                update_url(data[0].formatted_address, range, artist);
             } else {
                 alert("Error: " + status);
             }
@@ -111,10 +109,10 @@ function reverseGeocoding(lat, lng) {
 /*
  * Geocoding address from form after submit
  */
-function geoCodeAddress() {
+function geoCodeAddress(address, range, artist) {
     var address = document.getElementById('address').value,
-    range = parseFloat((document.getElementById("amount").value).replace(' Km', '')),
-    artist = document.getElementById('artist').value;
+        range = parseFloat($('#range').slider('value')),
+        artist = document.getElementById('artist').value;
     var geocoder = new google.maps.Geocoder();
     if(address != '') {
         geocoder.geocode({ "address" : address }, function(results, status) {
@@ -126,7 +124,7 @@ function geoCodeAddress() {
                 latitude = parseFloat(latitude);
                 longitude = parseFloat(longitude);
                 range = parseFloat(range);
-                update_url(latitude, longitude, range, artist);
+                update_url(address, range, artist);
                 setUserLocation(latitude, longitude, range, artist);
             } else alert("No such address exists!");
         });
@@ -241,7 +239,7 @@ function getConcerts(lat, lng, range, artist) {
         type : 'GET',
         url : '/concert?lat='+lat+'&long='+lng+'&range='+range+'&artist=' + artist,
         contentType : 'application/json; charset=UTF-8',
-        error: function(jqxhr, status, err) {console.log(SON.stringify(err) + " " + JSON.stringify(status));},
+        error: function(jqxhr, status, err) {console.log(JSON.stringify(err) + " " + JSON.stringify(status));},
         success : function(data, status) {
             if(data && typeof data === "string" && data !== null){
                 _responseJSON = JSON.parse(data);
@@ -256,20 +254,21 @@ function getConcerts(lat, lng, range, artist) {
 /*
  *  Update URL
  */
-function update_url (latitude, longitude, range, artist) {
-    window.history.pushState("", "", "?lat="+parseFloat(latitude)+"&long="+parseFloat(longitude)+"&range="+range+"&artist="+artist);
+function update_url (address, range, artist) {
+    window.history.pushState("", "", "?address="+address+"&range="+range+"&artist="+artist);
 }
 
 /*
  *  Update Form fields
  */
-function update_params (range, artist) {
+function update_params (address, range, artist) {
+    document.getElementById("address").value = decodeURIComponent(address);
     document.getElementById("artist").value = artist;
     $('#range').slider('value', range);
 }
 
 /*
- *  if a given parameter is not empty or exists
+ *  if a given parameter is not empty or exists. ref. initialiser()
  */
 function exists (arg) {
     if(arg && typeof arg === "string" && arg !== null){

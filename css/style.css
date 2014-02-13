@@ -14,11 +14,11 @@ body {
     /*--------------------------------------*/
     
     #carte {
-    height: 84.5%;
-    width:100%;
-    position: absolute;
-    clear: both;
-    bottom: 0;
+        height: 84.5%;
+        width: 100%;
+        position: absolute;
+        clear: both;
+        bottom: 0;
     }
 
     .info-window-title {
@@ -33,16 +33,16 @@ body {
     /*-------------------------------------*/
     
     .cf:before, .cf:after{
-      content:"";
-      display:table;
+        content:"";
+        display:table;
     }
     
     .cf:after{
-      clear:both;
+        clear:both;
     }
 
     .cf{
-      zoom:1;
+        zoom:1;
     }
 
     /*-------------------------------------*/   
@@ -309,4 +309,13 @@ body {
     .mt {
         width: 0;
         height: 0;
+    }
+
+    .ad {
+        background-color: #fff;
+        position: absolute;
+        top: 15.5%;
+        width: 150px;
+        height: 84.6%;
+        left: 88.3%;
     }

@@ -14,6 +14,7 @@ var express = require('express')
   
 // configure Express
 app.configure(function() {
+  app.disable('x-powered-by');
   app.use(express.logger());
   app.set('views', __dirname + '/views');
   app.set('view engine', 'ejs');

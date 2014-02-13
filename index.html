@@ -34,7 +34,7 @@
     var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
   })();
 </script>
-<script async="" src="http://www.google-analytics.com/ga.js"></script>
+<script async="" src="//www.google-analytics.com/ga.js"></script>
 </head>
 <body onload="initialiser()" class="cbp-spmenu-push">
 <script>(function(d, s, id) {
@@ -53,8 +53,8 @@
         Like our Facebook page for news and updates<br>
         Copyright (c) 2013 L3O2 Dev Team<br><br>
         <div class="mailto"><a href="mailto:concert.dacote@gmail.com" target="_top"><img src="images/email.png" width="25" title="Contact us by email"></a></div>
-        <div class="fb-like" data-href="https://facebook.com/concert.dacote" data-layout="button_count" data-action="like" data-show-faces="false" data-share="true"></div>
-        <a href="https://twitter.com/ConcertDaCote" class="twitter-follow-button" data-show-count="false" data-lang="en">Follow @ConcertDaCote</a>
+        <div class="fb-like" data-href="//facebook.com/concert.dacote" data-layout="button_count" data-action="like" data-show-faces="false" data-share="true"></div>
+        <a href="//twitter.com/ConcertDaCote" class="twitter-follow-button" data-show-count="false" data-lang="en">Follow @ConcertDaCote</a>
       </div>
       <a href="/dashbord">Access Admin Dashbord</a>
     </nav>
@@ -68,10 +68,10 @@
     <div class="mt"><a href="/"><div class="logo" title="Le Concert d'à Côté"></div></a></div>
 <div class="form-holder">
 <form class="form-wrapper cf" id="myForm" name="searchBar" action="concert" onsubmit="geoCodeAddress(); return false;">
-	<div class="form-wraper-location"><img src="images/marker.png" title="Press to get geolocated" alt="Press to get geolocated" onclick="geoLocate()"/></div>
+	<div class="form-wraper-location"><img src="images/marker.png" title="Press to get geolocated" alt="Press to get geolocated" onclick="geoLocate();"/></div>
 	<input id="address" name="address" type="text" class="form-wrapper-input" placeholder="Enter address here..." required />
   <button id="valider" class="form-wrapper-button" type="submit"><img src="images/search.png" alt="SEARCH"></button>
-  <div class="sliderContainer" title="Use the Handle to Change Range"><div id="range" class="form-wraper-range"></div></div>
+  <div class="sliderContainer" title="Use the handle to change range"><div id="range" class="form-wraper-range"></div></div>
 	<input type="text" id="amount" class="form-wraper-amount" disabled="disabled" title="Range"/>
 	<div class="form-wrapper-amount"></div>
 	<div>
@@ -81,6 +81,27 @@
 </form>
 </div>
 <div id="carte"></div>
+
+<!--
+<div class="ad" title="Click to feed me!"><p><b><br><br><br>&nbsp Your feeding <br> &nbsp plan here!</b></p>
+
+<script type="text/javascript">
+  ( function() {
+    if (window.CHITIKA === undefined) { window.CHITIKA = { 'units' : [] }; };
+    var unit = {"publisher":"drphase","width":150,"height":"auto","sid":"cdc","color_site_link":"0000CC","color_bg":"FFFFFF","alturl":"http://concert-dacote.heroku.com","nump":"3","fluidH":true};
+    var placement_id = window.CHITIKA.units.length;
+    window.CHITIKA.units.push(unit);
+    document.write('<div id="chitikaAdBlock-' + placement_id + '"></div>');
+    var s = document.createElement('script');
+    s.type = 'text/javascript';
+    s.src = '//cdn.chitika.net/getads.js';
+    try { document.getElementsByTagName('head')[0].appendChild(s); } catch(e) { document.write(s.outerHTML); }
+}());
+</script>
+
+</div>
+
+-->
 
 <script src="js/classie.js"></script>
 <script>

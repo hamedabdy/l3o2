@@ -31,9 +31,9 @@ $(function() {
 $( "#range" ).slider({
         range: "min",
         orientation: "horizontal",
-        min: 10,
+        min: 5,
         max: 500,
-        value: 5,
+        value: 10,
         animate : "slow",
         slide: function() {
 

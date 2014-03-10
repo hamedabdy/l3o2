@@ -1,6 +1,6 @@
 # Le Concert d'à Côté
 
-Projet L3O2 2013 [![Build Status](https://travis-ci.org/freeze2ice/l3o2.png?branch=master)](https://travis-ci.org/freeze2ice/l3o2)
+Projet L3O2 2013 [![Build Status](https://travis-ci.org/hamedabdy/l3o2.png?branch=master)](https://travis-ci.org/hamedabdy/l3o2)
 
 ## Introduction
 
@@ -14,6 +14,3 @@ L'objectif principal du projet est de développer une application web permettant
 - [Kader] (https://github.com/kfresh)
 - Cassandra
 - Michel
-
-## Licence
-Copyright (c) 2013 Dev Team

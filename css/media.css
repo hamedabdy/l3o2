@@ -1,8 +1,7 @@
-
 @media screen and (max-width: 900px){
 
     .logo {
-	background: url(../images/logo-minimized.png) no-repeat;
+	background: url(//dl.dropboxusercontent.com/s/zbipr045jwg7v7k/logo-minimized.png) no-repeat;
 	width: 60px;
 	height: 60px;
 	background-size: 60px 60px;

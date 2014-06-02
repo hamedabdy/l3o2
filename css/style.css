@@ -7,13 +7,12 @@ body {
     color: #444;
     }
     
-    a {
-    }
+    a {}
     
     /*--------------------------------------*/
     
-    #carte {
-        height: 84.5%;
+    .carte {
+        height: 89%;
         width: 100%;
         position: absolute;
         clear: both;
@@ -174,6 +173,8 @@ body {
         position: relative;
         float: left;
         padding-right: 55px;
+        border-right: 1px solid #D83C3C;
+        border-bottom: 1px solid #D83C3C;
     }
 
     .ui-slider-handle {
@@ -282,7 +283,7 @@ body {
         top: -35px;
     }
     
-    .hiddenInput {
+    .hideInput {
         display: none;
     }
     
@@ -292,9 +293,19 @@ body {
     
     .artist-input {
         border-radius: 0 0 4px 4px;
-        border-top: 1px solid #d83c3c;
+        border-top: 0;
         height: 30px;
         padding: 0px 5px;
+    }
+
+    .showInfo {
+        right: 240px !important;
+        transition: all 0.3s ease;
+    }
+
+    .reduceMapSize {
+        width: 85.2%;
+        transition: all 0.3s ease;
     }
     
     .logo {

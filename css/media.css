@@ -159,15 +159,35 @@ body {
         display: none;
     }
 
+    .main {
+        z-index: 10010;
+        bottom: 10px;
+        right: 34px;
+    }
+
+    .main > section {
+        width: 0;
+    }
+
     .main > section button {
-	width: 25px;
-	margin: 2px 2px;
-	border-radius: 6px 2px 6px 2px;
+	   width: 25px;
+       height: 27px;
     }
     
     .main > section img {
-	height: 25px;
-	margin: 0 -3px;
+	   height: 15px;
+    }
+
+    .cbp-spmenu-vertical {
+        width: 145px;
+    }
+
+    .showInfo {
+        right: 180px !important;
+    }
+
+    .reduceMapSize {
+        width: 55.4%;
     }
     
     .ui-autocomplete {

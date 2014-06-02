@@ -8,102 +8,37 @@ a {
 	text-decoration: none;
 }
 
-a:hover {
-}
+a:hover {}
 
-.main,
-.container > header {
-	width: 7%;
-	float: right;
-}
-
-.container > header {
-	padding: 2.875em 1.875em 1.875em;
-}
-
-.container > header h1 {
-	font-size: 2.125em;
-	line-height: 1.3;
-	margin: 0;
-	float: left;
-	font-weight: 400;
-}
-
-.container > header span {
-	display: block;
-	font-weight: 700;
-	text-transform: uppercase;
-	letter-spacing: 0.5em;
-	padding: 0 0 0.6em 0.1em;
-}
-
-.container > header nav {
-	float: right;
-}
-
-.container > header nav a {
-	display: block;
-	float: left;
-	position: relative;
-	width: 2.5em;
-	height: 2.5em;
-	background: #fff;
-	border-radius: 50%;
-	color: transparent;
-	margin: 0 0.1em;
-	border: 4px solid #47a3da;
-	text-indent: -8000px;
-}
-
-.container > header nav a:after {
-	content: attr(data-info);
-	color: #47a3da;
+.main {
+	width: auto;
+	margin: 33px 0;
 	position: absolute;
-	width: 600%;
-	top: 120%;
-	text-align: right;
 	right: 0;
-	opacity: 0;
-	pointer-events: none;
-}
-
-.container > header nav a:hover:after {
-	opacity: 1;
-}
-
-.container > header nav a:hover {
-	background: #47a3da;
-}
-
-.main > section {
-	max-width: 260px;
-	width: 90%;
-	margin: 0 auto;
+	transition: all 0.3s ease;
 }
 
 .main > section button {
 	border: none;
-	background: #47a3da;
+	background: #D83C3C;
 	color: #fff;
 	display: block;
 	cursor: pointer;
-	margin: 23px 10px;
-	border-radius: 10px 5px 10px 5px;
 	width: 35px;
-	float: right;
+	height: 35px;
+	border-radius: 5px 0 0 5px;
 }
 
 .main > section img {
-    height: 30px;
-    margin: 0 1px;
+    height: 23px;
 }
 
 .main > section button:hover {
-	background: #258ecd;
+	background: #E54040;
 }
 
 .main > section button.active {
-	background: #0d77b6;
+	background: #C42F2F;
 }
 
 .main > section button.disabled {
@@ -111,15 +46,9 @@ a:hover {
 	pointer-events: none;
 }
 
-.container > header nav a:hover:before {
-	color: #fff;
-}
-
 .info {
-        color: rgb(255, 255, 255); 
-        padding: 0.8em; 
-        width: 55%; 
-        float: left; 
-        font-size: 1.1em; 
-        font-weight: 300;
-    }
+    color: rgb(255, 255, 255); 
+    padding: 0.8em; 
+    font-size: 1.1em; 
+    font-weight: 300;
+}

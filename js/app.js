@@ -24,6 +24,16 @@ var QueryString = function () {
     return query_string;
 } ();
 
+function newGoogleMap(ip_latitude, ip_longitude) {
+    var latlng = new google.maps.LatLng(ip_latitude, ip_longitude);
+    var options = {
+            center : latlng,
+            zoom : 11,
+            mapTypeId : google.maps.MapTypeId.ROADMAP
+    };
+    carte = new google.maps.Map(document.getElementById("carte"), options);
+}
+
 /*
  * Google Map Initialiser
  */
@@ -36,23 +46,26 @@ function initialiser() {
     /*
      *  get user's location:
      */
-    $(document).ready( function() {
-    $.getJSON("http://freegeoip.net/json/", function(result){
-        ip_latitude = result.latitude;
-        ip_longitude = result.longitude;
-        var latlng = new google.maps.LatLng(ip_latitude, ip_longitude);
-        var options = {
-                center : latlng,
-                zoom : 11,
-                mapTypeId : google.maps.MapTypeId.ROADMAP
-        };
-        carte = new google.maps.Map(document.getElementById("carte"), options);
-        if (_address && _range) {
-            update_params(_address, _range, _artist);
-            geoCodeAddress(_address, _range, _artist);
-        }
-        });
-    });
+    $.ajax({
+        type: "GET",
+        dataType: "json",
+        url: "http://freegeoip.net/json/",
+        timeout: 200,
+        error: function(jqxhr, status, err) {
+            ip_latitude = 48.8588589;
+            ip_longitude = 2.3470599;
+            newGoogleMap(ip_latitude, ip_longitude);
+        },
+        success: function(result) {
+            ip_latitude = result.latitude;
+            ip_longitude = result.longitude;
+            newGoogleMap(ip_latitude, ip_longitude);
+        } });
+
+    if (_address && _range) {
+        update_params(_address, _range, _artist);
+        geoCodeAddress(_address, _range, _artist);
+    }
 }
 
 /*
@@ -239,7 +252,8 @@ function getConcerts(lat, lng, range, artist) {
         type : 'GET',
         url : '/concert?lat='+lat+'&long='+lng+'&range='+range+'&artist=' + artist,
         contentType : 'application/json; charset=UTF-8',
-        error: function(jqxhr, status, err) {console.log(JSON.stringify(err) + " " + JSON.stringify(status));},
+        error: function(jqxhr, status, err) {
+            console.log(JSON.stringify(err) + " " + JSON.stringify(status));},
         success : function(data, status) {
             if(data && typeof data === "string" && data !== null){
                 _responseJSON = JSON.parse(data);

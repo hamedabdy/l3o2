@@ -50,7 +50,7 @@ function initialiser() {
         type: "GET",
         dataType: "json",
         url: "http://freegeoip.net/json/",
-        timeout: 200,
+        timeout: 400,
         error: function(jqxhr, status, err) {
             ip_latitude = 48.8588589;
             ip_longitude = 2.3470599;

@@ -10,7 +10,6 @@ var express = require('express')
 	, LocalStrategy = require('passport-local').Strategy
 	, db2 = mongojs(url, ['htpasswd'])
 	, bcrypt = require('bcrypt');
-	//, MongoStore = require('connect-mongo')(express)
   
 // configure Express
 app.configure(function() {
@@ -21,12 +20,6 @@ app.configure(function() {
   app.use(express.cookieParser());
   app.use(express.bodyParser());
   app.use(express.methodOverride());
-  /*app.use(express.session({ 
-    secret: 'concert_dacote',
-    maxAge: new Date(Date.now() + 3600000),
-    store: new MongoStore(
-      {db: 'concerydacote'},
-      function(err) { if(!err) console.log('connect-mongodb setup ok!') }) })); */
   app.use(express.session({secret: 'concert_dacote'}));
   // Initialize Passport! Also use passport.session() middleware, to support
   // persistent login sessions (recommended).
@@ -37,6 +30,7 @@ app.configure(function() {
   app.use(express.compress());
   app.use(express.static(__dirname+'/'));
 });
+
 
 // Passport session setup.
 // To support persistent login sessions, Passport needs to be able to
@@ -56,8 +50,7 @@ passport.deserializeUser(function(id, done) {
 // Use the LocalStrategy within Passport.
 // Strategies in passport require a `verify` function, which accept
 // credentials (in this case, a username and password), and invoke a callback
-// with a user object. In the real world, this would query a database;
-// however, in this example we are using a baked-in set of users.
+// with a user object.
 passport.use(new LocalStrategy(function(username, password, done) {
 // asynchronous verification, for effect...
 process.nextTick(function () {
@@ -77,7 +70,7 @@ findByUsername(username, function(err, user) {
 }));
 
 /*
- * getting data from database
+ * Getting data from database
  */
 app.get('/concert', function(req, res){
   var dbQuery = { latlong: {
@@ -101,6 +94,9 @@ app.get('/concert', function(req, res){
 }
 });
 
+/*
+ * Filter by artists
+ */
 app.get('/artist', function(req, res, next){
   var dbQuery = { latlong: {
 	    $near:[parseFloat(req.query.lat), parseFloat(req.query.long)],
@@ -151,11 +147,16 @@ app.listen(process.env.PORT || 3000);
 console.log('Server listening on port 3000 || ' + process.env.PORT);
 
 
+/*********** Methods *************/
+
 function startUpdate(fn){
 	var requestLastfm = require('./req-json-lastfm.min');
 	requestLastfm.startUpdate();
 }
 
+/*
+ * Get a user by id from database (ref.db2 htpasswd)
+ */
 function findById(id, fn) {
   db2.htpasswd.findOne({_id: id}, function(err, results){
     if (results) {
@@ -166,6 +167,9 @@ function findById(id, fn) {
   });
 }
 
+/*
+ * Get a user by username from database (ref.db2 htpasswd)
+ */
 function findByUsername(username, fn) {
   db2.htpasswd.findOne({'username': username}, function(err, results){
     if (results) {
@@ -175,6 +179,10 @@ function findByUsername(username, fn) {
   });
 }
 
+/*
+ * Generate a hash from a given string phrase (pass)
+ * output: a hashed pass
+ */
 function encryptPass(pass, fn){
   bcrypt.genSalt(10, function(err, salt) {
     bcrypt.hash(pass, salt, function(err, hash) {
@@ -184,15 +192,22 @@ function encryptPass(pass, fn){
   });
 }
 
+/*
+ * Insert a user into database (db2 htpasswd)
+ * Note: not complete, needs verification of existing username
+ */
 function addUser (user, pass) {
   encryptPass(pass, function(err, hash){
-    db.htpasswd.insert({'username' : user, 'password' : hash});
+    db2.htpasswd.insert({'username' : user, 'password' : hash});
   });
 }
 
+/*
+ * Change the password with 'pass' for a given username 'user'
+ */
 function changePass (user, pass) {
   encryptPass(pass, function(err, hash) { 
-    db.htpasswd.update({'username': user}, {$set: {'password': hash},});
+    db2.htpasswd.update({'username': user}, {$set: {'password': hash},});
   });
 }
 

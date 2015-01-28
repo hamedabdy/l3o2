@@ -2,6 +2,12 @@
 
 var express = require('express')
     , app = express()
+    , cookieParser = require('cookie-parser')
+    , bodyParser = require('body-parser')
+    , session = require('express-session')
+    , compression = require('compression')
+    , favicon = require('serve-favicon')
+    , morgan = require('morgan')
     , mongojs = require('mongojs')
 	, url = process.env.MONGOHQ_URL || 'mongodb://localhost/concertdacote'
 	, db = mongojs(url, ['concerts'])
@@ -10,27 +16,39 @@ var express = require('express')
 	, LocalStrategy = require('passport-local').Strategy
 	, db2 = mongojs(url, ['htpasswd'])
 	, bcrypt = require('bcrypt');
-  
-// configure Express
-app.configure(function() {
+ 
+
+// Express 4.x config
+//var env = process.env.NODE_ENV || 'development';
+//if ('development' == env) {
+
+   // configure stuff here
   app.disable('x-powered-by');
-  app.use(express.logger());
+  // only log error responses
+  app.use(morgan('combined', {
+    skip: function (req, res) { return res.statusCode < 400 }
+  }));
+  app.use(favicon(__dirname + '/images/favicon.ico'));
   app.set('views', __dirname + '/views');
   app.set('view engine', 'ejs');
-  app.use(express.cookieParser());
-  app.use(express.bodyParser());
-  app.use(express.methodOverride());
-  app.use(express.session({secret: 'concert_dacote'}));
+  app.use(cookieParser());
+  app.use(bodyParser.json());
+  app.use(bodyParser.urlencoded({
+    extended: true
+  }));
+  app.use(session({
+    secret: 'concert_dacote',
+    resave: false,
+    saveUninitialized: true
+  }));
   // Initialize Passport! Also use passport.session() middleware, to support
   // persistent login sessions (recommended).
   app.use(flash());
   app.use(passport.initialize());
   app.use(passport.session());
-  app.use(app.router);
-  app.use(express.compress());
+  app.use(compression({ threshold: 512 }));
   app.use(express.static(__dirname+'/'));
-});
-
+//}
 
 // Passport session setup.
 // To support persistent login sessions, Passport needs to be able to

@@ -123,10 +123,10 @@ function reverseGeocoding(lat, lng, range, artist) {
  * Geocoding address from form after submit
  */
 function geoCodeAddress(address, range, artist) {
-    var address = document.getElementById('address').value,
-        range = parseFloat($('#range').slider('value')),
-        artist = document.getElementById('artist').value;
-    var geocoder = new google.maps.Geocoder();
+    var address = document.getElementById('address').value
+        , range = parseFloat($('#range').slider('value'))
+        , artist = document.getElementById('artist').value
+        , geocoder = new google.maps.Geocoder();
     if(address != '') {
         geocoder.geocode({ "address" : address }, function(results, status) {
             if (status == google.maps.GeocoderStatus.OK) {
@@ -137,8 +137,8 @@ function geoCodeAddress(address, range, artist) {
                 latitude = parseFloat(latitude);
                 longitude = parseFloat(longitude);
                 range = parseFloat(range);
-                update_url(address, range, artist);
-                setUserLocation(latitude, longitude, range, artist);
+                update_url(address, range, artist, date);
+                setUserLocation(latitude, longitude, range, artist, date);
             } else alert("No such address exists!");
         });
     }
@@ -162,23 +162,29 @@ function newPoint(carte, response, oms){
     var image_252 = 'http://userserve-ak.last.fm/serve/252/'+response["_id"]+'.jpg'
     summary = response.artist+' - '+response.startDate+' - '
                     +response.address.name+', '+response.address.street + ', '
-                    +response.address.postalcode+', '+response.address.city+', '+response.address.country,
+                    +response.address.postalcode+', '+response.address.city+', '
+                    +response.address.country,
 
         fb_share = '<a href="https://www.facebook.com/sharer/sharer.php?s=100&p[url]='
                     +encodedURL+'&p[title]='+response.title+'&p[summary]='
                     +summary+'&p[images][0]='+image_252
-                    +'" target="_blank"><img width="25" src="images/fb_1.png" alt"=Share On Facebook title="Share On Facebook"/></a>',
+                    +'" target="_blank"><img width="25" src="images/fb_1.png"'
+                    +'alt"=Share On Facebook title="Share On Facebook"/></a>',
 
         tw_share = '<a href="https://twitter.com/share?url='+encodedURL+'&text='+response.title
                     +'+'+response.artist+'&via=ConcertDaCote&related=concertdacote,ConcertDaCote,'
-                    +'" target="_blank"><img width="25" src="images/twitter_1.png" alt="Share On Twitter" title="Share On Twitter"/></a>',
+                    +'" target="_blank"><img width="25" src="images/twitter_1.png"'
+                    +'alt="Share On Twitter" title="Share On Twitter"/></a>',
 
         lastfm = '<a target="_blank" href ='+response.url
-                    +'><img width="25" src="images/lastfm.png" alt="More Info On Last.fm" title="More Info On Last.fm"/></a>',
+                    +'><img width="25" src="images/lastfm.png" alt="More Info On Last.fm"'
+                    +'title="More Info On Last.fm"/></a>',
         gplus = '<a href="https://plus.google.com/share?url=' + encodedURL 
-                    +'" target="_blank"><img width="25" src="images/google_plus.png" alt="Share on G+" title="Share On Google+"/></a>',
+                    +'" target="_blank"><img width="25" src="images/google_plus.png"'
+                    +'alt="Share on G+" title="Share On Google+"/></a>',
         su = '<a href="http://stumbleupon.com/submit?url=' + encodedURL 
-                    +'" target="_blank"><img width="25" src="images/stumble_upon.png" alt="Stumble" title="Stumble"/></a>';
+                    +'" target="_blank"><img width="25" src="images/stumble_upon.png"'
+                    +'alt="Stumble" title="Stumble"/></a>';
     var loc = new google.maps.LatLng(response.latlong[0], response.latlong[1]);
     var lemarqueur = new google.maps.Marker({
         position: loc,
@@ -214,19 +220,20 @@ function plotOverlay(lat, lng, response) {
     };
     carte = new google.maps.Map(document.getElementById("carte"), options);
     var pinColor = "#79CDCD";
-    var pinImage = new google.maps.MarkerImage("http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|"
-                                    + pinColor, new google.maps.Size(21, 34),
-                    new google.maps.Point(0, 0), new google.maps.Point(10,34));
+    var pinImage = new google.maps.MarkerImage(
+        "http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|"
+        + pinColor, new google.maps.Size(21, 34),
+        new google.maps.Point(0, 0), new google.maps.Point(10,34));
     var marqueur = new google.maps.Marker({
-            position : new google.maps.LatLng(parseFloat(lat), parseFloat(lng)),
-            map : carte,
-            title : "Your Location",
-            icon : pinImage
+        position : new google.maps.LatLng(parseFloat(lat), parseFloat(lng)),
+        map : carte,
+        title : "Your Location",
+        icon : pinImage
     });
     var myWindowOptions = { content : '<h5>Your Location</h5>'};
     var myInfoWindow = new google.maps.InfoWindow(myWindowOptions);
     google.maps.event.addListener(marqueur, 'click', function() {
-            myInfoWindow.open(carte, marqueur);
+        myInfoWindow.open(carte, marqueur);
     });
 
     var oms = new OverlappingMarkerSpiderfier(carte, {keepSpiderfied:true});
@@ -247,10 +254,11 @@ function plotOverlay(lat, lng, response) {
  * AJAX call to server
  */
 function getConcerts(lat, lng, range, artist) {
+    var date = new Date();
     var _responseJSON;
     $.ajax({
         type : 'GET',
-        url : '/concert?lat='+lat+'&long='+lng+'&range='+range+'&artist=' + artist,
+        url : '/concert?lat='+lat+'&long='+lng+'&range='+range+'&artist='+artist+'&date='+date,
         contentType : 'application/json; charset=UTF-8',
         error: function(jqxhr, status, err) {
             console.log(JSON.stringify(err) + " " + JSON.stringify(status));},
@@ -269,7 +277,8 @@ function getConcerts(lat, lng, range, artist) {
  *  Update URL
  */
 function update_url (address, range, artist) {
-    window.history.pushState("", "", "?address="+address+"&range="+range+"&artist="+artist);
+    window.history.pushState("", "", "?address="+address+"&range="
+        +range+"&artist="+artist);
 }
 
 /*

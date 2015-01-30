@@ -28,8 +28,8 @@ var express = require('express')
   app.use(morgan('combined', {
     skip: function (req, res) { return res.statusCode < 400 }
   }));
-  app.use(favicon(__dirname + '/images/favicon.ico'));
-  app.set('views', __dirname + '/views');
+  app.use(favicon(__dirname + '/public/images/favicon.ico'));
+  app.set('views', __dirname + '/public/views');
   app.set('view engine', 'ejs');
   app.use(cookieParser());
   app.use(bodyParser.json());
@@ -91,17 +91,23 @@ findByUsername(username, function(err, user) {
  * Getting data from database
  */
 app.get('/concert', function(req, res){
+  date = req.query.date;
+  if(date) {
+      console.log('date = '+date);
+    }
   var dbQuery = { latlong: {
 	    $near:[parseFloat(req.query.lat), parseFloat(req.query.long)],
-	    $maxDistance: parseFloat(req.query.range)/111.12}};
-  if (req.query.artist) {
-    dbQuery.artist = new RegExp(req.query.artist, 'i');
-    db.concerts.find( dbQuery, { limit : 5000 }, function(err, result) {
-	  if(!err) {
+	    $maxDistance: parseFloat(req.query.range)/111.12}
+    };
+    dbQuery.startDate = { $gte : new Date(date)};
+    if(req.query.artist) {
+      dbQuery.artist = new RegExp(req.query.artist, 'i');
+      db.concerts.find( dbQuery, { limit : 5000 }, function(err, result) {
+	   if(!err) {
       console.log(result.length);
       res.send(result); 
     } else console.log(err);
-	});
+	 });
   } else {
   db.concerts.find( dbQuery, { limit : 5000 }, function(err, result) {
 	  if(!err) {

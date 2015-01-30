@@ -98,7 +98,7 @@ app.get('/concert', function(req, res){
   var dbQuery = { latlong: {
 	    $near:[parseFloat(req.query.lat), parseFloat(req.query.long)],
 	    $maxDistance: parseFloat(req.query.range)/111.12},
-      startDate : { $gte : new ISODate(date)}
+      startDate : { $gte : new Date(date).toJSON()}
     };
     //dbQuery.startDate = { $gte : new Date(date)};
     console.log(date);

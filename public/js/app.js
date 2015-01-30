@@ -137,8 +137,8 @@ function geoCodeAddress(address, range, artist) {
                 latitude = parseFloat(latitude);
                 longitude = parseFloat(longitude);
                 range = parseFloat(range);
-                update_url(address, range, artist, date);
-                setUserLocation(latitude, longitude, range, artist, date);
+                update_url(address, range, artist);
+                setUserLocation(latitude, longitude, range, artist);
             } else alert("No such address exists!");
         });
     }

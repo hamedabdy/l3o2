@@ -47,7 +47,7 @@ var express = require('express')
   app.use(passport.initialize());
   app.use(passport.session());
   app.use(compression({ threshold: 512 }));
-  app.use(express.static(__dirname+'/'));
+  app.use(express.static(__dirname+'/public/'));
 //}
 
 // Passport session setup.

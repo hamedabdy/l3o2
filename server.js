@@ -99,7 +99,8 @@ app.get('/concert', function(req, res){
 	    $near:[parseFloat(req.query.lat), parseFloat(req.query.long)],
 	    $maxDistance: parseFloat(req.query.range)/111.12}
     };
-    dbQuery.startDate = { $gte : new Date(date)};
+    //dbQuery.startDate = { $gte : new Date(date)};
+    console.log(new Date(date));
     if(req.query.artist) {
       dbQuery.artist = new RegExp(req.query.artist, 'i');
       db.concerts.find( dbQuery, { limit : 5000 }, function(err, result) {
@@ -118,23 +119,6 @@ app.get('/concert', function(req, res){
 }
 });
 
-/*
- * Filter by artists
- */
-app.get('/artist', function(req, res, next){
-  var dbQuery = { latlong: {
-	    $near:[parseFloat(req.query.lat), parseFloat(req.query.long)],
-	    $maxDistance: parseFloat(req.query.rayon)/111.12}};
-  if (req.query.lat && req.query.long && req.query.rayon) {
-    db.concerts.find( dbQuery, { limit : 5000 }, function(err, result) {
-	  console.log(result.length);
-	  if(err) console.log(err);
-	  res.send(result);
-	  next();
-	  console.log(req.query);
-	});
-  }
-});
 
 /*
  * Dashbord Area

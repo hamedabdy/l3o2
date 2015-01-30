@@ -98,10 +98,10 @@ app.get('/concert', function(req, res){
   var dbQuery = { latlong: {
 	    $near:[parseFloat(req.query.lat), parseFloat(req.query.long)],
 	    $maxDistance: parseFloat(req.query.range)/111.12},
-      startDate : { $gte : new Date(date)}
+      startDate : { $gte : new ISODate(date)}
     };
     //dbQuery.startDate = { $gte : new Date(date)};
-    //console.log(new Date(date));
+    console.log(date);
     if(req.query.artist) {
       dbQuery.artist = new RegExp(req.query.artist, 'i');
       db.concerts.find( dbQuery, { limit : 5000 }, function(err, result) {

@@ -8,7 +8,8 @@ var mongojs = require('mongojs'),
  * inserting data into database
  */
 function insertData(data) {
-    db.concerts.insert(data, {continueOnError: true}, function(err, docs){
+	// save is more advantegeous than insert (ref. mongodb docs)
+    db.concerts.save(data, {continueOnError: true}, function(err, docs){
        if(err) console.log('err: ' + err + '\n');
        else console.log('data inserted successfully!\n');
    });

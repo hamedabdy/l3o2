@@ -194,7 +194,7 @@ function newPoint(carte, response, oms){
     var WindowOptions = { content:'<table><tr><td><img src="'
     +response.image+'"/></td><td><div class="info-window-title">'
     +response.title+'</div><div class="info-window-body"><b>Artists: </b>'
-    +response.artist+'<br><b>Date: </b>'+response.startDate+'<br>'
+    +response.artist+'<br><b>Date: </b>'+new Date(response.startDate).toLocaleString()+'<br>'
     +response.address.name+' '+response.address.street + '<br>'
     +response.address.postalcode+', '+response.address.city+', '+response.address.country
     +'</div></td></tr><tr><td></td><td>'+lastfm+'\t'+fb_share+'\t'+tw_share+'\t'+gplus

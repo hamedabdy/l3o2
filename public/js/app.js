@@ -255,7 +255,6 @@ function plotOverlay(lat, lng, response) {
  */
 function getConcerts(lat, lng, range, artist) {
     var date = new Date();
-    console.log(date);
     var _responseJSON;
     $.ajax({
         type : 'GET',

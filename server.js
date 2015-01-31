@@ -92,15 +92,15 @@ findByUsername(username, function(err, user) {
  */
 app.get('/concert', function(req, res){
   if(req.query.date) {
-    date = req.query.date
+    date = req.query.date;
     console.log('date = '+date);
     } else date = new Date();
   var dbQuery = { latlong: {
 	    $near:[parseFloat(req.query.lat), parseFloat(req.query.long)],
 	    $maxDistance: parseFloat(req.query.range)/111.12}
     };
-    //dbQuery.startDate = { $gte : new Date(date)};
-    //console.log(date);
+    dbQuery.startDate = { $gte : new Date(date)};
+    console.log(dbQuery.startDate);
     if(req.query.artist) {
       dbQuery.artist = new RegExp(req.query.artist, 'i');
       db.concerts.find( dbQuery, { limit : 5000 }, function(err, result) {

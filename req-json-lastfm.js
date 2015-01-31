@@ -106,7 +106,7 @@ function pushEvents(parsedJSON, location){
             latlong : [ parseFloat(myobject.venue.location['geo:point']['geo:lat']),
                        parseFloat(myobject.venue.location['geo:point']['geo:long'])],
             url : myobject.url,
-            startDate : myobject.startDate,
+            startDate : new Date(myobject.startDate),
             image : myobject.image[1]["#text"]
             });
     };

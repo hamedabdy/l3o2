@@ -15,8 +15,8 @@ body {
         height: 89%;
         width: 100%;
         position: absolute;
-        clear: both;
         bottom: 0;
+        z-index: -1;
     }
 
     .info-window-title {
@@ -62,7 +62,7 @@ body {
     .form-holder {
         position: absolute;
         left: 30%;
-        z-index: 1000;
+        z-index: 2;
         height: 0;
         top: 10px;
     }
@@ -198,7 +198,7 @@ body {
         color: #000;
         font-family: "Lato", "Lucida Grande", arial, sans-serif;
         background-color: #fff;
-        z-index: 2000;
+        z-index: 3;
     }
     
     .ui-menu-item {
@@ -215,7 +215,7 @@ body {
     }
     
     .optionsBtn {
-        z-index: 1000;
+        z-index: 2;
         opacity: 0.6;
         width: 100px;
         height: 10px;
@@ -300,12 +300,12 @@ body {
 
     .showInfo {
         right: 240px !important;
-        transition: all 0.3s ease;
+        transition: all 0.3s ease 0s;
     }
 
     .reduceMapSize {
-        width: 85.2%;
-        transition: all 0.3s ease;
+        width: 81.2%;
+        transition: all 0.3s ease 0s;
     }
     
     .logo {

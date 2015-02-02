@@ -19,14 +19,27 @@
 
 </head>
 
-<body onload="initialiser()" >
-<script>(function(d, s, id) {
-  var js, fjs = d.getElementsByTagName(s)[0];
-  if (d.getElementById(id)) return;
-  js = d.createElement(s); js.id = id;
-  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=566488513446170";
-  fjs.parentNode.insertBefore(js, fjs);
-}(document, 'script', 'facebook-jssdk'));</script>
+<body prefix="WebSite: http://schema.org/WebSite/
+                                      MediaObject: http://schema.org/MediaObject/
+                                      Product: http://schema.org/Product/">
+<div id="fb-root"></div>
+<script>
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId      : '566488513446170',
+      xfbml      : true,
+      version    : 'v2.2'
+    });
+  };
+
+  (function(d, s, id){
+     var js, fjs = d.getElementsByTagName(s)[0];
+     if (d.getElementById(id)) {return;}
+     js = d.createElement(s); js.id = id;
+     js.src = "//connect.facebook.net/en_US/sdk.js";
+     fjs.parentNode.insertBefore(js, fjs);
+   }(document, 'script', 'facebook-jssdk'));
+</script>
 <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
 
 
@@ -49,13 +62,13 @@
         </section>
       </div>
 
-<div class="mt"><a href="/"><div class="logo" title="Le Concert d'à Côté"></div></a></div>
-<div class="form-holder" vocab="http://schema.org/" typeof="WebSite">
-<meta property="url" content="http://www.concert-dacote.herokuapp.com/"/>
-<form class="form-wrapper cf" id="myForm" name="searchBar" action="concert" onsubmit="geoCodeAddress(); return false;" property="potentialAction" typeof="http://schema.org/SearchAction">
-<meta property="target" content="http://www.concert-dacote.herokuapp.com/search?address={adderss}"/>
+<div class="mt"><a href="/" resource="#Product" typeof="Product"><div class="logo" title="Le Concert d'à Côté" property="Product:image" content="images/logored-shadow.png"></div></a></div>
+<div class="form-holder" resource="#WebSite" typeof="WebSite">
+<meta property="WebSite:url" content="http://www.concert-dacote.herokuapp.com/"/>
+<form class="form-wrapper cf" id="myForm" name="searchBar" action="concert" onsubmit="geoCodeAddress(); return false;" property="WebSite:potentialAction" typeof="http://schema.org/SearchAction">
+<meta property="WebSite:target" content="http://www.concert-dacote.herokuapp.com/?address=%q"/>
 <div class="form-wraper-location"><img src="images/marker.png" title="Press to get geolocated" alt="Press to get geolocated" onclick="geoLocate();"/></div>
-<input id="address" name="address" type="text" class="form-wrapper-input" placeholder="Enter address here..." required property="query-input"/>
+<input id="address" name="address" type="text" class="form-wrapper-input" placeholder="Enter address here..." required property="WebSite:query-input" content="%q"/>
 <button id="valider" class="form-wrapper-button" type="submit"><img src="images/search.png" alt="SEARCH"></button>
 <div class="sliderContainer" title="Use the handle to change range"><div id="range" class="form-wraper-range"></div></div>
 <input type="text" id="amount" class="form-wraper-amount" disabled="disabled" title="Range"/>
@@ -77,6 +90,7 @@
 <script src="js/tools.js"></script>
 <script src="js/oms.min.js"></script>
 <script src="js/classie.js"></script>
+<script src="js/cookie.js"></script>
 <script>
   var _gaq = _gaq || [];
   _gaq.push(['_setAccount', 'UA-40498004-1']);
@@ -118,19 +132,6 @@ extendBtn.onclick = function() {
   classie.toggle( myForm, 'extendShadow' );
   classie.toggle( extendBtn, 'changeBtn' );
 };
-</script>
-
-<script type="application/ld+json">
-{
-   "@context": "http://schema.org",
-   "@type": "WebSite",
-   "url": "https://www.concert-dacote.herokuapp.com/",
-   "potentialAction": {
-     "@type": "SearchAction",
-     "target": "http://concert-dacote.herokuapp.com/?address={address}",
-     "query-input": "required name=address"
-   }
-}
 </script>
 
 </body>

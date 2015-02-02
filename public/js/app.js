@@ -37,7 +37,7 @@ function newGoogleMap(ip_latitude, ip_longitude) {
 /*
  * Google Map Initialiser
  */
-function initialiser() {
+
     var _address = QueryString.address,
         _range = parseFloat(QueryString.range),
         _artist = "";
@@ -49,14 +49,18 @@ function initialiser() {
     $.ajax({
         type: "GET",
         dataType: "json",
-        url: "http://freegeoip.net/json/",
+        contentType: 'application/x-www-form-urlencoded',
+        url: "https://freegeoip.net/json/",
         timeout: 400,
+        xhrFields: { withCredentials: true },
+        crossDomain: true,
         error: function(jqxhr, status, err) {
             ip_latitude = 48.8588589;
             ip_longitude = 2.3470599;
             newGoogleMap(ip_latitude, ip_longitude);
         },
         success: function(result) {
+            console.log(result.ip);
             ip_latitude = result.latitude;
             ip_longitude = result.longitude;
             newGoogleMap(ip_latitude, ip_longitude);
@@ -66,7 +70,6 @@ function initialiser() {
         update_params(_address, _range, _artist);
         geoCodeAddress(_address, _range, _artist);
     }
-}
 
 /*
  * GeoLocalization, using html5 geolocalization

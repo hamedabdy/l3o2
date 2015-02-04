@@ -1,5 +1,51 @@
-var protocol = document.location.protocol;
+$( document ).ready(function() {
+    var menuRight = document.getElementById( 'cbp-spmenu-s2' ),
+    showRight = document.getElementById( 'showRight' ),
+    infoBtn = document.getElementById( 'infoBtn' ),
+    mapWidth = document.getElementById( 'carte' );
 
+// Check browser support
+if (typeof(Storage) != "undefined") {
+    // Retrieve
+    var storageState = localStorage.getItem("infoActive")
+    if(!storageState) {
+        options();
+    }
+} else {
+    console.log("Sorry, your browser does not support Web Storage...");
+}
+
+showRight.onclick = function() {
+    options();
+    // Check browser support
+    if (typeof(Storage) != "undefined") {
+        // Store
+        localStorage.setItem("infoActive", false);
+    } else {
+        console.log("Sorry, your browser does not support Web Storage...");
+    }
+};
+
+function options () {
+    classie.toggle( showRight, 'active' );
+    classie.toggle( infoBtn, 'showInfo' );
+    classie.toggle( mapWidth, 'reduceMapSize' );
+    classie.toggle( menuRight, 'cbp-spmenu-open' );
+}
+
+var myForm = document.getElementById( 'myForm' ),
+    extendBtn = document.getElementById( 'extendBtn' ),
+    artist = document.getElementById( 'artist' ),
+    range = document.getElementById( 'range' );
+
+extendBtn.onclick = function() {
+  classie.toggle( this, 'active' );
+  classie.toggle( artist, 'showInput' );
+  classie.toggle( range, 'form-wraper-range-extended' );
+  classie.toggle( myForm, 'extendShadow' );
+  classie.toggle( extendBtn, 'changeBtn' );
+};
+});
 /*
  *  Get URL parameters
  */

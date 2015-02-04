@@ -20,8 +20,8 @@
 </head>
 
 <body prefix="WebSite: http://schema.org/WebSite/
-                                      MediaObject: http://schema.org/MediaObject/
-                                      Product: http://schema.org/Product/">
+              MediaObject: http://schema.org/MediaObject/
+              Product: http://schema.org/Product/">
 <div id="fb-root"></div>
 <script>
   window.fbAsyncInit = function() {
@@ -43,7 +43,7 @@
 <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
 
 
-  <nav class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-right cbp-spmenu-open" id="cbp-spmenu-s2">
+  <nav class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-right" id="cbp-spmenu-s2">
       <h3>About</h3>
       <div class="info"> 
         Copyright 2013 L3O2 DevT<br><br>
@@ -54,7 +54,7 @@
       <a href="/dashbord">Access Admin Dashbord</a>
     </nav>
 
-      <div class="main showInfo" id="infoBtn">
+      <div class="main" id="infoBtn">
         <section>
           <button id="showRight" title="More info...">
             <img src="images/menu.png">
@@ -79,7 +79,7 @@
 <div><button type="button" id="extendBtn" class="optionsBtn"></button></div>
 </form>
 </div>
-<div id="carte" class="carte reduceMapSize" ></div>
+<div id="carte" class="carte" ></div>
 
 <script src="js/modernizr.custom.js"></script>
 <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
@@ -102,35 +102,6 @@
   })();
 </script>
 <script async="" src="//www.google-analytics.com/ga.js"></script>
-
-<script>
-var menuRight = document.getElementById( 'cbp-spmenu-s2' ),
-    showRight = document.getElementById( 'showRight' ),
-    infoBtn = document.getElementById( 'infoBtn' ),
-    test = document.getElementById( 'carte' );
-
-    classie.toggle( showRight, 'active' );
-
-showRight.onclick = function() {
-  classie.toggle( showRight, 'active' );
-  classie.toggle( infoBtn, 'showInfo' );
-  classie.toggle( test, 'reduceMapSize' );
-  classie.toggle( menuRight, 'cbp-spmenu-open' );
-};
-
-var myForm = document.getElementById( 'myForm' ),
-    extendBtn = document.getElementById( 'extendBtn' ),
-    artist = document.getElementById( 'artist' ),
-    range = document.getElementById( 'range' );
-
-extendBtn.onclick = function() {
-  classie.toggle( this, 'active' );
-  classie.toggle( artist, 'showInput' );
-  classie.toggle( range, 'form-wraper-range-extended' );
-  classie.toggle( myForm, 'extendShadow' );
-  classie.toggle( extendBtn, 'changeBtn' );
-};
-</script>
 
 </body>
 </html>

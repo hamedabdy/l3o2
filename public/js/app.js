@@ -95,9 +95,10 @@ if(exists(QueryString.artist)){ _artist = QueryString.artist.replace('%20', ' ')
  */
 $.ajax({
     type: "GET",
-    dataType: "json",
     url: "//freegeoip.net/json/",
-    timeout: 500,
+    contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+    dataType: "json",
+    timeout: 3000,
     error: function(jqxhr, status, err) {
         ip_latitude = 48.8588589;
         ip_longitude = 2.3470599;

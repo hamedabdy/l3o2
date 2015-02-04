@@ -37,39 +37,36 @@ function newGoogleMap(ip_latitude, ip_longitude) {
 /*
  * Google Map Initialiser
  */
+var _address = QueryString.address,
+    _range = parseFloat(QueryString.range),
+    _artist = "";
+if(exists(QueryString.artist)){ _artist = QueryString.artist.replace('%20', ' '); }
 
-    var _address = QueryString.address,
-        _range = parseFloat(QueryString.range),
-        _artist = "";
-    if(exists(QueryString.artist)){ _artist = QueryString.artist.replace('%20', ' '); }
+/*
+ *  get user's location:
+ */
+$.ajax({
+    type: "GET",
+    dataType: "json",
+    url: "http://freegeoip.net/json/",
+    timeout: 500,
+    error: function(jqxhr, status, err) {
+        ip_latitude = 48.8588589;
+        ip_longitude = 2.3470599;
+        newGoogleMap(ip_latitude, ip_longitude);
+        alert(err + ", " + status);
+    },
+    success: function(result) {
+        console.log(result.ip);
+        ip_latitude = result.latitude;
+        ip_longitude = result.longitude;
+        newGoogleMap(ip_latitude, ip_longitude);
+    } });
 
-    /*
-     *  get user's location:
-     */
-    $.ajax({
-        type: "GET",
-        dataType: "json",
-        contentType: 'application/x-www-form-urlencoded',
-        url: "https://freegeoip.net/json/",
-        timeout: 400,
-        xhrFields: { withCredentials: true },
-        crossDomain: true,
-        error: function(jqxhr, status, err) {
-            ip_latitude = 48.8588589;
-            ip_longitude = 2.3470599;
-            newGoogleMap(ip_latitude, ip_longitude);
-        },
-        success: function(result) {
-            console.log(result.ip);
-            ip_latitude = result.latitude;
-            ip_longitude = result.longitude;
-            newGoogleMap(ip_latitude, ip_longitude);
-        } });
-
-    if (_address && _range) {
-        update_params(_address, _range, _artist);
-        geoCodeAddress(_address, _range, _artist);
-    }
+if (_address && _range) {
+    update_params(_address, _range, _artist);
+    geoCodeAddress(_address, _range, _artist);
+}
 
 /*
  * GeoLocalization, using html5 geolocalization

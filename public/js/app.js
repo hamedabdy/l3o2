@@ -1,3 +1,5 @@
+var protocol = document.location.protocol;
+
 /*
  *  Get URL parameters
  */
@@ -48,7 +50,7 @@ if(exists(QueryString.artist)){ _artist = QueryString.artist.replace('%20', ' ')
 $.ajax({
     type: "GET",
     dataType: "json",
-    url: "http://freegeoip.net/json/",
+    url: "//freegeoip.net/json/",
     timeout: 500,
     error: function(jqxhr, status, err) {
         ip_latitude = 48.8588589;

@@ -56,7 +56,7 @@ $.ajax({
         ip_latitude = 48.8588589;
         ip_longitude = 2.3470599;
         newGoogleMap(ip_latitude, ip_longitude);
-        alert(err + ", " + status);
+        console.log(err + ", " + status);
     },
     success: function(result) {
         console.log(result.ip);

@@ -155,7 +155,6 @@ app.get('/logout', function(req, res){
 });
 
 app.listen(process.env.PORT || 3000);
-//http.createServer(app).listen(process.env.PORT || 80);
 https.createServer(https_options, app).listen(process.env.PORT || 3443);
 console.log('HTTPS server listening on port 3000 || 3443 || ' + process.env.PORT);
 

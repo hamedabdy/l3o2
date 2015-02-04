@@ -1,7 +1,12 @@
 #!/usr/bin/env node
 
-var express = require('express')
+var fs = require('fs')
+    , https = require('https')
+    , http = require('http')
+    , express = require('express')
     , app = express()
+    , key = fs.readFileSync('./cert/concertdacote-key.pem')
+    , cert = fs.readFileSync('./cert/concertdacote-cert.pem')
     , cookieParser = require('cookie-parser')
     , bodyParser = require('body-parser')
     , session = require('express-session')
@@ -9,14 +14,14 @@ var express = require('express')
     , favicon = require('serve-favicon')
     , morgan = require('morgan')
     , mongojs = require('mongojs')
-	, url = process.env.MONGOHQ_URL || 'mongodb://localhost/concertdacote'
-	, db = mongojs(url, ['concerts'])
-	, flash = require('connect-flash')
-	, passport = require('passport')
-	, LocalStrategy = require('passport-local').Strategy
-	, db2 = mongojs(url, ['htpasswd'])
-	, bcrypt = require('bcrypt');
- 
+    , dbUrl = process.env.MONGOHQ_URL || 'mongodb://localhost/concertdacote'
+    , db = mongojs(dbUrl, ['concerts'])
+    , flash = require('connect-flash')
+    , passport = require('passport')
+    , LocalStrategy = require('passport-local').Strategy
+    , db2 = mongojs(dbUrl, ['htpasswd'])
+    , bcrypt = require('bcrypt')
+    , https_options = { key: key, cert: cert };
 
 // Express 4.x config
 //var env = process.env.NODE_ENV || 'development';
@@ -29,7 +34,7 @@ var express = require('express')
     skip: function (req, res) { return res.statusCode < 400 }
   }));
   app.use(favicon(__dirname + '/public/images/favicon.ico'));
-  app.set('views', __dirname + '/public/views');
+  app.set('views', __dirname + '/public/views/');
   app.set('view engine', 'ejs');
   app.use(cookieParser());
   app.use(bodyParser.json());
@@ -150,7 +155,9 @@ app.get('/logout', function(req, res){
 });
 
 app.listen(process.env.PORT || 3000);
-console.log('Server listening on port 3000 || ' + process.env.PORT);
+//http.createServer(app).listen(process.env.PORT || 80);
+https.createServer(https_options, app).listen(process.env.PORT || 3443);
+console.log('HTTPS server listening on port 3000 || 3443 || ' + process.env.PORT);
 
 
 /*********** Methods *************/
@@ -161,7 +168,7 @@ function startUpdate(fn){
 }
 
 /*
- * Get a user by id from database (ref.db2 htpasswd)
+ * Get a user by id from database (ref. db2 htpasswd)
  */
 function findById(id, fn) {
   db2.htpasswd.findOne({_id: id}, function(err, results){
@@ -174,13 +181,13 @@ function findById(id, fn) {
 }
 
 /*
- * Get a user by username from database (ref.db2 htpasswd)
+ * Get a user by username from database (ref. db2 htpasswd)
  */
 function findByUsername(username, fn) {
   db2.htpasswd.findOne({'username': username}, function(err, results){
     if (results) {
       return fn(null, results);
-    }
+    } 
     return fn(null, null);
   });
 }

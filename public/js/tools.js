@@ -27,7 +27,6 @@ $(document).ready(function() {
 /*
  * Range Slider JQuery
  */
-$(function() {
 $( "#range" ).slider({
         range: "min",
         orientation: "horizontal",
@@ -36,12 +35,10 @@ $( "#range" ).slider({
         value: 10,
         animate : "slow",
         slide: function() {
-
-                $( "#amount" ).val($( "#range" ).slider( "value") + " km");
+                $( "#amount" ).val($( "#range" ).slider( "value" ) + " km");
                 },
         change: function() {
-                $( "#amount" ).val($( "#range" ).slider( "value") + " km");
+                $( "#amount" ).val($( "#range" ).slider( "value" ) + " km");
                 }
             });
-$( "#amount" ).val($( "#range" ).slider( "value") + " km");
-});
+$( "#amount" ).val($( "#range" ).slider( "value" ) + " km");

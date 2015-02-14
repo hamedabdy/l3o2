@@ -16,7 +16,6 @@ body {
         width: 100%;
         position: absolute;
         bottom: 0;
-        z-index: -1;
     }
 
     .info-window-title {
@@ -64,6 +63,11 @@ body {
         left: 30%;
         z-index: 2;
         height: 0;
+        top: 40%;
+    }
+
+    .form-holder-transition {
+        transition: all 0.7s linear 0s;
         top: 10px;
     }
 
@@ -328,4 +332,10 @@ body {
         width: 150px;
         height: 84.6%;
         left: 88.3%;
+    }
+
+    .footer {
+        position: absolute;
+        bottom: 5px;
+        border-top: 1px solid #C42F2F;
     }

@@ -1,51 +1,63 @@
 $( document ).ready(function() {
+    /*
+     * Side bar
+     */
     var menuRight = document.getElementById( 'cbp-spmenu-s2' ),
     showRight = document.getElementById( 'showRight' ),
     infoBtn = document.getElementById( 'infoBtn' ),
     mapWidth = document.getElementById( 'carte' );
 
-// Check browser support
-if (typeof(Storage) != "undefined") {
-    // Retrieve
-    var storageState = localStorage.getItem("infoActive")
-    if(!storageState) {
-        options();
-    }
-} else {
-    console.log("Sorry, your browser does not support Web Storage...");
-}
-
-showRight.onclick = function() {
-    options();
     // Check browser support
     if (typeof(Storage) != "undefined") {
-        // Store
-        localStorage.setItem("infoActive", false);
+        // Retrieve
+        var storageState = localStorage.getItem("infoActive")
+        if(!storageState) {
+            options();
+        }
     } else {
         console.log("Sorry, your browser does not support Web Storage...");
     }
-};
 
-function options () {
-    classie.toggle( showRight, 'active' );
-    classie.toggle( infoBtn, 'showInfo' );
-    classie.toggle( mapWidth, 'reduceMapSize' );
-    classie.toggle( menuRight, 'cbp-spmenu-open' );
-}
+    showRight.onclick = function() {
+        options();
+        // Check browser support
+        if (typeof(Storage) != "undefined") {
+            // Store
+            localStorage.setItem("infoActive", false);
+        } else {
+            console.log("Sorry, your browser does not support Web Storage...");
+        }
+    };
 
-var myForm = document.getElementById( 'myForm' ),
-    extendBtn = document.getElementById( 'extendBtn' ),
-    artist = document.getElementById( 'artist' ),
-    range = document.getElementById( 'range' );
+    function options () {
+        classie.toggle( showRight, 'active' );
+        classie.toggle( infoBtn, 'showInfo' );
+        classie.toggle( mapWidth, 'reduceMapSize' );
+        classie.toggle( menuRight, 'cbp-spmenu-open' );
+    }
 
-extendBtn.onclick = function() {
-  classie.toggle( this, 'active' );
-  classie.toggle( artist, 'showInput' );
-  classie.toggle( range, 'form-wraper-range-extended' );
-  classie.toggle( myForm, 'extendShadow' );
-  classie.toggle( extendBtn, 'changeBtn' );
-};
+    /*
+     * Toggle artist search button
+     */
+    var myForm = document.getElementById( 'myForm' ),
+        extendBtn = document.getElementById( 'extendBtn' ),
+        artist = document.getElementById( 'artist' ),
+        range = document.getElementById( 'range' );
+
+    extendBtn.onclick = function() {
+      classie.toggle( this, 'active' );
+      classie.toggle( artist, 'showInput' );
+      classie.toggle( range, 'form-wraper-range-extended' );
+      classie.toggle( myForm, 'extendShadow' );
+      classie.toggle( extendBtn, 'changeBtn' );
+    };
 });
+
+function toggleMapAndSearch () {
+        var formHolder = document.getElementById( 'form-holder' );
+        classie.toggle( formHolder, 'form-holder-transition' );
+    }
+
 /*
  *  Get URL parameters
  */
@@ -72,7 +84,7 @@ var QueryString = function () {
     return query_string;
 } ();
 
-function newGoogleMap(ip_latitude, ip_longitude) {
+function newGoogleMap(ip_latitude, ip_longitude, fn) {
     var latlng = new google.maps.LatLng(ip_latitude, ip_longitude);
     var options = {
             center : latlng,
@@ -80,19 +92,21 @@ function newGoogleMap(ip_latitude, ip_longitude) {
             mapTypeId : google.maps.MapTypeId.ROADMAP
     };
     carte = new google.maps.Map(document.getElementById("carte"), options);
+    return fn(carte);
 }
 
 /*
- * Google Map Initialiser
+ * initializing from url params
  */
 var _address = QueryString.address,
     _range = parseFloat(QueryString.range),
     _artist = "";
-if(exists(QueryString.artist)){ _artist = QueryString.artist.replace('%20', ' '); }
+    if(exists(QueryString.artist)){ _artist = QueryString.artist.replace('%20', ' '); }
 
 /*
  *  get user's location:
  */
+/*
 $.ajax({
     type: "GET",
     url: "//freegeoip.net/json/",
@@ -111,6 +125,7 @@ $.ajax({
         ip_longitude = result.longitude;
         newGoogleMap(ip_latitude, ip_longitude);
     } });
+*/
 
 if (_address && _range) {
     update_params(_address, _range, _artist);
@@ -122,7 +137,7 @@ if (_address && _range) {
  */
 function geoLocate() {
     if (navigator.geolocation)
-        navigator.geolocation.getCurrentPosition(successCallback);
+        navigator.geolocation.getCurrentPosition(geoLocateCallback);
     else
         alert("Your browser does not support HTML5 Geolocation!");
 }
@@ -130,7 +145,7 @@ function geoLocate() {
 /*
  * This function is called on GeoLocalization success. ref. geoLocate()
  */
-function successCallback(position) {
+function geoLocateCallback(position) {
     var latitude = position.coords.latitude,
         longitude = position.coords.longitude,
         range = parseFloat($('#range').slider('value')),
@@ -140,19 +155,22 @@ function successCallback(position) {
 }
 
 /*
- * This fucntion sets the user location on the map. ref. successCallback()
+ * This fucntion sets the user location on the map. ref. geoLocateCallback()
  */
 function setUserLocation(latitude, longitude, range, artist) {
-    carte.panTo(new google.maps.LatLng(latitude, longitude));
-    var marker = new google.maps.Marker({
-        position : new google.maps.LatLng(latitude, longitude),
-        map : carte
+    toggleMapAndSearch();
+    newGoogleMap(latitude, longitude, function(carte) {
+        carte.panTo(new google.maps.LatLng(latitude, longitude));
+        var marker = new google.maps.Marker({
+            position : new google.maps.LatLng(latitude, longitude),
+            map : carte
+        });
+        getConcerts(latitude, longitude, range, artist);
     });
-    getConcerts(latitude, longitude, range, artist);
 }
 
 /*
- * Reverse geocoding
+ * Reverse geocoding ref. geolocation sucesscallack
  */
 function reverseGeocoding(lat, lng, range, artist) {
     var geocoder = new google.maps.Geocoder();
@@ -310,7 +328,9 @@ function getConcerts(lat, lng, range, artist) {
         url : '/concert?lat='+lat+'&long='+lng+'&range='+range+'&artist='+artist+'&date='+date,
         contentType : 'application/json; charset=UTF-8',
         error: function(jqxhr, status, err) {
-            console.log(JSON.stringify(err) + " " + JSON.stringify(status));},
+            console.log(JSON.stringify(err) + " " + JSON.stringify(status) 
+                + " " + JSON.stringify(jqxhr));
+        },
         success : function(data, status) {
             if(data && typeof data === "string" && data !== null){
                 _responseJSON = JSON.parse(data);

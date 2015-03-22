@@ -54,9 +54,9 @@ $( document ).ready(function() {
 });
 
 function toggleMapAndSearch () {
-        var formHolder = document.getElementById( 'form-holder' );
-        classie.toggle( formHolder, 'form-holder-transition' );
-    }
+    var formHolder = document.getElementById( 'form-holder' );
+    formHolder.className += ' form-holder-transition';
+}
 
 /*
  *  Get URL parameters

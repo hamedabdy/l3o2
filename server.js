@@ -21,7 +21,8 @@ var fs = require('fs')
     , LocalStrategy = require('passport-local').Strategy
     , db2 = mongojs(dbUrl, ['htpasswd'])
     , bcrypt = require('bcrypt')
-    , https_options = { key: key, cert: cert };
+    , https_options = { key: key, cert: cert }
+    , util = require('util');
 
 // Express 4.x config
 //var env = process.env.NODE_ENV || 'development';
@@ -95,31 +96,32 @@ findByUsername(username, function(err, user) {
 /*
  * Getting data from database filtered by artist and client's date
  */
-app.get('/concert', function(req, res){
-  if(req.query.date) {
-    date = req.query.date;
-    } else date = new Date();
+app.get('/@', function(req, res){
+  if (req.query.l) l = req.query.l;
+  else l = 5000;
+  if(req.query.date) date = req.query.date;
+  else date = new Date();
   var dbQuery = { latlong: {
-	    $near:[parseFloat(req.query.lat), parseFloat(req.query.long)],
-	    $maxDistance: parseFloat(req.query.range)/111.12}
-    };
-    dbQuery.startDate = { $gte : new Date(date)};
-    if(req.query.artist) {
-      dbQuery.artist = new RegExp(req.query.artist, 'i');
-      db.concerts.find( dbQuery, { limit : 5000 }, function(err, result) {
-	   if(!err) {
-      console.log(result.length);
-      res.send(result); 
-    } else console.log(err);
-	 });
+  	    $near:[parseFloat(req.query.lat), parseFloat(req.query.long)],
+  	    $maxDistance: parseFloat(req.query.range)/111.12}
+      };
+  dbQuery.startDate = { $gte : new Date(date)};
+  if(req.query.artist) {
+    dbQuery.artist = new RegExp(req.query.artist, 'i');
+    db.concerts.find( dbQuery, { 'limit' : l }, function(err, result) {
+	    if(!err) {
+        console.log('# of concerts returned = ' + result.length);
+        res.send(result); 
+      } else console.log(err);
+	  });
   } else {
-  db.concerts.find( dbQuery, { limit : 5000 }, function(err, result) {
-	  if(!err) {
-      console.log(result.length);
-      res.send(result); 
-    } else console.log(err);
-	});
-}
+    db.concerts.find( dbQuery, { 'limit' : l }, function(err, result) {
+   	  if(!err) {
+        console.log('# of concerts returned = ' + result.length);
+        res.send(result); 
+      } else console.log(err);
+    });
+  }
 });
 
 

@@ -2,10 +2,10 @@ $( document ).ready(function() {
     /*
      * Side bar
      */
-    var menuRight = document.getElementById( 'cbp-spmenu-s2' ),
-    showRight = document.getElementById( 'showRight' ),
-    infoBtn = document.getElementById( 'infoBtn' ),
-    mapWidth = document.getElementById( 'carte' );
+    var menuRight = document.getElementById( 'cbp-spmenu-s2' )
+        , showRight = document.getElementById( 'showRight' )
+        , infoBtn = document.getElementById( 'infoBtn' )
+        , mapWidth = document.getElementById( 'carte' );
 
     // Check browser support
     if (typeof(Storage) != "undefined") {
@@ -39,10 +39,10 @@ $( document ).ready(function() {
     /*
      * Toggle artist search button
      */
-    var myForm = document.getElementById( 'myForm' ),
-        extendBtn = document.getElementById( 'extendBtn' ),
-        artist = document.getElementById( 'artist' ),
-        range = document.getElementById( 'range' );
+    var myForm = document.getElementById( 'myForm' )
+        , extendBtn = document.getElementById( 'extendBtn' )
+        , artist = document.getElementById( 'artist' )
+        , range = document.getElementById( 'range' );
 
     extendBtn.onclick = function() {
       classie.toggle( this, 'active' );
@@ -54,8 +54,8 @@ $( document ).ready(function() {
 });
 
 function toggleMapAndSearch () {
-    var formHolder = document.getElementById( 'form-holder' );
-    formHolder.className += ' form-holder-transition';
+    $( '#tiles-box' ).addClass( 'fadeout' );
+    $( '#carte' ).css( 'display' , 'block' );
 }
 
 /*
@@ -102,30 +102,6 @@ var _address = QueryString.address,
     _range = parseFloat(QueryString.range),
     _artist = "";
     if(exists(QueryString.artist)){ _artist = QueryString.artist.replace('%20', ' '); }
-
-/*
- *  get user's location:
- */
-/*
-$.ajax({
-    type: "GET",
-    url: "//freegeoip.net/json/",
-    contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
-    dataType: "json",
-    timeout: 3000,
-    error: function(jqxhr, status, err) {
-        ip_latitude = 48.8588589;
-        ip_longitude = 2.3470599;
-        newGoogleMap(ip_latitude, ip_longitude);
-        console.log(err + ", " + status);
-    },
-    success: function(result) {
-        console.log(result.ip);
-        ip_latitude = result.latitude;
-        ip_longitude = result.longitude;
-        newGoogleMap(ip_latitude, ip_longitude);
-    } });
-*/
 
 if (_address && _range) {
     update_params(_address, _range, _artist);
@@ -225,47 +201,24 @@ function closeInfoWindows(){
  * Map markers customization
  */
 function newPoint(carte, response, oms){
-    var encodedURL = encodeURIComponent(document.URL+response.artist);
-    var image_252 = 'http://userserve-ak.last.fm/serve/252/'+response["_id"]+'.jpg'
-    summary = response.artist+' - '+response.startDate+' - '
-                    +response.address.name+', '+response.address.street + ', '
-                    +response.address.postalcode+', '+response.address.city+', '
-                    +response.address.country,
-
-        fb_share = '<a href="https://www.facebook.com/sharer/sharer.php?s=100&p[url]='
-                    +encodedURL+'&p[title]='+response.title+'&p[summary]='
-                    +summary+'&p[images][0]='+image_252
-                    +'" target="_blank"><img width="25" src="images/fb_1.png"'
-                    +'alt"=Share On Facebook title="Share On Facebook"/></a>',
-
-        tw_share = '<a href="https://twitter.com/share?url='+encodedURL+'&text='+response.title
-                    +'+'+response.artist+'&via=ConcertDaCote&related=concertdacote,ConcertDaCote,'
-                    +'" target="_blank"><img width="25" src="images/twitter_1.png"'
-                    +'alt="Share On Twitter" title="Share On Twitter"/></a>',
-
-        lastfm = '<a target="_blank" href ='+response.url
-                    +'><img width="25" src="images/lastfm.png" alt="More Info On Last.fm"'
-                    +'title="More Info On Last.fm"/></a>',
-        gplus = '<a href="https://plus.google.com/share?url=' + encodedURL 
-                    +'" target="_blank"><img width="25" src="images/google_plus.png"'
-                    +'alt="Share on G+" title="Share On Google+"/></a>',
-        su = '<a href="http://stumbleupon.com/submit?url=' + encodedURL 
-                    +'" target="_blank"><img width="25" src="images/stumble_upon.png"'
-                    +'alt="Stumble" title="Stumble"/></a>';
+    var share = {};
+    shareButtons(response, function(shareBtns){ share = shareBtns });
     var loc = new google.maps.LatLng(response.latlong[0], response.latlong[1]);
     var lemarqueur = new google.maps.Marker({
         position: loc,
         title: response.title
     });
     oms.addMarker(lemarqueur);
+    var artist = String(response.artist).replace(/,/g, ", ");
+    var cover = (response.image).replace("/64/", "/126/");
     var WindowOptions = { content:'<table><tr><td><img src="'
-    +response.image+'"/></td><td><div class="info-window-title">'
+    +cover+'"/></td><td><div class="info-window-title">'
     +response.title+'</div><div class="info-window-body"><b>Artists: </b>'
-    +response.artist+'<br><b>Date: </b>'+new Date(response.startDate).toLocaleString()+'<br>'
+    +artist+'<br><b>Date: </b>'+new Date(response.startDate).toLocaleString()+'<br>'
     +response.address.name+' '+response.address.street + '<br>'
     +response.address.postalcode+', '+response.address.city+', '+response.address.country
-    +'</div></td></tr><tr><td></td><td>'+lastfm+'\t'+fb_share+'\t'+tw_share+'\t'+gplus
-    +'\t'+su+'</td></tr></table>' };
+    +'</div></td></tr><tr><td></td><td>'+share.fb_share+'\t'+share.tw_share+'\t'+share.gplus
+    +'\t'+share.su+'\t'+share.lastfm+'</td></tr></table>' };
     var InfoWindow = new google.maps.InfoWindow(WindowOptions);
     infoWindows.push(InfoWindow);
     google.maps.event.addListener(lemarqueur, 'click', function() {
@@ -312,7 +265,7 @@ function plotOverlay(lat, lng, response) {
         var markerCluster = new MarkerClusterer(carte, markers);
         markerCluster.setMaxZoom(15);
         markerCluster.setGridSize(40);
-        google.maps.event.addDomListener(window, 'load', initialiser);
+        // google.maps.event.addDomListener(window, 'load', newGoogleMap(function(carte){}));
     } else alert('No conerts found at this time for the given parameters (range/address/artist)');
      
 }
@@ -325,7 +278,7 @@ function getConcerts(lat, lng, range, artist) {
     var _responseJSON;
     $.ajax({
         type : 'GET',
-        url : '/concert?lat='+lat+'&long='+lng+'&range='+range+'&artist='+artist+'&date='+date,
+        url : '/@?lat='+lat+'&long='+lng+'&range='+range+'&artist='+artist+'&date='+date,
         contentType : 'application/json; charset=UTF-8',
         error: function(jqxhr, status, err) {
             console.log(JSON.stringify(err) + " " + JSON.stringify(status) 

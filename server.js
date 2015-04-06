@@ -96,7 +96,7 @@ findByUsername(username, function(err, user) {
 /*
  * Getting data from database filtered by artist and client's date
  */
-app.get('/@', function(req, res){
+app.get('/concert', function(req, res){
   if (req.query.l) l = req.query.l;
   else l = 5000;
   if(req.query.date) date = req.query.date;

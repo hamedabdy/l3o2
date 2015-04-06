@@ -15,7 +15,8 @@ function insertData(data) {
 }
 
 function dropCollection(){
-	db.concerts.drop();
+	db.concerts.remove({"_id" : {$not: /.*pij.*/}});
+	//db.concerts.drop();
 }
 
 function ensureIndex(){
@@ -24,7 +25,7 @@ function ensureIndex(){
 
 function closeDatabase(){
 	db.close();
-	console.log('db cloesd!');
+	console.log('db closed!');
 }
 
 exports.dropCollection = dropCollection;

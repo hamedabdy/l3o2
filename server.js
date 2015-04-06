@@ -29,6 +29,7 @@ var fs = require('fs')
 //if ('development' == env) {
 
    // configure stuff here
+   
   app.disable('x-powered-by');
   // only log error responses
   app.use(morgan('combined', {

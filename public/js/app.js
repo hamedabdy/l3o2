@@ -278,7 +278,7 @@ function getConcerts(lat, lng, range, artist) {
     var _responseJSON;
     $.ajax({
         type : 'GET',
-        url : '/@?lat='+lat+'&long='+lng+'&range='+range+'&artist='+artist+'&date='+date,
+        url : '/concert?lat='+lat+'&long='+lng+'&range='+range+'&artist='+artist+'&date='+date,
         contentType : 'application/json; charset=UTF-8',
         error: function(jqxhr, status, err) {
             console.log(JSON.stringify(err) + " " + JSON.stringify(status) 

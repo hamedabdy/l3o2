@@ -110,7 +110,7 @@ function getTiles(lat, lng, range, limit) {
     var _responseJSON;
     $.ajax({
         type : 'GET',
-        url : '/@?lat='+lat+'&long='+lng+'&range='+range+'&date='+date+'&l='+limit,
+        url : '/concert?lat='+lat+'&long='+lng+'&range='+range+'&date='+date+'&l='+limit,
         contentType : 'application/json; charset=UTF-8',
         error: function(jqxhr, status, err) {
             console.log(JSON.stringify(err) + " " + JSON.stringify(status) 

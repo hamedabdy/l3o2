@@ -44,6 +44,8 @@ function drawTiles (data) {
                     +d.address.city+', '
                     +d.address.country;
         var artists = String(d.artist).replace(/,/g, ", ");
+        if (artists.length > 50)
+            artists = artists.substr(0, 50) + ' ...';
         var _shareButtons = share.fb_share+share.tw_share+share.gplus+share.su+share.lastfm;
         var info = '<div class="tile-info"><div class="tile-title">'
                     +d.title+'</div><div class="tile-body"><b>Artists: </b><span>'

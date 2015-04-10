@@ -59,6 +59,10 @@
 	vertical-align: middle;
 }
 
+.tile-link {
+	color: initial;
+}
+
 .fadeout {
 	display: none;
 }

@@ -30,8 +30,6 @@ function shareButtons (data, fn) {
         shareBtns.su = '<a href="http://stumbleupon.com/submit?url=' + encodedURL 
                     +'" target="_blank"><img width="25" src="images/stumble_upon.png"'
                     +'alt="Stumble" title="Stumble"/></a>';
-
-        // console.log(" share buttons : " + JSON.stringify(shareBtns));
         return fn(shareBtns);
 }
 
@@ -43,7 +41,7 @@ function drawTiles (data) {
         var d = data[i];
         var share = {};
         shareButtons(d, function(shareBtns) { share = shareBtns; });
-        var tile = '<div class="tile" id=tile'+i+'></div>';
+        var tile = '<div class="tile" id=tile'+i+' onclick="execTile(this)"></div>';
         $( '.tiles-box' ).append( tile );
         var helper = '<span class="helper"></span>';
         $( '#tile'+i ).append( helper );
@@ -52,11 +50,11 @@ function drawTiles (data) {
         $( '#tile'+i ).append( img );
         var artist = String(d.artist).replace(/,/g, ", ");
         var info = '<div class="tile-info"><div class="tile-title">'
-                    +d.title+'</div><div class="tile-body"><b>Artists: </b>'
-                    +artist+'<br><b>Date: </b>'+new Date(d.startDate).toLocaleString()+'<br>'
+                    +d.title+'</div><div class="tile-body"><b>Artists: </b><span>'
+                    +artist+'</span><br><b>Date: </b>'+new Date(d.startDate).toLocaleString()+'<br><span>'
                     +d.address.name+' '+d.address.street + ', '
                     +d.address.postalcode+', '+d.address.city+', '+d.address.country
-                    +'</div><div class="shareBtns">'
+                    +'</span></div><div class="shareBtns">'
                     + share.fb_share
                     + share.tw_share
                     + share.gplus
@@ -64,18 +62,23 @@ function drawTiles (data) {
                     + share.lastfm
                     + '</div></div>';
         $( '#tile'+i ).append( info );
-        $( '#tile'+i ).click( function(){
-            _address = d.address.name+' '
-                        +d.address.street + ', '
-                        +d.address.postalcode+', '
-                        +d.address.city+', '
-                        +d.address.country;
-            artist = (String(d.artist)).match(/.*,/);
-            artist = artist[0].replace(",", "");
-            update_params(_address, 10, artist);
-            geoCodeAddress(_address, 10, artist);
-        });
+        _address = d.address.name+' '
+                    +d.address.street + ', '
+                    +d.address.postalcode+', '
+                    +d.address.city+', '
+                    +d.address.country;
     }
+}
+
+
+function execTile (element) {
+    tile_body = element.getElementsByClassName('tile-body');
+    tile_body_span = tile_body[0].getElementsByTagName('span');
+    artists = tile_body_span[0].innerHTML;
+    artists = artists.split(',');
+    address = tile_body_span[1].innerHTML;
+    update_params(address, 10, artists[0]);
+    geoCodeAddress(address, 10, artists[0]);
 }
 
 /*

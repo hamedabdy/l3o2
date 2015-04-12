@@ -16,7 +16,7 @@ a:hover {}
 	position: fixed;
 	right: 0;
 	transition: all 0.3s ease 0s;
-	z-index: 1;
+	z-index: 5;
 }
 
 .main > section button {

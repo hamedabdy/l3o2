@@ -79,13 +79,15 @@ function geoIpLocation () {
         error: function(jqxhr, status, err) {
             ip_latitude = 48.8588589;
             ip_longitude = 2.3470599;
-            getTiles(ip_latitude, ip_longitude, 10, 15);
+            // getTiles(ip_latitude, ip_longitude, 10, 15);
             // console.log(err + ", " + status);
+            window.location.replace('/?lat='+ip_latitude+'&lng='+ip_longitude);
         },
         success: function(result) {
             ip_latitude = result.latitude;
             ip_longitude = result.longitude;
-            getTiles(ip_latitude, ip_longitude, 10, 15);
+            // getTiles(ip_latitude, ip_longitude, 10, 15);
+            window.location.replace('/?lat='+ip_latitude+'&lng='+ip_longitude);
         } 
     });
 }
@@ -115,4 +117,4 @@ function getTiles(lat, lng, range, limit) {
     });
 }
 
-geoIpLocation()
+// geoIpLocation()

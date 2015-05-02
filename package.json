@@ -1,6 +1,6 @@
 {
   "name": "concertdacote",
-  "version": "0.9.4",
+  "version": "1.0",
   "dependencies": {
     "bcrypt": "~0.8.1",
     "body-parser": "~1.10.2",

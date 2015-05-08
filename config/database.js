@@ -2,5 +2,5 @@
 
 
 module.exports = {
-	'url' : process.env.MONGOHQ_URL || 'mongodb://localhost/concertdacote' || process.env.MONGOLAB_URI
+	'url' : process.env.MONGOHQ_URL || process.env.MONGOLAB_URI || 'mongodb://localhost/concertdacote'
 };

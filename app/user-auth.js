@@ -1,10 +1,10 @@
 #!/usr/bin/env node
 
-var mongojs       = require('mongojs');
-var configDB 	= require('../config/database');
-var db2 = mongojs(configDB.url, ['htpasswd']);
-var LocalStrategy = require('passport-local').Strategy;
-var bcrypt = require('bcrypt');
+var mongojs     	= require('mongojs');
+var configDB 		= require('../config/database');
+var db 			= mongojs(configDB.url, ['htpasswd']);
+var LocalStrategy 	= require('passport-local').Strategy;
+var bcrypt 			= require('bcrypt');
 
 module.exports = function(app, passport) {
 	// Passport session setup.
@@ -86,10 +86,10 @@ function startUpdate(fn){
 }
 
 /*
- * Get a user by id from database (ref. db2 htpasswd)
+ * Get a user by id from database (ref. db htpasswd)
  */
 function findById(id, fn) {
-  db2.htpasswd.findOne({_id: id}, function(err, results){
+  db.htpasswd.findOne({_id: id}, function(err, results){
     if (results) {
       fn(null, results);
     } else {
@@ -99,10 +99,10 @@ function findById(id, fn) {
 }
 
 /*
- * Get a user by username from database (ref. db2 htpasswd)
+ * Get a user by username from database (ref. db htpasswd)
  */
 function findByUsername(username, fn) {
-  db2.htpasswd.findOne({'username': username}, function(err, results){
+  db.htpasswd.findOne({'username': username}, function(err, results){
     if (results) {
       return fn(null, results);
     } 
@@ -124,12 +124,12 @@ function encryptPass(pass, fn){
 }
 
 /*
- * Insert a user into database (db2 htpasswd)
+ * Insert a user into database (db htpasswd)
  * Note: not complete, needs verification of existing username
  */
 function addUser (user, pass) {
   encryptPass(pass, function(err, hash){
-    db2.htpasswd.insert({'username' : user, 'password' : hash});
+    db.htpasswd.insert({'username' : user, 'password' : hash});
   });
 }
 
@@ -138,7 +138,7 @@ function addUser (user, pass) {
  */
 function changePass (user, pass) {
   encryptPass(pass, function(err, hash) { 
-    db2.htpasswd.update({'username': user}, {$set: {'password': hash},});
+    db.htpasswd.update({'username': user}, {$set: {'password': hash},});
   });
 }
 

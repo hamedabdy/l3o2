@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 var request = require('request');
-var villes = require('./liste-villes');
+var villes = require('../config/liste-villes');
 console.log('\n*** Total number of locations to process= ' + villes.city.length + ' ***\n');
 console.log('*** Please be patient while sending requests this may take a while... ****\n');
 

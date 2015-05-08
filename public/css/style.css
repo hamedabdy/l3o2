@@ -22,8 +22,9 @@ a {}
     width: 100%;
     position: absolute;
     bottom: 0;
-    display: none;
+    display: block;
     transition: opacity 1s;
+    overflow: hidden;
 }
 
 .info-window-title {

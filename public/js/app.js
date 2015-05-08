@@ -4,8 +4,7 @@ $( document ).ready(function() {
      */
     var menuRight = document.getElementById( 'cbp-spmenu-s2' )
         , showRight = document.getElementById( 'showRight' )
-        , infoBtn = document.getElementById( 'infoBtn' )
-        , mapWidth = document.getElementById( 'carte' );
+        , infoBtn = document.getElementById( 'infoBtn' );
 
     // Check browser support
     if (typeof(Storage) != "undefined") {
@@ -32,7 +31,6 @@ $( document ).ready(function() {
     function options () {
         classie.toggle( showRight, 'active' );
         classie.toggle( infoBtn, 'showInfo' );
-        classie.toggle( mapWidth, 'reduceMapSize' );
         classie.toggle( menuRight, 'cbp-spmenu-open' );
     }
 

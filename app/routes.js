@@ -18,7 +18,6 @@ module.exports = function(app) {
 				, ip_longitude  = 2.3470599;
 			// ip = '46.193.143.95';
 			console.log('\n\n[DEBUG] ip = ' + ip);
-			console.log("\n\n[DEBUG] process.env.MONGOLAB_URI = " + process.env.MONGOLAB_URI);
 			userlocation.getRemoteGeoLocationFromIp(ip, function(err, results){
 				var r = '';
 				if (err) {

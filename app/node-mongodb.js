@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 var mongojs 	= require('mongojs'),
-    configDB 	= require('../config/database');,
+    configDB 	= require('../config/database'),
 	db 			= mongojs(configDB.url, ['concerts']);
 
 /*

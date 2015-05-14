@@ -30,7 +30,7 @@ module.exports = function(app) {
 							res.render('index', p);
 						}
 					});
-				} else if(Object.keys(results).length != 0) {
+				} else if(results.ip) {
 					r = JSON.parse(results);
 					getConcerts(r.latitude, r.longitude, 100, '', '', '', function(err, results) {
 						if (!err) {

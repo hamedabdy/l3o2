@@ -1,5 +1,5 @@
 body {
-    background: url("http://subtlepatterns.com/patterns/tweed.png");
+    background: url("../images/tweed.png");
     height: 100%;
     margin: 0px;
     padding: 0px;
@@ -18,7 +18,7 @@ a {}
 /*--------------------------------------*/
 
 .carte {
-    height: 89%;
+    height: 86%;
     width: 100%;
     position: absolute;
     bottom: 0;
@@ -92,8 +92,8 @@ a {}
 }
 
 .form-wrapper-input {
-    width: 575px;
-    height: 41px;
+    width: 485px;
+    height: 21px;
     padding: 10px 45px;
     float: left;
     font: bold 16px 'Lato', 'lucida sans', 'trebuchet MS', 'Tahoma';
@@ -307,7 +307,7 @@ a {}
     border-radius: 0 0 4px 4px;
     border-top: 0;
     height: 30px;
-    padding: 0px 5px;
+    padding: 0px 45px;
 }
 
 .showInfo {
@@ -339,7 +339,7 @@ a {}
     position: fixed;
     top: 0;
     z-index: 3;
-    background: url("http://subtlepatterns.com/patterns/tweed.png") repeat scroll 0% 0% transparent;
+    background: url("../images/tweed.png");
 }
 
 .header-holder {

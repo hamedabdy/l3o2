@@ -9,6 +9,8 @@ var util = require('util');
 module.exports = function(app) {
 
 	app.get('/', function(req, res){
+		var fullUrl = req.protocol + '://' + req.get('host') + req.originalUrl;
+		res.locals.url = fullUrl;
 		if(Object.keys(req.query).length == 0 ) {
 			var ip = req.headers['x-forwarded-for']
 				|| req.connection.remoteAddress
@@ -54,6 +56,7 @@ module.exports = function(app) {
 
 	app.get('/m', function(req, res){
 		if(Object.keys(req.query).length != 0){
+			res.locals.query = req.query;
 			var lat = req.query.lat
 				, lng = req.query.lng
 				, artist = req.query.artist;
@@ -62,6 +65,10 @@ module.exports = function(app) {
 					res.render('map', {concerts : results});
 				}
 			});
+		}
+		else {
+			res.locals.query = null;
+			res.render('map', {concerts : null});
 		}
 	});
 
@@ -95,7 +102,6 @@ module.exports = function(app) {
  * @param fn : callback function (err, results)
  */
 function getConcerts (lat, lng, radius, artists, limit, date, fn) {
-	console.log("lat = " + lat + " lng = " + lng + " radius = " + radius + " artist = " + artists);
  	var l = 5000;
  	if (limit) l = limit;
  	var dbQuery = { latlong: { $near:[parseFloat(lat), parseFloat(lng)], $maxDistance: parseFloat(radius)/111.12} };

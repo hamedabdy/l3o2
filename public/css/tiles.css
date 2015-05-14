@@ -13,7 +13,6 @@
 	margin: 10px;
 	border: 2px solid #FAFAFA;
 	box-shadow: 0 1px 2px rgba(34, 25, 25, 0.4);
-	cursor: pointer;
 	animation: fadein 2s;
 	animation-fill-mode: forwards;
 	transition-duration: 0.1s;
@@ -35,16 +34,29 @@
     vertical-align: middle;
 }
 
-.tile > img {
+.tile > a > img {
 	padding-right: 5px;
 	border-right: 1px solid #ccc;
 	vertical-align: middle;
 	max-height: 130px;
 }
 
+.tile a {
+	color : #2A5DB0;
+}
+
+.tile a:hover {
+	color : #EEE;
+}
+
 .tile-title {
     font-size: 14px;
     box-shadow: 0px 1px 2px rgba(34, 25, 25, 0.4);
+    padding-left: 3px;
+}
+
+.tile-title:hover {
+	background-color: #2A5DB0;
 }
 
 .tile-body {
@@ -59,10 +71,6 @@
 	vertical-align: middle;
 }
 
-.tile-link {
-	color: initial;
-}
-
 .fadeout {
 	display: none;
 }
@@ -74,4 +82,8 @@
 
 .shareBtns > a {
 	margin-left: 5px;
+}
+
+.shareBtns > a > img:hover {
+	transform: scale(1.07);
 }

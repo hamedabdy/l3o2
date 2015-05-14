@@ -1,53 +1,53 @@
-    /*
-     * Side bar
-     */
-    var menuRight = document.getElementById( 'cbp-spmenu-s2' )
-        , showRight = document.getElementById( 'showRight' )
-        , infoBtn = document.getElementById( 'infoBtn' );
+/*
+ * Side bar
+ */
+var menuRight = document.getElementById( 'cbp-spmenu-s2' )
+    , showRight = document.getElementById( 'showRight' )
+    , infoBtn = document.getElementById( 'infoBtn' );
 
+// Check browser support
+if (typeof(Storage) != "undefined") {
+    // Retrieve
+    var storageState = localStorage.getItem("infoActive")
+    if(!storageState) {
+        options();
+    }
+} else {
+    console.log("Sorry, your browser does not support Web Storage...");
+}
+
+showRight.onclick = function() {
+    options();
     // Check browser support
     if (typeof(Storage) != "undefined") {
-        // Retrieve
-        var storageState = localStorage.getItem("infoActive")
-        if(!storageState) {
-            options();
-        }
+        // Store
+        localStorage.setItem("infoActive", false);
     } else {
         console.log("Sorry, your browser does not support Web Storage...");
     }
+};
 
-    showRight.onclick = function() {
-        options();
-        // Check browser support
-        if (typeof(Storage) != "undefined") {
-            // Store
-            localStorage.setItem("infoActive", false);
-        } else {
-            console.log("Sorry, your browser does not support Web Storage...");
-        }
-    };
+function options () {
+    classie.toggle( showRight, 'active' );
+    classie.toggle( infoBtn, 'showInfo' );
+    classie.toggle( menuRight, 'cbp-spmenu-open' );
+}
 
-    function options () {
-        classie.toggle( showRight, 'active' );
-        classie.toggle( infoBtn, 'showInfo' );
-        classie.toggle( menuRight, 'cbp-spmenu-open' );
-    }
+/*
+ * Toggle artist search button
+ */
+var myForm = document.getElementById( 'myForm' )
+    , extendBtn = document.getElementById( 'extendBtn' )
+    , artist = document.getElementById( 'artist' )
+    , range = document.getElementById( 'range' );
 
-    /*
-     * Toggle artist search button
-     */
-    var myForm = document.getElementById( 'myForm' )
-        , extendBtn = document.getElementById( 'extendBtn' )
-        , artist = document.getElementById( 'artist' )
-        , range = document.getElementById( 'range' );
-
-    extendBtn.onclick = function() {
-      classie.toggle( this, 'active' );
-      classie.toggle( artist, 'showInput' );
-      classie.toggle( range, 'form-wraper-range-extended' );
-      classie.toggle( myForm, 'extendShadow' );
-      classie.toggle( extendBtn, 'changeBtn' );
-    };
+extendBtn.onclick = function() {
+  classie.toggle( this, 'active' );
+  classie.toggle( artist, 'showInput' );
+  classie.toggle( range, 'form-wraper-range-extended' );
+  classie.toggle( myForm, 'extendShadow' );
+  classie.toggle( extendBtn, 'changeBtn' );
+};
 
 $( '#myForm' ).submit(function(){
     var address = document.getElementById('address').value

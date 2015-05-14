@@ -22,7 +22,7 @@ module.exports = function(app) {
 			console.log('\n\n[DEBUG] ip = ' + ip);
 			userlocation.getRemoteGeoLocationFromIp(ip, function(err, results){
 				var r = '';
-				if (err || Object.keys(results).length == 0) {
+				if (err) {
 					console.log('err = ' + err);
 					getConcerts(ip_latitude, ip_longitude, 50, '', '', '', function(err, results) {
 						if (!err) {
@@ -30,7 +30,7 @@ module.exports = function(app) {
 							res.render('index', p);
 						}
 					});
-				} else {
+				} else if(Object.keys(results).length != 0) {
 					r = JSON.parse(results);
 					getConcerts(r.latitude, r.longitude, 100, '', '', '', function(err, results) {
 						if (!err) {

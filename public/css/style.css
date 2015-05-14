@@ -53,19 +53,20 @@ a {}
 
 /*-------------------------------------*/   
 
-.mailto a {
-    border:none !important;
+.mailto {
+    display: inline-block;
+}
+
+.mailto > a {
     padding:0 !important;
     background:#fff !important;
-    width:25px !important;
-    margin-right:4px !important;
     border-radius:5px !important;
+    height: 24px;
 }
 
-.mailto:hover a {
-    background-color: #fff !important;
+.fb-like {
+    padding-bottom: 3px
 }
-
 
 .form-holder {
     position: absolute;
@@ -359,4 +360,5 @@ a {}
     position: absolute;
     bottom: 5px;
     border-top: 1px solid #C42F2F;
+    width: 100%;
 }

@@ -38,12 +38,14 @@ module.exports = function(app) {
 							res.render('index', p);
 						}
 					});
-				}
+				} else {
+                    res.end("error", err, results);
+                }
 			});
 		} else {
 			if (req.query.lat && req.query.lng)
 				p = {lat : req.query.lat, lng : req.query.lng};
-			else 
+			else
 				p = {lat : ip_latitude, lng : ip_longitude};
 			getConcerts(p.lat, p.lng, 50, '', '', '', function(err, results) {
 				if (!err) {
@@ -116,6 +118,6 @@ function getConcerts (lat, lng, radius, artists, limit, date, fn) {
 	    } else {
 	    	console.log(err);
 	    	return fn(err, null);
-	    } 
+	    }
 	});
 }

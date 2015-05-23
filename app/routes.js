@@ -39,7 +39,14 @@ module.exports = function(app) {
 						}
 					});
 				} else {
-                    res.end("error " + err + " " + results);
+                    console.log(err + " " + results);
+                    p = {lat : _latitude, lng : _longitude};
+                    getConcerts(p.lat, p.lng, 50, '', '', '', function(err, results) {
+                        if (!err) {
+                            p = {lat : p.lat, lng : p.lng, concerts : results};
+                            res.render('index', p);
+                        }
+                    });
                 }
 			});
 		} else {

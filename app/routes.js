@@ -16,17 +16,17 @@ module.exports = function(app) {
 				|| req.connection.remoteAddress
 				|| req.socket.remoteAddress
 				|| req.connection.socket.remoteAddress;
-			var ip_latitude   = 48.8588589
-				, ip_longitude  = 2.3470599;
+			var _latitude   = 48.8588589
+				, _longitude  = 2.3470599;
 			// ip = '46.193.143.95';
 			console.log('\n\n[DEBUG] ip = ' + ip);
 			userlocation.getRemoteGeoLocationFromIp(ip, function(err, results){
 				var r = '';
 				if (err) {
 					console.log('err = ' + err);
-					getConcerts(ip_latitude, ip_longitude, 50, '', '', '', function(err, results) {
+					getConcerts(_latitude, _longitude, 50, '', '', '', function(err, results) {
 						if (!err) {
-							p = {lat : ip_latitude, lng : ip_longitude, concerts : results};
+							p = {lat : _latitude, lng : _longitude, concerts : results};
 							res.render('index', p);
 						}
 					});
@@ -39,14 +39,14 @@ module.exports = function(app) {
 						}
 					});
 				} else {
-                    res.end("error", err, results);
+                    res.end("error " + err + " " + results);
                 }
 			});
 		} else {
 			if (req.query.lat && req.query.lng)
 				p = {lat : req.query.lat, lng : req.query.lng};
 			else
-				p = {lat : ip_latitude, lng : ip_longitude};
+				p = {lat : _latitude, lng : _longitude};
 			getConcerts(p.lat, p.lng, 50, '', '', '', function(err, results) {
 				if (!err) {
 					p = {lat : p.lat, lng : p.lng, concerts : results};

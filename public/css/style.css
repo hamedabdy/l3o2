@@ -41,7 +41,7 @@ a {}
 }
 
 .info-window-title:hover {
-    background-color: none !important;
+    background-color: inherit !important;
 }
 
 .info-window-info {

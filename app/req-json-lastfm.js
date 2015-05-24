@@ -2,7 +2,9 @@
 
 var request = require('request');
 var villes = require('../config/liste-villes');
-console.log('\n*** Total number of locations to process= ' + villes.city.length + ' ***\n');
+var util = require('util');
+
+console.log('\n*** Total number of locations to process : ' + villes.city.length + ' ***\n');
 console.log('*** Please be patient while sending requests this may take a while... ****\n');
 
 /*
@@ -75,7 +77,7 @@ function getConcertsUsingPages(url, location, page, limit){
             page = parseInt(page, 10);
             console.log('Location: ' + location + ' Page: ' +page+ ' / '+ totalpages);
             pushEvents(parsedJSON, location);
-            if(page < totalpages){ 
+            if(page < totalpages){
                 getConcertsUsingPages(url, location, page+1, limit);
             }
         }
@@ -87,37 +89,51 @@ function getConcertsUsingPages(url, location, page, limit){
  * Creating JSON of the recieved concerts
  */
 function pushEvents(parsedJSON, location){
-    var myobject = '';
-    var obj = [];
-    var length =0;
+    var dict = {};
+    var newArray = [];
+    var length = 0;
     length = (parsedJSON.events.event).length;
-    console.log('processing database for: ' + location);
-    //creating JSON
+    console.log('processing database for : ' + location + ' - # of events : ' + length);
+    // creating JSON
     for(i =0; i<length; i++){
-        myobject = parsedJSON.events.event[i];
-        //adding data to JSON
-        obj.push({
-            "_id" : myobject.id,
-            title : myobject.title,
-            artist : myobject.artists.artist,
-            address : {name: myobject.venue.name, street : myobject.venue.location.street,
-                        postalcode : myobject.venue.location.postalcode,
-                        city : myobject.venue.location.city, country : myobject.venue.location.country},
-            latlong : [ parseFloat(myobject.venue.location['geo:point']['geo:lat']),
-                       parseFloat(myobject.venue.location['geo:point']['geo:long'])],
-            url : myobject.url,
-            startDate : new Date(myobject.startDate),
-            image : myobject.image[1]["#text"]
-            });
-    };
-    /*
-     * inserting each concert into database
-     */
-    database.insertData(obj);
+        dict = parsedJSON.events.event[i];
+        _checkInputFileds(dict, function(out, fields_ok){
+            if(fields_ok) {
+                // building an array of dict of events
+                newArray.push({
+                    "_id" : dict.id,
+                    title : dict.title,
+                    artist : dict.artists.artist,
+                    address : {name: dict.venue.name, street : dict.venue.location.street,
+                                postalcode : dict.venue.location.postalcode,
+                                city : dict.venue.location.city, country : dict.venue.location.country},
+                    latlong : [ parseFloat(dict.venue.location['geo:point']['geo:lat']),
+                               parseFloat(dict.venue.location['geo:point']['geo:long'])],
+                    url : dict.url,
+                    startDate : new Date(dict.startDate),
+                    image : dict.image[1]["#text"]
+                });
+            }
+        });
+    }
+    // sending an array of events to be inserted into db
+    database.insertData(newArray);
 }
 
 function startUpdate(){
     iterateCities(url, villes);
+}
+
+function _checkInputFileds(input, fn){
+    _fields = ['id', 'title', 'artists', 'venue', 'startDate', 'image'];
+    var fields_ok = true;
+    for(var key in _fields){
+        if(!input.hasOwnProperty(_fields[key])){
+            console.log("key [" + key + "] = " + _fields[key] + " \ninput : " + util.inspect(input));
+            fields_ok = false;
+        }
+    }
+    return fn(input, fields_ok);
 }
 
 var database = require('./node-mongodb');
@@ -126,4 +142,5 @@ database.ensureIndex();
 var apiKey = 'dbc287366d92998e7f5fb5ba6fb7e7f1';
 var distance = "&distance=500";
 var url = 'http://ws.audioscrobbler.com/2.0/?method=geo.getevents'+ distance +'&api_key='+apiKey+'&format=json';
+
 exports.startUpdate = startUpdate;

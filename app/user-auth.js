@@ -81,7 +81,7 @@ module.exports = function(app, passport) {
 /*********** Methods *************/
 
 function startUpdate(fn){
-	var requestLastfm = require('./req-json-lastfm.min');
+	var requestLastfm = require('./req-json-lastfm');
 	requestLastfm.startUpdate();
 }
 
@@ -105,7 +105,7 @@ function findByUsername(username, fn) {
   db.htpasswd.findOne({'username': username}, function(err, results){
     if (results) {
       return fn(null, results);
-    } 
+    }
     return fn(null, null);
   });
 }
@@ -137,7 +137,7 @@ function addUser (user, pass) {
  * Change the password with 'pass' for a given username 'user'
  */
 function changePass (user, pass) {
-  encryptPass(pass, function(err, hash) { 
+  encryptPass(pass, function(err, hash) {
     db.htpasswd.update({'username': user}, {$set: {'password': hash},});
   });
 }

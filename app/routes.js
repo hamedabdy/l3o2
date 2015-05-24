@@ -120,7 +120,7 @@ function getConcerts (lat, lng, radius, artists, limit, date, fn) {
  	dbQuery.startDate = { $gte : new Date(newDate)};
  	db.concerts.find( dbQuery, { 'limit' : l }, function(err, result) {
 	   	if(!err) {
-    		console.log('# of concerts returned = ' + result.length);
+    		console.log('\n# of concerts returned = ' + result.length + '\n');
 	        return fn(null, result);
 	    } else {
 	    	console.log(err);

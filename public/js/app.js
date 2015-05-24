@@ -74,7 +74,7 @@ $( '#myForm' ).submit(function(){
  *  Get URL parameters
  */
 var QueryString = function () {
-  // This function is anonymous, is executed immediately and 
+  // This function is anonymous, is executed immediately and
   // the return value is assigned to QueryString!
   var query_string = {};
   var query = window.location.search.substring(1);
@@ -92,7 +92,7 @@ var QueryString = function () {
     } else {
       query_string[pair[0]].push(pair[1]);
     }
-  } 
+  }
     return query_string;
 } ();
 
@@ -244,16 +244,24 @@ function newOverlay(carte, concerts, oms){
         title: concerts.title
     });
     oms.addMarker(lemarqueur);
-    var artist = String(concerts.artist).replace(/,/g, ", ");
+    var imageAlt = concerts.title;
+    if (concerts.title.lenth > 13) imageAlt = concerts.title.substr(0, 13)+' ...';
+    var title = concerts.title;
+    if (concerts.title.length > 22) title = concerts.title.substr(0, 22) + ' ...';
+    var artists = String(concerts.artist).replace(/,/g, ", ");
+    if (artists.length > 50) artists = artists.substr(0, 50) + ' ...';
+    var artists = artists.split(',');
     var cover = (concerts.image).replace("/64/", "/126/");
-    var WindowOptions = { content:'<table><tr><td><img src="'
-    +cover+'"/></td><td><div class="info-window-title">'
-    +concerts.title+'</div><div class="info-window-body"><b>Artists: </b>'
-    +artist+'<br><b>Date: </b>'+new Date(concerts.startDate).toLocaleString()+'<br>'
-    +concerts.address.name+' '+concerts.address.street + '<br>'
-    +concerts.address.postalcode+', '+concerts.address.city+', '+concerts.address.country
-    +'</div></td></tr><tr><td></td><td>'+share.fb_share+'\t'+share.tw_share+'\t'+share.gplus
-    +'\t'+share.su+'\t'+share.lastfm+'</td></tr></table>' };
+    var date = new Date(concerts.startDate).toLocaleString();
+    date = date.replace(/:..\ /i, " ");
+    var address = concerts.address.name+' '+concerts.address.street + ', '+concerts.address.postalcode+', '+concerts.address.city+', '+concerts.address.country;
+
+    _content = '<div class="info-window-body"><span class="helper"></span><img src="'+cover+'" title="'+concerts.title+'" alt="'+imageAlt+'"/><div class="tile-info info-window-info"><div class="tile-title info-window-title" title="'+concerts.title+'">'+title+'</div><div class="tile-body"><b>Artists: </b><span>'+artists+'</span><br><b>Date:</b>'+date+'<br><span>'+address+'</span></div><div class="shareBtns">'+share.fb_share+share.tw_share+share.gplus+share.su+share.lastfm+'</div></div></div>';
+
+    // var WindowOptions = { content:'<table><tr><td><img src="'+cover+'"/></td><td><div class="info-window-title">'+concerts.title+'</div><div class="info-window-body"><b>Artists: </b>'+artists+'<br><b>Date: </b>'+new Date(concerts.startDate).toLocaleString()+'<br>'+concerts.address.name+' '+concerts.address.street + '<br>'+concerts.address.postalcode+', '+concerts.address.city+', '+concerts.address.country +'</div></td></tr><tr><td></td><td>'+share.fb_share+'\t'+share.tw_share+'\t'+share.gplus +'\t'+share.su+'\t'+share.lastfm+'</td></tr></table>' };
+
+    var WindowOptions = { content: _content };
+
     var InfoWindow = new google.maps.InfoWindow(WindowOptions);
     infoWindows.push(InfoWindow);
     google.maps.event.addListener(lemarqueur, 'click', function() {
@@ -264,7 +272,7 @@ function newOverlay(carte, concerts, oms){
 }
 
 /*
- * Plots concerts on map 
+ * Plots concerts on map
  * - multiple concerts at the same address are Spiderfied
  * - mutiple conerts close to each other are Clustered.
  */
@@ -279,7 +287,7 @@ function plotOverlays(carte, lat, lng, concerts) {
         markerCluster.setMaxZoom(15);
         markerCluster.setGridSize(40);
     } else alert('No conerts found at this time for the given parameters (range/address/artist)');
-     
+
 }
 
 /*
@@ -293,7 +301,7 @@ function getConcerts(lat, lng, range, artist, fn) {
         url : '/concert?lat='+lat+'&long='+lng+'&range='+range+'&artist='+artist+'&date='+date,
         contentType : 'application/json; charset=UTF-8',
         error: function(jqxhr, status, err) {
-            console.log(JSON.stringify(err) + " " + JSON.stringify(status) 
+            console.log(JSON.stringify(err) + " " + JSON.stringify(status)
                 + " " + JSON.stringify(jqxhr));
             return fn(err, null);
         },
@@ -340,7 +348,7 @@ function updateFormFields (address, range, artist) {
 function exists (arg) {
     if(arg && typeof arg === "string" && arg !== null){
         return true;
-    } else return false;    
+    } else return false;
 }
 
 function defaultFor(arg, val) { return typeof arg !== 'undefined' ? arg : val; }

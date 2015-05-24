@@ -12,10 +12,10 @@ body {
 .page-loaded {
     opacity: 1;
 }
-    
+
 a {}
 
-/*--------------------------------------*/
+/*---------------- MAP ----------------*/
 
 .carte {
     height: 86%;
@@ -36,6 +36,18 @@ a {}
     font-size: 13px !important;
 }
 
+.info-window-body img {
+    vertical-align: middle !important;
+}
+
+.info-window-title:hover {
+    background-color: none !important;
+}
+
+.info-window-info {
+    display: inline-block !important;
+}
+
 /*-------------------------------------*/
 
 .cf:before, .cf:after{
@@ -51,7 +63,7 @@ a {}
     zoom:1;
 }
 
-/*-------------------------------------*/   
+/*-------------------------------------*/
 
 .mailto {
     display: inline-block;
@@ -121,11 +133,11 @@ a {}
     border-radius: 3px;
     margin: 3px -39px;
 }
-  
-.form-wrapper-button:hover{ 
+
+.form-wrapper-button:hover{
     background: #e54040;
-}   
-  
+}
+
 .form-wrapper-button:active,
 .form-wrapper-button:focus{
     background: #c42f2f;
@@ -136,7 +148,7 @@ a {}
 }
 
 .form-wraper-location {
-   border: 0; 
+   border: 0;
    cursor: pointer;
    position: absolute;
    background: #d83c3c;

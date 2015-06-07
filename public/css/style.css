@@ -1,9 +1,34 @@
+/* ------------- FONTS --------------- */
+
+@font-face{
+    font-family: Lato;
+    src: url("../fonts/lato/Lato-Regular.ttf") format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face{
+    font-family: Sansation;
+    src: url("../fonts/sansation/Sansation-Regular.ttf") format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face{
+    font-family: open-sans;
+    src: url("../fonts/open-sans/OpenSans-Regular.ttf") format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+/* ----------------------------------- */
+
 body {
     background: url("../images/tweed.png");
+    font-family: Sansation, Calibri, Arial, sans-serif;
     height: 100%;
     margin: 0px;
     padding: 0px;
-    font: bold 15px 'Lato', 'lucida sans', 'trebuchet MS', 'Tahoma';
     color: #444;
     opacity : 0;
     transition: opacity 1s;
@@ -12,8 +37,6 @@ body {
 .page-loaded {
     opacity: 1;
 }
-
-a {}
 
 /*---------------- MAP ----------------*/
 
@@ -81,16 +104,13 @@ a {}
 }
 
 .form-holder {
-    position: absolute;
-    left: 28%;
+    transition: all 0.7s linear 0s;
+    position: fixed;
+    left: 50%;
     z-index: 2;
     height: 0;
-    top: 40%;
-}
-
-.form-holder-transition {
-    transition: all 0.7s linear 0s;
     top: 10px;
+    transform: translate(-50%);
 }
 
 .form-wrapper {
@@ -109,15 +129,26 @@ a {}
     height: 21px;
     padding: 10px 45px;
     float: left;
-    font: bold 16px 'Lato', 'lucida sans', 'trebuchet MS', 'Tahoma';
+    font: bold 16px open-sans;
     border: 0;
     background: #eee;
     border-radius: 0;
-    border: solid 0px rgb(216, 60, 60);
+    border: 0;
+}
+
+input:invalid {
+  box-shadow: none;
+}
+
+:-moz-submit-invalid {
+  box-shadow: none;
+}
+
+:-moz-ui-invalid {
+  box-shadow:none;
 }
 
 .form-wrapper-input:focus {
-    outline: 0;
     background: #fff;
     box-shadow: 0 0 2px rgba(0,0,0,.8) inset;
 }
@@ -144,7 +175,7 @@ a {}
 }
 
 .form-wrapper-button img {
-    margin: -4px;
+    height: 100%;
 }
 
 .form-wraper-location {
@@ -163,8 +194,7 @@ a {}
 }
 
 .form-wraper-location img {
-    position: absolute;
-    margin: 2px;
+    width: 100%;
 }
 
 .form-wraper-amount {
@@ -244,19 +274,20 @@ a {}
     opacity: 0.6;
     width: 100px;
     height: 10px;
-    position: absolute;
-    content: "";
+    position: fixed;
+    /*content: "";*/
     box-shadow: 2px 2px 2px;
     top: 76px;
-    left: 250px;
-    background: #fff;
+    left: 50%;
+    transform: translate(-50%);
+    /*background: #fff;*/
     border: 5px;
     border-color: #d83c3c;
     border-radius: 0px 0px 20px 20px;
     border-style: solid solid none;
     border-width: 0 10px 0px 10px;
     cursor: pointer;
-    transition: all 0.3s ease 0s;
+    /*transition: all 0.3s ease 0s;*/
 }
 
 .optionsBtn:hover {
@@ -294,7 +325,6 @@ a {}
 
 .changeBtn {
     top: 104px;
-    left: 250px;
 }
 
 .changeBtn:before {
@@ -373,4 +403,447 @@ a {}
     bottom: 5px;
     border-top: 1px solid #C42F2F;
     width: 100%;
+}
+
+/* ------------ TILES.CSS ------------ */
+.tiles-box {
+    width: 100%;
+    height: 78%;
+    margin-top: 25px;
+}
+
+.tile {
+    width: 350px;
+    height: 130px;
+    background-color: #EEE;
+    padding: 10px;
+    display: inline-block;
+    margin: 10px;
+    border: 2px solid #FAFAFA;
+    box-shadow: 0 1px 2px rgba(34, 25, 25, 0.4);
+    animation: fadein 2s;
+    animation-fill-mode: forwards;
+    transition-duration: 0.1s;
+}
+
+@keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+.tile:hover {
+    box-shadow: 4px 4px 5px #000;
+    transform: scale(1.05);
+}
+
+.helper {
+    display: inline-block;
+    height: 100%;
+    vertical-align: middle;
+}
+
+.tile > a > img {
+    padding-right: 5px;
+    border-right: 1px solid #ccc;
+    vertical-align: middle;
+    max-height: 130px;
+}
+
+.tile a {
+    color : #2A5DB0;
+}
+
+.tile a:hover {
+    color : #EEE;
+}
+
+.tile-title {
+    font-size: 14px;
+    box-shadow: 0px 1px 2px rgba(34, 25, 25, 0.4);
+    padding-left: 3px;
+}
+
+.tile-title:hover {
+    background-color: #2A5DB0;
+}
+
+.tile-body {
+    font: 12px "Lato";
+}
+
+.tile-info {
+    max-width: 200px;
+    max-height: 130px;
+    display: inherit;
+    padding-left: 5px;
+    vertical-align: middle;
+}
+
+.fadeout {
+    display: none;
+}
+
+.shareBtns {
+    margin-top: 3px;
+    max-height: 25px;
+}
+
+.shareBtns > a {
+    margin-left: 5px;
+}
+
+.shareBtns > a > img:hover {
+    transform: scale(1.07);
+}
+
+/* ---------- DEFUALT.CSS ----------*/
+a {
+    text-decoration: none;
+}
+
+a:hover {}
+
+.main {
+    width: auto;
+    margin: 33px 0 0 0;
+    position: fixed;
+    right: 0;
+    transition: all 0.3s ease 0s;
+    z-index: 5;
+}
+
+.main > section button {
+    border: none;
+    background: #D83C3C;
+    color: #fff;
+    display: block;
+    cursor: pointer;
+    width: 35px;
+    height: 35px;
+    border-radius: 5px 0 0 5px;
+    position: fixed;
+    right: 0;
+    transition: all 0.3s ease 0s;
+}
+
+.main > section img {
+    height: 23px;
+}
+
+.main > section button:hover {
+    background: #E54040;
+}
+
+.main > section button.active {
+    background: #C42F2F;
+    right: 240px;
+    transition: all 0.3s ease 0s;
+}
+
+.main > section button.disabled {
+    background: #aaa;
+    pointer-events: none;
+}
+
+.info {
+    color: rgb(255, 255, 255);
+    padding: 0.8em;
+}
+
+/* ------------ COMPONENT.CSS ------------- */
+/* General styles for all menus */
+.cbp-spmenu {
+    background: #D83C3C;
+    position: fixed;
+    font-family: Lato;
+}
+
+.cbp-spmenu h3 {
+    color: #fff;
+    font-size: 1.9em;
+    padding: 20px;
+    margin: 0;
+    font-weight: 300;
+    background: #C42F2F;
+}
+
+.cbp-spmenu a {
+    display: block;
+    color: #fff;
+}
+
+.cbp-spmenu a:hover {
+    background: #E54040;
+}
+
+.cbp-spmenu a:active {
+    background: #C42F2F;
+    color: #fff;
+}
+
+/* Orientation-dependent styles for the content of the menu */
+
+.cbp-spmenu-vertical {
+    width: 240px;
+    height: 100%;
+    top: 0;
+    z-index: 5;
+}
+
+.cbp-spmenu-vertical a {
+    border-bottom: 1px solid #C42F2F;
+    padding: 1em;
+}
+
+/* Vertical menu that slides from the left or right */
+
+.cbp-spmenu-right {
+    right: -240px;
+}
+
+.cbp-spmenu-right.cbp-spmenu-open {
+    right: 0px;
+}
+
+/* Push classes applied to the body */
+
+/* Transitions */
+
+.cbp-spmenu,
+.cbp-spmenu-push {
+    -webkit-transition: all 0.3s ease;
+    -moz-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+}
+
+/* Example media queries */
+
+@media screen and (max-height: 26.375em){
+
+    .cbp-spmenu-vertical {
+        font-size: 90%;
+        width: 190px;
+    }
+
+    .cbp-spmenu-right {
+        right: -190px;
+    }
+
+}
+
+/* ------------- MEDIA.CSS ---------- */
+@media screen and (max-width: 900px){
+
+    .logo {
+        background: url(../images/logo-minimized.png) no-repeat;
+        width: 60px;
+        height: 60px;
+        background-size: 60px 60px;
+        position: fixed;
+        top: 11%;
+        left: 2%;
+        transform: translate(-50%, -50%);
+    }
+
+    .logo img {
+        display: none;
+    }
+
+    .form-wrapper {
+       width: 430px;
+    }
+
+    .form-wrapper-input {
+       width: 350px;
+       height: 36px;
+       padding: 5px 40px;
+    }
+
+    .form-wrapper-button {
+       height: 35px;
+       width: 35px;
+       margin: 5px -38px;
+    }
+
+    .sliderContainer {
+        width: 375px;
+    }
+
+    .form-wraper-range {
+       width: 380px;
+    }
+
+    .form-wraper-amount {
+        margin: 47px -34px;
+        width: 30px;
+        font-weight: 300;
+        font-size: 6pt;
+    }
+
+    .form-wraper-location {
+       height: 35px;
+       width: 35px;
+       margin-top: 5px;
+    }
+
+    .optionsBtn {
+       top: 82px;
+    }
+
+    .changeBtn {
+       top: 120px;
+    }
+
+    .extendShadow {
+        padding: 10px;
+    }
+
+    .artist-input {
+       height: 30px;
+    }
+}
+
+
+@media screen and (max-width: 480px){
+    .header-holder {
+        max-height: 65px;
+    }
+
+    #carte {
+        height: 90.5%;
+    }
+
+    .form-wrapper {
+        margin-top: 0;
+        width: 275px;
+        padding: 5px 5px 6px ;
+        border-radius: 5px;
+    }
+
+    .form-wrapper-input {
+        width: 205px;
+        height: 24px;
+        padding: 5px 35px;
+        font-size: 9pt;
+    }
+
+    .form-wrapper-button {
+        height: 25px;
+        width: 25px;
+        margin: 4px -29px;
+    }
+
+    .form-wraper-location {
+        height: 25px;
+        width: 25px;
+        margin: 4px;
+    }
+
+    .form-wraper-location img {
+        height: 100%;
+        margin: 0;
+    }
+
+    .form-wraper-amount {
+        width: 25px;
+        height: 8px;
+        font-size: 5pt;
+        font-weight: 300;
+        margin: 35px -29px;
+    }
+
+    .sliderContainer {
+        width: 220px;
+    }
+
+    .form-wraper-range {
+        width: 235px;
+        height: 10px;
+    }
+
+    .ui-slider-handle {
+       top: -6px !important;
+       height: 10px !important;
+       width: 10px !important;
+    }
+
+    .logo {
+        display: none;
+    }
+
+    .main {
+        right: 35px;
+    }
+
+    .main > section button {
+       width: 25px;
+       height: 27px;
+    }
+
+    .main > section button.active {
+        right: 170px;
+    }
+
+    .main > section img {
+       height: 15px;
+    }
+
+    .cbp-spmenu-vertical {
+        width: 170px;
+    }
+
+    .showInfo {
+        right: 180px !important;
+    }
+
+    .cbp-spmenu {
+        font-size: 9pt;
+    }
+
+    .reduceMapSize {
+        width: 55.4%;
+    }
+
+    .ui-autocomplete {
+        width: 187px;
+        font-size: 11px;
+    }
+
+    .ui-menu-item {
+        margin: 0px 10px;
+        padding: 3px 0 3px 0;
+    }
+
+    .optionsBtn {
+        width: 70px;
+        height: 8px;
+        top: 55px;
+    }
+
+    .optionsBtn:before {
+        border-width:  7px 7px 7px;
+        top: -3px;
+        right: 22px;
+    }
+
+    .extendShadow {
+        padding: 5px 5px 5px;
+    }
+
+    .changeBtn {
+        top: 76px;
+    }
+
+    .changeBtn:before {
+        top: -3px;
+        transform: rotate(90deg);
+        -ms-transform:rotate(90deg); /* IE 9 */
+        -webkit-transform:rotate(90deg); /* Safari and Chrome */
+    }
+
+    .artist-input {
+        height: 18px;
+        padding: 2px 35px;
+    }
+
 }

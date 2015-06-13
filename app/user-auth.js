@@ -53,7 +53,7 @@ module.exports = function(app, passport) {
 		res.render('dashbord', {user: req.user, message: 'Update Started!' });
 	});
 
-	app.get('/dashbord', function(req, res){
+	app.get('/admin', function(req, res){
 		res.render('dashbord', { user: req.user, message: ''});
 	});
 

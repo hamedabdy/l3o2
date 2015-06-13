@@ -391,10 +391,7 @@ var infoWindows = [];
 
 function closeInfoWindows(){
     var i = infoWindows.length;
-    while(i--)
-    {
-        infoWindows[i].close();
-    }
+    while(i--) { infoWindows[i].close(); }
 }
 
 /*
@@ -420,13 +417,8 @@ function newOverlay(carte, concerts, oms){
     var date = new Date(concerts.startDate).toLocaleString();
     date = date.replace(/:..\ /i, " ");
     var address = concerts.address.name+' '+concerts.address.street + ', '+concerts.address.postalcode+', '+concerts.address.city+', '+concerts.address.country;
-
-    _content = '<div class="info-window-body"><span class="helper"></span><img src="'+cover+'" title="'+concerts.title+'" alt="'+imageAlt+'"/><div class="tile-info info-window-info"><div class="tile-title info-window-title" title="'+concerts.title+'">'+title+'</div><div class="tile-body"><b>Artists: </b><span>'+artists+'</span><br><b>Date:</b>'+date+'<br><span>'+address+'</span></div><div class="shareBtns">'+share.fb_share+share.tw_share+share.gplus+share.su+share.lastfm+'</div></div></div>';
-
-    // var WindowOptions = { content:'<table><tr><td><img src="'+cover+'"/></td><td><div class="info-window-title">'+concerts.title+'</div><div class="info-window-body"><b>Artists: </b>'+artists+'<br><b>Date: </b>'+new Date(concerts.startDate).toLocaleString()+'<br>'+concerts.address.name+' '+concerts.address.street + '<br>'+concerts.address.postalcode+', '+concerts.address.city+', '+concerts.address.country +'</div></td></tr><tr><td></td><td>'+share.fb_share+'\t'+share.tw_share+'\t'+share.gplus +'\t'+share.su+'\t'+share.lastfm+'</td></tr></table>' };
-
+    var _content = '<div class="info-window-body"><span class="helper"></span><img src="'+cover+'" title="'+concerts.title+'" alt="'+imageAlt+'"/><div class="tile-info info-window-info"><div class="tile-title info-window-title" title="'+concerts.title+'">'+title+'</div><div class="tile-body"><b>Artists: </b><span>'+artists+'</span><br><b>Date:</b>'+date+'<br><span>'+address+'</span></div><div class="shareBtns">'+share.fb_share+share.tw_share+share.gplus+share.su+share.lastfm+'</div></div></div>';
     var WindowOptions = { content: _content };
-
     var InfoWindow = new google.maps.InfoWindow(WindowOptions);
     infoWindows.push(InfoWindow);
     google.maps.event.addListener(lemarqueur, 'click', function() {

@@ -82,8 +82,9 @@
 						</a>
 						<div itemprop="description" class="tile-body"><b>Artists: </b>
 							<span itemprop="performer"><%-artists%></span><br>
-							<b itemprop="startDate">Date: </b><%=date%><br>
-							<span itemprop="location"><%-address%></span>
+							<span itemprop="startDate"><b>Date: </b><%=date%><br></span>
+							<span itemprop="location:address"><%-address%></span>
+							<span itemprop="offers"></span>
 						</div>
 						<div class="shareBtns">
 							<a href="https://www.facebook.com/sharer/sharer.php?s=100&amp;p[url]=<%=encodedURL%>&amp;p[title]=<%=d.title%>&amp;p[summary]=<%=summary%>&amp;p[images][0]=<%=image_252%>" target="_blank">

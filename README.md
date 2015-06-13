@@ -20,4 +20,4 @@ L'objectif principal du projet est de développer une application web permettant
 - Michel
 
 
-**Website:** ![Le Concert d'a cote](http://concert-dacote.com)
+**Website:** [Le Concert d'a cote](http://concert-dacote.com)

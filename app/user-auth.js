@@ -68,7 +68,7 @@ module.exports = function(app, passport) {
 	app.post('/login',
 		passport.authenticate('local', { failureRedirect: '/login', failureFlash: true }),
 		function(req, res) {
-			res.redirect('/dashbord');
+			res.redirect('/admin');
 	});
 
 	app.get('/logout', function(req, res){

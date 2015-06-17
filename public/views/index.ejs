@@ -14,7 +14,7 @@
 	<div class="main" id="infoBtn">
 		<section>
 			<button id="showRight" title="More info...">
-				<img src="images/menu.png">
+				<img src="images/menu.png" alt="Options">
 			</button>
 		</section>
 	</div>
@@ -63,9 +63,9 @@
 			var uri = '/m?'+latlng+'&range=10&artist='+artists[0];
 			var encodedURL = encodeURIComponent(url+uri);
 			var image_252 = (d.image).replace("/64/", "/252/")
-				, summary = d.artist+' - '+date+' - '
-							+d.address.name+', '+d.address.street + ', '
-							+d.address.postalcode+', '+d.address.city+', '
+				, summary = String(d.artist).replace(/ /g, "+")+' - '+date+' - '
+							+d.address.name+',+'+d.address.street + ',+'
+							+d.address.postalcode+',+'+d.address.city+',+'
 							+d.address.country
 		  %>
 				<div class="tile" id="tile<%-i%>">
@@ -74,7 +74,7 @@
 						<img itemprop="image" src="<%-cover%>" title="<%=d.title%>" alt="<%=imageAlt%>"/>
 					</a>
 					<div class="tile-info">
-		  				<a href="/m?<%=latlng%>&amp;range=10&amp;artist=<%=artists[0]%>" class="tile-link">
+		  				<a href="/m?<%=latlng%>&amp;range=10&amp;artist=<%=artist_url[0]%>" class="tile-link">
 							<div itemprop="name" class="tile-title" title="<%-d.title%>"><%-title%></div>
 						</a>
 						<div itemprop="description" class="tile-body"><b>Artists: </b>
@@ -111,7 +111,7 @@
 		  	<div class="fb-like" data-href="//facebook.com/concert.dacote" data-layout="button_count" data-action="like" data-show-faces="false" data-share="true"></div>
 			<a href="//twitter.com/ConcertDaCote" class="twitter-follow-button" data-show-count="false" data-lang="en">Follow @ConcertDaCote</a>
 		</div>
-		<div class="info footer"> Copyright 2013-15 </div>
+		<div class="info footer"> Copyright 2013-15 | By Hamed </div>
 	</nav>
 	<div id="fb-root"></div>
 	<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>

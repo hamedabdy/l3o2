@@ -81,10 +81,10 @@
 							<span itemprop="offers"></span>
 						</div>
 						<div class="shareBtns">
-							<a href="https://www.facebook.com/sharer/sharer.php?s=100&amp;p[url]=<%=encodedURL%>&amp;p[title]=<%=String(d.title).replace(/ /g, '+')%>&amp;p[summary]=<%=summary%>&amp;p[images][0]=<%=image_252%>" target="_blank">
+							<a href="https://www.facebook.com/sharer/sharer.php?s=100&amp;p[url]=<%=encodedURL%>&amp;p[title]=<%-String(d.title).replace(/ /g, '+')%>&amp;p[summary]=<%=summary%>&amp;p[images][0]=<%=image_252%>" target="_blank">
 								<img width="25" src="images/fb_1.png" alt="Share On Facebook" title="Share On Facebook"/>
 							</a>
-							<a href="https://twitter.com/share?url=<%=encodedURL%>&amp;text=<%=d.title%>+<%-artists%>&amp;via=ConcertDaCote&amp;related=concertdacote,ConcertDaCote" target="_blank">
+							<a href="https://twitter.com/share?url=<%=encodedURL%>&amp;text=<%-String(d.title).replace(/ /g, '+')%>+<%-String(artists).replace(/ /g, '+')%>&amp;via=ConcertDaCote&amp;related=concertdacote,ConcertDaCote" target="_blank">
 								<img width="25" src="images/twitter_1.png" alt="Tweet" title="Tweet"/>
 							</a>
 							<a href="https://plus.google.com/share?url=<%=encodedURL%>" target="_blank">

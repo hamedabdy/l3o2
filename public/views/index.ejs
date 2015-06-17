@@ -74,7 +74,7 @@
 						<img itemprop="image" src="<%-cover%>" title="<%=d.title%>" alt="<%=imageAlt%>"/>
 					</a>
 					<div class="tile-info">
-		  				<a href="/m?<%=latlng%>&amp;range=10&amp;artist=<%=artist_url[0]%>" class="tile-link">
+		  				<a href="/m?<%=latlng%>&amp;range=10&amp;artist=<%-String(artists[0]).replace(/ /g, '+')%>" class="tile-link">
 							<div itemprop="name" class="tile-title" title="<%-d.title%>"><%-title%></div>
 						</a>
 						<div itemprop="description" class="tile-body"><b>Artists: </b>

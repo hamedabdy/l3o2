@@ -67,7 +67,7 @@
 		  %>
 				<div class="tile" id="tile<%-i%>">
 					<span class="helper"></span>
-					<a itemprop="url" href="/m?<%=latlng%>&amp;range=10&amp;artist=<%=artists[0]%>" class="tile-link">
+					<a itemprop="url" href="/m?<%=latlng%>&amp;range=10&amp;artist=<%=String(artists[0]).replace(/ /g, '+')%>" class="tile-link">
 						<img itemprop="image" src="<%-cover%>" title="<%=d.title%>" alt="<%=imageAlt%>"/>
 					</a>
 					<div class="tile-info">

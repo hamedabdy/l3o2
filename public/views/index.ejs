@@ -63,10 +63,7 @@
 			var uri = '/m?'+latlng+'&range=10&artist='+artists[0];
 			var encodedURL = encodeURIComponent(url+uri);
 			var image_252 = (d.image).replace("/64/", "/252/")
-				, summary = String(d.artist).replace(/ /g, "+")+'+-+'+String(date).replace(/ /g, '+')+'+-+'
-							+d.address.name+',+'+d.address.street + ',+'
-							+d.address.postalcode+',+'+d.address.city+',+'
-							+d.address.country
+			var summary = String(d.artist).replace(/ /g, "+")+'+-+'+String(date).replace(/ /g, '+')+'+-+'+d.address.name+',+'+String(d.address.street).replace(/ /g, '+')+',+'+d.address.postalcode+',+'+d.address.city+',+'+d.address.country;
 		  %>
 				<div class="tile" id="tile<%-i%>">
 					<span class="helper"></span>

@@ -75,7 +75,7 @@
 					</a>
 					<div class="tile-info">
 		  				<a href="/m?<%=latlng%>&amp;range=10&amp;artist=<%-String(artists[0]).replace(/ /g, '+')%>" class="tile-link">
-							<div itemprop="name" class="tile-title" title="<%-d.title%>"><%-title%></div>
+							<div itemprop="name" class="tile-title" title="<%-String(d.title).replace(/"/g, '')%>"><%-title%></div>
 						</a>
 						<div itemprop="description" class="tile-body"><b>Artists: </b>
 							<span itemprop="performer"><%-artists%></span><br>

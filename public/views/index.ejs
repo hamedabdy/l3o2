@@ -53,7 +53,7 @@
 			var latlng = 'lat=' + d.latlong[0] + '&lng=' + d.latlong[1];
 			var imageAlt = d.title;
 			if (d.title.lenth > 13) imageAlt = d.title.substr(0, 13)+' ...';
-			var title = d.title;
+			var title = String(d.title).replace(/"/g, "");
 			if (d.title.length > 22) title = d.title.substr(0, 22) + ' ...';
 			var artists = String(d.artist).replace(/,/g, ", ");
 			if (artists.length > 40) artists = artists.substr(0, 40) + ' ...';

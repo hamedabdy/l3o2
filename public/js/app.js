@@ -135,29 +135,9 @@ $( "#amount" ).val($( "#range" ).slider( "value" ) + " km");
 function shareButtons (data, fn) {
     var encodedURL = encodeURIComponent(document.URL+data.artist);
     var image_252 = (data.image).replace("/64/", "/252/")
-        , summary = data.artist+' - '+new Date(data.startDate).toLocaleString()+' - '
-                    +data.address.name+', '+data.address.street + ', '
-                    +data.address.postalcode+', '+data.address.city+', '
-                    +data.address.country
-        , shareBtns = {};
+        , summary = data.artist+' - '+new Date(data.startDate).toLocaleString()+' - '+data.address.name+', '+data.address.street + ', '+data.address.postalcode+', '+data.address.city+', '+data.address.country , shareBtns = {};
         shareBtns.fb_share = '<a href="https://www.facebook.com/sharer/sharer.php?s=100&p[url]='
-                    +encodedURL+'&p[title]='+data.title+'&p[summary]='
-                    +summary+'&p[images][0]='+image_252
-                    +'" target="_blank"><img width="25" src="images/fb_1.png" '
-                    +'alt="Share On Facebook" title="Share On Facebook"/></a>';
-        shareBtns.tw_share = '<a href="https://twitter.com/share?url='+encodedURL+'&text='+data.title
-                    +'+'+data.artist+'&via=ConcertDaCote&related=concertdacote,ConcertDaCote,'
-                    +'" target="_blank"><img width="25" src="images/twitter_1.png" '
-                    +'alt="Tweet" title="Tweet"/></a>';
-        shareBtns.lastfm = '<a target="_blank" href="'+data.url
-                    +'"><img width="25" src="images/lastfm.png" alt="More Info On Last.fm"'
-                    +'title="More Info On Last.fm"/></a>';
-        shareBtns.gplus = '<a href="https://plus.google.com/share?url=' + encodedURL
-                    +'" target="_blank"><img width="25" src="images/google_plus.png" '
-                    +'alt="Share on G+" title="Share On Google+"/></a>';
-        shareBtns.su = '<a href="http://stumbleupon.com/submit?url=' + encodedURL
-                    +'" target="_blank"><img width="25" src="images/stumble_upon.png" '
-                    +'alt="Stumble" title="Stumble"/></a>';
+                    +encodedURL+'&p[title]='+data.title+'&p[summary]='+summary+'&p[images][0]='+image_252 +'" target="_blank"><img width="25" src="images/fb_1.png" '+'alt="Share On Facebook" title="Share On Facebook"/></a>'; shareBtns.tw_share = '<a href="https://twitter.com/share?url='+encodedURL+'&text='+data.title +'+'+data.artist+'&via=ConcertDaCote&related=concertdacote,ConcertDaCote,'+'" target="_blank"><img width="25" src="images/twitter_1.png" '+'alt="Tweet" title="Tweet"/></a>'; shareBtns.lastfm = '<a target="_blank" href="'+data.url +'"><img width="25" src="images/lastfm.png" alt="More Info On Last.fm"'+'title="More Info On Last.fm"/></a>'; shareBtns.gplus = '<a href="https://plus.google.com/share?url=' + encodedURL +'" target="_blank"><img width="25" src="images/google_plus.png" '+'alt="Share on G+" title="Share On Google+"/></a>'; shareBtns.su = '<a href="http://stumbleupon.com/submit?url=' + encodedURL +'" target="_blank"><img width="25" src="images/stumble_upon.png" '+'alt="Stumble" title="Stumble"/></a>';
         return fn(shareBtns);
 }
 
@@ -173,7 +153,7 @@ var menuRight = document.getElementById( 'cbp-spmenu-s2' )
 // Check browser support
 if (typeof(Storage) != "undefined") {
     // Retrieve
-    var storageState = localStorage.getItem("infoActive")
+    var storageState = localStorage.getItem("infoActive");
     if(!storageState) {
         options();
     }
@@ -473,14 +453,6 @@ function getConcerts(lat, lng, range, artist, fn) {
     });
 }
 
-/*
- *  Update URL
- */
-function update_url (address, range, artist) {
-    window.history.pushState("", "", "?address="+address+"&range="
-        +range+"&artist="+artist);
-}
-
 function updateUrl (lat, lng, range, artist) {
     window.history.pushState("", "", "?lat="+lat+"&lng="+lng+"&range="
         +range+"&artist="+artist);
@@ -490,22 +462,10 @@ function assignUrl (lat, lng, range, artist) {
     location.assign('/m?lat='+lat+'&lng='+lng+'&range='+range+'&artist='+artist);
 }
 
-/*
- *  Update Form fields
- */
 function updateFormFields (address, range, artist) {
     document.getElementById("address").value = decodeURIComponent(address);
     document.getElementById("artist").value = artist;
     $('#range').slider('value', range);
-}
-
-/*
- *  if a given parameter is not empty or exists. ref. initialiser()
- */
-function exists (arg) {
-    if(arg && typeof arg === "string" && arg !== null){
-        return true;
-    } else return false;
 }
 
 function defaultFor(arg, val) { return typeof arg !== 'undefined' ? arg : val; }

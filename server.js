@@ -16,7 +16,7 @@ var fs            = require('fs')
   , flash         = require('connect-flash')
   , passport      = require('passport')
   , https_options = { key: key, cert: cert }
-  ; 
+  ;
 
 // Express 4.x config
 //var env = process.env.NODE_ENV || 'development';
@@ -48,6 +48,10 @@ var fs            = require('fs')
   app.use(passport.session());
   app.use(compression({ threshold: 512 }));
   app.use(express.static(__dirname+'/public/'));
+  app.use(function(req, res, next) {
+    res.status(404);
+    res.render('404', {});
+  });
 //}
 
 var user_auth     = require('./app/user-auth')(app, passport)

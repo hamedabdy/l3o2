@@ -54,7 +54,7 @@ module.exports = function(app, passport) {
     });
 
 	app.get('/importAds', ensureAuthenticated, function(req, res){
-		importAds();
+		importCsvAds();
 		res.render('dashbord', {user: req.user, message: 'Importing ads...' });
 	});
 

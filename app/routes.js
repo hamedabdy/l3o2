@@ -18,7 +18,6 @@ module.exports = function(app) {
 				|| req.connection.socket.remoteAddress;
 			var _latitude   = 48.8588589
 				, _longitude  = 2.3470599;
-			// ip = '46.193.143.95';
 			console.log('\n\n[DEBUG] ip = ' + ip);
 			userlocation.getRemoteGeoLocationFromIp(ip, function(err, results){
 				var r = '';

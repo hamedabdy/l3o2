@@ -48,9 +48,14 @@ module.exports = function(app, passport) {
 	/*
 	 * Dashbord Area
 	 */
-	app.get('/maj', ensureAuthenticated, function(req, res){
-		startUpdate();
-		res.render('dashbord', {user: req.user, message: 'Update Started!' });
+    app.get('/maj', ensureAuthenticated, function(req, res){
+        startUpdate();
+        res.render('dashbord', {user: req.user, message: 'Update Started!' });
+    });
+
+	app.get('/importAds', ensureAuthenticated, function(req, res){
+		importAds();
+		res.render('dashbord', {user: req.user, message: 'Importing ads...' });
 	});
 
 	app.get('/admin', function(req, res){
@@ -80,9 +85,14 @@ module.exports = function(app, passport) {
 
 /*********** Methods *************/
 
-function startUpdate(fn){
+function startUpdate(){
 	var requestLastfm = require('./req-json-lastfm');
 	requestLastfm.startUpdate();
+}
+
+function importCsvAds() {
+    var insertCsvAds = require('./insert-ads-csv');
+    insertCsvAds.insertCsvAds();
 }
 
 /*

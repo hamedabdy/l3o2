@@ -1,28 +1,44 @@
 /* ------------- FONTS --------------- */
-
-@font-face{
-    font-family: Lato;
-    src: url("../fonts/lato/Lato-Regular.ttf") format('truetype');
-    font-weight: normal;
-    font-style: normal;
-}
-
 @font-face{
     font-family: Sansation;
     src: url("../fonts/sansation/Sansation-Regular.ttf") format('truetype');
     font-weight: normal;
     font-style: normal;
 }
-
-@font-face{
-    font-family: open-sans;
-    src: url("../fonts/open-sans/OpenSans-Regular.ttf") format('truetype');
-    font-weight: normal;
-    font-style: normal;
-}
+/* ---------------------------------- */
 
 body {
     background: url("../images/dark.png");
     font-family: Sansation, Calibri, Arial, sans-serif;
-    color: #444;
+    color: #eee;
+}
+
+body * {
+    margin-left: 50%;
+    transform: translate(-50%);
+    display: inline-block;
+}
+
+h1 {
+    padding-top:5%;
+    font-size: 150px;
+    margin-bottom: 0;
+}
+
+h3 {
+    margin-bottom: 0;
+    text-align: left;
+}
+
+h4 {
+    text-align: left;
+    margin-top: 0;
+}
+
+a {
+    text-decoration: none;
+    color: #bbb;
+} :hover {
+    background-color: #bbb;
+    color: #111;
 }

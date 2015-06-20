@@ -49,8 +49,7 @@ var fs            = require('fs')
   app.use(compression({ threshold: 512 }));
   app.use(express.static(__dirname+'/public/'));
   app.use(function(req, res, next) {
-    res.status(404);
-    res.render('404', {});
+    if (res.statusCode == 404) res.render('404', {});
   });
 //}
 

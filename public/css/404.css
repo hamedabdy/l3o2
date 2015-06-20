@@ -1,0 +1,28 @@
+/* ------------- FONTS --------------- */
+
+@font-face{
+    font-family: Lato;
+    src: url("../fonts/lato/Lato-Regular.ttf") format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face{
+    font-family: Sansation;
+    src: url("../fonts/sansation/Sansation-Regular.ttf") format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face{
+    font-family: open-sans;
+    src: url("../fonts/open-sans/OpenSans-Regular.ttf") format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+body {
+    background: url("../images/dark.png");
+    font-family: Sansation, Calibri, Arial, sans-serif;
+    color: #444;
+}

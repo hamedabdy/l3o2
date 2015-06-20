@@ -1,65 +1,43 @@
 #!/usr/bin/env node
 
-var mongojs       = require('mongojs');
-var configDB 	= require('../config/database');
-var db 			= mongojs(configDB.url, ['concerts']);
-var userlocation  = require('./userlocation');
-var util = require('util');
+var mongojs       	= require('mongojs');
+var configDB 		= require('../config/database');
+var db 				= mongojs(configDB.url, ['concerts']);
+var db2				= mongojs(configDB.url, ['ads']);
+var userlocation	= require('./userlocation');
+var util 			= require('util');
 
 module.exports = function(app) {
 
 	app.get('/', function(req, res){
 		var fullUrl = req.protocol + '://' + req.get('host') + req.originalUrl;
 		res.locals.url = fullUrl;
+		var o = { lat : 48.8588589, lng : 2.3470599 };
 		if(Object.keys(req.query).length == 0 ) {
-			var ip = req.headers['x-forwarded-for']
-				|| req.connection.remoteAddress
-				|| req.socket.remoteAddress
-				|| req.connection.socket.remoteAddress;
-			var _latitude   = 48.8588589
-				, _longitude  = 2.3470599;
+			var ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress || req.socket.remoteAddress || req.connection.socket.remoteAddress;
 			console.log('\n\n[DEBUG] ip = ' + ip);
 			userlocation.getRemoteGeoLocationFromIp(ip, function(err, results){
-				var r = '';
+				console.log(err + " " + results);
 				if (err) {
 					console.log('err = ' + err);
-					getConcerts(_latitude, _longitude, 50, '', '', '', function(err, results) {
-						if (!err) {
-							p = {lat : _latitude, lng : _longitude, concerts : results};
-							res.render('index', p);
-						}
-					});
-				} else if(results.ip) {
-					r = JSON.parse(results);
-					getConcerts(r.latitude, r.longitude, 100, '', '', '', function(err, results) {
-						if (!err) {
-							p = {lat : r.latitude, lng : r.longitude, concerts : results};
-							res.render('index', p);
-						}
-					});
-				} else {
-                    console.log(err + " " + results);
-                    p = {lat : _latitude, lng : _longitude};
-                    getConcerts(p.lat, p.lng, 50, '', '', '', function(err, results) {
-                        if (!err) {
-                            p = {lat : p.lat, lng : p.lng, concerts : results};
-                            res.render('index', p);
-                        }
-                    });
-                }
+				}
+				if(results.ip) {
+					var r = JSON.parse(results);
+                    o = {lat : r.latitude, lng : r.longitude};
+				}
 			});
 		} else {
 			if (req.query.lat && req.query.lng)
-				p = {lat : req.query.lat, lng : req.query.lng};
+				o = {lat : req.query.lat, lng : req.query.lng};
 			else
-				p = {lat : _latitude, lng : _longitude};
-			getConcerts(p.lat, p.lng, 50, '', '', '', function(err, results) {
-				if (!err) {
-					p = {lat : p.lat, lng : p.lng, concerts : results};
-					res.render('index', p);
-				}
-			});
+				res.render('404', {});
 		}
+		getConcerts(o.lat, o.lng, 100, '', '', '', function(err, results) {
+			if (!err) {
+				o.concerts = results;
+				res.render('index', o);
+			}
+		});
 	});
 
 	app.get('/m', function(req, res){
@@ -91,9 +69,7 @@ module.exports = function(app) {
 			}
 		});
 	});
-
 }
-
 
 /**
  * METHODS

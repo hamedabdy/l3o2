@@ -100,7 +100,7 @@ function pushEvents(parsedJSON, location){
         _checkInputFileds(dict, function(out, fields_ok){
             if(fields_ok) {
                 // building an array of dict of events
-                newArray.push({
+                var item = {
                     "_id" : dict.id,
                     title : dict.title,
                     artist : dict.artists.artist,
@@ -111,8 +111,11 @@ function pushEvents(parsedJSON, location){
                                parseFloat(dict.venue.location['geo:point']['geo:long'])],
                     url : dict.url,
                     startDate : new Date(dict.startDate),
-                    image : dict.image[1]["#text"]
-                });
+                    image : dict.image[1]["#text"],
+                    description : dict.description
+                };
+                if(dict.tags) item.tags = dict.tags.tag;
+                newArray.push(item);
             }
         });
     }
@@ -125,7 +128,7 @@ function startUpdate(){
 }
 
 function _checkInputFileds(input, fn){
-    _fields = ['id', 'title', 'artists', 'venue', 'startDate', 'image'];
+    _fields = ['id', 'title', 'artists', 'venue', 'startDate', 'image', 'description'];
     var fields_ok = true;
     for(var key in _fields){
         if(!input.hasOwnProperty(_fields[key])){

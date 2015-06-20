@@ -276,19 +276,16 @@ input:invalid {
     width: 100px;
     height: 10px;
     position: fixed;
-    /*content: "";*/
     box-shadow: 2px 2px 2px;
     top: 76px;
     left: 50%;
     transform: translate(-50%);
-    /*background: #fff;*/
     border: 5px;
     border-color: #d83c3c;
     border-radius: 0px 0px 20px 20px;
     border-style: solid solid none;
     border-width: 0 10px 0px 10px;
     cursor: pointer;
-    /*transition: all 0.3s ease 0s;*/
 }
 
 .optionsBtn:hover {

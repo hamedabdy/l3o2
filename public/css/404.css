@@ -17,8 +17,9 @@ body {
     display: inline-block;
     width: 200px;
     height: 90px;
-    background-size: 200px 90px;
-    margin: -10px 30px;
+    margin-left: 15%;
+    margin-top: 20;
+    vertical-align: top;
 }
 
 .logo img {
@@ -30,24 +31,24 @@ body {
 }
 
 .content {
-    margin-left: 20%;
-    transform: translate(-20%);
+    margin-left: 15%;
+    transform: translate(-15%);
     display: inline-block;
 }
 
-h1 {
+.content > h1 {
     padding-top:10%;
     font-size: 150px;
     margin-bottom: 0;
 }
 
-h3 {
+.content > h3 {
     margin-bottom: 0;
     text-align: left;
     margin-left: 10px;
 }
 
-h4 {
+.content > h4 {
     text-align: left;
     margin-top: 0;
     margin-left: 20px;

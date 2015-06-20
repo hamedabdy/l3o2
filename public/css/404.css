@@ -14,6 +14,7 @@ body {
 }
 
 .logo {
+    display: inline-block;
     width: 200px;
     height: 90px;
     background-size: 200px 90px;
@@ -21,8 +22,7 @@ body {
 }
 
 .logo img {
-    width: 200px;
-    height: 90px;
+    width: 100%;
 }
 
 .logo > h1 {
@@ -30,8 +30,8 @@ body {
 }
 
 .content {
-    margin-left: 50%;
-    transform: translate(-50%);
+    margin-left: 20%;
+    transform: translate(-20%);
     display: inline-block;
 }
 
@@ -61,6 +61,8 @@ h4 {
     margin: 0 10px 0 10px;
     text-decoration: none;
     color: #bbb;
-} :hover {
+}
+
+.links > a:hover {
     color: #c42f2f;
 }

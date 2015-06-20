@@ -369,8 +369,7 @@ input:invalid {
 }
 
 .logo img {
-    width: 200px;
-    height: 90px;
+    width: 100%;
 }
 
 .logo > h1 {

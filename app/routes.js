@@ -21,7 +21,7 @@ module.exports = function(app) {
 				if (err) {
 					console.log('err = ' + err);
 				}
-				if(results.ip) {
+				if(results.hasOwnProperty('ip')) {
 					var r = JSON.parse(results);
                     o = {lat : r.latitude, lng : r.longitude};
 				}

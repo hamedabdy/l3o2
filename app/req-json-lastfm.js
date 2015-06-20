@@ -114,7 +114,7 @@ function pushEvents(parsedJSON, location){
                     image : dict.image[1]["#text"],
                     description : dict.description
                 };
-                if(dict.tags) item.tags = dict.tags.tag;
+                if(dict.hasOwnProperty('tags')) item.tags = dict.tags.tag;
                 newArray.push(item);
             }
         });

@@ -48,14 +48,15 @@ var fs            = require('fs')
   app.use(passport.session());
   app.use(compression({ threshold: 512 }));
   app.use(express.static(__dirname+'/public/'));
-  app.use(function(req, res, next) {
-    if (res.statusCode == 404) res.render('404', {});
-  });
 //}
 
 var user_auth     = require('./app/user-auth')(app, passport)
   , routes        = require('./app/routes')(app);
 
+app.use(function(req, res, next) {
+    res.status(404);
+    res.render('404', {});
+  });
 app.listen(process.env.PORT || 3000);
 https.createServer(https_options, app).listen(process.env.PORT+443 || 3443);
 console.log('server listening on port 3000 (HTTP) || 3443 (HTTPS) || ' + process.env.PORT);

@@ -14,7 +14,15 @@ body {
 }
 
 .logo {
+    width: 200px;
+    height: 90px;
+    background-size: 200px 90px;
+    margin: -10px 30px;
+}
 
+.logo img {
+    width: 200px;
+    height: 90px;
 }
 
 .logo > h1 {
@@ -49,7 +57,7 @@ h4 {
     margin-left: 30px;
 }
 
-a {
+.links > a {
     margin: 0 10px 0 10px;
     text-decoration: none;
     color: #bbb;

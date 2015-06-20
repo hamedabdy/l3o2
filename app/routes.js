@@ -20,8 +20,7 @@ module.exports = function(app) {
 				console.log(err + " " + results);
 				if (err) {
 					console.log('err = ' + err);
-				}
-				if(results.hasOwnProperty('ip')) {
+				} else if(results.ip) {
 					var r = JSON.parse(results);
                     o = {lat : r.latitude, lng : r.longitude};
 				}

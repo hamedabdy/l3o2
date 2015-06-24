@@ -25,18 +25,18 @@ module.exports = function(app) {
                     o = {lat : r.latitude, lng : r.longitude};
 				}
 			});
+			getConcerts(o.lat, o.lng, 100, '', '', '', function(err, results) {
+			if (!err) {
+				o.concerts = results;
+				res.render('index', o);
+			}
+			});
 		} else {
 			if (req.query.lat && req.query.lng)
 				o = {lat : req.query.lat, lng : req.query.lng};
 			else
 				res.render('404', {});
 		}
-		getConcerts(o.lat, o.lng, 100, '', '', '', function(err, results) {
-			if (!err) {
-				o.concerts = results;
-				res.render('index', o);
-			}
-		});
 	});
 
 	app.get('/m', function(req, res){

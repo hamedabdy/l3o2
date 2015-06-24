@@ -31,7 +31,7 @@ ga('send', 'pageview');
 
 function classReg( className ) {
   return new RegExp("(^|\\s+)" + className + "(\\s+|$)");
-}
+};
 
 // classList support for class management
 // altho to be fair, the api sucks because it won't accept multiple classes at once
@@ -60,12 +60,12 @@ else {
   removeClass = function( elem, c ) {
     elem.className = elem.className.replace( classReg( c ), ' ' );
   };
-}
+};
 
 function toggleClass( elem, c ) {
   var fn = hasClass( elem, c ) ? removeClass : addClass;
   fn( elem, c );
-}
+};
 
 window.classie = {
   // full names
@@ -136,10 +136,13 @@ function shareButtons (data, fn) {
     var encodedURL = encodeURIComponent(document.URL+data.artist);
     var image_252 = (data.image).replace("/64/", "/252/")
         , summary = data.artist+' - '+new Date(data.startDate).toLocaleString()+' - '+data.address.name+', '+data.address.street + ', '+data.address.postalcode+', '+data.address.city+', '+data.address.country , shareBtns = {};
-        shareBtns.fb_share = '<a href="https://www.facebook.com/sharer/sharer.php?s=100&p[url]='
-                    +encodedURL+'&p[title]='+data.title+'&p[summary]='+summary+'&p[images][0]='+image_252 +'" target="_blank"><img width="25" src="images/fb_1.png" '+'alt="Share On Facebook" title="Share On Facebook"/></a>'; shareBtns.tw_share = '<a href="https://twitter.com/share?url='+encodedURL+'&text='+data.title +'+'+data.artist+'&via=ConcertDaCote&related=concertdacote,ConcertDaCote,'+'" target="_blank"><img width="25" src="images/twitter_1.png" '+'alt="Tweet" title="Tweet"/></a>'; shareBtns.lastfm = '<a target="_blank" href="'+data.url +'"><img width="25" src="images/lastfm.png" alt="More Info On Last.fm"'+'title="More Info On Last.fm"/></a>'; shareBtns.gplus = '<a href="https://plus.google.com/share?url=' + encodedURL +'" target="_blank"><img width="25" src="images/google_plus.png" '+'alt="Share on G+" title="Share On Google+"/></a>'; shareBtns.su = '<a href="http://stumbleupon.com/submit?url=' + encodedURL +'" target="_blank"><img width="25" src="images/stumble_upon.png" '+'alt="Stumble" title="Stumble"/></a>';
+        shareBtns.fb_share = '<a href="https://www.facebook.com/sharer/sharer.php?s=100&p[url]='+encodedURL+'&p[title]='+data.title+'&p[summary]='+summary+'&p[images][0]='+image_252+'" target="_blank"><img width="25" src="images/fb_1.png" '+'alt="Share On Facebook" title="Share On Facebook"/></a>';
+        shareBtns.tw_share = '<a href="https://twitter.com/share?url='+encodedURL+'&text='+data.title+'+'+data.artist+'&via=ConcertDaCote&related=concertdacote,ConcertDaCote,'+'" target="_blank"><img width="25" src="images/twitter_1.png" '+'alt="Tweet" title="Tweet"/></a>';
+        shareBtns.lastfm = '<a target="_blank" href="'+data.url+'"><img width="25" src="images/lastfm.png" alt="More Info On Last.fm"'+'title="More Info On Last.fm"/></a>';
+        shareBtns.gplus = '<a href="https://plus.google.com/share?url='+encodedURL+'" target="_blank"><img width="25" src="images/google_plus.png" '+'alt="Share on G+" title="Share On Google+"/></a>';
+        shareBtns.su = '<a href="http://stumbleupon.com/submit?url='+encodedURL+'" target="_blank"><img width="25" src="images/stumble_upon.png" '+'alt="Stumble" title="Stumble"/></a>';
         return fn(shareBtns);
-}
+};
 
 // --------------------------
 
@@ -159,7 +162,7 @@ if (typeof(Storage) != "undefined") {
     }
 } else {
     console.log("Sorry, your browser does not support Web Storage...");
-}
+};
 
 showRight.onclick = function() {
     options();
@@ -176,7 +179,7 @@ function options () {
     classie.toggle( showRight, 'active' );
     classie.toggle( infoBtn, 'showInfo' );
     classie.toggle( menuRight, 'cbp-spmenu-open' );
-}
+};
 
 /*
  * Toggle artist search button
@@ -252,7 +255,7 @@ function indexGeoLocate() {
         });
     else
         alert("Your browser does not support HTML5 Geolocation!");
-}
+};
 
 /*
  * GeoLocalization, using html5 geolocalization
@@ -262,7 +265,7 @@ function geoLocate() {
         navigator.geolocation.getCurrentPosition(geoLocateCallback);
     else
         alert("Your browser does not support HTML5 Geolocation!");
-}
+};
 
 /*
  * This function is called on GeoLocalization success. ref. geoLocate()
@@ -281,7 +284,7 @@ function geoLocateCallback(position) {
     getConcerts(latitude, longitude, range, artist, function(err, results){
         if(!err) setUserLocation(query, results);
     });
-}
+};
 
 function newGoogleMap(ip_latitude, ip_longitude, fn) {
     var latlng = new google.maps.LatLng(ip_latitude, ip_longitude);
@@ -292,7 +295,7 @@ function newGoogleMap(ip_latitude, ip_longitude, fn) {
     };
     carte = new google.maps.Map(document.getElementById("carte"), options);
     return fn(carte);
-}
+};
 
 /*
  * This fucntion sets the user location on the map. ref. geoLocateCallback()
@@ -322,7 +325,7 @@ function setUserLocation(query, concerts) {
         reverseGeocoding(query.lat, query.lng, query.range, query.artist);
         plotOverlays(carte, query.lat, query.lng, concerts);
     });
-}
+};
 
 /*
  * Reverse geocoding ref. geolocation sucesscallack
@@ -338,7 +341,7 @@ function reverseGeocoding(lat, lng, range, artist) {
             }
         });
     return false;
-}
+};
 
 /*
  * Geocoding address from form after submit
@@ -365,14 +368,14 @@ function geoCodeAddress(address, range, artist) {
             } else alert("Sorry couldn't find the given address!");
         });
     }
-}
+};
 
 var infoWindows = [];
 
 function closeInfoWindows(){
     var i = infoWindows.length;
     while(i--) { infoWindows[i].close(); }
-}
+};
 
 /*
  * Map markers customization
@@ -406,7 +409,7 @@ function newOverlay(carte, concerts, oms){
         InfoWindow.open(carte,lemarqueur);
     });
     return lemarqueur;
-}
+};
 
 /*
  * Plots concerts on map
@@ -425,7 +428,7 @@ function plotOverlays(carte, lat, lng, concerts) {
         markerCluster.setGridSize(40);
     } else alert('No conerts found at this time for the given parameters (range/address/artist)');
 
-}
+};
 
 /*
  * AJAX call to server to get concerts
@@ -451,21 +454,21 @@ function getConcerts(lat, lng, range, artist, fn) {
             }
         }
     });
-}
+};
 
 function updateUrl (lat, lng, range, artist) {
     window.history.pushState("", "", "?lat="+lat+"&lng="+lng+"&range="
         +range+"&artist="+artist);
-}
+};
 
 function assignUrl (lat, lng, range, artist) {
     location.assign('/m?lat='+lat+'&lng='+lng+'&range='+range+'&artist='+artist);
-}
+};
 
 function updateFormFields (address, range, artist) {
     document.getElementById("address").value = decodeURIComponent(address);
     document.getElementById("artist").value = artist;
     $('#range').slider('value', range);
-}
+};
 
-function defaultFor(arg, val) { return typeof arg !== 'undefined' ? arg : val; }
+function defaultFor(arg, val) { return typeof arg !== 'undefined' ? arg : val; };

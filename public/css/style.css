@@ -175,7 +175,8 @@ input:invalid {
 }
 
 .form-wrapper-button img {
-    height: 100%;
+    margin: 50%;
+    transform: translate(-53%, -50%);
 }
 
 .form-wraper-location {
@@ -194,7 +195,9 @@ input:invalid {
 }
 
 .form-wraper-location img {
-    width: 100%;
+    width: 90%;
+    margin: 50%;
+    transform: translate(-52%, -53%);
 }
 
 .form-wraper-amount {
@@ -408,9 +411,11 @@ input:invalid {
 
 /* ------------ TILES.CSS ------------ */
 .tiles-box {
-    width: 100%;
+    width: 93.1%;
     height: 78%;
     margin-top: 25px;
+    margin-left: 50%;
+    transform: translate(-50%);
 }
 
 .tile {

@@ -48,7 +48,7 @@ module.exports = function(app) {
 			getConcerts(lat, lng, 10, artist, '', '', function(err, results){
 				if(!err){
 					res.render('map', {concerts : results});
-				}
+				} else res.render('404', {});
 			});
 		}
 		else {

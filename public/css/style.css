@@ -369,7 +369,9 @@ input:invalid {
     width: 200px;
     height: 90px;
     background-size: 200px 90px;
-    margin: -10px 30px;
+    margin: 0;
+    position: fixed;
+    left: 2%;
 }
 
 .logo img {
@@ -413,7 +415,6 @@ input:invalid {
 /* ------------ TILES.CSS ------------ */
 .tiles-box {
     width: 1190px;
-    height: 78%;
     margin-top: 25px;
     margin-left: 50%;
     transform: translate(-50%);
@@ -646,10 +647,7 @@ a:hover {}
         width: 60px;
         height: 60px;
         background-size: 60px 60px;
-        position: fixed;
-        top: 11%;
-        left: 2%;
-        transform: translate(-50%, -50%);
+        top: 10px;
     }
 
     .logo img {
@@ -710,7 +708,7 @@ a:hover {}
     }
 
     .tiles-box {
-        width: 94%;
+        width: 100%;
     }
 
 }
@@ -859,7 +857,7 @@ a:hover {}
     }
 
     .tile-info {
-        max-width: 70%;
+        max-width: 69%;
     }
 
     .tile > a > img {

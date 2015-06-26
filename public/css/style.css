@@ -175,7 +175,8 @@ input:invalid {
 }
 
 .form-wrapper-button img {
-    margin: 50%;
+    margin: 49%;
+    width: 100%;
     transform: translate(-53%, -50%);
 }
 
@@ -411,7 +412,7 @@ input:invalid {
 
 /* ------------ TILES.CSS ------------ */
 .tiles-box {
-    width: 93.1%;
+    width: 1190px;
     height: 78%;
     margin-top: 25px;
     margin-left: 50%;
@@ -743,11 +744,6 @@ a:hover {}
         height: 25px;
         width: 25px;
         margin: 4px;
-    }
-
-    .form-wraper-location img {
-        height: 100%;
-        margin: 0;
     }
 
     .form-wraper-amount {

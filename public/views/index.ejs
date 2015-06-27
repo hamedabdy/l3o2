@@ -75,11 +75,12 @@
 		  				<a href="/m?<%=latlng%>&amp;range=10&amp;artist=<%-String(artists[0]).replace(/ /g, '+')%>" class="tile-link">
 							<div itemprop="name" class="tile-title" title="<%-String(d.title).replace(/"/g, '')%>"><%-title%></div>
 						</a>
-						<div itemprop="description" class="tile-body"><b>Artists: </b>
+						<div class="tile-body"><b>Artists: </b>
 							<span itemprop="performer"><%-artists%></span><br>
 							<b>Date: </b><span itemprop="startDate"><%=date%></span><br>
 							<span itemprop="location"><%-address%></span>
 							<span itemprop="offers"></span>
+							<meta name="description" itemprop="description" content="<%-d.description%>">
 						</div>
 						<div class="shareBtns">
 							<a href="https://www.facebook.com/sharer/sharer.php?s=100&amp;p%5Burl%5D=<%=encodedURL%>&amp;p%5Btitle%5D=<%-String(d.title).replace(/ /g, '+').replace(/"/g, '')%>&amp;p%5Bsummary%5D=<%=summary%>&amp;p%5Bimages%5D%5B0%5D=<%=image_252%>" target="_blank">

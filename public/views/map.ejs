@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta name="description" content="Le Concert d'a Cote |" />
+<meta name="description" content="Le Concert d'a Cote | <%if(concerts!=null){%><%for(i=0;i<concerts.length;i++){%><%=concerts[i].description+' | '%><%}%><%}%>" />
 <meta name="keywords" content="<%if(concerts!=null){%><%for(i=0;i<concerts.length;i++){%><%=concerts[i].title+' | '%><%}%><%}%>" />
 <meta name="author" content="<%if(concerts!=null){%><%for(i=0;i<concerts.length;i++){%><%=concerts[i].artist+' | '%><%}%><%}%>" />
 <title><%if(concerts!=null){%><%=concerts[0].title+' | '%><%}%>Le Concert d'à Côté</title>

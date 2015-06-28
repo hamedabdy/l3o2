@@ -38,6 +38,10 @@ body {
     opacity: 1;
 }
 
+.hidden {
+    display: none;
+}
+
 /*---------------- MAP ----------------*/
 
 .carte {
@@ -390,6 +394,7 @@ input:invalid {
     top: 0;
     z-index: 3;
     background: url("../images/tweed.png");
+    box-shadow: 0 5px 10px #311;
 }
 
 .header-holder {
@@ -485,10 +490,6 @@ input:invalid {
     display: inherit;
     padding-left: 5px;
     vertical-align: middle;
-}
-
-.hidden {
-    display: none;
 }
 
 .fadeout {

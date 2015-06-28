@@ -394,7 +394,7 @@ input:invalid {
     top: 0;
     z-index: 3;
     background: url("../images/tweed.png");
-    box-shadow: 0 5px 10px #311;
+    box-shadow: 0 3px 5px #311;
 }
 
 .header-holder {

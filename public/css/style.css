@@ -487,6 +487,10 @@ input:invalid {
     vertical-align: middle;
 }
 
+.hidden {
+    display: none;
+}
+
 .fadeout {
     display: none;
 }

@@ -397,10 +397,6 @@ input:invalid {
     box-shadow: 0 3px 5px #311;
 }
 
-.header-holder {
-    height: 90px;
-}
-
 .ad {
     background-color: #fff;
     position: absolute;
@@ -420,9 +416,10 @@ input:invalid {
 /* ------------ TILES.CSS ------------ */
 .tiles-box {
     width: 1190px;
-    margin-top: 25px;
+    margin-top: 105px;
     margin-left: 50%;
     transform: translate(-50%);
+    font-size: 0.56em;
 }
 
 .tile {
@@ -499,6 +496,7 @@ input:invalid {
 .shareBtns {
     margin-top: 3px;
     max-height: 25px;
+    display: inline-block;
 }
 
 .shareBtns > a {
@@ -509,6 +507,16 @@ input:invalid {
     transform: scale(1.07);
 }
 
+.campaign {
+    font-size: 7px;
+    position: absolute;
+}
+
+.campaign p {
+    position: relative;
+    top: 121px;
+}
+
 /* ---------- DEFUALT.CSS ----------*/
 a {
     text-decoration: none;
@@ -517,10 +525,8 @@ a {
 a:hover {}
 
 .main {
-    width: auto;
-    margin: 33px 0 0 0;
+    margin-top: -50px;
     position: fixed;
-    right: 0;
     transition: all 0.3s ease 0s;
     z-index: 5;
 }
@@ -646,6 +652,9 @@ a:hover {}
 
 /* ------------- MEDIA.CSS ---------- */
 @media screen and (max-width: 900px){
+    .header {
+        height: 81px;
+    }
 
     .logo {
         background: url(../images/logo-minimized.png) no-repeat;
@@ -653,6 +662,10 @@ a:hover {}
         height: 60px;
         background-size: 60px 60px;
         top: 10px;
+    }
+
+    .header {
+        height: 110px;
     }
 
     .logo img {
@@ -714,14 +727,14 @@ a:hover {}
 
     .tiles-box {
         width: 100%;
+        margin-top: 115px;
     }
 
 }
 
-
 @media screen and (max-width: 480px){
-    .header-holder {
-        max-height: 65px;
+    .header {
+        height: 81px;
     }
 
     #carte {
@@ -857,6 +870,10 @@ a:hover {}
     }
 
     /*--------- TILES ---------*/
+    .tiles-box {
+        margin-top: 85px;
+    }
+
     .tile {
         max-width: 88%;
     }

@@ -26,20 +26,21 @@ function getAttr(url, city){
     var total = 0;
     const MAX_TOTAL = 800;
     request(url, function(err, res, results){
-        parsedRslts = JSON.parse(results);
-        if(!parsedRslts.events){
-            console.log('***error could not fetch results for '+city+'!***\n');
-            console.log(results);
-        }
-        else {
-            total = parsedRslts.events['@attr'].total;
-            location = parsedRslts.events['@attr'].location;
-            console.log('location: ' + location);
-            console.log("total concerts in this location to process: " + total);
-            if(total <= MAX_TOTAL) getConcerts(url, total, location)
-            else getConcertsUsingPages(url, location, 1, MAX_TOTAL);
-        };
-       if(err) console.log('err in getAttr: ' + err);
+        if(!err) {
+            parsedRslts = JSON.parse(results);
+            if(!parsedRslts.events){
+                console.log('***error could not fetch results for '+city+'!***\n');
+                console.log(results);
+            }
+            else {
+                total = parsedRslts.events['@attr'].total;
+                location = parsedRslts.events['@attr'].location;
+                console.log('location: ' + location);
+                console.log("total concerts in this location to process: " + total);
+                if(total <= MAX_TOTAL) getConcerts(url, total, location)
+                else getConcertsUsingPages(url, location, 1, MAX_TOTAL);
+            };
+       } else console.log('err in getAttr(): ' + err);
     });
 }
 
@@ -51,11 +52,12 @@ function getConcerts(url, limit, location){
     var url2 = url + '&limit=' + limit;
     console.log('Sending request on: ' +url2 + '\n');
     request(url2, function(err, res, results) {
-        parsedJSON = JSON.parse(results);
-        if (parsedJSON.events) {
-            pushEvents(parsedJSON, location);
-        }
-        if(err) console.log('err in getConcerts: ' + err);
+        if(!err) {
+            parsedJSON = JSON.parse(results);
+            if (parsedJSON.events) {
+                pushEvents(parsedJSON, location);
+            }
+        } else console.log('err in getConcerts(): ' + err);
     });
 }
 
@@ -69,19 +71,20 @@ function getConcertsUsingPages(url, location, page, limit){
     console.log('\nPage: ' + page);
     console.log('Sending request on: ' +url2 + '\n');
     request(url2, function(err, res, results){
-        parsedJSON = JSON.parse(results);
-        if(parsedJSON.events){
-            totalpages = parsedJSON.events['@attr'].totalPages;
-            totalpages = parseInt(totalpages, 10);
-            page = parsedJSON.events['@attr'].page;
-            page = parseInt(page, 10);
-            console.log('Location: ' + location + ' Page: ' +page+ ' / '+ totalpages);
-            pushEvents(parsedJSON, location);
-            if(page < totalpages){
-                getConcertsUsingPages(url, location, page+1, limit);
-            }
-        }
-        if(err) console.log('err in getConcertsUsingPages: ' + err);
+        if(!err) {
+            parsedJSON = JSON.parse(results);
+            if(parsedJSON.events){
+                totalpages = parsedJSON.events['@attr'].totalPages;
+                totalpages = parseInt(totalpages, 10);
+                page = parsedJSON.events['@attr'].page;
+                page = parseInt(page, 10);
+                console.log('Location: ' + location + ' Page: ' +page+ ' / '+ totalpages);
+                pushEvents(parsedJSON, location);
+                if(page < totalpages){
+                    getConcertsUsingPages(url, location, page+1, limit);
+                };
+            };
+        } else console.log('err in getConcertsUsingPages(): ' + err);
     });
 }
 

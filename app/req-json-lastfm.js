@@ -123,7 +123,7 @@ function pushEvents(parsedJSON, location){
         });
     }
     // sending an array of events to be inserted into db
-    database.upsertData(newArray);
+    database.insertData(newArray);
 }
 
 function startUpdate(){

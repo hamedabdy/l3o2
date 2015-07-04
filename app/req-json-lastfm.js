@@ -123,7 +123,7 @@ function pushEvents(parsedJSON, location){
         });
     }
     // sending an array of events to be inserted into db
-    database.insertData(newArray);
+    database.upsertData(newArray);
 }
 
 function startUpdate(){
@@ -143,7 +143,7 @@ function _checkInputFileds(input, fn){
 }
 
 var database = require('./node-mongodb');
-database.dropCollection();
+// database.dropCollection();
 database.ensureIndex();
 var apiKey = 'dbc287366d92998e7f5fb5ba6fb7e7f1';
 var distance = "&distance=500";

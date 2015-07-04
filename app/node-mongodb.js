@@ -15,6 +15,16 @@ function insertData(data) {
    });
 };
 
+/*
+ * upsert data into database
+ */
+function upsertData(data) {
+    db.concerts.update(data, data, {continueOnError: true, upsert: true}, function(err, docs){
+       if(err) console.log('err: ' + err + '\n');
+       else console.log('concerts upserted successfully!\n');
+   });
+};
+
 function dropCollection(){
 	db.concerts.drop();
 };
@@ -43,6 +53,7 @@ function closeAdsDb(){
 
 exports.dropCollection = dropCollection;
 exports.insertData = insertData;
+exports.upsertData = upsertData;
 exports.ensureIndex = ensureIndex;
 exports.closeDatabase = closeDatabase;
 exports.insertAds = insertAds;

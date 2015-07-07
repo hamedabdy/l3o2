@@ -6,6 +6,7 @@ var util = require('util');
 
 console.log('\n*** Total number of locations to process : ' + villes.city.length + ' ***\n');
 console.log('*** Please be patient while sending requests this may take a while... ****\n');
+REQ_TIMEOUT = 300000;
 
 /*
  * iterating cities
@@ -24,8 +25,10 @@ function getAttr(url, city){
     var parsedRslts ='';
     var location ='';
     var total = 0;
-    const MAX_TOTAL = 800;
-    request(url, function(err, res, results){
+    const MAX_TOTAL = 200;
+    options = { uri: url, timeout: REQ_TIMEOUT };
+    console.log('Fetching attributes for '+city+' with : '+options+'\n');
+    request(options, function(err, res, results){
         if(!err) {
             parsedRslts = JSON.parse(results);
             if(!parsedRslts.events){
@@ -49,9 +52,10 @@ function getAttr(url, city){
  */
 function getConcerts(url, limit, location){
     var parsedJSON = '';
-    var url2 = url + '&limit=' + limit;
-    console.log('Sending request on: ' +url2 + '\n');
-    request(url2, function(err, res, results) {
+    var url = url + '&limit=' + limit;
+    console.log('Sending request on: ' +url + '\n');
+    options = { uri: url, timeout: REQ_TIMEOUT };
+    request(options, function(err, res, results) {
         if(!err) {
             parsedJSON = JSON.parse(results);
             if (parsedJSON.events) {
@@ -67,10 +71,11 @@ function getConcerts(url, limit, location){
 function getConcertsUsingPages(url, location, page, limit){
     var parsedJSON = '';
     var totalpages = 0;
-    var url2 = url + '&limit=' + limit + '&page=' + page;
+    var url = url + '&limit=' + limit + '&page=' + page;
     console.log('\nPage: ' + page);
-    console.log('Sending request on: ' +url2 + '\n');
-    request(url2, function(err, res, results){
+    console.log('Sending request on: ' +url + '\n');
+    options = { uri: url, timeout: REQ_TIMEOUT };
+    request(options, function(err, res, results){
         if(!err) {
             parsedJSON = JSON.parse(results);
             if(parsedJSON.events){

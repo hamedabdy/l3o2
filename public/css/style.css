@@ -457,6 +457,7 @@ input:invalid {
     border-right: 1px solid #ccc;
     vertical-align: middle;
     max-height: 130px;
+    max-width: 130px;
 }
 
 .tile a {

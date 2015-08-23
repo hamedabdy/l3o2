@@ -1,0 +1,104 @@
+<head>
+<meta name="description" content="Use this page to add/submit your event/concert to our databse." />
+<meta name="keywords" content="submission, submit, concert, add, event, program" />
+<meta name="author" content="Hamed" />
+<title> Le Concert d'à Côté | Submit an event </title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+<link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css" />
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+<!-- <link rel="stylesheet" type="text/css" href="css/flat-ui.css"/> -->
+<link rel="stylesheet" type="text/css" href="css/event.css">
+</head>
+<body>
+
+<div class="logo">
+        <h1>Le Concert d'a Cote</h1>
+        <a href="/"><img title="Le Concert d'à Côté" src="images/logored-shadow.png" alt="Le Concert d'a Cote logo"></a>
+</div>
+
+<section>
+    <% if (message) { %>
+        <div class="message"><p><%=message%></p></div>
+    <% } %>
+
+    <h1>Event Submission Form</h1>
+
+    <form action="/se" method="POST" role="form">
+        <div class="form-group">
+            <fieldset>
+                <legend>Event information</legend>
+                <label for="title">Title*:</label><input type="text" class="form-control" id="title" name="title" placeholder="My Best Concert" required="true"/>
+                <label for="artist">Artist(s)*:</label><input type="text" class="form-control" id="artist" name="artist" placeholder="Jack, Jill, Mike, Mary" required="true"/>
+                <label for="address">Address*:</label><input type="text" class="form-control" id="address" name="address" placeholder="15 Av. Champs Elysees, 75008 Paris France" required="true" onblur="geoCodeAddress();" />
+                <input type="text" id="latlong" name="latlong" readonly="true" />
+                <label for="startDate">Start Date (local time)*:</label><input type="datetime-local" class="form-control" id="startDate" name="startDate" placeholder="yyyy-mm-dd HH:MM" required="true"/>
+                <label for="img">Image URL*:</label><input type="url" class="form-control" id="img" name="img" placeholder="http://example.com/image.jpg" required="true" pattern="https?://.+"/>
+                <label for="website">Website:</label><input type="url" class="form-control" id="website" name="website" placeholder="http://www.example.com" pattern="https?://.+"/>
+                <label for="description">Description:</label><textarea class="form-control" id="description" name="description" placeholder="Description" maxlength="500" cols="50"></textarea>
+                <label for="tags">Tags:</label><input type="text" class="form-control" id="tags" name="tags" placeholder="cool, funky, free" />
+                <label for="clicks">Campaigne Type:</label><select class="form-control" id="clicks" name="clicks" readonly="true">
+                    <option value="5" selected="true">Standard (5 Points)</option>
+                    <option value="50">Bronze (50 Points) 5 Euros</option>
+                    <option value="100">Silver (100 Points) 9 Euros</option>
+                    <option value="150">Gold (150 Points) 13 Euros</option>
+                    <option value="200">Platinium (200 Points) 16</option>
+                </select>
+            </fieldset>
+            <fieldset>
+                <legend>Contact information:</legend>
+                <label for="name">Your name:</label><input type="text" class="form-control" id="name" name="name" placeholder="FirstName LastName"/>
+                <label for="email">Email:</label><input type="email" class="form-control" id="email" name="email" placeholder="example@example.com"/>
+                <label for="phone">Phone:</label><input type="tel" class="form-control" id="tel" name="tel"/>
+            </fieldset>
+            <button class="btn btn-primary" type="submit">Submit</button>
+        </div>
+    </form>
+</section>
+
+<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+<script src="//code.jquery.com/ui/1.10.4/jquery-ui.min.js"></script>
+<script src="//maps.google.com/maps/api/js?sensor=true"></script>
+<script type="text/javascript">
+
+    /*
+     * Address AutoComplete JQuery
+     */
+    $(document).ready(function() {
+        var geocoder = new google.maps.Geocoder();
+        $('#address').autocomplete({
+            source : function(request, response) {
+                geocoder.geocode({
+                        'address' : $('#address').val()
+                }, function(results, status) {
+                    response($.map(results, function(item) {
+                        return {
+                            value : item.formatted_address
+                        }
+                    }));
+                });
+            },
+            select : function(event, ui) {
+                $('#address').val(ui.item['value']);
+            },
+            minLength : 2
+        });
+    });
+
+    /*
+     * Geocoding address from form after submit
+     */
+    function geoCodeAddress() {
+        var address = document.getElementById('address').value
+            , geocoder = new google.maps.Geocoder();
+        if(address != '') {
+            geocoder.geocode({ "address" : address }, function(results, status) {
+                if (status == google.maps.GeocoderStatus.OK) {
+                    document.getElementById('latlong').value = results[0].geometry.location.G + ',' + results[0].geometry.location.K;
+                } else alert("Sorry couldn't find the given address!");
+            });
+        }
+    };
+</script>
+
+</body>

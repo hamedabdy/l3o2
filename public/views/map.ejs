@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta name="description" content="Le Concert d'a Cote | <%if(concerts!=null){%><%for(i=0;i<concerts.length;i++){%><%=concerts[i].description+' | '%><%}%><%}%>" />
-<meta name="keywords" content="<%if(concerts!=null){%><%for(i=0;i<concerts.length;i++){%><%=concerts[i].title+' | '%><%}%><%}%>" />
-<meta name="author" content="<%if(concerts!=null){%><%for(i=0;i<concerts.length;i++){%><%=concerts[i].artist+' | '%><%}%><%}%>" />
-<title><%if(concerts!=null){%><%=concerts[0].title+' | '%><%}%>Le Concert d'à Côté</title>
+<meta name="description" content="Le Concert d'a Cote | <%if(concerts.length!=0){%><%for(i=0;i<concerts.length;i++){%><%=concerts[i].description+' | '%><%}%><%}%>" />
+<meta name="keywords" content="<%if(concerts.length!=0){%><%for(i=0;i<concerts.length;i++){%><%=concerts[i].title+' | '%><%}%><%}%>" />
+<meta name="author" content="<%if(concerts.length!=0){%><%for(i=0;i<concerts.length;i++){%><%=concerts[i].artist+' | '%><%}%><%}%>" />
+<title><%if(concerts.length!=0){%><%=concerts[0].title+' | '%><%}%>Le Concert d'à Côté</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
 <link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css" />
@@ -60,7 +60,7 @@
 	<script src="//maps.google.com/maps/api/js?sensor=true"></script>
 	<script src="js/modernizr.custom.js"></script>
 	<script src="js/markerclusterer_packed.js"></script>
-	<script src="js/app.min.js"></script>
+	<script src="js/app.js"></script>
 	<script src="js/oms.min.js"></script>
 	<script>
 		$(document).ready(function(){

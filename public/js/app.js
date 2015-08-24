@@ -398,7 +398,7 @@ function newOverlay(carte, concerts, oms){
     var artists = artists.split(',');
     var cover = (concerts.image).replace("/64/", "/126/");
     var date = new Date(concerts.startDate).toLocaleString();
-    date = date.slice(0, -18);
+    date = date.replace(/:..\ /i, '');
     var address = concerts.address.name+' '+concerts.address.street + ', '+concerts.address.postalcode+', '+concerts.address.city+', '+concerts.address.country;
     var _content = '<div class="info-window-body"><span class="helper"></span><img src="'+cover+'" title="'+concerts.title+'" alt="'+imageAlt+'"/><div class="tile-info info-window-info"><div class="tile-title info-window-title" title="'+concerts.title+'">'+title+'</div><div class="tile-body"><b>Artists: </b><span>'+artists+'</span><br><b>Date:</b>'+date+'<br><span>'+address+'</span></div><div class="shareBtns">'+share.fb_share+share.tw_share+share.gplus+share.su+share.lastfm+'</div></div></div>';
     var WindowOptions = { content: _content };

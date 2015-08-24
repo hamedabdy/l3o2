@@ -53,7 +53,7 @@ module.exports = function(app) {
 		}
 		else {
 			res.locals.query = null;
-			res.render('map', {concerts : null});
+			res.render('map', {concerts : []});
 		}
 	});
 

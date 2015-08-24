@@ -68,11 +68,11 @@
 		  %>
 				<div class="tile" id="tile<%-i%>">
 					<span class="helper"></span>
-					<a itemprop="url" href="/m?<%=latlng%>&amp;range=10&amp;artist=<%=String(artists[0]).replace(/ /g, '+')%>" class="tile-link">
+					<a itemprop="url" href="/m?<%=latlng%>&amp;range=10&amp;artist=<%=String(d.artist[0]).replace(/ /g, '+')%>" class="tile-link">
 						<img itemprop="image" src="<%-cover%>" title="<%=d.title%>" alt="<%=imageAlt%>"/>
 					</a>
 					<div class="tile-info">
-		  				<a href="/m?<%=latlng%>&amp;range=10&amp;artist=<%-String(artists[0]).replace(/ /g, '+')%>" class="tile-link">
+		  				<a href="/m?<%=latlng%>&amp;range=10&amp;artist=<%-String(d.artist[0]).replace(/ /g, '+')%>" class="tile-link">
 							<div itemprop="name" class="tile-title" title="<%-String(d.title).replace(/"/g, '')%>"><%-title%></div>
 						</a>
 						<div class="tile-body"><b>Artists: </b>

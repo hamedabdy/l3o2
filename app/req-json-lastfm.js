@@ -113,7 +113,7 @@ function pushEvents(parsedJSON, location){
                     title : dict.title,
                     artist : dict.artists.artist,
                     address : dict.venue.name +', '+ dict.venue.location.street +', '+
-                                dict.venue.location.postalcode +', '+ dict.venue.location.city +', '+ dict.venue.location.country},
+                                dict.venue.location.postalcode +', '+ dict.venue.location.city +', '+ dict.venue.location.country,
                     latlong : [ parseFloat(dict.venue.location['geo:point']['geo:lat']),
                                parseFloat(dict.venue.location['geo:point']['geo:long'])],
                     url : dict.url,

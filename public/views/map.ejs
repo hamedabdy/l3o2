@@ -65,7 +65,7 @@
 	<script>
 		$(document).ready(function(){
 			$( 'body' ).addClass( 'page-loaded' );
-			document.body.onload = <%if(concerts==null){%>newGoogleMap(48.8588589, 2.3470599, function(map){});<%} else {%>setUserLocation(<%-JSON.stringify(query)+', '+JSON.stringify(concerts)%>);<%};%>;
+			document.body.onload = <%if(concerts.length!=0){%>newGoogleMap(48.8588589, 2.3470599, function(map){});<%} else {%>setUserLocation(<%-JSON.stringify(query)+', '+JSON.stringify(concerts)%>);<%};%>;
 		});
 
 		window.fbAsyncInit = function() {

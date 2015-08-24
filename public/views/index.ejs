@@ -60,7 +60,7 @@
 			if (artists.length > 40) artists = artists.substr(0, 40) + ' ...';
 			var artists = artists.split(',');
 			var date = new Date(d.startDate).toLocaleString();
-			date = date.replace(/:..\ /i, " ");
+			date = date.slice(0, -18);
 			var uri = '/m?'+latlng+'&range=10&artist='+artists[0];
 			var encodedURL = encodeURIComponent(url+uri);
 			var image_252 = (d.image).replace("/64/", "/252/")

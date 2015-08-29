@@ -48,6 +48,8 @@ module.exports = function(app) {
 				, artist = req.query.artist;
 			getConcerts(lat, lng, 10, artist, '', '', function(err, results){
 				if(!err){
+					results[0].score = parseInt(results[0].score)+1;
+					db.concerts.update({'_id': results[0]['_id']}, results[0]);
 					res.render('map', {concerts : results});
 				} else res.render('404', {});
 			});
@@ -95,9 +97,7 @@ function getConcerts (lat, lng, radius, artists, limit, date, fn) {
  	dbQuery.startDate = { $gte : new Date(newDate)};
  	db.concerts.find( dbQuery).sort({'score' : -1}).limit(l, function(err, result) {
 	   	if(!err) {
-	   		// logger.trace(dbQuery);
     		logger.info('\n# of concerts returned = ' + result.length + '\n');
-    		// logger.trace(result);
 	        return fn(null, result);
 	    } else {
 	    	logger.error(err);

@@ -113,7 +113,7 @@ function reverseGeocode (lat, lng, callback) {
             var r = null;
             try{
                 r = JSON.parse(result);
-                return callback(null, r.display_name);
+                return callback(null, r.house_number+', '+r.road+' '+r.postcode+', '+r.city+' '+r.country);
             }
             catch (e) {
                 return callback(e, null);

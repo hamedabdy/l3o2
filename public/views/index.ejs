@@ -63,10 +63,9 @@
 			date = date.slice(0, -18);
 			var uri = '/m?'+latlng+'&range=10&artist='+artists[0];
 			var encodedURL = encodeURIComponent(url+uri);
-			var image_252 = (d.img).replace("/64/", "/252/")
-			var summary = String(d.artist).replace(/ /g, "+")+'+-+'+String(date).replace(/ /g, '+')+'+-+'+String(d.address.name).replace(/ /g, '+')+',+'+String(d.address.street).replace(/ /g, '+')+',+'+d.address.postalcode+',+'+d.address.city+',+'+d.address.country;
+			var summary = String(d.artist).replace(/ /g, "+")+'+-+'+String(date).replace(/ /g, '+')+'+-+'+String(d.address).replace(/ /g, '+');
 		  %>
-				<div class="tile" id="tile<%-i%>">
+				<div class="tile" id="<%-d['_id']%>">
 					<span class="helper"></span>
 					<a itemprop="url" href="/m?<%=latlng%>&amp;range=10&amp;artist=<%=String(artists[0]).replace(/ /g, '+')%>" class="tile-link">
 						<img itemprop="image" src="<%-cover%>" title="<%=d.title%>" alt="<%=imageAlt%>" onerror="this.src='images/noimage.png';"/>
@@ -83,7 +82,7 @@
 							<span class="hidden" itemprop="description"><%-d.description%></span>
 						</div>
 						<div class="shareBtns">
-							<a href="https://www.facebook.com/sharer/sharer.php?s=100&amp;p%5Burl%5D=<%=encodedURL%>&amp;p%5Btitle%5D=<%-String(d.title).replace(/ /g, '+').replace(/"/g, '')%>&amp;p%5Bsummary%5D=<%=summary%>&amp;p%5Bimages%5D%5B0%5D=<%=image_252%>" target="_blank">
+							<a href="https://www.facebook.com/sharer/sharer.php?s=100&amp;p%5Burl%5D=<%=encodedURL%>&amp;p%5Btitle%5D=<%-String(d.title).replace(/ /g, '+').replace(/"/g, '')%>&amp;p%5Bsummary%5D=<%=summary%>&amp;p%5Bimages%5D%5B0%5D=<%=d.img%>" target="_blank">
 								<img width="25" src="images/fb_1.png" alt="Share On Facebook" title="Share On Facebook"/>
 							</a>
 							<a href="https://twitter.com/share?url=<%=encodedURL%>&amp;text=<%-String(d.title).replace(/ /g, '+').replace(/"/g, '')%>+<%-String(artists).replace(/ /g, '+')%>&amp;via=ConcertDaCote&amp;related=concertdacote,ConcertDaCote" target="_blank">

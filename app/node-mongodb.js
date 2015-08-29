@@ -6,7 +6,7 @@ var mongojs 	= require('mongojs'),
     db2         = mongojs(configDB.url, ['ads']);
 
 /*
- * inserting data into database
+ * inserting data into database (Insert everythin and clean the old ones afterwards)
  */
 function insertData(data) {
     db.concerts.insert(data, {continueOnError: true}, function(err, docs){
@@ -16,10 +16,10 @@ function insertData(data) {
 };
 
 /*
- * upsert data into database
+ * upsert data into database (Accepts only one doc at a time)
  */
 function upsertData(data) {
-    db.concerts.update(data, data, {continueOnError: true, upsert: true}, function(err, docs){
+    db.concerts.save(data, {continueOnError: true}, function(err, docs){
        if(err) console.log('err: ' + err + '\n');
        else console.log('concerts upserted successfully!\n');
    });
@@ -30,7 +30,7 @@ function dropCollection(){
 };
 
 function ensureIndex(){
-	db.concerts.ensureIndex({latlong : "2d"});
+	db.concerts.ensureIndex({latlng : "2d"});
 };
 
 function closeDatabase(){
@@ -47,7 +47,7 @@ function insertAds(data) {
 };
 
 function closeAdsDb(){
-
+    db2.close();
     console.log('ads db cloesd!');
 };
 

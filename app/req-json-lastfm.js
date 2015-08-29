@@ -109,18 +109,20 @@ function pushEvents(parsedJSON, location){
             if(fields_ok) {
                 // building an array of dict of events
                 var item = {
-                    "_id" : dict.id,
-                    title : dict.title,
-                    artist : dict.artists.artist,
-                    address : {name: dict.venue.name, street : dict.venue.location.street,
+                    '_id' : 'as_'+dict.id,
+                    'title' : dict.title,
+                    'artist' : (((Object.prototype.toString.call(dict.artists.artist)).slice(8, -1)=='Array') ? dict.artists.artist : [dict.artists.artist]),
+                    'address' : {name: dict.venue.name, street : dict.venue.location.street,
                                 postalcode : dict.venue.location.postalcode,
                                 city : dict.venue.location.city, country : dict.venue.location.country},
-                    latlong : [ parseFloat(dict.venue.location['geo:point']['geo:lat']),
+                    'latlong' : [ parseFloat(dict.venue.location['geo:point']['geo:lat']),
                                parseFloat(dict.venue.location['geo:point']['geo:long'])],
-                    url : dict.url,
-                    startDate : new Date(dict.startDate),
-                    image : dict.image[1]["#text"],
-                    description : dict.description
+                    'url' : dict.url,
+                    'startDate' : new Date(dict.startDate),
+                    'img' : dict.image[1]["#text"],
+                    'description' : dict.description,
+                    'score' : 0,
+                    'source' : 'audioscrobbler'
                 };
                 if(dict.hasOwnProperty('tags')) item.tags = dict.tags.tag;
                 newArray.push(item);

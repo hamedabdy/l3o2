@@ -15,6 +15,7 @@ module.exports = function(app) {
 		var o = { lat : 48.8588589, lng : 2.3470599 };
 		if(Object.keys(req.query).length == 0 ) {
 			var ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress || req.socket.remoteAddress || req.connection.socket.remoteAddress;
+			ip = '46.193.140.155';
 			console.log('\n\n[DEBUG] ip = ' + ip);
 			userlocation.getRemoteGeoLocationFromIp(ip, function(err, results){
 				console.log(err + " " + results);
@@ -87,12 +88,12 @@ module.exports = function(app) {
 function getConcerts (lat, lng, radius, artists, limit, date, fn) {
  	var l = 5000;
  	if (limit) l = limit;
- 	var dbQuery = { latlong: { $near:[parseFloat(lat), parseFloat(lng)], $maxDistance: parseFloat(radius)/111.12} };
+ 	var dbQuery = { latlng: { $near:[parseFloat(lat), parseFloat(lng)], $maxDistance: parseFloat(radius)/111.12} };
  	if (artists) dbQuery.artist = new RegExp(artists, 'i');
  	var newDate = new Date();
  	if (date) newDate = date;
  	dbQuery.startDate = { $gte : new Date(newDate)};
- 	db.concerts.find( dbQuery, { 'limit' : l }, function(err, result) {
+ 	db.concerts.find( dbQuery, {'limit' : l}, function(err, result) {
 	   	if(!err) {
     		console.log('\n# of concerts returned = ' + result.length + '\n');
 	        return fn(null, result);

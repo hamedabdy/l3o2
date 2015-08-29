@@ -32,15 +32,19 @@
 	<% } %>
 <% } %>
 </div>
-	<div id="dialog-confirm" style="font-size: small;" title="Update Database?">
-<p><span class="ui-icon ui-icon-alert" style="float: left; margin: 0 7px 20px 0;"></span>Are you sure?</p>
+	<div id="dialog-confirm-as" style="font-size: small;" title="Update Database from Last.fm?">
+	<p><span class="ui-icon ui-icon-alert" style="float: left; margin: 0 7px 20px 0;"></span>Are you sure?</p>
+</div>
+</div>
+	<div id="dialog-confirm-sk" style="font-size: small;" title="Update Database from SongKick?">
+	<p><span class="ui-icon ui-icon-alert" style="float: left; margin: 0 7px 20px 0;"></span>Are you sure?</p>
 </div>
 	<script>
 	$(function() {
-		$( "#dialog-confirm" ).dialog({
+		$( "#dialog-confirm-as" ).dialog({
 			autoOpen: false,
 			resizable: false,
-			height:140,
+			height:200,
 			modal: true,
 			buttons: {
 				"Do it!": function() {
@@ -53,14 +57,14 @@
 		});
 	});
 	$("#opener-as").click(function(){
-		$("#dialog-confirm").dialog("open");
+		$("#dialog-confirm-as").dialog("open");
 	});
 
 	$(function() {
-		$( "#dialog-confirm" ).dialog({
+		$( "#dialog-confirm-sk" ).dialog({
 			autoOpen: false,
 			resizable: false,
-			height:140,
+			height:200,
 			modal: true,
 			buttons: {
 				"Do it!": function() {
@@ -73,7 +77,7 @@
 		});
 	});
 	$("#opener-sk").click(function(){
-		$("#dialog-confirm").dialog("open");
+		$("#dialog-confirm-sk").dialog("open");
 	});
 	</script>
 </body>

@@ -285,7 +285,7 @@ input:invalid {
     height: 10px;
     position: fixed;
     box-shadow: 2px 2px 2px;
-    top: 76px;
+    top: 77px;
     left: 50%;
     transform: translate(-50%);
     border: 5px;
@@ -330,7 +330,7 @@ input:invalid {
 }
 
 .changeBtn {
-    top: 104px;
+    top: 105px;
 }
 
 .changeBtn:before {
@@ -524,6 +524,10 @@ a {
 }
 
 a:hover {}
+
+section {
+    margin-top: -31px;
+}
 
 .main {
     margin-top: -50px;

@@ -50,11 +50,11 @@ fieldset {
     box-shadow: 1px 1px 3px #000 inset, 0px 0px 1px transparent;
 }
 
-#clicks {
+#score {
     pointer-events: none;
     cursor: default;
 }
 
-#latlong {
+#latlng {
     display: none;
 }

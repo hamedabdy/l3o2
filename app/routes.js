@@ -26,7 +26,7 @@ module.exports = function(app) {
                     o = {lat : r.latitude, lng : r.longitude};
 				}
 			});
-			getConcerts(o.lat, o.lng, 100, '', '', '', function(err, results) {
+			getConcerts(o.lat, o.lng, 100, '', 50, '', function(err, results) {
 			if (!err) {
 				o.concerts = results;
 				res.render('index', o);
@@ -93,9 +93,11 @@ function getConcerts (lat, lng, radius, artists, limit, date, fn) {
  	var newDate = new Date();
  	if (date) newDate = date;
  	dbQuery.startDate = { $gte : new Date(newDate)};
- 	db.concerts.find( dbQuery, { 'limit' : l }, function(err, result) {
+ 	db.concerts.find( dbQuery).sort({'score' : -1}).limit(l, function(err, result) {
 	   	if(!err) {
+	   		// logger.trace(dbQuery);
     		logger.info('\n# of concerts returned = ' + result.length + '\n');
+    		// logger.trace(result);
 	        return fn(null, result);
 	    } else {
 	    	logger.error(err);

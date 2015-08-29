@@ -18,9 +18,11 @@ module.exports = function(app) {
 
     app.post('/se', function(req, res){
         req.body.startDate = new Date(req.body.startDate);
-        req.body.latlong = [parseFloat(req.body.latlong.split(',')[0]), parseFloat(req.body.latlong.split(',')[1])];
-        // req.body.artist = [req.body.artist.split(', ')[0], req.body.artist.split(',')[1]];
-        // req.body.tags = [req.body.tags.split(', ')[0], req.body.tags.split(',')[1]];
+        var latlng = req.body.latlng.split(',');
+        req.body.latlng = [parseFloat(latlng[0]), parseFloat(latlng[1])];
+        req.body.source = 'form';
+        req.body.artist = req.body.artist.split(', ');
+        req.body.tags = req.body.tags.split(', ');
         db.concerts.insert(req.body);
         res.render('submit-event', {message: 'Thank you for your submission'});
     });

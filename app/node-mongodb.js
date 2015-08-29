@@ -7,7 +7,7 @@ var mongojs 	= require('mongojs')
     ,logger     = require('../logger').appLog;
 
 /*
- * inserting data into database
+ * inserting data into database (Insert everythin and clean the old ones afterwards)
  */
 function insertData(data) {
     db.concerts.insert(data, {continueOnError: true}, function(err, docs){
@@ -17,7 +17,7 @@ function insertData(data) {
 };
 
 /*
- * upsert data into database
+ * upsert data into database (Accepts only one doc at a time)
  */
 function upsertData(data) {
     db.concerts.update(data, data, {continueOnError: true, upsert: true}, function(err, docs){
@@ -31,7 +31,7 @@ function dropCollection(){
 };
 
 function ensureIndex(){
-	db.concerts.ensureIndex({latlong : "2d"});
+	db.concerts.ensureIndex({latlng : "2d"});
 };
 
 function closeDatabase(){

@@ -23,7 +23,8 @@
     "request": "~2.51.0",
     "serve-favicon": "~2.2.0",
     "log4js": "~0.6.26",
-    "mongojs": "~1.3.0"
+    "node-geocoder": "~3.0.0",
+    "mongojs": "~0.18.0"
   },
   "contributors": [
     {

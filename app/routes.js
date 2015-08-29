@@ -88,12 +88,12 @@ module.exports = function(app) {
 function getConcerts (lat, lng, radius, artists, limit, date, fn) {
  	var l = 5000;
  	if (limit) l = limit;
- 	var dbQuery = { latlong: { $near:[parseFloat(lat), parseFloat(lng)], $maxDistance: parseFloat(radius)/111.12} };
+ 	var dbQuery = { latlng: { $near:[parseFloat(lat), parseFloat(lng)], $maxDistance: parseFloat(radius)/111.12} };
  	if (artists) dbQuery.artist = new RegExp(artists, 'i');
  	var newDate = new Date();
  	if (date) newDate = date;
  	dbQuery.startDate = { $gte : new Date(newDate)};
- 	db.concerts.find( dbQuery).limit(l, function(err, result) {
+ 	db.concerts.find( dbQuery, { 'limit' : l }, function(err, result) {
 	   	if(!err) {
     		logger.info('\n# of concerts returned = ' + result.length + '\n');
 	        return fn(null, result);

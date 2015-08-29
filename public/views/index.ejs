@@ -51,7 +51,7 @@
 		  for (var i = 0; i < l; i++) {
 			var d = concerts[i];
 			var cover = (d.img).replace("/64/", "/126/");
-			var latlng = 'lat=' + d.latlong[0] + '&lng=' + d.latlong[1];
+			var latlng = 'lat=' + d.latlng[0] + '&lng=' + d.latlng[1];
 			var imageAlt = d.title;
 			if (d.title.lenth > 13) imageAlt = d.title.substr(0, 13)+' ...';
 			var title = String(d.title).replace(/"/g, "");
@@ -63,7 +63,7 @@
 			date = date.slice(0, -18);
 			var uri = '/m?'+latlng+'&range=10&artist='+artists[0];
 			var encodedURL = encodeURIComponent(url+uri);
-			var image_252 = (d.image).replace("/64/", "/252/")
+			var image_252 = (d.img).replace("/64/", "/252/")
 			var summary = String(d.artist).replace(/ /g, "+")+'+-+'+String(date).replace(/ /g, '+')+'+-+'+String(d.address.name).replace(/ /g, '+')+',+'+String(d.address.street).replace(/ /g, '+')+',+'+d.address.postalcode+',+'+d.address.city+',+'+d.address.country;
 		  %>
 				<div class="tile" id="tile<%-i%>">

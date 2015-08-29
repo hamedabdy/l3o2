@@ -27,7 +27,7 @@ console.log('*** Please be patient while sending requests this may take a while.
  * iterating cities
  */
 function iterateCityFile(url, pays){
-    for(i=0; i<1; i++){
+    for(i=0; i<pays.country.length; i++){
         var _url = url + '&query=' + pays.country[i];
         getCityId(_url, pays.country[i]);
     };

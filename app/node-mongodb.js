@@ -11,7 +11,7 @@ var mongojs 	= require('mongojs')
  */
 function insertData(data) {
     db.concerts.insert(data, {continueOnError: true}, function(err, docs){
-       if(err) logger.error('err: ' + err + '\n');
+       if(err) logger.warn(err);
        else logger.info('concerts inserted successfully!\n');
    });
 };
@@ -21,7 +21,7 @@ function insertData(data) {
  */
 function upsertData(data) {
     db.concerts.update(data, data, {continueOnError: true, upsert: true}, function(err, docs){
-       if(err) logger.error('err: ' + err + '\n');
+       if(err) logger.warn(err);
        else logger.info('concerts upserted successfully!\n');
    });
 };
@@ -41,7 +41,7 @@ function closeDatabase(){
 
 function insertAds(data) {
     db2.ads.insert(data, {continueOnError: true}, function(err, docs){
-       if(err) logger.error('err: ' + err + '\n');
+       if(err) logger.warn(err);
        else logger.info('ads inserted successfully!\n');
        db2.close();
    });

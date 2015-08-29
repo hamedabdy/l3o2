@@ -48,9 +48,14 @@ module.exports = function(app, passport) {
 	/*
 	 * Dashbord Area
 	 */
-    app.get('/maj', ensureAuthenticated, function(req, res){
-        startUpdate();
-        res.render('dashbord', {user: req.user, message: 'Update Started!' });
+    app.get('/maj-as', ensureAuthenticated, function(req, res){
+        startUpdate('as');
+        res.render('dashbord', {user: req.user, message: 'Last.fm Update Started!' });
+    });
+
+    app.get('/maj-sk', ensureAuthenticated, function(req, res){
+        startUpdate('sk');
+        res.render('dashbord', {user: req.user, message: 'SongKick Update Started!' });
     });
 
 	app.get('/importAds', ensureAuthenticated, function(req, res){
@@ -85,9 +90,18 @@ module.exports = function(app, passport) {
 
 /*********** Methods *************/
 
-function startUpdate(){
-	var requestLastfm = require('./req-json-lastfm');
-	requestLastfm.startUpdate();
+function startUpdate(arg){
+    if(arg == 'as'){
+    	var requestLastfm = require('./req-json-lastfm');
+    	requestLastfm.startUpdate();
+        return 0;
+    }
+    if(arg == 'sk'){
+        var requestSK = require('./req-json-sk');
+        requestSK.startUpdate();
+        return 0;
+    }
+    else return 1;
 }
 
 function importCsvAds() {

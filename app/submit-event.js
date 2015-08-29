@@ -9,7 +9,11 @@ var mongojs     = require('mongojs')
 module.exports = function(app) {
 
     app.get('/se', function(req, res){
-        res.render('submit-event', {message: ''});
+        if(Object.keys(req.query).length == 0){
+            res.render('submit-event', {message: ''});
+        } else {
+            res.render('404', {});
+        }
     });
 
     app.post('/se', function(req, res){

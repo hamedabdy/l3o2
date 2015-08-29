@@ -14,13 +14,13 @@ module.exports = function(app) {
 		var fullUrl = req.protocol + '://' + req.get('host') + req.originalUrl;
 		res.locals.url = fullUrl;
 		var o = { lat : 48.8588589, lng : 2.3470599 };
-		if(Object.keys(req.query).length == 0 ) {
+		if(Object.keys(req.query).length == 0) {
 			var ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress || req.socket.remoteAddress || req.connection.socket.remoteAddress;
 			logger.debug('ip = ' + ip);
 			userlocation.getRemoteGeoLocationFromIp(ip, function(err, results){
 				logger.debug(err + " " + results);
 				if (err) {
-					logger.error('err = ' + err);
+					logger.error(err);
 				} else if(results.ip) {
 					var r = JSON.parse(results);
                     o = {lat : r.latitude, lng : r.longitude};

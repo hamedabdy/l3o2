@@ -72,7 +72,7 @@
 						<img itemprop="image" src="<%-cover%>" title="<%=d.title%>" alt="<%=imageAlt%>" onerror="this.src='images/noimage.png';"/>
 					</a>
 					<div class="tile-info">
-		  				<a href="/m?<%=latlng%>&amp;range=10&amp;artist=<%=_artist%>" class="tile-link">
+		  				<a href="/m?<%=latlng%>&amp;range=10&amp;artist=<%=String(artists[0])%>" class="tile-link">
 							<div itemprop="name" class="tile-title" title="<%-String(d.title).replace(/"/g, '')%>"><%-title%></div>
 						</a>
 						<div class="tile-body"><b>Artists: </b>
@@ -96,7 +96,7 @@
 								<img width="25" src="images/stumble_upon.png" alt="Stumble" title="Stumble"/>
 							</a>
 							<a target="_blank" href="<%=d.url%>">
-								<img width="25" src="images/lastfm.png" alt="More Info On Last.fm" title="More Info On Last.fm"/>
+								<img width="25" src="images/external_link.png" alt="External Link" title="Source site"/>
 							</a>
 						</div>
 					</div>
@@ -109,6 +109,7 @@
 			<div class="mailto"><a href="mailto:concert.dacote@gmail.com" target="_top"><img src="images/email.png" width="25" title="Contact us by email" alt="Contact us by email"></a></div>
 		  	<div class="fb-like" data-href="//facebook.com/concert.dacote" data-layout="button_count" data-action="like" data-show-faces="false" data-share="true"></div>
 			<a href="//twitter.com/ConcertDaCote" class="twitter-follow-button" data-show-count="false" data-lang="en">Follow @ConcertDaCote</a>
+			<a href="/se">Submit Your Event</a>
 		</div>
 		<div class="info footer"> Copyright 2013-15 </div>
 	</nav>

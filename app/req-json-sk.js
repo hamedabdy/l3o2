@@ -126,4 +126,4 @@ function startUpdate(){
     iterateCityFile(api_loc, pays);
 }
 
-startUpdate();
+exports.startUpdate = startUpdate;

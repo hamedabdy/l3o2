@@ -70,7 +70,6 @@
 body {
   color: #34495e;
   font: 14px/1.231 "Lato", sans-serif;
-  background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAB9JREFUeNpi/P//PwM6YGLAAuCCmpqacC2MRGsHCDAA+fIHfeQbO8kAAAAASUVORK5CYII=") repeat scroll 0% 0% rgb(85, 85, 85);  
  }
 
 a {
@@ -96,7 +95,7 @@ h4 {
 }
 
 .messege {
-  font-size: 15px; 
+  font-size: 15px;
   color: red;
 }
 

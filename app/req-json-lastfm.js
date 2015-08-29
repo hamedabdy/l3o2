@@ -112,15 +112,15 @@ function pushEvents(parsedJSON, location){
                     "_id" : dict.id,
                     title : dict.title,
                     artist : dict.artists.artist,
-                    address : {name: dict.venue.name, street : dict.venue.location.street,
-                                postalcode : dict.venue.location.postalcode,
-                                city : dict.venue.location.city, country : dict.venue.location.country},
+                    address : dict.venue.name +', '+ dict.venue.location.street +', '+
+                                dict.venue.location.postalcode +', '+ dict.venue.location.city +', '+ dict.venue.location.country,
                     latlong : [ parseFloat(dict.venue.location['geo:point']['geo:lat']),
                                parseFloat(dict.venue.location['geo:point']['geo:long'])],
                     url : dict.url,
                     startDate : new Date(dict.startDate),
-                    image : dict.image[1]["#text"],
-                    description : dict.description
+                    img : dict.image[1]["#text"],
+                    description : dict.description,
+                    clicks : 0
                 };
                 if(dict.hasOwnProperty('tags')) item.tags = dict.tags.tag;
                 newArray.push(item);

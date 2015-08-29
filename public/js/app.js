@@ -134,7 +134,7 @@ $( "#amount" ).val($( "#range" ).slider( "value" ) + " km");
  */
 function shareButtons (data, fn) {
     var encodedURL = encodeURIComponent(document.URL+data.artist);
-    var image_252 = (data.image).replace("/64/", "/252/")
+    var image_252 = (data.img).replace("/64/", "/252/")
         , summary = data.artist+' - '+new Date(data.startDate).toLocaleString()+' - '+data.address.name+', '+data.address.street + ', '+data.address.postalcode+', '+data.address.city+', '+data.address.country , shareBtns = {};
         shareBtns.fb_share = '<a href="https://www.facebook.com/sharer/sharer.php?s=100&p[url]='+encodedURL+'&p[title]='+data.title+'&p[summary]='+summary+'&p[images][0]='+image_252+'" target="_blank"><img width="25" src="images/fb_1.png" '+'alt="Share On Facebook" title="Share On Facebook"/></a>';
         shareBtns.tw_share = '<a href="https://twitter.com/share?url='+encodedURL+'&text='+data.title+'+'+data.artist+'&via=ConcertDaCote&related=concertdacote,ConcertDaCote,'+'" target="_blank"><img width="25" src="images/twitter_1.png" '+'alt="Tweet" title="Tweet"/></a>';
@@ -396,11 +396,10 @@ function newOverlay(carte, concerts, oms){
     var artists = String(concerts.artist).replace(/,/g, ", ");
     if (artists.length > 50) artists = artists.substr(0, 50) + ' ...';
     var artists = artists.split(',');
-    var cover = (concerts.image).replace("/64/", "/126/");
+    var cover = (concerts.img).replace("/64/", "/126/");
     var date = new Date(concerts.startDate).toLocaleString();
-    date = date.replace(/:..\ /i, '');
-    var address = concerts.address.name+' '+concerts.address.street + ', '+concerts.address.postalcode+', '+concerts.address.city+', '+concerts.address.country;
-    var _content = '<div class="info-window-body"><span class="helper"></span><img src="'+cover+'" title="'+concerts.title+'" alt="'+imageAlt+'"/><div class="tile-info info-window-info"><div class="tile-title info-window-title" title="'+concerts.title+'">'+title+'</div><div class="tile-body"><b>Artists: </b><span>'+artists+'</span><br><b>Date:</b>'+date+'<br><span>'+address+'</span></div><div class="shareBtns">'+share.fb_share+share.tw_share+share.gplus+share.su+share.lastfm+'</div></div></div>';
+    date = date.slice(0, -18);
+    var _content = '<div class="info-window-body"><span class="helper"></span><img src="'+cover+'" title="'+concerts.title+'" alt="'+imageAlt+'" onerror="this.src=\'images/noimage.png\'"/><div class="tile-info info-window-info"><div class="tile-title info-window-title" title="'+concerts.title+'">'+title+'</div><div class="tile-body"><b>Artists: </b><span>'+artists+'</span><br><b>Date:</b>'+date+'<br><span>'+concerts.address+'</span></div><div class="shareBtns">'+share.fb_share+share.tw_share+share.gplus+share.su+share.lastfm+'</div></div></div>';
     var WindowOptions = { content: _content };
     var InfoWindow = new google.maps.InfoWindow(WindowOptions);
     infoWindows.push(InfoWindow);

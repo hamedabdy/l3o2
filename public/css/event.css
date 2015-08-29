@@ -1,0 +1,60 @@
+body {
+    background: url(../images/dark.png);
+}
+
+section {
+    background: #EEE none repeat scroll 0% 0%;
+    margin-left: 50%;
+    transform: translate(-50%);
+    padding: 3% 5% 5% 5%;
+    display: inline-block;
+    width: 50%;
+}
+
+button {
+    position: absolute;
+    right: 0;
+    margin-top: 10px;
+    transform: translate(-100%);
+}
+
+.logo {
+    position: fixed;
+    display: inline-block;
+    width: 200px;
+    height: 90px;
+    margin-left: 5%;
+    vertical-align: top;
+}
+
+.logo img {
+    width: 100%;
+}
+
+.logo > h1 {
+    display: none;
+}
+
+textarea {
+    max-width: 570px;
+}
+
+fieldset {
+    margin-top: 10px;
+}
+
+.message {
+    background: #5cb85c;
+    padding: 13px 0px 1px 13px;
+    border-radius: 3px;
+    box-shadow: 1px 1px 3px #000 inset, 0px 0px 1px transparent;
+}
+
+#clicks {
+    pointer-events: none;
+    cursor: default;
+}
+
+#latlong {
+    display: none;
+}

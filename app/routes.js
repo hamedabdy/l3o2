@@ -1,11 +1,12 @@
 #!/usr/bin/env node
 
-var mongojs       	= require('mongojs');
-var configDB 		= require('../config/database');
-var db 				= mongojs(configDB.url, ['concerts']);
-var db2				= mongojs(configDB.url, ['ads']);
-var userlocation	= require('./userlocation');
-var util 			= require('util');
+var mongojs       	= require('mongojs')
+	,configDB 		= require('../config/database')
+	,db 			= mongojs(configDB.url, ['concerts'])
+	,db2 			= mongojs(configDB.url, ['ads'])
+	,userlocation 	= require('./userlocation')
+	,util 			= require('util')
+	,logger			= require('../logger').appLog;
 
 module.exports = function(app) {
 
@@ -15,11 +16,11 @@ module.exports = function(app) {
 		var o = { lat : 48.8588589, lng : 2.3470599 };
 		if(Object.keys(req.query).length == 0 ) {
 			var ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress || req.socket.remoteAddress || req.connection.socket.remoteAddress;
-			console.log('\n\n[DEBUG] ip = ' + ip);
+			logger.debug('ip = ' + ip);
 			userlocation.getRemoteGeoLocationFromIp(ip, function(err, results){
-				console.log(err + " " + results);
+				logger.debug(err + " " + results);
 				if (err) {
-					console.log('err = ' + err);
+					logger.error('err = ' + err);
 				} else if(results.ip) {
 					var r = JSON.parse(results);
                     o = {lat : r.latitude, lng : r.longitude};
@@ -92,12 +93,12 @@ function getConcerts (lat, lng, radius, artists, limit, date, fn) {
  	var newDate = new Date();
  	if (date) newDate = date;
  	dbQuery.startDate = { $gte : new Date(newDate)};
- 	db.concerts.find( dbQuery, { 'limit' : l }, function(err, result) {
+ 	db.concerts.find( dbQuery).limit(l, function(err, result) {
 	   	if(!err) {
-    		console.log('\n# of concerts returned = ' + result.length + '\n');
+    		logger.info('\n# of concerts returned = ' + result.length + '\n');
 	        return fn(null, result);
 	    } else {
-	    	console.log(err);
+	    	logger.error(err);
 	    	return fn(err, null);
 	    }
 	});

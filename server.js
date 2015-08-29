@@ -12,7 +12,7 @@ var fs            = require('fs')
   , session       = require('express-session')
   , compression   = require('compression')
   , favicon       = require('serve-favicon')
-  , morgan        = require('morgan')
+  , logger        = require('./logger')
   , flash         = require('connect-flash')
   , passport      = require('passport')
   , https_options = { key: key, cert: cert }
@@ -24,10 +24,7 @@ var fs            = require('fs')
 
    // configure stuff here
   app.disable('x-powered-by');
-  // only log error responses
-  app.use(morgan('combined', {
-    skip: function (req, res) { return res.statusCode < 400 }
-  }));
+  app.use(logger.httpLog);
   app.use(favicon(__dirname + '/public/images/favicon.ico'));
   app.set('views', __dirname + '/public/views/');
   app.set('view engine', 'ejs');
@@ -51,7 +48,9 @@ var fs            = require('fs')
 //}
 
 var user_auth     = require('./app/user-auth')(app, passport)
-  , routes        = require('./app/routes')(app);
+  , routes        = require('./app/routes')(app)
+  , se            = require('./app/submit-event')(app)
+  ;
 
 app.use(function(req, res, next) {
     res.status(404);
@@ -59,4 +58,4 @@ app.use(function(req, res, next) {
   });
 app.listen(process.env.PORT || 3000);
 https.createServer(https_options, app).listen(process.env.PORT+443 || 3443);
-console.log('server listening on port 3000 (HTTP) || 3443 (HTTPS) || ' + process.env.PORT);
+logger.appLog.info('server listening on port 3000 (HTTP) || 3443 (HTTPS) || ' + process.env.PORT);

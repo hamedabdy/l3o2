@@ -52,10 +52,6 @@
 			var d = concerts[i];
 			var cover = (d.img).replace("/64/", "/126/");
 			var latlng = 'lat=' + d.latlng[0] + '&lng=' + d.latlng[1];
-			var imageAlt = d.title;
-			if (d.title.lenth > 13) imageAlt = d.title.substr(0, 13)+' ...';
-			var title = String(d.title).replace(/"/g, "");
-			if (d.title.length > 22) title = d.title.substr(0, 22) + ' ...';
 			var artists = String(d.artist).replace(/,/g, ", ");
 			if (artists.length > 40) artists = artists.substr(0, 40) + ' ...';
 			var artists = artists.split(',');
@@ -68,11 +64,11 @@
 				<div class="tile" id="<%-d['_id']%>">
 					<span class="helper"></span>
 					<a itemprop="url" href="/m?<%=latlng%>&amp;range=10&amp;artist=<%=String(artists[0]).replace(/ /g, '+')%>" class="tile-link">
-						<img itemprop="image" src="<%-cover%>" title="<%=d.title%>" alt="<%=imageAlt%>" onerror="this.src='images/noimage.png';"/>
+						<img itemprop="image" src="<%-cover%>" title="<%=d.title%>" alt="<%=d.title%>" onerror="this.src='images/noimage.png';"/>
 					</a>
 					<div class="tile-info">
 		  				<a href="/m?<%=latlng%>&amp;range=10&amp;artist=<%=String(artists[0])%>" class="tile-link">
-							<div itemprop="name" class="tile-title" title="<%-String(d.title).replace(/"/g, '')%>"><%-title%></div>
+							<div itemprop="name" class="tile-title" title="<%-String(d.title).replace(/"/g, '')%>"><%-d.title%></div>
 						</a>
 						<div class="tile-body"><b>Artists: </b>
 							<span itemprop="performer"><%-artists%></span><br>

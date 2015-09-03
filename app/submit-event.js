@@ -23,6 +23,7 @@ module.exports = function(app) {
         req.body.source = 'form';
         req.body.artist = req.body.artist.split(', ');
         req.body.tags = req.body.tags.split(', ');
+        req.body.score = parseInt(req.body.score);
         db.concerts.insert(req.body);
         res.render('submit-event', {message: 'Thank you for your submission'});
     });

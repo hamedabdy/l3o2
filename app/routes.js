@@ -88,7 +88,7 @@ module.exports = function(app) {
  * @param fn : callback function (err, results)
  */
 function getConcerts (lat, lng, radius, artists, limit, date, fn) {
- 	var l = 5000;
+ 	var l = 500;
  	if (limit) l = limit;
  	var dbQuery = { latlng: { $near:[parseFloat(lat), parseFloat(lng)], $maxDistance: parseFloat(radius)/111.12} };
  	if (artists) dbQuery.artist = new RegExp(artists, 'i');

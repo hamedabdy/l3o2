@@ -57,11 +57,13 @@ function getEventAttr (url, city_name) {
         if(!err){
             var r = (JSON.parse(results)).resultsPage;
             console.log('Fetching attributes for '+city_name+' with : '+options + ' -- totalEntries= '+r.totalEntries);
-            // (r.totalEntries/MAX_PER_PAGE)+1 = total pages
-            var totalPages = parseInt(r.totalEntries/MAX_PER_PAGE)+1;
-            for(p=1; p<totalPages; p++){
-                _url = util.format(url, p);
-                getEventPerCityId(_url, city_name);
+            if(r.totalEntries > 0){
+                // (r.totalEntries/MAX_PER_PAGE)+1 = total pages
+                var totalPages = parseInt(r.totalEntries/MAX_PER_PAGE)+1;
+                for(p=1; p<totalPages; p++){
+                    _url = util.format(url, p);
+                    getEventPerCityId(_url, city_name);
+                }
             }
         }
     });

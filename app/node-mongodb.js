@@ -1,18 +1,21 @@
 #!/usr/bin/env node
 
-var mongojs 	= require('mongojs')
-    ,configDB 	= require('../config/database')
-    ,db			= mongojs(configDB.url, ['concerts'])
-    ,db2        = mongojs(configDB.url, ['ads'])
-    ,logger     = require('../logger').appLog;
+var mongojs   = require('mongojs')
+    ,configDB = require('../config/database')
+    ,db       = mongojs(configDB.url, ['concerts'])
+    ,db2      = mongojs(configDB.url, ['ads'])
+    ,logger   = require('../logger').appLog;
 
 /*
  * inserting data into database (Insert everythin and clean the old ones afterwards)
  */
 function insertData(data) {
     db.concerts.insert(data, {continueOnError: true}, function(err, docs){
-       if(err) logger.warn(err);
-       else logger.info('concerts inserted successfully!\n');
+        // code = 11000 : duplicate key. code = 13027 : Point out of geo point interval
+        if(err && !err.code != 11000 && !err.code != 13027){
+            logger.warn(err);
+        }
+        else logger.info('concerts inserted successfully!\n');
    });
 };
 
@@ -27,16 +30,16 @@ function upsertData(data) {
 };
 
 function dropCollection(){
-	db.concerts.drop();
+    db.concerts.drop();
 };
 
 function ensureIndex(){
-	db.concerts.ensureIndex({latlng : "2d"});
+    db.concerts.ensureIndex({latlng : "2d"});
 };
 
 function closeDatabase(){
-	db.close();
-	logger.info('concerts db cloesd!');
+    db.close();
+    logger.info('concerts db cloesd!');
 };
 
 function insertAds(data) {

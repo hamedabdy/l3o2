@@ -41,15 +41,15 @@ module.exports = function(app) {
 	});
 
 	app.get('/m', function(req, res){
-		if(Object.keys(req.query).length != 0){
-			res.locals.query = req.query;
-			var lat = req.query.lat
-				, lng = req.query.lng
-				, artist = req.query.artist;
-			getConcerts(lat, lng, 10, artist, '', '', function(err, results){
+		var q = req.query;
+		if(Object.keys(q).length != 0){
+			res.locals.query = q;
+			getConcerts(q.lat, q.lng, q.range, q.artist, '', '', function(err, results){
 				if(!err){
-					results[0].score = parseInt(results[0].score)+1;
-					db.concerts.update({'_id': results[0]['_id']}, results[0]);
+					if (Object.keys(q).length == 1) {
+						results[0].score = parseInt(results[0].score)+1;
+						db.concerts.update({'_id': results[0]['_id']}, results[0]);
+					};
 					res.render('map', {concerts : results});
 				} else res.render('404', {});
 			});
@@ -61,7 +61,7 @@ module.exports = function(app) {
 	});
 
 	/*
-	 * Getting data from database filtered by artist and client's date
+	 * Concerts API
 	 */
 	app.get('/concert', function(req, res){
 		var q =  req.query;

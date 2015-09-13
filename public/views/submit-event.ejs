@@ -38,11 +38,12 @@
                 <label for="description">Description:</label><textarea class="form-control" id="description" name="description" placeholder="Description" maxlength="500" cols="50"></textarea>
                 <label for="tags">Tags:</label><input type="text" class="form-control" id="tags" name="tags" placeholder="cool, funky, free" />
                 <label for="score">Campaigne Type:</label><select class="form-control" id="score" name="score" readonly="true">
-                    <option value="5" selected="true">Standard (5 Points)</option>
-                    <!-- <option value="50">Bronze (50 Points) 5 Euros</option>
-                    <option value="100">Silver (100 Points) 9 Euros</option>
-                    <option value="150">Gold (150 Points) 13 Euros</option>
-                    <option value="200">Platinium (200 Points) 16</option> -->
+                    <option value="<%-score[0]%>" selected="true">Standard (5 Points)</option>
+                    <!-- <option value="<%-score[1]%>">Bronze (50 Points) 5 Euros</option>
+                    <option value="<%-score[2]%>">Silver (100 Points) 9 Euros</option>
+                    <option value="<%-score[3]%>">Gold (150 Points) 13 Euros</option>
+                    <option value="<%-score[4]%>">Platinium (200 Points) 17 Euros</option>
+                    <option value="<%-score[5]%>">Titanium (400 Points) 32 Euros</option> -->
                 </select>
             </fieldset>
             <fieldset>

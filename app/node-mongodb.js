@@ -55,6 +55,8 @@ function closeAdsDb(){
     logger.info('ads db cloesd!');
 };
 
+ensureIndex();
+
 exports.dropCollection = dropCollection;
 exports.insertData = insertData;
 exports.upsertData = upsertData;

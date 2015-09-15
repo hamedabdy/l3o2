@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta name="description" content="Le Concert d'a Cote, helps you geolocate concerts nearby. Concerts worldwide: Europe, United States, Asia, Australia" />
-<meta name="keywords" content="concerts, googlemaps, search, geolocate, find, nearby, europe, us, lastfm, place, near, 151703ea239fe4a8e778" />
+<meta name="description" content="Le Concert d'a Cote, helps you geolocate concerts nearby. You can also use our event submit tool to get referenced" />
+<meta name="keywords" content="concerts, search, geolocate, find, nearby, submit, event, reference, europe, U.S.A, asia, place, near, 151703ea239fe4a8e778" />
 <meta name="author" content="Hamed" />
-<title> Le Concert d'à Côté | Geolocate concerts near your place </title>
+<title> Le Concert d'à Côté | Concerts near you </title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
 <link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css" />
@@ -46,7 +46,7 @@
 	</div>
 	<div class="tiles-box" id="tiles-box">
 		<%
-		l = ((Object.keys(concerts).length < 31) ? Object.keys(concerts).length:31);
+		l = ((Object.keys(concerts).length < 33) ? Object.keys(concerts).length:33);
 		if(lat && lng && Object.keys(concerts).length != 0) {
 		  for (var i = 0; i < l; i++) {
 			var d = concerts[i];

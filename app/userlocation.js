@@ -5,7 +5,8 @@ var request     = require('request')
     ,logger     = require('../logger').appLog;
 
 function getRemoteGeoLocationFromIp (ip, fn) {
-	var url = 'https://freegeoip.net/json/'+ip;
+    // var url = 'https://freegeoip.net/json/'+ip;
+	var url = 'http://ip-api.com/json/'+ip;
 	logger.debug('Requesting : ' + url);
 	request({'uri' : url, 'timeout' : 2000}, function(err, response, results){
 		logger.debug(err, results);

@@ -13,7 +13,7 @@ module.exports = function(app) {
 	app.get('/', function(req, res){
 		var fullUrl = req.protocol + '://' + req.get('host') + req.originalUrl;
 		res.locals.url = fullUrl;
-		var o = { lat : 48.8588589, lng : 2.3470599 };
+		var o = { lat : 48.8588589, lng : 2.3470599, loc : 'unknown' };
 		if(Object.keys(req.query).length == 0) {
 			var ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress || req.socket.remoteAddress || req.connection.socket.remoteAddress;
 			logger.debug('ip = ' + ip);

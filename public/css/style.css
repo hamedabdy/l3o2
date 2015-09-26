@@ -575,6 +575,7 @@ section {
 .info {
     color: rgb(255, 255, 255);
     padding: 0.8em;
+    font-size: 0.85em;
 }
 
 /* ------------ COMPONENT.CSS ------------- */

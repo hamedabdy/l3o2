@@ -19,23 +19,31 @@ module.exports = function(app) {
 			logger.debug('ip = ' + ip);
 			userlocation.getRemoteGeoLocationFromIp(ip, function(err, results){
 				logger.debug(err + " " + results);
-				if (err) {
-					logger.error(err);
-				} else if(results.ip) {
+				if(results.status == "success") {
 					var r = JSON.parse(results);
-                    o = {lat : r.latitude, lng : r.longitude};
+                    o = {lat : r.lat, lng : r.lon, loc : r.city + ', ' + r.country};
+                    getConcerts(o.lat, o.lng, 100, '', 50, '', function(err, results) {
+						if (!err) {
+							o.concerts = results;
+							logger.info(o);
+							res.render('index', o);
+						}
+					});
+				} else {
+					logger.error(err);
+					getConcerts(o.lat, o.lng, 100, '', 50, '', function(err, results) {
+						if (!err) {
+							o.concerts = results;
+							logger.info(o);
+							res.render('index', o);
+						}
+					});
 				}
 			});
-			getConcerts(o.lat, o.lng, 100, '', 50, '', function(err, results) {
-			if (!err) {
-				o.concerts = results;
-				res.render('index', o);
-			}
-			});
 		} else {
-			if (req.query.lat && req.query.lng)
-				o = {lat : req.query.lat, lng : req.query.lng};
-			else
+			// if (req.query.lat && req.query.lng)
+			// 	o = {lat : req.query.lat, lng : req.query.lng};
+			// else
 				res.render('404', {});
 		}
 	});

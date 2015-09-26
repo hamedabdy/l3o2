@@ -16,7 +16,6 @@ module.exports = function(app) {
 		var o = { lat : 48.8588589, lng : 2.3470599, loc : 'unknown' };
 		if(Object.keys(req.query).length == 0) {
 			var ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress || req.socket.remoteAddress || req.connection.socket.remoteAddress;
-			ip = '46.193.143.95';
 			logger.debug('ip = ' + ip);
 			userlocation.getRemoteGeoLocationFromIp(ip, function(err, results){
 				var r = JSON.parse(results);

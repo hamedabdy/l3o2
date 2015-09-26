@@ -16,16 +16,16 @@ module.exports = function(app) {
 		var o = { lat : 48.8588589, lng : 2.3470599, loc : 'unknown' };
 		if(Object.keys(req.query).length == 0) {
 			var ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress || req.socket.remoteAddress || req.connection.socket.remoteAddress;
+			ip = '46.193.143.95';
 			logger.debug('ip = ' + ip);
 			userlocation.getRemoteGeoLocationFromIp(ip, function(err, results){
-				logger.debug(err + " " + results);
-				if(results.status == "success") {
-					var r = JSON.parse(results);
+				var r = JSON.parse(results);
+				logger.debug(err + " " + r);
+				if(r.status == "success") {
                     o = {lat : r.lat, lng : r.lon, loc : r.city + ', ' + r.country};
                     getConcerts(o.lat, o.lng, 100, '', 50, '', function(err, results) {
 						if (!err) {
 							o.concerts = results;
-							logger.info(o);
 							res.render('index', o);
 						}
 					});
@@ -34,7 +34,6 @@ module.exports = function(app) {
 					getConcerts(o.lat, o.lng, 100, '', 50, '', function(err, results) {
 						if (!err) {
 							o.concerts = results;
-							logger.info(o);
 							res.render('index', o);
 						}
 					});

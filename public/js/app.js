@@ -297,13 +297,32 @@ function newGoogleMap(ip_latitude, ip_longitude, fn) {
     return fn(carte);
 };
 
+function initLocation(query, concerts) {
+    if(query) {
+        // Setting default values to range and artist
+        query.range = defaultFor(query.range, 10);
+        query.artist = defaultFor(query.artist, '');
+        setUserLocation(query, concerts);
+    }
+    else {
+        ipLocation(function(err, r){
+            if(r && r.status == 'success'){
+                newGoogleMap(r.lat, r.lon, function(carte) {
+                    // carte.panTo(new google.maps.LatLng(query.lat, query.lng));
+                });
+            } else {
+                newGoogleMap(48.8588589, 2.3470599, function(carte) {
+                    // carte.panTo(new google.maps.LatLng(48.8588589, 2.3470599));
+                });
+            }
+        });
+    }
+}
+
 /*
  * This fucntion sets the user location on the map. ref. geoLocateCallback()
  */
 function setUserLocation(query, concerts) {
-    // Setting default values to range and artist
-    query.range = defaultFor(query.range, 10);
-    query.artist = defaultFor(query.artist, '');
     newGoogleMap(query.lat, query.lng, function(carte) {
         carte.panTo(new google.maps.LatLng(query.lat, query.lng));
         var pinColor = "#79CDCD";
@@ -362,6 +381,7 @@ function geoCodeAddress(address, range, artist) {
                 longitude = parseFloat(longitude);
                 range = parseFloat(range);
                 updateUrl(latitude, longitude, range, artist);
+                query = {lat : latitude, lng: longitude, range: range, artist: artist};
                 getConcerts(latitude, longitude, range, artist, function(err, results){
                     if(!err) setUserLocation(query, results);
                 });
@@ -470,3 +490,19 @@ function updateFormFields (address, range, artist) {
 };
 
 function defaultFor(arg, val) { return typeof arg !== 'undefined' ? arg : val; };
+
+function ipLocation(fn) {
+    var url = '//ip-api.com/json/';
+    $.ajax({
+        type : 'GET',
+        url : url,
+        error: function(jqxhr, status, err) {
+            console.log(JSON.stringify(err) + " " + JSON.stringify(status)
+                + " " + JSON.stringify(jqxhr));
+            return fn(err, null);
+        },
+        success : function(data, status) {
+            return fn(null, data);
+        }
+    });
+}

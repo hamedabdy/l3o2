@@ -95,7 +95,7 @@
         if(address != '') {
             geocoder.geocode({ "address" : address }, function(results, status) {
                 if (status == google.maps.GeocoderStatus.OK) {
-                    document.getElementById('latlng').value = results[0].geometry.location.G + ',' + results[0].geometry.location.K;
+                    document.getElementById('latlng').value = results[0].geometry.location.H + ',' + results[0].geometry.location.L;
                 } else alert("Sorry couldn't find the given address!");
             });
         }

@@ -52,9 +52,11 @@ module.exports = function(app) {
 			res.locals.query = q;
 			getConcerts(q.lat, q.lng, q.range, q.artist, '', '', function(err, results){
 				if(!err){
-					if (Object.keys(q).length == 1) {
+					logger.trace(results.length);
+					if (results.length == 1 || q.artist) {
 						results[0].score = parseInt(results[0].score)+1;
 						db.concerts.update({'_id': results[0]['_id']}, results[0]);
+						logger.trace(results[0]);
 					};
 					res.render('map', {concerts : results});
 				} else res.render('404', {});

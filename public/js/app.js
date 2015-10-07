@@ -416,9 +416,8 @@ function newOverlay(carte, concerts, oms){
     var artists = String(concerts.artist).replace(/,/g, ", ");
     if (artists.length > 50) artists = artists.substr(0, 50) + ' ...';
     var artists = artists.split(',');
-    var date = new Date(concerts.startDate).toLocaleString();
-    date = date.slice(0, -18);
-    var _content = '<div class="info-window-body"><span class="helper"></span><img src="'+concerts.img+'" title="'+concerts.title+'" alt="'+imageAlt+'" onerror="this.src=\'images/noimage.png\'"/><div class="tile-info info-window-info"><div class="tile-title info-window-title" title="'+concerts.title+'">'+title+'</div><div class="tile-body"><b>Artists: </b><span>'+artists+'</span><br><b>Date:</b>'+date+'<br><span>'+concerts.address+'</span></div><div class="shareBtns">'+share.fb_share+share.tw_share+share.gplus+share.su+share.extLink+'</div></div></div>';
+    var date = new Date(concerts.startDate).toLocaleString(navigator.language, {day: 'numeric', month: 'numeric', year: 'numeric', hour: '2-digit', minute: '2-digit'});
+    var _content = '<div class="info-window-body"><span class="helper"></span><img style="max-width: 300px; max-height: 300px;" src="'+concerts.img+'" title="'+concerts.title+'" alt="'+imageAlt+'" onerror="this.src=\'images/noimage.png\'"/><div class="tile-info info-window-info"><div class="tile-title info-window-title" title="'+concerts.title+'">'+title+'</div><div class="tile-body"><b>Artists: </b><span>'+artists+'</span><br><b>Date: </b>'+date+'<br><span>'+concerts.address+'</span></div><div class="shareBtns">'+share.fb_share+share.tw_share+share.gplus+share.su+share.extLink+'</div></div></div>';
     var WindowOptions = { content: _content };
     var InfoWindow = new google.maps.InfoWindow(WindowOptions);
     infoWindows.push(InfoWindow);

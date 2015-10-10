@@ -95,7 +95,12 @@
         if(address != '') {
             geocoder.geocode({ "address" : address }, function(results, status) {
                 if (status == google.maps.GeocoderStatus.OK) {
-                    document.getElementById('latlng').value = results[0].geometry.location.H + ',' + results[0].geometry.location.L;
+                    var latlng = results[0].geometry.location + "";
+                    var tab_latlng = latlng.split(',');
+                    var latitude = parseFloat(tab_latlng[0].replace('(', ''));
+                    var longitude = parseFloat(tab_latlng[1].replace(')', ''));
+                    console.log(latitude + ',' + longitude);
+                    document.getElementById('latlng').value = latitude + ',' + longitude;
                 } else alert("Sorry couldn't find the given address!");
             });
         }

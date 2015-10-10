@@ -375,10 +375,8 @@ function geoCodeAddress(address, range, artist) {
             if (status == google.maps.GeocoderStatus.OK) {
                 var latlng = results[0].geometry.location + "",
                 tab_latlng = latlng.split(','),
-                latitude = tab_latlng[0].replace('(', ''),
-                longitude = tab_latlng[1].replace(')', '');
-                latitude = parseFloat(latitude);
-                longitude = parseFloat(longitude);
+                latitude = parseFloat(tab_latlng[0].replace('(', '')),
+                longitude = parseFloat(tab_latlng[1].replace(')', ''));
                 range = parseFloat(range);
                 updateUrl(latitude, longitude, range, artist);
                 query = {lat : latitude, lng: longitude, range: range, artist: artist};

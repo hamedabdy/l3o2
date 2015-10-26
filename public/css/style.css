@@ -543,16 +543,12 @@ a {
 
 a:hover {}
 
-section {
-    margin-top: -31px;
-}
-
 .main {
     position: fixed;
     transition: all 0.3s ease 0s;
     z-index: 5;
     right: 0;
-    top: 30px;
+    top: 23px;
 }
 
 .main > section button {

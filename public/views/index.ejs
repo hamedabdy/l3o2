@@ -102,13 +102,14 @@
 	</div>
 	<nav class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-right" id="cbp-spmenu-s2">
 		<h3>About</h3>
-		<div class="info"><p>Le Concert d'a Cote, helps you geolocate concerts nearby. New feature, now you can submit your own event to be referenced by our site.</p><p>Please feel free to contact us through the social options provided below or send an email to concert.dacote@gmail.com for any feedback or support.</p>
+		<div class="info"><p>Le Concert d'a Cote, helps you geolocate concerts nearby. New feature, now you can submit your own event to be referenced by our site.</p><p>Please feel free to contact us through the social options provided below or send an email to contact@concert-dacote.com for any feedback or support.</p>
 		<p>Recommending events based on your ip location : <%=loc%> </p>
-		  	<div class="fb-like" data-href="//facebook.com/concert.dacote" data-layout="button_count" data-action="like" data-show-faces="false" data-share="true"></div>
-			<a href="//twitter.com/ConcertDaCote" class="twitter-follow-button" data-show-count="false" data-lang="en">Follow @ConcertDaCote</a>
 			<a href="/">Home</a>
 			<a href="/m">View Map</a>
 			<a href="/se">Submit Your Event</a>
+			<h4>Community</h4>
+			<a href="//facebook.com/concert.dacote">Facebook</a>
+			<a href="//twitter.com/ConcertDaCote">Twitter</a>
 		</div>
 		<div class="info footer">Copyright 2013-15</div>
 	</nav>
@@ -121,19 +122,6 @@
 		$(document).ready(function(){
 		  $( 'body' ).addClass( 'page-loaded' );
 		});
-
-		window.fbAsyncInit = function() {
-			FB.init({appId:'566488513446170', xfbml:true, version:'v2.2'});
-		};
-
-		(function(d, s, id){
-			var js, fjs = d.getElementsByTagName(s)[0];
-			if (d.getElementById(id)) {return;}
-			js = d.createElement(s); js.id = id;
-			js.src = "//connect.facebook.net/en_US/sdk.js";
-			fjs.parentNode.insertBefore(js, fjs);
-		}(document, 'script', 'facebook-jssdk'));
-		!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");
 	</script>
 </body>
 </html>

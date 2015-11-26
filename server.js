@@ -5,8 +5,6 @@ var fs            = require('fs')
   , http          = require('http')
   , express       = require('express')
   , app           = express()
-  , key           = fs.readFileSync('./cert/key.pem')
-  , cert          = fs.readFileSync('./cert/cdc.pem')
   , cookieParser  = require('cookie-parser')
   , bodyParser    = require('body-parser')
   , session       = require('express-session')
@@ -15,7 +13,6 @@ var fs            = require('fs')
   , logger        = require('./logger')
   , flash         = require('connect-flash')
   , passport      = require('passport')
-  , https_options = { key: key, cert: cert }
   ;
 
 // Express 4.x config
@@ -56,6 +53,5 @@ app.use(function(req, res, next) {
     res.status(404);
     res.render('404', {});
   });
-app.listen(process.env.PORT || 3000);
-https.createServer(https_options, app).listen(process.env.PORT+443 || 3443);
-logger.appLog.info('server listening on port 3000 (HTTP) || 3443 (HTTPS) || ' + process.env.PORT);
+app.listen(process.env.PORT || 5000);
+logger.appLog.info('server listening on port 5000 (HTTP) || ' + process.env.PORT);

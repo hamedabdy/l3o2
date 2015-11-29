@@ -407,7 +407,7 @@ input:invalid {
 }
 
 .footer {
-    position: absolute;
+    position: relative;
     bottom: 5px;
     border-top: 1px solid #C42F2F;
     width: 100%;
@@ -653,6 +653,8 @@ a:hover {}
     -webkit-transition: all 0.3s ease;
     -moz-transition: all 0.3s ease;
     transition: all 0.3s ease;
+    overflow-y: scroll;
+    overflow-x: hidden;
 }
 
 /* Example media queries */

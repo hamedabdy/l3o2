@@ -53,7 +53,7 @@ module.exports = function(app) {
 			getConcerts(q.lat, q.lng, q.range, q.artist, '', '', function(err, results){
 				if(!err){
 					logger.trace(results.length);
-					if (results.length == 1 || q.artist) {
+					if (results.length == 1 || (q.artist && results.length>0)) {
 						results[0].score = parseInt(results[0].score)+1;
 						db.concerts.update({'_id': results[0]['_id']}, results[0]);
 						logger.trace(results[0]);

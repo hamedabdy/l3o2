@@ -25,7 +25,7 @@
 			<a href="/"><img title="Le Concert d'à Côté" src="images/logored-shadow.png" alt="Le Concert d'a Cote logo"></a>
 		</div>
 		<div class="form-holder form-holder-transition" id="form-holder">
-			<form class="form-wrapper cf" id="myForm" name="searchBar" action="concert" method="GET" onsubmit="geoCodeAddress();">
+			<form class="form-wrapper cf" id="myForm" name="searchBar">
 				<div class="form-wraper-location">
 					<img src="images/marker.png" title="Press to get geolocated" alt="Press to get geolocated" onclick="geoLocate();"/>
 				</div>
@@ -36,11 +36,13 @@
 				<div class="sliderContainer" title="Use the handle to change range">
 					<div id="range" class="form-wraper-range"></div>
 				</div>
-				<input type="text" id="amount" class="form-wraper-amount" disabled="disabled" title="Range"/>
+				<input type="text" id="amount" name="range" class="form-wraper-amount" title="Range"/>
 				<div>
 					<input type="text" name="artist" id="artist" class="hideInput form-wrapper-input artist-input" placeholder="Enter an artist name here..."/>
 				</div>
 				<button type="button" id="extendBtn" class="optionsBtn"></button>
+				<input type="hidden" name="lat" id="lat" value="0"/>
+				<input type="hidden" name="lng" id="lng" value="0"/>
 			</form>
 		</div>
 	</div>

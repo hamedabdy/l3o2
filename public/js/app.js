@@ -197,22 +197,21 @@ extendBtn.onclick = function() {
   classie.toggle( extendBtn, 'changeBtn' );
 };
 
-$( '#myForm' ).submit(function(){
-    var address = document.getElementById('address').value
-        , range = parseFloat($('#range').slider('value'))
-        , artist = document.getElementById('artist').value
-        , geocoder = new google.maps.Geocoder();
+
+// Action taken before Form submission
+$( '#valider' ).on('click', function(e){
+    e.preventDefault();
+    var address = document.getElementById('address').value;
+    $('#amount').val(parseFloat($('#range').slider('value')));
+    var geocoder = new google.maps.Geocoder();
     if(address != '') {
         geocoder.geocode({ "address" : address }, function(results, status) {
             if (status == google.maps.GeocoderStatus.OK) {
                 var latlng = results[0].geometry.location + "",
-                tab_latlng = latlng.split(','),
-                latitude = tab_latlng[0].replace('(', ''),
-                longitude = tab_latlng[1].replace(')', '');
-                latitude = parseFloat(latitude);
-                longitude = parseFloat(longitude);
-                range = parseFloat(range);
-                assignUrl(latitude, longitude, range, artist);
+                tab_latlng = latlng.split(',');
+                $('#lat').val(parseFloat(tab_latlng[0].replace('(', '')));
+                $('#lng').val(parseFloat(tab_latlng[1].replace(')', '')));
+                $('#myForm').submit();
             } else alert("Sorry couldn't find the given address!");
         });
     }

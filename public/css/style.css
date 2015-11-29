@@ -653,7 +653,7 @@ a:hover {}
     -webkit-transition: all 0.3s ease;
     -moz-transition: all 0.3s ease;
     transition: all 0.3s ease;
-    overflow-y: scroll;
+    overflow-y: auto;
     overflow-x: hidden;
 }
 

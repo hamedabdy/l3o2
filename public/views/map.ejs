@@ -46,7 +46,8 @@
 			</form>
 		</div>
 	</div>
-	<div id="carte" class="carte" ></div>
+	<div id="alert-msg" class="msg"></div>
+	<div id="carte-container"><div id="carte" class="carte" ></div></div>
 	<nav class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-right" id="cbp-spmenu-s2">
 		<h3>About</h3>
 		<div class="info"><p>Le Concert d'a Cote, helps you geolocate concerts nearby. New feature, now you can submit your own event to be referenced by our site.</p><p>Please feel free to contact us through the social options provided below or send an email to contact@concert-dacote.com for any feedback or support.</p>
@@ -73,6 +74,7 @@
 			$( 'body' ).addClass( 'page-loaded' );
 			document.body.onload = initLocation(<%-JSON.stringify(query)+', '+JSON.stringify(concerts)%>);
 		});
+		$('#carte-container').height($(window).height()-100);
 	</script>
 </body>
 </html>

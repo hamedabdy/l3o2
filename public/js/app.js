@@ -212,7 +212,7 @@ $( '#valider' ).on('click', function(e){
                 $('#lat').val(parseFloat(tab_latlng[0].replace('(', '')));
                 $('#lng').val(parseFloat(tab_latlng[1].replace(')', '')));
                 $('#myForm').submit();
-            } else alert("Sorry couldn't find the given address!");
+            } else printMsg("Sorry couldn't find the given address!");
         });
     }
 });
@@ -252,8 +252,7 @@ function indexGeoLocate() {
                 , artist = document.getElementById('artist').value;
             assignUrl(latitude, longitude, range, artist);
         });
-    else
-        alert("Your browser does not support HTML5 Geolocation!");
+    else printMsg("Your browser does not support HTML5 Geolocation!");
 };
 
 /*
@@ -262,8 +261,7 @@ function indexGeoLocate() {
 function geoLocate() {
     if (navigator.geolocation)
         navigator.geolocation.getCurrentPosition(geoLocateCallback);
-    else
-        alert("Your browser does not support HTML5 Geolocation!");
+    else printMsg("Your browser does not support HTML5 Geolocation!");
 };
 
 /*
@@ -382,7 +380,7 @@ function geoCodeAddress(address, range, artist) {
                 getConcerts(latitude, longitude, range, artist, function(err, results){
                     if(!err) setUserLocation(query, results);
                 });
-            } else alert("Sorry couldn't find the given address!");
+            } else printMsg("Sorry couldn't find the given address!");
         });
     }
 };
@@ -440,7 +438,7 @@ function plotOverlays(carte, lat, lng, concerts) {
         var markerCluster = new MarkerClusterer(carte, markers);
         markerCluster.setMaxZoom(15);
         markerCluster.setGridSize(40);
-    } else alert('No conerts found at this time for the given parameters (range/address/artist)');
+    } else printMsg('No conerts found at this time for the given parameters (range/address/artist)');
 
 };
 
@@ -501,4 +499,9 @@ function ipLocation(fn) {
             return fn(null, data);
         }
     });
+}
+
+function printMsg(message) {
+    $('#alert-msg').html(message);
+    $('#alert-msg').delay(7000).slideUp('fast');
 }

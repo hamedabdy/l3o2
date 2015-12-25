@@ -18,7 +18,7 @@ module.exports = function(app) {
 			var ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress || req.socket.remoteAddress || req.connection.socket.remoteAddress;
 			logger.debug('ip = ' + ip);
 			userlocation.getRemoteGeoLocationFromIp(ip, function(err, results){
-				var r = JSON.parse(results);
+				var r = (results) ? JSON.parse(results) : void 0;
 				logger.debug(err + " " + r);
 				if(r.status == "success") {
                     o = {lat : r.lat, lng : r.lon, loc : r.city + ', ' + r.country};
@@ -39,9 +39,6 @@ module.exports = function(app) {
 				}
 			});
 		} else {
-			// if (req.query.lat && req.query.lng)
-			// 	o = {lat : req.query.lat, lng : req.query.lng};
-			// else
 				res.render('404', {});
 		}
 	});

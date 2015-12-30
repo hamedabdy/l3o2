@@ -4,7 +4,7 @@
     if(lat && lng && Object.keys(concerts).length != 0) {
       for (var i = 0; i < l; i++) {
         var d = concerts[i];
-        var cover = (d.img).replace("/64/", "/126/");
+        var cover = (d.img != null) ? (d.img).replace("/64/", "/126/") : 'noimage';
         var latlng = 'lat=' + d.latlng[0] + '&lng=' + d.latlng[1];
         var artists = String(d.artist).replace(/,/g, ", ");
         if (artists.length > 40) artists = artists.substr(0, 40) + ' ...';

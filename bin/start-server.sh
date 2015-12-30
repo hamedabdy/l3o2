@@ -11,7 +11,7 @@ PARENT="$(dirname "$DIR")"
 # Invoke the Forever module (to START our Node.js server).
 mkdir -p logs
 
-./node_modules/forever/bin/forever -v \
+forever -v \
 start \
 -al forever.log \
 -ao logs/out.log \

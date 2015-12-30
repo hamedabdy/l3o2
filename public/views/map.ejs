@@ -5,70 +5,13 @@
 <meta name="keywords" content="<%if(concerts.length!=0){%><%for(i=0;i<concerts.length;i++){%><%=concerts[i].title+' | '%><%}%><%}%>" />
 <meta name="author" content="<%if(concerts.length!=0){%><%for(i=0;i<concerts.length;i++){%><%=concerts[i].artist+' | '%><%}%><%}%>" />
 <title><%if(concerts.length!=0){%><%=concerts[0].title+' | '%><%}%>Le Concert d'à Côté</title>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
-<link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css" />
-<link rel="stylesheet" type="text/css" href="css/style.css"/>
-</head>
-<body class="">
-	<div class="main" id="infoBtn">
-		<section>
-			<button id="showRight" title="More info...">
-				<img src="images/menu.png" alt="Options">
-			</button>
-		</section>
-	</div>
-	<div class="header-holder"></div>
-	<div class="header">
-		<div class="logo">
-			<h1>Le Concert d'a Cote</h1>
-			<a href="/"><img title="Le Concert d'à Côté" src="images/logored-shadow.png" alt="Le Concert d'a Cote logo"></a>
-		</div>
-		<div class="form-holder form-holder-transition" id="form-holder">
-			<form class="form-wrapper cf" id="myForm" name="searchBar">
-				<div class="form-wraper-location">
-					<img src="images/marker.png" title="Press to get geolocated" alt="Press to get geolocated" onclick="geoLocate();"/>
-				</div>
-				<input id="address" name="address" type="text" class="form-wrapper-input" placeholder="Enter address here..." required/>
-				<button id="valider" class="form-wrapper-button" type="submit">
-					<img src="images/search.png" alt="Search">
-				</button>
-				<div class="sliderContainer" title="Use the handle to change range">
-					<div id="range" class="form-wraper-range"></div>
-				</div>
-				<input type="text" id="amount" name="range" class="form-wraper-amount" title="Range"/>
-				<div>
-					<input type="text" name="artist" id="artist" class="hideInput form-wrapper-input artist-input" placeholder="Enter an artist name here..."/>
-				</div>
-				<button type="button" id="extendBtn" class="optionsBtn"></button>
-				<input type="hidden" name="lat" id="lat" value="0"/>
-				<input type="hidden" name="lng" id="lng" value="0"/>
-			</form>
-		</div>
-	</div>
-	<div id="alert-msg" class="msg"></div>
-	<div id="carte-container"><div id="carte" class="carte" ></div></div>
-	<nav class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-right" id="cbp-spmenu-s2">
-		<h3>About</h3>
-		<div class="info"><p>Le Concert d'a Cote, helps you geolocate concerts nearby. New feature, now you can submit your own event to be referenced by our site.</p><p>Please feel free to contact us through the social options provided below or send an email to contact@concert-dacote.com for any feedback or support.</p>
-			<a href="/">Home</a>
-			<a href="/m">View Map</a>
-			<a href="/se">Submit Your Event</a>
-			<h4>Community</h4>
-			<a href="//facebook.com/concert.dacote">Facebook</a>
-			<a href="//twitter.com/ConcertDaCote">Twitter</a>
-			<a href="//plus.google.com/+Concert-dacote">Google+</a>
-		</div>
-		<div class="info footer"> Copyright 2013-15 </div>
-	</nav>
-	<div id="fb-root"></div>
-	<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
-	<script src="//code.jquery.com/ui/1.10.4/jquery-ui.min.js"></script>
-	<script src="//maps.google.com/maps/api/js?sensor=true"></script>
-	<script src="js/modernizr.custom.js"></script>
-	<script src="js/markerclusterer_packed.js"></script>
-	<script src="js/app.js"></script>
-	<script src="js/oms.min.js"></script>
+
+<%- include('header'); %>
+
+<%- include('carte'); %>
+
+<%- include('footer', {location: '', extra_deps: '<script src="js/modernizr.custom.js"></script><script src="js/markerclusterer_packed.js"></script><script src="js/oms.min.js"></script>'}); %>
+
 	<script>
 		$(document).ready(function(){
 			$( 'body' ).addClass( 'page-loaded' );

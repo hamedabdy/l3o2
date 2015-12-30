@@ -45,7 +45,7 @@ body {
 .logo {
     width: 150px;
     background-size: 200px 90px;
-    margin: 10 0 0 0;
+    margin: 10px 0 0 0;
     position: fixed;
     left: 2%;
 }
@@ -205,6 +205,8 @@ input:invalid {
    width: 35px;
    border-radius: 3px;
    margin: 3px;
+   padding: 0;
+   left: 11px;
 }
 
 .form-wraper-location:hover {
@@ -212,9 +214,9 @@ input:invalid {
 }
 
 .form-wraper-location img {
-    width: 90%;
-    margin: 50%;
-    transform: translate(-52%, -53%);
+    width: 100%;
+    position: relative;
+    top: 1px;
 }
 
 .form-wraper-amount {
@@ -378,8 +380,6 @@ input:invalid {
 }
 
 .footer {
-    position: relative;
-    bottom: 5px;
     border-top: 1px solid #C42F2F;
     width: 100%;
 }
@@ -516,6 +516,7 @@ input:invalid {
     box-shadow: 0 0 0;
     border-radius: 0;
     opacity: .9;
+    padding: 0;
 }
 
 /* ---------- DEFUALT.CSS ----------*/

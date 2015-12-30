@@ -143,11 +143,10 @@ function shareButtons (data, fn) {
         shareBtns.su = '<a href="http://stumbleupon.com/submit?url='+encodedURL+'" target="_blank"><img width="25" src="images/stumble_upon.png" '+'alt="Stumble" title="Stumble"/></a>';
         return fn(shareBtns);
 };
-
-// --------------------------
+// ---------------- End of share buttons
 
 /*
- * Side bar
+ * Right Pane
  */
 var menuRight = document.getElementById( 'cbp-spmenu-s2' )
     , showRight = document.getElementById( 'showRight' )
@@ -180,6 +179,7 @@ function options () {
     classie.toggle( infoBtn, 'showInfo' );
     classie.toggle( menuRight, 'cbp-spmenu-open' );
 };
+// ------------ End of right pane:
 
 /*
  * Toggle artist search button
@@ -196,12 +196,12 @@ extendBtn.onclick = function() {
   classie.toggle( myForm, 'extendShadow' );
   classie.toggle( extendBtn, 'changeBtn' );
 };
-
+// --------- End of Artist toggle button
 
 // Action taken before Form submission
 $( '#valider' ).on('click', function(e){
     e.preventDefault();
-    var address = document.getElementById('address').value;
+    var address = $( '#address' ).val();
     $('#amount').val(parseFloat($('#range').slider('value')));
     var geocoder = new google.maps.Geocoder();
     if(address != '') {
@@ -217,71 +217,20 @@ $( '#valider' ).on('click', function(e){
     }
 });
 
-/*
- *  Get URL parameters
- */
-var QueryString = function () {
-  // This function is anonymous, is executed immediately and
-  // the return value is assigned to QueryString!
-  var query_string = {};
-  var query = window.location.search.substring(1);
-  var vars = query.split("&");
-  for (var i=0;i<vars.length;i++) {
-    var pair = vars[i].split("=");
-        // If first entry with this name
-    if (typeof query_string[pair[0]] === "undefined") {
-      query_string[pair[0]] = pair[1];
-        // If second entry with this name
-    } else if (typeof query_string[pair[0]] === "string") {
-      var arr = [ query_string[pair[0]], pair[1] ];
-      query_string[pair[0]] = arr;
-        // If third or later entry with this name
-    } else {
-      query_string[pair[0]].push(pair[1]);
-    }
-  }
-    return query_string;
-} ();
-
-function indexGeoLocate() {
-    if (navigator.geolocation)
+$( '#geolocate' ).on( 'click', function(e){
+    e.preventDefault();
+    if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(function(position){
-            var latitude = position.coords.latitude
-                , longitude = position.coords.longitude
-                , range = parseFloat($('#range').slider('value'))
-                , artist = document.getElementById('artist').value;
-            assignUrl(latitude, longitude, range, artist);
+            lat = position.coords.latitude
+            , lng = position.coords.longitude;
+            $('#amount').val(parseFloat($('#range').slider('value')));
+            $('#lat').val(parseFloat(lat));
+            $('#lng').val(parseFloat(lng));
+            $('#myForm').submit();
         });
+    }
     else printMsg("Your browser does not support HTML5 Geolocation!");
-};
-
-/*
- * GeoLocalization, using html5 geolocalization
- */
-function geoLocate() {
-    if (navigator.geolocation)
-        navigator.geolocation.getCurrentPosition(geoLocateCallback);
-    else printMsg("Your browser does not support HTML5 Geolocation!");
-};
-
-/*
- * This function is called on GeoLocalization success. ref. geoLocate()
- */
-function geoLocateCallback(position) {
-    var latitude = position.coords.latitude
-        , longitude = position.coords.longitude
-        , range = parseFloat($('#range').slider('value'))
-        , artist = document.getElementById('artist').value
-        , query = {};
-        query.lat = position.coords.latitude;
-        query.lng = position.coords.longitude;
-        query.range = parseFloat($('#range').slider('value'));
-        query.artist = document.getElementById('artist').value;
-    reverseGeocoding(latitude, longitude, range, artist);
-    getConcerts(latitude, longitude, range, artist, function(err, results){
-        if(!err) setUserLocation(query, results);
-    });
-};
+});
 
 function newGoogleMap(ip_latitude, ip_longitude, fn) {
     var latlng = new google.maps.LatLng(ip_latitude, ip_longitude);

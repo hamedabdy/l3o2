@@ -1,0 +1,42 @@
+<title> Le Concert d'à Côté | Concerts near you </title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+<link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css" />
+<link rel="stylesheet" type="text/css" href="css/style.css"/>
+</head>
+<body class="" itemscope itemtype="http://schema.org/Event">
+    <div class="main" id="infoBtn">
+        <section>
+            <button id="showRight" title="More info...">
+                <img src="images/menu.png" alt="Options">
+            </button>
+        </section>
+    </div>
+    <div class="header-holder"></div>
+    <div class="header">
+        <div class="logo">
+            <h1>Le Concert d'a Cote</h1>
+            <a href="/"><img title="Le Concert d'à Côté" src="images/logored-shadow.png" alt="Le Concert d'a Cote logo"></a>
+        </div>
+        <div class="form-holder form-holder-transition" id="form-holder">
+            <form class="form-wrapper cf" id="myForm" name="searchBar" method="GET" action="/m">
+                <button id="geolocate" class="form-wraper-location" type="button">
+                    <img src="images/marker.png" title="Press to get geolocated" alt="Press to get geolocated" />
+                </button>
+                <input id="address" name="address" type="text" class="form-wrapper-input" placeholder="Enter address here..." required/>
+                <input type="hidden" name="lat" id="lat" />
+                <input type="hidden" name="lng" id="lng" />
+                <div class="sliderContainer" title="Use the handle to change range">
+                    <div id="range" class="form-wraper-range"></div>
+                </div>
+                <input type="text" id="amount" class="form-wraper-amount" title="Range" name="range" readonly="true" />
+                <div>
+                    <input type="text" name="artist" id="artist" class="hideInput form-wrapper-input artist-input" placeholder="Enter an artist name here..."/>
+                </div>
+                <button type="button" id="extendBtn" class="optionsBtn"></button>
+                <button id="valider" class="form-wrapper-button" type="submit">
+                    <img src="images/search.png" alt="Search">
+                </button>
+            </form>
+        </div>
+    </div>

@@ -18,8 +18,9 @@ module.exports = function(app) {
 			var ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress || req.socket.remoteAddress || req.connection.socket.remoteAddress;
 			logger.debug('ip = ' + ip);
 			userlocation.getRemoteGeoLocationFromIp(ip, function(err, results){
-				var r = (results) ? JSON.parse(results) : void 0;
-				logger.debug(err + " " + r);
+				var r = ""; 
+				r = (results) ? JSON.parse(results) : '{status:' + err +'}';
+				logger.debug(err + " " + r.status);
 				if(r.status == "success") {
                     o = {lat : r.lat, lng : r.lon, loc : r.city + ', ' + r.country};
                     getConcerts(o.lat, o.lng, 100, '', 50, '', function(err, results) {
@@ -49,7 +50,6 @@ module.exports = function(app) {
 			res.locals.query = q;
 			getConcerts(q.lat, q.lng, q.range, q.artist, '', '', function(err, results){
 				if(!err){
-					logger.trace(results.length);
 					if (results.length == 1 || (q.artist && results.length>0)) {
 						results[0].score = parseInt(results[0].score)+1;
 						db.concerts.update({'_id': results[0]['_id']}, results[0]);
@@ -76,6 +76,7 @@ module.exports = function(app) {
 			}
 		});
 	});
+
 }
 
 /**

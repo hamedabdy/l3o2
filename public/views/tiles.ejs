@@ -1,0 +1,56 @@
+<div class="tiles-box" id="tiles-box">
+    <%
+    l = ((Object.keys(concerts).length < 33) ? Object.keys(concerts).length:33);
+    if(lat && lng && Object.keys(concerts).length != 0) {
+      for (var i = 0; i < l; i++) {
+        var d = concerts[i];
+        var cover = (d.img).replace("/64/", "/126/");
+        var latlng = 'lat=' + d.latlng[0] + '&lng=' + d.latlng[1];
+        var artists = String(d.artist).replace(/,/g, ", ");
+        if (artists.length > 40) artists = artists.substr(0, 40) + ' ...';
+        var artists = artists.split(',');
+        var date = new Date(d.startDate).toLocaleString('en-GB', {day: 'numeric', month: 'numeric', year: 'numeric', hour: '2-digit', minute: '2-digit'});
+        var uri = '/m?'+latlng+'&range=10&artist='+artists[0];
+        var encodedURL = encodeURIComponent(url+uri);
+        var summary = String(d.artist).replace(/ /g, "+")+'+-+'+String(date).replace(/ /g, '+')+'+-+'+String(d.address).replace(/ /g, '+');
+      %>
+            <div class="tile" id="<%-d['_id']%>">
+                <span class="helper"></span>
+                <a itemprop="url" href="/m?<%=latlng%>&amp;range=10&amp;artist=<%=String(artists[0]).replace(/ /g, '+')%>" class="tile-link">
+                    <img itemprop="image" src="<%-cover%>" title="<%=d.title%>" alt="<%=d.title%>" onerror="this.src='images/noimage.png';"/>
+                </a>
+                <div class="tile-info">
+                    <a href="/m?<%=latlng%>&amp;range=10&amp;artist=<%=String(artists[0])%>" class="tile-link">
+                        <div itemprop="name" class="tile-title" title="<%-String(d.title).replace(/"/g, '')%>"><%-d.title%></div>
+                    </a>
+                    <div class="tile-body"><b>Artists: </b>
+                        <span itemprop="performer"><%-artists%></span><br>
+                        <b>Date: </b><span itemprop="startDate"><%=date%></span><br>
+                        <span itemprop="location"><%-d.address%></span>
+                        <span itemprop="offers"></span>
+                        <span class="hidden" itemprop="description"><%-d.description%></span>
+                    </div>
+                    <div class="shareBtns">
+                        <a href="https://www.facebook.com/sharer/sharer.php?s=100&amp;p%5Burl%5D=<%=encodedURL%>&amp;p%5Btitle%5D=<%-String(d.title).replace(/ /g, '+').replace(/"/g, '')%>&amp;p%5Bsummary%5D=<%=summary%>&amp;p%5Bimages%5D%5B0%5D=<%=d.img%>" target="_blank">
+                            <img width="25" src="images/fb_1.png" alt="Share On Facebook" title="Share On Facebook"/>
+                        </a>
+                        <a href="https://twitter.com/share?url=<%=encodedURL%>&amp;text=<%-String(d.title).replace(/ /g, '+').replace(/"/g, '')%>+<%-String(artists).replace(/ /g, '+')%>&amp;via=ConcertDaCote&amp;related=concertdacote,ConcertDaCote" target="_blank">
+                            <img width="25" src="images/twitter_1.png" alt="Tweet" title="Tweet"/>
+                        </a>
+                        <a href="https://plus.google.com/share?url=<%=encodedURL%>" target="_blank">
+                            <img width="25" src="images/google_plus.png" alt="Share on G+" title="Share On Google+"/>
+                        </a>
+                        <a href="http://stumbleupon.com/submit?url=<%=encodedURL%>" target="_blank">
+                            <img width="25" src="images/stumble_upon.png" alt="Stumble" title="Stumble"/>
+                        </a>
+                        <a target="_blank" href="<%=d.url%>">
+                            <img width="25" src="images/external_link.png" alt="External Link" title="Source site"/>
+                        </a>
+                    </div>
+                </div>
+            </div>
+    <% }; } %>
+    <% if(l == 0) {%>
+        <div class="msg"><p>Sorry couldn't find any upcoming events for your location, please use our <a href="/se">event submission form</a> to add your event to be referenced on our site.</p></div>
+    <%}%>
+</div>

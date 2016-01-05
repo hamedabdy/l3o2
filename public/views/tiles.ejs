@@ -14,7 +14,7 @@
         var encodedURL = encodeURIComponent(url+uri);
         var summary = String(d.artist).replace(/ /g, "+")+'+-+'+String(date).replace(/ /g, '+')+'+-+'+String(d.address).replace(/ /g, '+');
       %>
-            <div class="tile" id="<%-d['_id']%>">
+            <div class="tile" id="<%-d['_id']%>" data-lat="<%-d.latlng[0]%>" data-lng="<%-d.latlng[1]%>">
                 <span class="helper"></span>
                 <a itemprop="url" href="/m?<%=latlng%>&amp;range=10&amp;artist=<%=String(artists[0]).replace(/ /g, '+')%>" class="tile-link">
                     <img itemprop="image" src="<%-cover%>" title="<%=d.title%>" alt="<%=d.title%>" onerror="this.src='images/noimage.png';"/>
@@ -23,10 +23,10 @@
                     <a href="/m?<%=latlng%>&amp;range=10&amp;artist=<%=String(artists[0])%>" class="tile-link">
                         <div itemprop="name" class="tile-title" title="<%-String(d.title).replace(/"/g, '')%>"><%-d.title%></div>
                     </a>
-                    <div class="tile-body"><b>Artists: </b>
-                        <span itemprop="performer"><%-artists%></span><br>
-                        <b>Date: </b><span itemprop="startDate"><%=date%></span><br>
-                        <span itemprop="location"><%-d.address%></span>
+                    <div class="tile-body">
+                        <b>Artists: </b><span itemprop="performer"><%-artists%></span><br>
+                        <span itemprop="startDate"><%=date%></span><br>
+                        <span itemprop="location" id="location"><%-d.address%></span>
                         <span itemprop="offers"></span>
                         <span class="hidden" itemprop="description"><%-d.description%></span>
                     </div>

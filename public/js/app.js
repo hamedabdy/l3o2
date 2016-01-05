@@ -82,8 +82,98 @@ window.classie = {
 
 })( window );
 
-// -------------  TOOLS  --------------
 
+/**
+ * METHODS
+ */
+/*
+ * Google Reverse Geocoder
+ */
+function reverseGeocode (latlng, fn) {
+    var geocoder = new google.maps.Geocoder();
+    var point = new google.maps.LatLng(parseFloat(latlng[0]), parseFloat(latlng[1]));
+    geocoder.geocode({"latLng" : point }, function(data, status) {
+        if (status == google.maps.GeocoderStatus.OK && data[0]) 
+            return fn(data[0].formatted_address, null);
+        else 
+            return fn(null, status);
+    });
+}
+
+/**
+ * Google Geocoder
+ */
+function geocodeAddress(address, fn) {
+    var geocoder = new google.maps.Geocoder();
+    geocoder.geocode({ "address" : address }, function(results, status) {
+        if (status == google.maps.GeocoderStatus.OK) {
+            var latlng = results[0].geometry.location + "",
+            tab_latlng = latlng.split(',');
+            lat = parseFloat(tab_latlng[0].replace('(', ''));
+            lng = parseFloat(tab_latlng[1].replace(')', ''));
+            return fn( [lat, lng], null);
+        } else return fn(null, status);
+    });
+}
+
+function updateUrl (lat, lng, range, artist) {
+    window.history.pushState("", "", "?lat="+lat+"&lng="+lng+"&range="
+        +range+"&artist="+artist);
+};
+
+function assignUrl (lat, lng, range, artist) {
+    location.assign('/m?lat='+lat+'&lng='+lng+'&range='+range+'&artist='+artist);
+};
+
+function updateFormFields (address, range, artist) {
+    document.getElementById("address").value = decodeURIComponent(address);
+    document.getElementById("artist").value = artist;
+    $('#range').slider('value', range);
+};
+
+function defaultFor(arg, val) { return typeof arg !== 'undefined' ? arg : val; };
+
+function ipLocation(fn) {
+    var url = '//ip-api.com/json/';
+    $.ajax({
+        type : 'GET',
+        url : url,
+        error: function(jqxhr, status, err) {
+            console.log(JSON.stringify(err) + " " + JSON.stringify(status)
+                + " " + JSON.stringify(jqxhr));
+            return fn(err, null);
+        },
+        success : function(data, status) {
+            return fn(null, data);
+        }
+    });
+}
+
+function printMsg(message) {
+    $('#alert-msg').html(message);
+    $('#alert-msg').delay(7000).slideUp('fast');
+}
+
+
+/**
+ * Method to construct neccessary share buttons from given data(concert) and url
+ */
+function shareButtons (data, fn) {
+    var encodedURL = encodeURIComponent(document.URL+data.artist);
+    var summary = data.artist+' - '+new Date(data.startDate).toLocaleString()+' - '+data.address
+        , shareBtns = {};
+        shareBtns.fb_share = '<a href="https://www.facebook.com/sharer/sharer.php?s=100&p[url]='+encodedURL+'&p[title]='+data.title+'&p[summary]='+summary+'&p[images][0]='+data.img+'" target="_blank"><img width="25" src="images/fb_1.png" '+'alt="Share On Facebook" title="Share On Facebook"/></a>';
+        shareBtns.tw_share = '<a href="https://twitter.com/share?url='+encodedURL+'&text='+data.title+'+'+data.artist+'&via=ConcertDaCote&related=concertdacote,ConcertDaCote,'+'" target="_blank"><img width="25" src="images/twitter_1.png" '+'alt="Tweet" title="Tweet"/></a>';
+        shareBtns.extLink = '<a target="_blank" href="'+data.url+'"><img width="25" src="images/external_link.png" alt="External Link" title="Source site"/></a>';
+        shareBtns.gplus = '<a href="https://plus.google.com/share?url='+encodedURL+'" target="_blank"><img width="25" src="images/google_plus.png" '+'alt="Share on G+" title="Share On Google+"/></a>';
+        shareBtns.su = '<a href="http://stumbleupon.com/submit?url='+encodedURL+'" target="_blank"><img width="25" src="images/stumble_upon.png" '+'alt="Stumble" title="Stumble"/></a>';
+        return fn(shareBtns);
+};
+
+// ------------ END of METHODS
+
+
+// -------------  TOOLS  --------------
 /*
  * Address AutoComplete JQuery
  */
@@ -128,22 +218,6 @@ $( "#range" ).slider({
                 }
             });
 $( "#amount" ).val($( "#range" ).slider( "value" ) + " km");
-
-/**
- * Method to construct neccessary share buttons from given data(concert) and url
- */
-function shareButtons (data, fn) {
-    var encodedURL = encodeURIComponent(document.URL+data.artist);
-    var summary = data.artist+' - '+new Date(data.startDate).toLocaleString()+' - '+data.address
-        , shareBtns = {};
-        shareBtns.fb_share = '<a href="https://www.facebook.com/sharer/sharer.php?s=100&p[url]='+encodedURL+'&p[title]='+data.title+'&p[summary]='+summary+'&p[images][0]='+data.img+'" target="_blank"><img width="25" src="images/fb_1.png" '+'alt="Share On Facebook" title="Share On Facebook"/></a>';
-        shareBtns.tw_share = '<a href="https://twitter.com/share?url='+encodedURL+'&text='+data.title+'+'+data.artist+'&via=ConcertDaCote&related=concertdacote,ConcertDaCote,'+'" target="_blank"><img width="25" src="images/twitter_1.png" '+'alt="Tweet" title="Tweet"/></a>';
-        shareBtns.extLink = '<a target="_blank" href="'+data.url+'"><img width="25" src="images/external_link.png" alt="External Link" title="Source site"/></a>';
-        shareBtns.gplus = '<a href="https://plus.google.com/share?url='+encodedURL+'" target="_blank"><img width="25" src="images/google_plus.png" '+'alt="Share on G+" title="Share On Google+"/></a>';
-        shareBtns.su = '<a href="http://stumbleupon.com/submit?url='+encodedURL+'" target="_blank"><img width="25" src="images/stumble_upon.png" '+'alt="Stumble" title="Stumble"/></a>';
-        return fn(shareBtns);
-};
-// ---------------- End of share buttons
 
 /*
  * Right Pane
@@ -198,19 +272,37 @@ extendBtn.onclick = function() {
 };
 // --------- End of Artist toggle button
 
+
+$( '.tile' ).on( 'click', function(e){
+    if($(this).attr('id') != 'undefined') {
+        if ($(this).find( '#location' ).html() == 'No address provided') {
+            var id = $(this).attr('id');
+            var lat = $(this).attr('data-lat');
+            var lng = $(this).attr('data-lng');
+            reverseGeocode([lat, lng], function(results, err){
+                if(err == null) {
+                    $.ajax({
+                        method: 'PUT',
+                        url: '/location',
+                        data: { '_id' : id, address: results },
+                    });
+                }
+            });
+        }
+    }
+});
+
+
 // Action taken before Form submission
 $( '#valider' ).on('click', function(e){
     e.preventDefault();
     var address = $( '#address' ).val();
     $('#amount').val(parseFloat($('#range').slider('value')));
-    var geocoder = new google.maps.Geocoder();
     if(address != '') {
-        geocoder.geocode({ "address" : address }, function(results, status) {
-            if (status == google.maps.GeocoderStatus.OK) {
-                var latlng = results[0].geometry.location + "",
-                tab_latlng = latlng.split(',');
-                $('#lat').val(parseFloat(tab_latlng[0].replace('(', '')));
-                $('#lng').val(parseFloat(tab_latlng[1].replace(')', '')));
+        geocodeAddress(address, function(results, err) {
+            if (err == null) {
+                $('#lat').val(results[0]);
+                $('#lng').val(results[1]);
                 $('#myForm').submit();
             } else printMsg("Sorry couldn't find the given address!");
         });
@@ -287,51 +379,12 @@ function setUserLocation(query, concerts) {
         google.maps.event.addListener(marqueur, 'click', function() {
             myInfoWindow.open(carte, marqueur);
         });
-        reverseGeocoding(query.lat, query.lng, query.range, query.artist);
+        reverseGeocode([query.lat, query.lng], function(results, err){
+            if (err == null)
+                updateFormFields(results, query.range, query.artist);
+        });
         plotOverlays(carte, query.lat, query.lng, concerts);
     });
-};
-
-/*
- * Reverse geocoding ref. geolocation sucesscallack
- */
-function reverseGeocoding(lat, lng, range, artist) {
-    var geocoder = new google.maps.Geocoder();
-    var point = new google.maps.LatLng(parseFloat(lat), parseFloat(lng));
-    geocoder.geocode({"latLng" : point }, function(data, status) {
-            if (status == google.maps.GeocoderStatus.OK && data[0]) {
-                updateFormFields(data[0].formatted_address, range, decodeURIComponent(artist));
-            } else {
-                alert("Error: " + status);
-            }
-        });
-    return false;
-};
-
-/*
- * Geocoding address from form after submit
- */
-function geoCodeAddress(address, range, artist) {
-    var address = document.getElementById('address').value
-        , range = parseFloat($('#range').slider('value'))
-        , artist = document.getElementById('artist').value
-        , geocoder = new google.maps.Geocoder();
-    if(address != '') {
-        geocoder.geocode({ "address" : address }, function(results, status) {
-            if (status == google.maps.GeocoderStatus.OK) {
-                var latlng = results[0].geometry.location + "",
-                tab_latlng = latlng.split(','),
-                latitude = parseFloat(tab_latlng[0].replace('(', '')),
-                longitude = parseFloat(tab_latlng[1].replace(')', ''));
-                range = parseFloat(range);
-                updateUrl(latitude, longitude, range, artist);
-                query = {lat : latitude, lng: longitude, range: range, artist: artist};
-                getConcerts(latitude, longitude, range, artist, function(err, results){
-                    if(!err) setUserLocation(query, results);
-                });
-            } else printMsg("Sorry couldn't find the given address!");
-        });
-    }
 };
 
 var infoWindows = [];
@@ -390,67 +443,3 @@ function plotOverlays(carte, lat, lng, concerts) {
     } else printMsg('No conerts found at this time for the given parameters (range/address/artist)');
 
 };
-
-/*
- * AJAX call to server to get concerts
- */
-function getConcerts(lat, lng, range, artist, fn) {
-    var date = new Date();
-    var _responseJSON;
-    $.ajax({
-        type : 'GET',
-        url : '/concert?lat='+lat+'&long='+lng+'&range='+range+'&artist='+artist+'&date='+date,
-        contentType : 'application/json; charset=UTF-8',
-        error: function(jqxhr, status, err) {
-            console.log(JSON.stringify(err) + " " + JSON.stringify(status)
-                + " " + JSON.stringify(jqxhr));
-            return fn(err, null);
-        },
-        success : function(data, status) {
-            if(data && typeof data === "string" && data !== null){
-                _responseJSON = JSON.parse(data);
-                return fn(null, _responseJSON);
-            } else {
-                return fn(null, data);
-            }
-        }
-    });
-};
-
-function updateUrl (lat, lng, range, artist) {
-    window.history.pushState("", "", "?lat="+lat+"&lng="+lng+"&range="
-        +range+"&artist="+artist);
-};
-
-function assignUrl (lat, lng, range, artist) {
-    location.assign('/m?lat='+lat+'&lng='+lng+'&range='+range+'&artist='+artist);
-};
-
-function updateFormFields (address, range, artist) {
-    document.getElementById("address").value = decodeURIComponent(address);
-    document.getElementById("artist").value = artist;
-    $('#range').slider('value', range);
-};
-
-function defaultFor(arg, val) { return typeof arg !== 'undefined' ? arg : val; };
-
-function ipLocation(fn) {
-    var url = '//ip-api.com/json/';
-    $.ajax({
-        type : 'GET',
-        url : url,
-        error: function(jqxhr, status, err) {
-            console.log(JSON.stringify(err) + " " + JSON.stringify(status)
-                + " " + JSON.stringify(jqxhr));
-            return fn(err, null);
-        },
-        success : function(data, status) {
-            return fn(null, data);
-        }
-    });
-}
-
-function printMsg(message) {
-    $('#alert-msg').html(message);
-    $('#alert-msg').delay(7000).slideUp('fast');
-}

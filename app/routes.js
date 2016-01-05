@@ -55,6 +55,12 @@ module.exports = function(app) {
             res.locals.query = q;
             if (q.artist)
                 db.concerts.findAndModify({ query: { artist: q.artist }, update: { $inc: { score: 1 } } });
+            getConcerts(q.lat, q.lng, q.range, q.artist, '', '', function(err, results){
+                if(!err) 
+                    res.render('map', {concerts : results});
+                else 
+                    res.render('404', {});
+            });
         }
         else {
             res.locals.query = null;

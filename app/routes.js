@@ -20,7 +20,6 @@ module.exports = function(app) {
             userlocation.getRemoteGeoLocationFromIp(ip, function(err, results){
                 var r = ""; 
                 r = (results) ? JSON.parse(results) : '{status:' + err +'}';
-                logger.debug(err + " " + r.status);
                 if(r.status == "success") {
                     o = {lat : r.lat, lng : r.lon, loc : r.city + ', ' + r.country};
                     getConcerts(o.lat, o.lng, 100, '', 50, '', function(err, results) {
@@ -30,7 +29,6 @@ module.exports = function(app) {
                         }
                     });
                 } else {
-                    logger.error(err);
                     getConcerts(o.lat, o.lng, 100, '', 50, '', function(err, results) {
                         if (!err) {
                             o.concerts = results;
@@ -110,7 +108,7 @@ function getConcerts (lat, lng, radius, artists, limit, date, fn) {
     dbQuery.startDate = { $gte : new Date(newDate)};
     db.concerts.find( dbQuery).sort({'score' : -1}).limit(l, function(err, result) {
         if(!err) {
-            logger.info('\n# of concerts returned = ' + result.length + '\n');
+            logger.info('# of concerts returned = ' + result.length + '\n');
             return fn(null, result);
         } else {
             logger.error(err);

@@ -48,6 +48,8 @@ module.exports = function(app) {
      * in order to stimulate the click action!
      */
     app.get('/m', function(req, res){
+        var fullUrl = req.protocol + '://' + req.get('host') + req.originalUrl;
+        res.locals.url = fullUrl;
         var q = req.query;
         if(Object.keys(q).length != 0){
             res.locals.query = q;
@@ -55,14 +57,14 @@ module.exports = function(app) {
                 db.concerts.findAndModify({ query: { artist: q.artist }, update: { $inc: { score: 1 } } });
             getConcerts(q.lat, q.lng, q.range, q.artist, '', '', function(err, results){
                 if(!err) 
-                    res.render('map', {concerts : results});
+                    res.render('map', {lat: q.lat, lng: q.lng, concerts : results});
                 else 
                     res.render('404', {});
             });
         }
         else {
             res.locals.query = null;
-            res.render('map', {concerts : []});
+            res.render('map', {lat: 0, lng: 0, concerts : []});
         }
     });
 

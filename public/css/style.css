@@ -134,13 +134,22 @@ li {
 /*---------------- MAP ----------------*/
 
 #carte-container {
-    width: 100%;
+    width: 75%;
     position: fixed;
     bottom: 0;
+    right: 0;
 }
 
 .carte {
     height: 100%;
+}
+
+#mini-tiles-box {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 400px;
+    top: 135px;
 }
 
 .info-window-title {
@@ -449,11 +458,15 @@ input:invalid {
 }
 
 /* ------------ TILES.CSS ------------ */
-.tiles-box {
+.tiles-container {
     width: 1190px;
     margin-top: 135px;
     margin-left: 50%;
     transform: translate(-50%);
+}
+
+.tiles-box {
+    width: 100%;
     font-size: 0.56em;
 }
 

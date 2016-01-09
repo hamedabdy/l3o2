@@ -8,7 +8,9 @@
 
 <%- include('header'); %>
 
-<%- include('tiles'); %>
+<div class="tiles-container">
+    <%- include('tiles'); %>
+</div>
 
 <%- include('footer', {location: '<p>Recommending events based on your ip location: ' + loc + '</p>', extra_deps: ''}); %>
 

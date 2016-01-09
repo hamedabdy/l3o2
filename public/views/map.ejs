@@ -8,6 +8,10 @@
 
 <%- include('header'); %>
 
+<div id="mini-tiles-box">
+	<%- include('tiles', {lat: lat, lng: lng, concerts: concerts}); %>
+</div>
+
 <%- include('carte'); %>
 
 <%- include('footer', {location: '', extra_deps: '<script src="js/modernizr.custom.js"></script><script src="js/markerclusterer_packed.js"></script><script src="js/oms.min.js"></script>'}); %>
@@ -17,7 +21,8 @@
 			$( 'body' ).addClass( 'page-loaded' );
 			document.body.onload = initLocation(<%-JSON.stringify(query)+', '+JSON.stringify(concerts)%>);
 		});
-		$('#carte-container').height($(window).height()-100);
+		$('#carte-container').height($(window).height()-90);
+		$('#carte-container').width($(window).width()-400);
 	</script>
 </body>
 </html>

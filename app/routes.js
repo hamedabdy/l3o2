@@ -77,10 +77,9 @@ module.exports = function(app) {
      */
     app.get('/concert', function(req, res){
         var q =  req.query;
-        getConcerts(q.lat, q.long, q.range, q.artist, q.l, q.date, function(err, results) {
-            if (!err) {
-                res.send(results);
-            }
+        getConcerts(q.lat, q.lng, q.range, q.artist, q.l, q.date, function(err, results) {
+            if (!err) res.send(results);
+            else res.send(err);
         });
     });
 
@@ -101,12 +100,10 @@ module.exports = function(app) {
  * @param fn : callback function (err, results)
  */
 function getConcerts (lat, lng, radius, artists, limit, date, fn) {
-    var l = 500;
-    if (limit) l = limit;
+    var l = (limit) ? parseFloat(limit) : 100;
+    var newDate = (date) ? date : new Date();
     var dbQuery = { latlng: { $near:[parseFloat(lat), parseFloat(lng)], $maxDistance: parseFloat(radius)/111.12} };
     if (artists) dbQuery.artist = new RegExp(artists, 'i');
-    var newDate = new Date();
-    if (date) newDate = date;
     dbQuery.startDate = { $gte : new Date(newDate)};
     db.concerts.find( dbQuery).sort({'score' : -1}).limit(l, function(err, result) {
         if(!err) {

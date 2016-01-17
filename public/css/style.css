@@ -459,10 +459,8 @@ input:invalid {
 
 /* ------------ TILES.CSS ------------ */
 .tiles-container {
-    width: 1190px;
-    margin-top: 135px;
-    margin-left: 50%;
-    transform: translate(-50%);
+    text-align: center;
+    margin: 135px auto auto auto;
 }
 
 .tiles-box {
@@ -541,6 +539,7 @@ input:invalid {
     display: inherit;
     padding-left: 5px;
     vertical-align: middle;
+    text-align: left;
 }
 
 .fadeout {
@@ -601,11 +600,8 @@ a {
     text-decoration: none;
 }
 
-a:hover {}
-
 .main {
     position: fixed;
-    transition: all 0.3s ease 0s;
     z-index: 5;
     right: 0;
     top: 23px;
@@ -620,7 +616,6 @@ a:hover {}
     width: 35px;
     height: 35px;
     border-radius: 5px 0 0 5px;
-    transition: all 0.3s ease 0s;
 }
 
 .main > section img {
@@ -634,7 +629,6 @@ a:hover {}
 .main > section button.active {
     background: #C42F2F;
     right: 240px;
-    transition: all 0.3s ease 0s;
 }
 
 .main > section button.disabled {
@@ -806,9 +800,22 @@ a:hover {}
        height: 30px;
     }
 
-    .tiles-box {
-        width: 100%;
-        margin-top: 115px;
+    .header-nav {
+        margin-top: 40px;
+    }
+
+    .tiles-container {
+        margin-top: 140px;
+    }
+
+    #mini-tiles-box {
+        display: none;
+    }
+
+    #carte-container {
+        height: 85% !important;
+        width: 100% !important;
+        bottom: 0;
     }
 
 }
@@ -816,10 +823,6 @@ a:hover {}
 @media screen and (max-width: 480px){
     .header {
         height: 81px;
-    }
-
-    #carte {
-        height: 90.5%;
     }
 
     .form-wrapper {
@@ -846,6 +849,7 @@ a:hover {}
         height: 25px;
         width: 25px;
         margin: 4px;
+        left: 5px;
     }
 
     .form-wraper-amount {
@@ -875,6 +879,11 @@ a:hover {}
         display: none;
     }
 
+    .main {
+        bottom: 4px;
+        top: unset;
+    }
+
     .main > section button {
        width: 25px;
        height: 27px;
@@ -898,10 +907,6 @@ a:hover {}
 
     .cbp-spmenu {
         font-size: 9pt;
-    }
-
-    .reduceMapSize {
-        width: 55.4%;
     }
 
     .ui-autocomplete {
@@ -946,13 +951,18 @@ a:hover {}
         padding: 2px 35px;
     }
 
+    .header-nav {
+        margin-top: 81px;
+    }
+
     /*--------- TILES ---------*/
-    .tiles-box {
-        margin-top: 85px;
+    .tiles-container {
+        margin-top: 110px;
     }
 
     .tile {
         max-width: 88%;
+        text-align: left;
     }
 
     .tile-info {
@@ -963,4 +973,5 @@ a:hover {}
         max-width: 23%;
         max-height: 70%;
     }
+
 }

@@ -9,7 +9,8 @@
         var artists = String(d.artist).replace(/,/g, ", ");
         if (artists.length > 40) artists = artists.substr(0, 40) + ' ...';
         var artists = artists.split(',');
-        var date = new Date(d.startDate).toLocaleString('en-GB', {day: 'numeric', month: 'numeric', year: 'numeric', hour: '2-digit', minute: '2-digit'});
+        var date = new Date(d.startDate);
+        date = (date.toDateString()).substr(0,10) + ' at ' + (date.toLocaleTimeString()).substr(0,5);
         var uri = '/m?'+latlng+'&range=10&artist='+artists[0];
         var encodedURL = encodeURIComponent(url+uri);
         var summary = String(d.artist).replace(/ /g, "+")+'+-+'+String(date).replace(/ /g, '+')+'+-+'+String(d.address).replace(/ /g, '+');
@@ -25,7 +26,7 @@
                     </a>
                     <div class="tile-body">
                         <b>Artists: </b><span itemprop="performer"><%-artists%></span><br>
-                        <span itemprop="startDate"><%=date%></span><br>
+                        <span itemprop="startDate" style="color: #C42F2F;"><b><%=date%></b></span><br>
                         <span itemprop="location" id="location"><%-d.address%></span>
                         <span itemprop="offers"></span>
                         <span class="hidden" itemprop="description"><%-d.description%></span>

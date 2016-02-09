@@ -23,17 +23,14 @@
                 <button id="geolocate" class="form-wraper-location" type="button">
                     <img src="images/marker.png" title="Press to get geolocated" alt="Press to get geolocated" />
                 </button>
-                <input id="address" name="address" type="text" class="form-wrapper-input" placeholder="Enter address here..." required/>
+                <input id="address" name="address" type="text" class="form-wrapper-input" placeholder="Where?" required/>
+                <input type="text" name="artist" id="artist" class="form-wrapper-input artist-input" placeholder="Who?"/>
                 <input type="hidden" name="lat" id="lat" />
                 <input type="hidden" name="lng" id="lng" />
                 <div class="sliderContainer" title="Use the handle to change range">
                     <div id="range" class="form-wraper-range"></div>
                 </div>
                 <input type="text" id="amount" class="form-wraper-amount" title="Range" name="range" readonly="true" />
-                <div>
-                    <input type="text" name="artist" id="artist" class="hideInput form-wrapper-input artist-input" placeholder="Enter an artist name here..."/>
-                </div>
-                <button type="button" id="extendBtn" class="optionsBtn"></button>
                 <button id="valider" class="form-wrapper-button" type="submit">
                     <img src="images/search.png" alt="Search">
                 </button>

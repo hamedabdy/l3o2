@@ -212,15 +212,14 @@ li {
 }
 
 .form-wrapper-input {
-    width: 485px;
+    width: 340px;
     height: 21px;
-    padding: 10px 45px;
+    padding: 10px 190px 10px 45px;;
     float: left;
     font: bold 16px open-sans;
     border: 0;
     background: #eee;
     border-radius: 0;
-    border: 0;
 }
 
 input:invalid {
@@ -430,10 +429,11 @@ input:invalid {
 }
 
 .artist-input {
-    border-radius: 0 0 4px 4px;
-    border-top: 0;
-    height: 30px;
-    padding: 0px 45px;
+    padding: 10px 15px;
+    position: absolute;
+    max-width: 150px;
+    right: 11px;
+    border-left: 1px dotted #d83c3c;
 }
 
 .showInfo {
@@ -752,9 +752,9 @@ a {
     }
 
     .form-wrapper-input {
-       width: 350px;
+       width: 195px;
        height: 36px;
-       padding: 5px 40px;
+       padding: 5px 190px 5px 45px;
     }
 
     .form-wrapper-button {
@@ -779,17 +779,17 @@ a {
     }
 
     .form-wraper-location {
-       height: 35px;
-       width: 35px;
-       margin-top: 5px;
+        height: 35px;
+        width: 35px;
+        margin-top: 5px;
     }
 
     .optionsBtn {
-       top: 82px;
+        top: 82px;
     }
 
     .changeBtn {
-       top: 120px;
+        top: 120px;
     }
 
     .extendShadow {
@@ -797,7 +797,9 @@ a {
     }
 
     .artist-input {
-       height: 30px;
+        right: 10px;
+        padding: 5px 38px 5px 10px;
+        width: 135px;
     }
 
     .header-nav {
@@ -833,9 +835,9 @@ a {
     }
 
     .form-wrapper-input {
-        width: 205px;
+        width: 110px;
         height: 24px;
-        padding: 5px 35px;
+        padding: 5px 130px 5px 35px;
         font-size: 9pt;
     }
 
@@ -947,8 +949,9 @@ a {
     }
 
     .artist-input {
-        height: 18px;
-        padding: 2px 35px;
+        padding: 5px 35px 5px 10px;
+        width: 80px;
+        right: 5px;
     }
 
     .header-nav {

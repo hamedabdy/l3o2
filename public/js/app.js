@@ -255,24 +255,9 @@ function options () {
 };
 // ------------ End of right pane:
 
-/*
- * Toggle artist search button
+/**
+ * Retreive unknown event address from user using Google Geolocation
  */
-var myForm = document.getElementById( 'myForm' )
-    , extendBtn = document.getElementById( 'extendBtn' )
-    , artist = document.getElementById( 'artist' )
-    , range = document.getElementById( 'range' );
-
-extendBtn.onclick = function() {
-  classie.toggle( this, 'active' );
-  classie.toggle( artist, 'showInput' );
-  classie.toggle( range, 'form-wraper-range-extended' );
-  classie.toggle( myForm, 'extendShadow' );
-  classie.toggle( extendBtn, 'changeBtn' );
-};
-// --------- End of Artist toggle button
-
-
 $( '.tile' ).on( 'click', function(e){
     if($(this).attr('id') != 'undefined') {
         if ($(this).find( '#location' ).html() == 'No address provided') {
@@ -291,7 +276,7 @@ $( '.tile' ).on( 'click', function(e){
         }
     }
 });
-
+// ------------------------------
 
 // Action taken before Form submission
 $( '#valider' ).on('click', function(e){
@@ -309,6 +294,7 @@ $( '#valider' ).on('click', function(e){
     }
 });
 
+// Geolocation button, on press submits form
 $( '#geolocate' ).on( 'click', function(e){
     e.preventDefault();
     if (navigator.geolocation) {

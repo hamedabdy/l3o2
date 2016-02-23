@@ -16,7 +16,7 @@ module.exports = function(app) {
         var o = { lat : 48.8588589, lng : 2.3470599, loc : 'unknown' };
         if(Object.keys(req.query).length == 0 || (req.query.p && req.query.p >= 1) ) {
             var ip = req.headers['x-forwarded-for'];
-            p = req.query.p || '';
+            p = req.query.p || 1;
             logger.debug('ip = ' + ip);
             userlocation.getRemoteGeoLocationFromIp(ip, function(err, results){
                 var r = "";
@@ -131,8 +131,7 @@ function countDocs (lat, lng, radius, fn) {
     var newDate = new Date();
     dbQuery.startDate = { $gte : new Date(newDate)};
     db.concerts.count(dbQuery, function(err, results) {
-        if (!err) {
-            return fn(null, results);
-        } else return fn(err, null);
+        if (!err) return fn(null, results);
+        else return fn(err, null);
     });
 }

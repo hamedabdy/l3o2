@@ -14,25 +14,34 @@ module.exports = function(app) {
         var fullUrl = req.protocol + '://' + req.get('host') + req.originalUrl;
         res.locals.url = fullUrl;
         var o = { lat : 48.8588589, lng : 2.3470599, loc : 'unknown' };
-        if(Object.keys(req.query).length == 0) {
+        if(Object.keys(req.query).length == 0 || (req.query.p && req.query.p >= 1) ) {
             var ip = req.headers['x-forwarded-for'];
+            p = req.query.p || '';
             logger.debug('ip = ' + ip);
             userlocation.getRemoteGeoLocationFromIp(ip, function(err, results){
-                var r = ""; 
+                var r = "";
+                const DISPLAY_TOTAL = 33;
+                const RADIUS = 100;
                 r = (results) ? JSON.parse(results) : '{status:' + err +'}';
                 if(r.status == "success") {
-                    o = {lat : r.lat, lng : r.lon, loc : r.city + ', ' + r.country};
-                    getConcerts(o.lat, o.lng, 100, '', 50, '', function(err, results) {
+                    o = {lat : r.lat, lng : r.lon, loc : r.city + ', ' + r.country, p: p};
+                    getConcerts(o.lat, o.lng, RADIUS, '', DISPLAY_TOTAL, '', p, function(err, results) {
                         if (!err) {
-                            o.concerts = results;
-                            res.render('index', o);
+                            countDocs(o.lat, o.lng, RADIUS, function(err, count) {
+                                o.concerts = results;
+                                o.totalPages = Math.ceil(count/DISPLAY_TOTAL);
+                                res.render('index', o);
+                            });
                         }
                     });
                 } else {
-                    getConcerts(o.lat, o.lng, 100, '', 50, '', function(err, results) {
+                    getConcerts(o.lat, o.lng, RADIUS, '', DISPLAY_TOTAL, '', p, function(err, results) {
                         if (!err) {
-                            o.concerts = results;
-                            res.render('index', o);
+                            countDocs(o.lat, o.lng, RADIUS, function(err, count) {
+                                o.concerts = results;
+                                o.totalPages = Math.ceil(count/DISPLAY_TOTAL);
+                                res.render('index', o);
+                            });
                         }
                     });
                 }
@@ -99,13 +108,14 @@ module.exports = function(app) {
  * @param date : used to fetch concerts later than date
  * @param fn : callback function (err, results)
  */
-function getConcerts (lat, lng, radius, artists, limit, date, fn) {
-    var l = (limit) ? parseFloat(limit) : 100;
-    var newDate = (date) ? date : new Date();
+function getConcerts (lat, lng, radius, artists, limit, date, page, fn) {
+    var l = parseFloat(limit) || 100;
+    page = page || 0;
+    var newDate = date || new Date();
     var dbQuery = { latlng: { $near:[parseFloat(lat), parseFloat(lng)], $maxDistance: parseFloat(radius)/111.12} };
     if (artists) dbQuery.artist = new RegExp(artists, 'i');
     dbQuery.startDate = { $gte : new Date(newDate)};
-    db.concerts.find( dbQuery).sort({'score' : -1}).limit(l, function(err, result) {
+    db.concerts.find(dbQuery).sort({'score' : -1}).skip(--page*l).limit(l, function(err, result) {
         if(!err) {
             logger.info('# of concerts returned = ' + result.length + '\n');
             return fn(null, result);
@@ -113,5 +123,17 @@ function getConcerts (lat, lng, radius, artists, limit, date, fn) {
             logger.error(err);
             return fn(err, null);
         }
+    });
+}
+
+function countDocs (lat, lng, radius, fn) {
+    var dbQuery = { latlng: { $near:[parseFloat(lat), parseFloat(lng)], $maxDistance: parseFloat(radius)/111.12} };
+    var newDate = new Date();
+    dbQuery.startDate = { $gte : new Date(newDate)};
+    db.concerts.count(dbQuery, function(err, results) {
+        if (!err) {
+            logger.trace('count : ' + results);
+            return fn(null, results);
+        } else return fn(err, null);
     });
 }

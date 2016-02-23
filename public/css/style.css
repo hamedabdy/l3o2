@@ -21,6 +21,13 @@
     font-style: normal;
 }
 
+@font-face{
+    font-family: web-symbols;
+    src: url("../fonts/WebSymbols-Regular.otf") format('opentype');
+    font-weight: normal;
+    font-style: normal;
+}
+
 /* ----------------------------------- */
 
 body {
@@ -32,6 +39,7 @@ body {
     color: #444;
     opacity : 0;
     transition: opacity 1s;
+    overflow-x: hidden;
 }
 
 ul {
@@ -354,80 +362,6 @@ input:invalid {
 
 #ui-active-menuitem {}
 
-.optionsBtn {
-    z-index: 5;
-    opacity: 0.6;
-    width: 100px;
-    height: 10px;
-    position: fixed;
-    box-shadow: 2px 2px 2px;
-    top: 77px;
-    left: 50%;
-    transform: translate(-50%);
-    border: 5px;
-    border-color: #d83c3c;
-    border-radius: 0px 0px 20px 20px;
-    border-style: solid solid none;
-    border-width: 0 10px 0px 10px;
-    cursor: pointer;
-}
-
-.optionsBtn:hover {
-    background: #d83c3c;
-    border-color: #fff;
-    opacity: 0.8;
-    box-shadow: 5px 5px 5px;
-}
-
-.optionsBtn:before {
-    content: '';
-    display: block;
-    position: absolute;
-    border-width: 8px 8px 8px;
-    border-style: solid solid solid none;
-    border-color: transparent #d83c3c transparent;
-    top: -3px;
-    right: 35px;
-    transform: rotate(270deg);
-    -ms-transform:rotate(270deg); /* IE 9 */
-    -webkit-transform:rotate(270deg); /* Safari and Chrome */
-}
-
-.optionsBtn:before:-webkit {
-    top: 25px;
-}
-
-.optionsBtn:hover:before {
-    border-color: transparent #fff transparent;
-}
-
-.extendShadow {
-    padding: 10px;
-}
-
-.changeBtn {
-    top: 105px;
-}
-
-.changeBtn:before {
-    top: -3px;
-    transform: rotate(90deg);
-    -ms-transform:rotate(90deg); /* IE 9 */
-    -webkit-transform:rotate(90deg); /* Safari and Chrome */
-}
-
-.changeBtn:before:-webkit {
-    top: -35px;
-}
-
-.hideInput {
-    display: none;
-}
-
-.showInput {
-    display: inline;
-}
-
 .artist-input {
     padding: 10px 15px;
     position: absolute;
@@ -710,7 +644,33 @@ a {
     overflow-x: hidden;
 }
 
-/* Example media queries */
+/*-------- Page Nav ---------*/
+.page-nav {
+    text-align: center;
+    margin: 20px;
+}
+
+.page-nav a {
+    padding: .45em;
+    border-radius: 3px;
+    box-shadow: 0px 0px 5px #311;
+    background-color: #d83c3c;
+    color: #eee;
+    font-size: .8em;
+    margin-right: 10px;
+    display: inline-block;
+    width: 20px;
+}
+
+.page-nav a:hover {
+    background-color: #e54040;
+}
+
+.page-nav a:active {
+    background-color: #c42f2f;
+}
+
+/* Media queries */
 
 @media screen and (max-height: 26.375em){
 
@@ -782,18 +742,6 @@ a {
         height: 35px;
         width: 35px;
         margin-top: 5px;
-    }
-
-    .optionsBtn {
-        top: 82px;
-    }
-
-    .changeBtn {
-        top: 120px;
-    }
-
-    .extendShadow {
-        padding: 10px;
     }
 
     .artist-input {
@@ -921,33 +869,6 @@ a {
         padding: 3px 0 3px 0;
     }
 
-    .optionsBtn {
-        width: 70px;
-        height: 8px;
-        top: 55px;
-    }
-
-    .optionsBtn:before {
-        border-width:  7px 7px 7px;
-        top: -3px;
-        right: 22px;
-    }
-
-    .extendShadow {
-        padding: 5px 5px 5px;
-    }
-
-    .changeBtn {
-        top: 76px;
-    }
-
-    .changeBtn:before {
-        top: -3px;
-        transform: rotate(90deg);
-        -ms-transform:rotate(90deg); /* IE 9 */
-        -webkit-transform:rotate(90deg); /* Safari and Chrome */
-    }
-
     .artist-input {
         padding: 5px 35px 5px 10px;
         width: 80px;
@@ -975,6 +896,10 @@ a {
     .tile > a > img {
         max-width: 23%;
         max-height: 70%;
+    }
+
+    .page-nav a {
+        padding: .5em;
     }
 
 }

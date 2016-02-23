@@ -12,6 +12,20 @@
     <%- include('tiles'); %>
 </div>
 
+<div class="page-nav">
+    <a href="/?p=<%=(parseInt(p)-1)%>" id="prev-page" style="<% if (parseInt(p) == 1 ){%>visibility:hidden;<%}%> font-family:web-symbols;"><</a>
+    <a href="/?p=1" style="<% if (parseInt(p) == 1 ){%>visibility:hidden;<%}%>">1</a>
+    <% if(parseInt(p) > 4 ) { %>
+        <a href="/?p=<%=(parseInt(p)-2)%>"><%=(parseInt(p)-2)%></a>
+        <a href="/?p=<%=(parseInt(p)-1)%>"><%=(parseInt(p)-1)%></a>
+    <%}%>
+    <a href="javascript:void(0)" style="cursor: default;background-color:#311;"><%=parseInt(p)%></a>
+    <a href="/?p=<%=(parseInt(p)+1)%>" <%if(parseInt(p) > totalPages-2){%> style="display:none;"<%}%>><%=(parseInt(p)+1)%></a>
+    <a href="/?p=<%=(parseInt(p)+2)%>" <%if(parseInt(p) > (totalPages-3)){%> style="display:none;"<%}%>><%=(parseInt(p)+2)%></a>
+    <a href="/?p=<%=totalPages%>" <%if(parseInt(p) == totalPages){%> style="display:none;"<%}%>><%=totalPages%></a>
+    <a href="/?p=<%=(parseInt(p)+1)%>" id="next-page" style="<% if (parseInt(p) == totalPages ){%>visibility:hidden;<%}%> font-family:web-symbols;">></a>
+</div>
+
 <%- include('footer', {location: '<p>Recommending events based on your ip location: ' + loc + '</p>', extra_deps: ''}); %>
     
 	<script type="text/javascript" src="//cdn.rawgit.com/WickyNilliams/headroom.js/v0.7.0/dist/headroom.min.js"></script>

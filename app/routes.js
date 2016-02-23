@@ -110,7 +110,7 @@ module.exports = function(app) {
  */
 function getConcerts (lat, lng, radius, artists, limit, date, page, fn) {
     var l = parseFloat(limit) || 100;
-    page = page || 0;
+    page = page || 1;
     var newDate = date || new Date();
     var dbQuery = { latlng: { $near:[parseFloat(lat), parseFloat(lng)], $maxDistance: parseFloat(radius)/111.12} };
     if (artists) dbQuery.artist = new RegExp(artists, 'i');
@@ -132,7 +132,6 @@ function countDocs (lat, lng, radius, fn) {
     dbQuery.startDate = { $gte : new Date(newDate)};
     db.concerts.count(dbQuery, function(err, results) {
         if (!err) {
-            logger.trace('count : ' + results);
             return fn(null, results);
         } else return fn(err, null);
     });

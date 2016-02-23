@@ -3,6 +3,8 @@
 var request = require('request');
 var villes = require('../config/liste-villes');
 var util = require('util');
+var Encoder = require('node-html-encoder').Encoder;
+var encoder = new Encoder('entity');
 
 console.log('\n*** Total number of locations to process : ' + villes.city.length + ' ***\n');
 console.log('*** Please be patient while sending requests this may take a while... ****\n');
@@ -27,13 +29,13 @@ function getAttr(url, city){
     var total = 0;
     const MAX_TOTAL = 200;
     options = { uri: url, timeout: REQ_TIMEOUT };
-    console.log('Fetching attributes for '+city+' with : '+options+'\n');
+    console.log('Fetching attributes for '+city+' with : '+util.inspect(options)+'\n');
     request(options, function(err, res, results){
         if(!err) {
             parsedRslts = JSON.parse(results);
             if(!parsedRslts.events){
                 console.log('***error could not fetch results for '+city+'!***\n');
-                console.log(results);
+                console.log(results + '\n' + util.inspect(options) + '\n' + err);
             }
             else {
                 total = parsedRslts.events['@attr'].total;
@@ -107,21 +109,21 @@ function pushEvents(parsedJSON, location){
         dict = parsedJSON.events.event[i];
         _checkInputFileds(dict, function(out, fields_ok){
             if(fields_ok) {
+                desc = encoder.htmlEncode(dict.description);
                 // building an array of dict of events
                 var item = {
-                    '_id' : 'as_'+dict.id,
+                    "_id" : dict.id,
                     title : dict.title,
                     artist : dict.artists.artist,
-                    address : dict.venue.name +', '+ dict.venue.location.street +', '+
-                                dict.venue.location.postalcode +', '+ dict.venue.location.city +', '+ dict.venue.location.country,
+                    address : {name: dict.venue.name, street : dict.venue.location.street,
+                                postalcode : dict.venue.location.postalcode,
+                                city : dict.venue.location.city, country : dict.venue.location.country},
                     latlong : [ parseFloat(dict.venue.location['geo:point']['geo:lat']),
                                parseFloat(dict.venue.location['geo:point']['geo:long'])],
-                    'url' : dict.url,
-                    'startDate' : new Date(dict.startDate),
-                    'img' : dict.image[1]["#text"],
-                    'description' : dict.description,
-                    'score' : 0,
-                    'source' : 'audioscrobbler'
+                    url : dict.url,
+                    startDate : new Date(dict.startDate),
+                    image : dict.image[1]["#text"],
+                    description : desc
                 };
                 if(dict.hasOwnProperty('tags')) item.tags = dict.tags.tag;
                 newArray.push(item);

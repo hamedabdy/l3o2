@@ -900,6 +900,7 @@ a {
 
     .page-nav a {
         padding: .5em;
+        width: 15px;
     }
 
 }

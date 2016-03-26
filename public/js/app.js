@@ -170,6 +170,16 @@ function shareButtons (data, fn) {
         return fn(shareBtns);
 };
 
+$('.shareBtns').children('a').on('click', function(e){
+        e.preventDefault();
+        var e = 575,
+            f = 520,
+            g = (jQuery(window).width() - e) / 2,
+            h = (jQuery(window).height() - f) / 2,
+            i = "status=1,width=" + e + ",height=" + f + ",top=" + h + ",left=" + g;
+        window.open($(this).attr("href"), "Maf Business", i);
+    });
+
 // ------------ END of METHODS
 
 

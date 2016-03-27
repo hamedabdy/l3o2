@@ -86,7 +86,7 @@ module.exports = function(app) {
      */
     app.get('/concert', function(req, res){
         var q =  req.query;
-        getConcerts(q.lat, q.lng, q.range, q.artist, q.l, q.date, function(err, results) {
+        getConcerts(q.lat, q.lng, q.range, q.artist, q.l, q.date, q.page, function(err, results) {
             if (!err) res.send(results);
             else res.send(err);
         });

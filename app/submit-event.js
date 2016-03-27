@@ -5,7 +5,8 @@ var mongojs     = require('mongojs')
     ,util       = require('util')
     ,logger     = require('../logger').appLog
     ,util       = require('util')
-    ,crypto     = require('crypto');
+    ,crypto     = require('crypto')
+    ,twitter    = require('./twitter');
 
 module.exports = function(app) {
 
@@ -32,6 +33,12 @@ module.exports = function(app) {
             req.body.score = parseInt(decrypted);
             mongo.insertData(req.body);
         });
+        // Post status to Twitter
+        status = '#' + req.body.artist[0].replace(/ /g, '') + ' • ' + req.body.title 
+                    + ' • ' 
+                    + 'http://concert-dacote.com/m?lat='+latlng[0]+'&lng='+latlng[1]+'&range=10&artist='
+                    + req.body.artist[0].replace(/ /g, '+');
+        twitter.postStatus(status);
         // res.render('submit-event', {message: 'Thank you for your submission'});
         req.session.msg = 'Thank you for your submission';
         res.redirect('/se');

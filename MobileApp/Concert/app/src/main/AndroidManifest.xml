@@ -5,6 +5,7 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
     <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES" />
     <!--
  The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
@@ -15,10 +16,13 @@
     <uses-permission android:name="android.permission.VIBRATE" />
 
     <application
+        android:name=".AppController"
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher_concert"
-        android:label="@string/app_name">
-        <!--android:theme="@style/Theme.AppCompat">-->
+        android:label="Concert d&apos;à côté">
+
+        <!-- android:theme="@style/AppTheme" > -->
+
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
@@ -26,18 +30,15 @@
             android:name="com.google.android.maps.v2.API_KEY"
             android:value="@string/google_maps_key" />
 
-        <activity
-            android:name=".Main"
-            android:label="Concert">
+        <activity android:name=".Main" android:screenOrientation="portrait" ></activity>
+        <activity android:name=".Information" android:screenOrientation="portrait" ></activity>
+        <activity android:name=".Details" android:screenOrientation="portrait"></activity>
+        <activity android:name=".Demarrage"
+                  android:theme="@style/Theme.AppCompat.NoActionBar" android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-        <activity
-            android:name=".Information"
-            android:label="@string/title_activity_information"
-            android:theme="@style/Theme.AppCompat.Light">
         </activity>
     </application>
 

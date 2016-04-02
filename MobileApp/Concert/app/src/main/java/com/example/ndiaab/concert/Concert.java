@@ -2,11 +2,18 @@ package com.example.ndiaab.concert;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.util.Log;
 
 import com.google.android.gms.maps.model.LatLng;
 import com.google.maps.android.clustering.ClusterItem;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
 
 /**
  * Created by ndiaab on 27/03/15.
@@ -14,19 +21,23 @@ import java.util.ArrayList;
 public class Concert implements Parcelable, ClusterItem {
 
     //Données Brut
-    private String id;
-    private String title;
-    private String artistes;
-    private String nom;
-    private String rue;
-    private String codePostal;
-    private String ville;
-    private String pays;
-    private Double lattitude;
-    private Double longitude;
-    private String url;
-    private String dateString;
-    private String urlImage;
+    String id;
+    String title;
+    String artistes;
+    String nom;
+    String rue;
+    String codePostal;
+    String ville;
+    String pays;
+    Double lattitude;
+    Double longitude;
+    String url;
+    String dateString;
+    String urlImage;
+    String urlGrandeImage="";
+    String dateFormat;
+    String heureFormat;
+    long dateMillis;
 
     private String idMarker;
 
@@ -37,7 +48,7 @@ public class Concert implements Parcelable, ClusterItem {
     public Concert () {
     }
 
-    public Concert(String id, String title, String artistes, String nom, String rue, String codePostal, String ville, String pays, Double lattitude, Double longitude, String url, String dateString, String urlImage) {
+    public Concert(String id, String title, String artistes, String nom, String rue, String codePostal, String ville, String pays, Double lattitude, Double longitude, String url, String dateString, String urlImage) throws ParseException {
         this.id = id;
         this.title = title;
         this.artistes = artistes;
@@ -52,6 +63,8 @@ public class Concert implements Parcelable, ClusterItem {
         this.url = url;
         this.dateString = dateString;
         this.urlImage = urlImage;
+        setDateHeureFormat();
+        //setUrlGrandeImage();
     }
 
     public Concert(Parcel source) {
@@ -68,6 +81,10 @@ public class Concert implements Parcelable, ClusterItem {
         this.url = source.readString();
         this.dateString = source.readString();
         this.urlImage = source.readString();
+        this.urlGrandeImage=source.readString();
+        this.dateFormat=source.readString();
+        this.heureFormat=source.readString();
+        this.dateMillis=source.readLong();
     }
 
     public String getId() {
@@ -198,6 +215,50 @@ public class Concert implements Parcelable, ClusterItem {
         this.idMarker = idMarker;
     }
 
+    public String getUrlGrandeImage() {
+        return urlGrandeImage;
+    }
+
+    public void setUrlGrandeImage() {
+        if (!urlImage.isEmpty() && !id.contains("pij"))
+        {
+            String[] decoupe = urlImage.split("/");
+            this.urlGrandeImage = decoupe[0] + "/" + decoupe[1] + "/" + decoupe[2] + "/" + decoupe[3] + "/252/" + decoupe[5];
+        }
+    }
+
+
+    public void setDateHeureFormat() throws ParseException {
+        if(!id.contains("pij"))
+        {
+            //DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
+            DateFormat formatter = new SimpleDateFormat("EEE, d MMM yyyy HH:mm:ss", Locale.US);
+            Date date = formatter.parse(this.dateString);
+
+            Calendar cal = Calendar.getInstance();
+            cal.setTime(date);
+            System.out.println(cal.get(Calendar.DAY_OF_MONTH) + "/" + cal.get(Calendar.MONTH) + "/" + cal.get(Calendar.YEAR));
+            int moisCalc = cal.get(Calendar.MONTH)+1;
+
+
+            dateMillis = cal.getTimeInMillis();
+            dateFormat = cal.get(Calendar.DAY_OF_MONTH)+"/"+moisCalc+"/"+cal.get(Calendar.YEAR);
+            //Log.e("Date Concert", dateFormat);
+
+            if(cal.get(Calendar.MINUTE)==0)
+                heureFormat = String.valueOf(cal.get(Calendar.HOUR_OF_DAY)+":00");
+            else
+                heureFormat = String.valueOf(cal.get(Calendar.HOUR_OF_DAY)+":"+cal.get(Calendar.MINUTE));
+        }
+        else
+        {
+            String[] decoupe = dateString.split(" ");
+            dateFormat=decoupe[0];
+            heureFormat=decoupe[1];
+            Log.e("test",dateFormat+" "+heureFormat);
+        }
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -218,8 +279,12 @@ public class Concert implements Parcelable, ClusterItem {
         dest.writeString(url);
         dest.writeString(dateString);
         dest.writeString(urlImage);
-
+        dest.writeString(urlGrandeImage);
+        dest.writeString(dateFormat);
+        dest.writeString(heureFormat);
+        dest.writeLong(dateMillis);
     }
+
 
     public static final Parcelable.Creator<Concert> CREATOR = new Parcelable.Creator<Concert>()
     {

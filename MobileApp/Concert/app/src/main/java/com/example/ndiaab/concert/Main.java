@@ -1,21 +1,42 @@
 package com.example.ndiaab.concert;
 
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.location.Location;
+import android.location.LocationManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Vibrator;
+import android.provider.Settings;
+import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.app.FragmentActivity;
+import android.support.v4.widget.DrawerLayout;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.widget.ImageView;
+import android.view.View;
+import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.AdapterView;
+import android.widget.AutoCompleteTextView;
+import android.widget.CheckBox;
+import android.widget.RelativeLayout;
+import android.widget.SearchView;
 import android.widget.SeekBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.location.places.Place;
+import com.google.android.gms.location.places.Places;
+import com.google.android.gms.location.places.ui.PlacePicker;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -28,20 +49,28 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.maps.android.clustering.Cluster;
 import com.google.maps.android.clustering.ClusterManager;
 import com.google.maps.android.clustering.view.DefaultClusterRenderer;
-import com.google.maps.android.ui.IconGenerator;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Random;
 
-public class Main extends FragmentActivity implements OnMapReadyCallback, GoogleMap.OnInfoWindowClickListener, GoogleMap.OnMarkerClickListener, GoogleMap.OnMyLocationButtonClickListener, GoogleMap.OnCameraChangeListener,
-        ClusterManager.OnClusterClickListener<Concert>, ClusterManager.OnClusterInfoWindowClickListener<Concert>, ClusterManager.OnClusterItemClickListener<Concert>, ClusterManager.OnClusterItemInfoWindowClickListener<Concert>
-{
+import static com.example.ndiaab.concert.R.drawable;
+import static com.example.ndiaab.concert.R.id;
+import static com.example.ndiaab.concert.R.layout;
+import static com.example.ndiaab.concert.R.string;
 
+public class Main extends FragmentActivity implements OnMapReadyCallback, GoogleMap.OnInfoWindowClickListener, GoogleMap.OnMarkerClickListener, GoogleMap.OnMyLocationButtonClickListener, GoogleMap.OnCameraChangeListener,
+        ClusterManager.OnClusterClickListener<Concert>, ClusterManager.OnClusterInfoWindowClickListener<Concert>, ClusterManager.OnClusterItemClickListener<Concert>, ClusterManager.OnClusterItemInfoWindowClickListener<Concert>,
+        GoogleApiClient.OnConnectionFailedListener, GoogleApiClient.ConnectionCallbacks, View.OnFocusChangeListener, View.OnClickListener, com.androidmapsextensions.GoogleMap.OnMapClickListener, TextView.OnEditorActionListener, AdapterView.OnItemClickListener, SeekBar.OnSeekBarChangeListener {
+
+    private static final int PRIORITY_HIGH_ACCURACY = 100;
+    private static final int PLACE_PICKER_REQUEST = 1;
     private GoogleMap mMap; // Might be null if Google Play services APK is not available.
     private ProgressDialog pDialog;
 
@@ -53,6 +82,12 @@ public class Main extends FragmentActivity implements OnMapReadyCallback, Google
     private int majDistance=20;
     private String majArtiste="";
 
+    public ActionBarDrawerToggle mDrawerToggle;
+    private DrawerLayout mDrawerLayout;
+    // used to store app title
+    private CharSequence mTitle;
+    private CharSequence mDrawerTitle;
+
     private Random mRandom = new Random(1984);
 
     float mCurrentZoom;
@@ -60,6 +95,14 @@ public class Main extends FragmentActivity implements OnMapReadyCallback, Google
     ArrayList<Marker> mClusterMarkers;
 
     private ClusterManager<Concert> mClusterManager;
+
+    Vibrator vibreur;
+
+    CheckBox checkBoxConcertPij;
+    Boolean checkedPij = false;
+    CheckBox checkBoxConcertDuJour;
+    Boolean chekedConcertDuJour = false;
+    SeekBar seekBarProgress;
 
 
     //private ClusterManager<MyItem> mClusterManager;
@@ -82,118 +125,80 @@ public class Main extends FragmentActivity implements OnMapReadyCallback, Google
 
     private ArrayList<Concert> mesConcerts;
     private HashMap<String,Concert> infoConcert;
+    private GoogleApiClient mGoogleApiClient;
+    Menu mMenu;
+    SearchView searchView;
+    private RelativeLayout mDrawerList;
 
+    int progress = 0;
+
+    Calendar dateDuJour=Calendar.getInstance();
+    int mois = dateDuJour.get(Calendar.MONTH)+1;
+    String dateDuJourString = dateDuJour.get(Calendar.DAY_OF_MONTH) + "/" + mois + "/" +dateDuJour.get(Calendar.YEAR);
+
+    public void fermerClavier(){
+        InputMethodManager imm = (InputMethodManager) this
+                .getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(this.getCurrentFocus().getWindowToken(),0);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        vibreur = (Vibrator) getApplicationContext().getSystemService(getApplicationContext().VIBRATOR_SERVICE);
+        System.out.println();
+
+
         mMarkers = new ArrayList<Marker>();
         mClusterMarkers = new ArrayList<Marker>();
-
-        setContentView(R.layout.activity_main);
+        setContentView(layout.activity_main);
         infoConcert = new HashMap<>();
         mesConcerts = new ArrayList<>();
         mesMarkers = new ArrayList<>();
         setUpMapIfNeeded();
+        mTitle = mDrawerTitle = getTitle();
+
+
+
+        mDrawerLayout = (DrawerLayout) findViewById(id.container);
+        mDrawerList = (RelativeLayout) findViewById(id.menu);
+        mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout,
+                drawable.ic_drawer, //nav menu toggle icon
+                string.app_name, // nav drawer open - description for accessibility
+                string.app_name // nav drawer close - description for accessibility
+        ) {
+            public void onDrawerClosed(View view) {
+                getActionBar().setTitle(mTitle);
+                // calling onPrepareOptionsMenu() to show action bar icons
+                invalidateOptionsMenu();
+            }
+
+            public void onDrawerOpened(View drawerView) {
+                getActionBar().setTitle(mDrawerTitle);
+                fermerClavier();
+                    // calling onPrepareOptionsMenu() to hide action bar icons
+            }
+        };
+
+
+
         mMap.setOnMarkerClickListener(this);
         mMap.setOnInfoWindowClickListener(this);
         mMap.setOnMyLocationButtonClickListener(this);
-        SeekBar seekBar = (SeekBar) findViewById(R.id.seekBar);
+        mMap.setOnMapClickListener(this);
 
-        seekBar.setOnSeekBarChangeListener(
-                new SeekBar.OnSeekBarChangeListener() {
-            int progress = 0;
+        mGoogleApiClient = new GoogleApiClient
+                .Builder(this)
+                .addApi(Places.GEO_DATA_API)
+                .addApi(Places.PLACE_DETECTION_API)
+                .addConnectionCallbacks(this)
+                .addOnConnectionFailedListener(this)
+                .build();
 
 
-                    @Override
-            public void onProgressChanged(SeekBar seekBar, int progresValue, boolean fromUser) {
-                progress = progresValue;
-                //Toast.makeText(getApplicationContext(), progresValue, Toast.LENGTH_SHORT).show();
-            }
+        SeekBar seekBar = (SeekBar) findViewById(id.seekBar);
+        seekBar.setOnSeekBarChangeListener(this);
 
-            @Override
-            public void onStartTrackingTouch(SeekBar seekBar) {
-                //Toast.makeText(getApplicationContext(), "Started tracking seekbar", Toast.LENGTH_SHORT).show();
-                //Toast.makeText(getApplicationContext(), progress, Toast.LENGTH_SHORT).show();
-            }
-
-            @Override
-            public void onStopTrackingTouch(SeekBar seekBar) {
-                //textView.setText("Covered: " + progress + "/" + seekBar.getMax());
-                Vibrator v = (Vibrator) getApplicationContext().getSystemService(getApplicationContext().VIBRATOR_SERVICE);
-                if(progress<=5){
-                    Toast.makeText(Main.this,"Distance : 5 KM", Toast.LENGTH_SHORT).show();
-                    seekBar.setProgress(5);
-                    setMajDistance(seekBar.getProgress());
-                    v.vibrate(200);
-                }
-                else
-                if(progress<=10){
-                    Toast.makeText(Main.this,"Distance : 10 KM", Toast.LENGTH_SHORT).show();
-                    seekBar.setProgress(10);
-                    setMajDistance(seekBar.getProgress());
-                    v.vibrate(200);
-                }
-                else
-                if (progress>10 & progress<=20){
-                    Toast.makeText(Main.this,"Distance : 20 KM", Toast.LENGTH_SHORT).show();
-                    seekBar.setProgress(20);
-                    setMajDistance(seekBar.getProgress());
-                }
-                else
-                if(progress>20 &progress<=30){
-                    Toast.makeText(Main.this,"Distance : 30 KM", Toast.LENGTH_SHORT).show();
-                    seekBar.setProgress(30);
-                    setMajDistance(seekBar.getProgress());
-                }
-                else
-                if (progress >30 &progress<=40){
-                    Toast.makeText(Main.this,"Distance : 40 KM", Toast.LENGTH_SHORT).show();
-                    seekBar.setProgress(40);
-                    setMajDistance(seekBar.getProgress());
-                }
-                else
-                if(progress>40 &progress<=50){
-                    Toast.makeText(Main.this,"Distance : 50 KM", Toast.LENGTH_SHORT).show();
-                    seekBar.setProgress(50);
-                    setMajDistance(seekBar.getProgress());
-                }
-                else
-                if (progress >50 &progress<=60){
-                    Toast.makeText(Main.this,"Distance : 100 KM", Toast.LENGTH_SHORT).show();
-                    seekBar.setProgress(60);
-                    setMajDistance(100);
-                }
-                else
-                if (progress >60 &progress<=70){
-                    Toast.makeText(Main.this,"Distance : 200 KM", Toast.LENGTH_SHORT).show();
-                    seekBar.setProgress(70);
-                    setMajDistance(200);
-                }
-                else
-                if (progress >70 &progress<=80){
-                    Toast.makeText(Main.this,"Distance : 300 KM", Toast.LENGTH_SHORT).show();
-                    seekBar.setProgress(80);
-                    setMajDistance(300);
-                }
-                else
-                if (progress >80 &progress<=90){
-                    Toast.makeText(Main.this,"Distance : 400 KM", Toast.LENGTH_SHORT).show();
-                    seekBar.setProgress(90);
-                    setMajDistance(400);
-                }
-                else
-                if (progress >90 &progress<=100){
-                    Toast.makeText(Main.this,"Distance : 500 KM", Toast.LENGTH_SHORT).show();
-                    seekBar.setProgress(100);
-                    setMajDistance(500);
-                    v.vibrate(200);
-                }
-            }
-    });
-        //mClusterManager = new ClusterManager<MyItem>(this, getMap());
-        //mClusterManager = new ClusterManager<Person>(this, getMap());
-        //getMap().setOnCameraChangeListener(mClusterManager);
         mClusterManager = new ClusterManager<Concert>(this, getMap());
         mClusterManager.setRenderer(new PersonRenderer());
         getMap().setOnCameraChangeListener(mClusterManager);
@@ -205,6 +210,19 @@ public class Main extends FragmentActivity implements OnMapReadyCallback, Google
         mClusterManager.setOnClusterItemInfoWindowClickListener(this);
         mClusterManager.cluster();
 
+        AutoCompleteTextView autoCompView = (AutoCompleteTextView) findViewById(id.rechercheVille);
+        autoCompView.setAdapter(new GooglePlacesAutocompleteAdapter(this, layout.list_item));
+        autoCompView.setOnItemClickListener(this);
+        autoCompView.setOnEditorActionListener(this);
+
+        checkBoxConcertPij = (CheckBox) findViewById(R.id.concertPij);
+        checkBoxConcertDuJour = (CheckBox) findViewById(R.id.concertDuJour);
+        seekBarProgress = (SeekBar) findViewById(id.seekBar);
+    }
+
+    public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
+        String str = (String) adapterView.getItemAtPosition(position);
+        Toast.makeText(this, str, Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -232,7 +250,7 @@ public class Main extends FragmentActivity implements OnMapReadyCallback, Google
         // Do a null check to confirm that we have not already instantiated the map.
         if (mMap == null) {
             // Try to obtain the map from the SupportMapFragment.
-            mMap = ((SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map))
+            mMap = ((SupportMapFragment) getSupportFragmentManager().findFragmentById(id.map))
                     .getMap();
             // Check if we were successful in obtaining the map.
             if (mMap != null) {
@@ -255,7 +273,8 @@ public class Main extends FragmentActivity implements OnMapReadyCallback, Google
 
     @Override
     public boolean onMyLocationButtonClick() {
-        Location maLocation=mMap.getMyLocation();
+        EnableGPSIfPossible();
+        Location maLocation= mMap.getMyLocation();
         if (maLocation != null) {
             Double lat = maLocation.getLatitude();
             Double longitude = maLocation.getLongitude();
@@ -263,18 +282,147 @@ public class Main extends FragmentActivity implements OnMapReadyCallback, Google
             setMajLongitude(longitude);
             new GetConcerts().execute();
         }
-        else
-            Toast.makeText(Main.this,"Localisation en cours", Toast.LENGTH_SHORT).show();
-        return false;
-    }
-    public boolean onMyIconeButtonClick(IconGenerator uneIcone) {
-            Toast.makeText(Main.this,"Localisation en cours", Toast.LENGTH_SHORT).show();
         return false;
     }
 
     @Override
     public void onCameraChange(CameraPosition cameraPosition) {
+    }
 
+    @Override
+    public void onConnectionFailed(ConnectionResult connectionResult) {
+    }
+
+    @Override
+    public void onConnected(Bundle bundle) {
+    }
+
+    @Override
+    public void onConnectionSuspended(int i) {
+
+    }
+
+    @Override
+    public void onFocusChange(View v, boolean hasFocus) {
+        if(!hasFocus) {
+            mMenu.findItem(id.action_search).collapseActionView();
+            Toast.makeText(Main.this, "Test On Focus !!", Toast.LENGTH_SHORT).show();
+            //searchView.setQuery("", false);
+        }
+
+    }
+
+    @Override
+    public void onClick(View v) {
+    }
+
+    public void onClickBtnValider(View v) {
+        int progression=0;
+        mDrawerLayout.closeDrawer(mDrawerList);
+        AutoCompleteTextView rechercheVille = (AutoCompleteTextView) findViewById(id.rechercheVille);
+        rechercheVille.clearFocus();
+        String uneVille= String.valueOf(rechercheVille.getText());
+        rechercheVille.setText("");
+        if(!uneVille.equalsIgnoreCase("")) {
+            new GetGeocode(uneVille).execute();
+            new GetConcerts().execute();
+        }
+        else
+            if(majLongitude!=0 && majLattitude!=0)
+            {
+                if(checkBoxConcertDuJour.isChecked() != chekedConcertDuJour || checkBoxConcertPij.isChecked() != checkedPij || seekBarProgress.getProgress()!=progression)
+                {
+                    progression=seekBarProgress.getProgress();
+                    chekedConcertDuJour=checkBoxConcertDuJour.isChecked();
+                    checkedPij=checkBoxConcertPij.isChecked();
+                    new GetConcerts().execute();
+                }
+            }
+
+    }
+
+    @Override
+    public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+        boolean handled = false;
+        if (actionId == EditorInfo.IME_ACTION_DONE) {
+            //Toast.makeText(Main.this, "Test Du bouton !!", Toast.LENGTH_SHORT).show();
+            handled = true;
+            mDrawerLayout.closeDrawer(mDrawerList);
+            AutoCompleteTextView rechercheVille = (AutoCompleteTextView) findViewById(id.rechercheVille);
+            rechercheVille.clearFocus();
+            String uneVille= String.valueOf(rechercheVille.getText());
+            rechercheVille.setText("");
+            if(!uneVille.equalsIgnoreCase("")) {
+                new GetGeocode(uneVille).execute();
+                new GetConcerts().execute();
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public void onMapClick(LatLng latLng) {
+        
+    }
+
+    @Override
+    public void onProgressChanged(SeekBar seekBar, int progressValue, boolean fromUser) {
+        progress = progressValue;
+    }
+
+    @Override
+    public void onStartTrackingTouch(SeekBar seekBar) {
+    }
+
+    @Override
+    public void onStopTrackingTouch(SeekBar seekBar) {
+        if (progress <= 5) {
+            Toast.makeText(Main.this, "Distance : 5 KM", Toast.LENGTH_SHORT).show();
+            seekBar.setProgress(5);
+            setMajDistance(seekBar.getProgress());
+            vibreur.vibrate(200);
+        } else if (progress <= 10) {
+            Toast.makeText(Main.this, "Distance : 10 KM", Toast.LENGTH_SHORT).show();
+            seekBar.setProgress(10);
+            setMajDistance(seekBar.getProgress());
+        } else if (progress > 10 & progress <= 20) {
+            Toast.makeText(Main.this, "Distance : 20 KM", Toast.LENGTH_SHORT).show();
+            seekBar.setProgress(20);
+            setMajDistance(seekBar.getProgress());
+        } else if (progress > 20 & progress <= 30) {
+            Toast.makeText(Main.this, "Distance : 30 KM", Toast.LENGTH_SHORT).show();
+            seekBar.setProgress(30);
+            setMajDistance(seekBar.getProgress());
+        } else if (progress > 30 & progress <= 40) {
+            Toast.makeText(Main.this, "Distance : 40 KM", Toast.LENGTH_SHORT).show();
+            seekBar.setProgress(40);
+            setMajDistance(seekBar.getProgress());
+        } else if (progress > 40 & progress <= 50) {
+            Toast.makeText(Main.this, "Distance : 50 KM", Toast.LENGTH_SHORT).show();
+            seekBar.setProgress(50);
+            setMajDistance(seekBar.getProgress());
+        } else if (progress > 50 & progress <= 60) {
+            Toast.makeText(Main.this, "Distance : 60 KM", Toast.LENGTH_SHORT).show();
+            seekBar.setProgress(60);
+            setMajDistance(seekBar.getProgress());
+        } else if (progress > 60 & progress <= 70) {
+            Toast.makeText(Main.this, "Distance : 70 KM", Toast.LENGTH_SHORT).show();
+            seekBar.setProgress(70);
+            setMajDistance(seekBar.getProgress());
+        } else if (progress > 70 & progress <= 80) {
+            Toast.makeText(Main.this, "Distance : 80 KM", Toast.LENGTH_SHORT).show();
+            seekBar.setProgress(80);
+            setMajDistance(seekBar.getProgress());
+        } else if (progress > 80 & progress <= 90) {
+            Toast.makeText(Main.this, "Distance : 90 KM", Toast.LENGTH_SHORT).show();
+            seekBar.setProgress(90);
+            setMajDistance(seekBar.getProgress());
+        } else if (progress > 90 & progress <= 100) {
+            Toast.makeText(Main.this, "Distance : 100 KM", Toast.LENGTH_SHORT).show();
+            seekBar.setProgress(100);
+            setMajDistance(seekBar.getProgress());
+            vibreur.vibrate(200);
+        }
     }
 
     public class GetConcerts extends AsyncTask<Void, Void, Void> {
@@ -293,14 +441,17 @@ public class Main extends FragmentActivity implements OnMapReadyCallback, Google
         @Override
         protected Void doInBackground(Void... arg0) {
             mesConcerts.clear();
-            String url = "http://concert-dacote.herokuapp.com/concert?lat="+majLattitude+"&long="+majLongitude+"&range="+majDistance+"&artist="+majArtiste;
+            mClusterMarkers.clear();
+            mClusterManager.clearItems();
+            //Origine
+            String url = "http://concert-da-cote.herokuapp.com/concert?lat="+majLattitude+"&long="+majLongitude+"&range="+majDistance+"&artist="+majArtiste;
+            Log.d("URL ",url);
             // Creating service handler class instance
+
             ServiceHandler sh = new ServiceHandler();
 
             // Making a request to url and getting response
             String jsonStr = sh.makeServiceCall(url, ServiceHandler.GET);
-
-            //Log.d("Response: ", "> " + jsonStr);
 
             if (jsonStr != null) {
                 try {
@@ -308,18 +459,35 @@ public class Main extends FragmentActivity implements OnMapReadyCallback, Google
 
                     // looping through All Concerts
                     for (int i = 0; i < jsonObj.length() ; i++) {
+
                         JSONObject unConcert = jsonObj.getJSONObject(i);
 
                         String id = unConcert.getString(TAG_ID);
                         String title = unConcert.getString(TAG_TITLE);
                         String artists =unConcert.getString(TAG_ARTIST);
 
-                        JSONObject address = unConcert.getJSONObject(TAG_ADDRESS);
-                        String nom =address.getString(TAG_NAME);
-                        String rue = address.getString(TAG_STREET);
-                        String codePostal = address.getString(TAG_POSTALCODE);
-                        String ville = address.getString(TAG_CITY);
-                        String pays = address.getString(TAG_COUNTRY);
+                        String nom ="";
+                        String rue ="";
+                        String codePostal="";
+                        String ville = "";
+                        String pays = "";
+                        String image="";
+
+                        if(id.contains("pij"))
+                        {
+                            rue = unConcert.getString(TAG_ADDRESS);
+                            image="http://concert-da-cote.herokuapp.com/images/cadrij-small.jpg";
+                        }
+                        else
+                        {
+                            JSONObject address = unConcert.getJSONObject(TAG_ADDRESS);
+                            nom =address.getString(TAG_NAME);
+                            rue = address.getString(TAG_STREET);
+                            codePostal = address.getString(TAG_POSTALCODE);
+                            ville = address.getString(TAG_CITY);
+                            pays = address.getString(TAG_COUNTRY);
+                            image =unConcert.getString(TAG_IMAGE);
+                        }
 
                         JSONArray coordonnees = unConcert.getJSONArray(TAG_LATLONG_TAB);
                         Double longitude = coordonnees.getDouble(0);
@@ -328,21 +496,41 @@ public class Main extends FragmentActivity implements OnMapReadyCallback, Google
 
                         String monUrl = unConcert.getString(TAG_URL);
                         String date = unConcert.getString(TAG_DATE);
-                        String image =unConcert.getString(TAG_IMAGE);
+
                         ArrayList<String> artistes = new ArrayList<String>();
                         artistes.add(artists);
                         Concert monConcert = new Concert(id,title,artists,nom,rue,codePostal,ville,pays,lattitude,longitude,monUrl,date,image);
-
 
                         HashMap<String, String> concert = new HashMap<String, String>();
                         concert.put(TAG_ID,id);
                         concert.put(TAG_TITLE,title);
                         concert.put("longitude",String.valueOf(longitude));
-                        concert.put("lattitude",String.valueOf(lattitude));
-                        mesConcerts.add(monConcert);
+                        concert.put("lattitude", String.valueOf(lattitude));
 
+                        if(checkBoxConcertPij.isChecked() && checkBoxConcertDuJour.isChecked()) {
+                            if (monConcert.getId().contains("pij"))
+                                mesConcerts.add(monConcert);
+                        }
+                        else
+                            if (checkBoxConcertPij.isChecked()){
+                                if (monConcert.getId().contains("pij"))
+                                mesConcerts.add(monConcert);
+                            }
+                            else
+                                if(checkBoxConcertDuJour.isChecked()){
+                                    //Log.e("Test Date Concert : ",monConcert.dateFormat);
+                                    if(dateDuJourString.equalsIgnoreCase(monConcert.dateFormat) || monConcert.getId().contains("pij"))
+                                        mesConcerts.add(monConcert);
+                                }
+                                else
+                                {
+                                    if(dateDuJour.getTimeInMillis()<monConcert.dateMillis || monConcert.getId().contains("pij"))
+                                        mesConcerts.add(monConcert);
+                                }
                     }
                 } catch (JSONException e) {
+                    e.printStackTrace();
+                } catch (ParseException e) {
                     e.printStackTrace();
                 }
             } else {
@@ -360,24 +548,97 @@ public class Main extends FragmentActivity implements OnMapReadyCallback, Google
 
             if (mesConcerts.isEmpty() !=true) {
                 for(int i=0; i<mesConcerts.size();i++){
-                LatLng sydney = new LatLng(mesConcerts.get(i).getLongitude(),mesConcerts.get(i).getLattitude());
-                    /*Marker unMarker = mMap.addMarker(new MarkerOptions()
-                            .title(mesConcerts.get(i).getTitle())
-                            .snippet(mesConcerts.get(i).getId() + " " + mesConcerts.get(i).getTitle())
-                            .position(sydney).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_VIOLET))
-
-                            );
-                    mesConcerts.get(i).setIdMarker(unMarker.getId());
-                    infoConcert.put(unMarker.getId(), mesConcerts.get(i));
-                    mMarkers.add(unMarker);*/
-                    MyItem items = new MyItem(mesConcerts.get(i).getLongitude(),mesConcerts.get(i).getLattitude());
-                    //mClusterManager.addItem(items);
                     mClusterManager.addItem(mesConcerts.get(i));
-                    getMap().setOnCameraChangeListener(mClusterManager);
                     }
                 }
+                LatLng loc = new LatLng(majLattitude,majLongitude);
+                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(loc, 12));
+                mMap.addMarker(new MarkerOptions()
+                        .title("Ma Position")
+                        .position(loc)
+                        .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE)));
                 Toast.makeText(Main.this, mesConcerts.size() + " concerts autour de vous !!", Toast.LENGTH_SHORT).show();
             }
+        }
+    }
+
+    public class GetGeocode extends AsyncTask<Void, Void, Void> {
+
+        Double mlongitude=0.0;
+        Double mlatitude=0.0;
+        String mRue="";
+        String recherhe="";
+
+        public GetGeocode(String recherhe) {
+            this.recherhe = recherhe.replaceAll(" ","%20");
+            System.out.println(this.recherhe);
+        }
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            mMap.clear();
+            // Showing progress dialog
+        }
+
+        @Override
+        protected Void doInBackground(Void... arg0) {
+            mesConcerts.clear();
+            mClusterMarkers.clear();
+            mClusterManager.clearItems();
+            
+            //Origine
+            String url = "https://maps.googleapis.com/maps/api/geocode/json?address="+recherhe;
+            Log.d("URL ",url);
+
+            // Creating service handler class instance
+            ServiceHandler sh = new ServiceHandler();
+
+            // Making a request to url and getting response
+            String jsonStr = sh.makeServiceCall(url, ServiceHandler.GET);
+
+            if (jsonStr != null) {
+                try {
+                    JSONObject jsonObj = new JSONObject(jsonStr);
+                    JSONArray results = jsonObj.getJSONArray("results");
+                    JSONObject test = results.getJSONObject(0);
+                    String rue = test.getString("formatted_address");
+                    JSONObject geometry = test.getJSONObject("geometry");
+                    System.out.println(geometry);
+                    JSONObject location = geometry.getJSONObject("location");
+                    Double longitude = location.getDouble("lat");
+                    Double lattitude = location.getDouble("lng");
+
+                    mlongitude=longitude;
+                    mlatitude=lattitude;
+                    setMajLattitude(mlongitude);
+                    setMajLongitude(mlatitude);
+                    mRue=rue;
+
+                    System.out.println(longitude);
+                    System.out.println(lattitude);
+                    System.out.println(rue);
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            } else {
+                Log.e("ServiceHandler", "Couldn't get any data from the url");
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void result) {
+            super.onPostExecute(result);
+            // Dismiss the progress dialog
+            /*    LatLng loc = new LatLng(mlongitude,mlatitude);
+                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(loc, 9));
+                mMap.addMarker(new MarkerOptions()
+                        .title("Ma Position")
+                        .position(loc)
+                        .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE)));*/
+                Toast.makeText(Main.this,mRue, Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -392,7 +653,6 @@ public class Main extends FragmentActivity implements OnMapReadyCallback, Google
                 .position(new LatLng(41.889, -87.622)));
     }
 
-
     @Override
     public boolean onMarkerClick(Marker marker) {
         // TODO Auto-generated method stub
@@ -402,8 +662,7 @@ public class Main extends FragmentActivity implements OnMapReadyCallback, Google
     @Override
     public void onInfoWindowClick(Marker marker) {
         // When touch InfoWindow on the marker, display another screen.
-        Intent intent = new Intent(this, Information.class);
-        Log.e("Response: ", "> " + infoConcert.get(marker.getId()).getTitle());
+        Intent intent = new Intent(this, Details.class);
         Concert unConcert = infoConcert.get(marker.getId());
         intent.putExtra("concert",unConcert);
         intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
@@ -413,16 +672,29 @@ public class Main extends FragmentActivity implements OnMapReadyCallback, Google
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
+        mMenu = menu;
         inflater.inflate(R.menu.menu_information, menu);
+
+        searchView = (SearchView) mMenu.findItem(id.action_search)
+                .getActionView();
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.menu_search:
-                // Comportement du bouton "Recherche"
-                boolean b = onSearchRequested();
+            case id.action_search:
+                if (mDrawerLayout.isDrawerOpen(mDrawerList))
+                {
+                    mDrawerLayout.closeDrawer(mDrawerList);
+                    //Clavier
+                    InputMethodManager imm = (InputMethodManager) this
+                            .getSystemService(Context.INPUT_METHOD_SERVICE);
+                    imm.hideSoftInputFromWindow(this.getCurrentFocus().getWindowToken(),0);
+                }
+                else
+                    mDrawerLayout.openDrawer(mDrawerList);
+                return true;
         }
         return true;
     }
@@ -448,32 +720,36 @@ public class Main extends FragmentActivity implements OnMapReadyCallback, Google
         return mMap;
     }
 
-    private double random(double min, double max) {
-        return mRandom.nextDouble() * (max - min) + min;
-    }
-
     @Override
     public boolean onClusterClick(Cluster<Concert> cluster) {
         // Show a toast with some info when the cluster is clicked.
-        String firstName = cluster.getItems().iterator().next().getTitle();
-        Toast.makeText(this, cluster.getSize()+" Concerts", Toast.LENGTH_SHORT).show();
-        /*AlertDialog.Builder builder = new AlertDialog.Builder(Main.this);
-        builder.setMessage("Titre boite");
-        builder.setTitle ("Détails boite");
-        AlertDialog ad = builder.create();
-        ad.show();*/
-        /*IconGenerator iconFactory = new IconGenerator(this);
-        iconFactory.setContentRotation(180);
-        iconFactory.setRotation(180);
-        iconFactory.setStyle(IconGenerator.STYLE_PURPLE);
-        addIcon(iconFactory, "Default", new LatLng(cluster.getPosition().latitude,cluster.getPosition().longitude));
-        onMyIconeButtonClick(iconFactory);*/
+        Concert concert =  cluster.getItems().iterator().next();
+        String firstName = concert.title;
+        Double latitude=concert.lattitude;
+        Double longitude=concert.longitude;
+        Boolean uneSalleUnique=true;
+        for(Concert unConcert:cluster.getItems())
+        {
+            if(!unConcert.lattitude.equals(latitude) || !unConcert.longitude.equals(longitude)){
+                uneSalleUnique=false;
+                break;
+            }
+        }
+        if (uneSalleUnique==true){
+            Intent intent = new Intent(this, Information.class);
+            ArrayList<Concert> maListe = new ArrayList<>();
+            for(Concert unConcert:cluster.getItems())
+                maListe.add(unConcert);
+            intent.putExtra("liste", maListe);
+            startActivity(intent);
+        }
         return true;
     }
 
     @Override
     public void onClusterInfoWindowClick(Cluster<Concert> cluster) {
         // Does nothing, but you could go to a list of the users.
+        //Toast.makeText(this,"onClusterInfoWindowClick", Toast.LENGTH_SHORT).show();
 
     }
 
@@ -484,57 +760,96 @@ public class Main extends FragmentActivity implements OnMapReadyCallback, Google
     }
 
     @Override
-    public void onClusterItemInfoWindowClick(Concert item) {
+    public void onClusterItemInfoWindowClick(Concert concert) {
         // Does nothing, but you could go into the user's profile page, for example.
-        Intent intent = new Intent(this, Information.class);
-        intent.putExtra("concert",item);
-        intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+        Intent intent = new Intent(this, Details.class);
+        intent.putExtra("concert", concert);
         startActivity(intent);
     }
 
 
     private class PersonRenderer extends DefaultClusterRenderer<Concert> {
-        private final IconGenerator mIconGenerator = new IconGenerator(getApplicationContext());
-        private  IconGenerator mClusterIconGenerator = new IconGenerator(getApplicationContext());
-        private  ImageView mImageView;
-        private  ImageView mClusterImageView;
-        private  int mDimension;
 
         public PersonRenderer() {
             super(getApplicationContext(), getMap(), mClusterManager);
-           /* View multiProfile = getLayoutInflater().inflate(R.layout.multi_profile, null);
-            mClusterIconGenerator.setContentView(multiProfile);
-            mClusterImageView = (ImageView) multiProfile.findViewById(R.id.image);
-
-            mImageView = new ImageView(getApplicationContext());
-            mDimension = (int) getResources().getDimension(R.dimen.custom_profile_image);
-            mImageView.setLayoutParams(new ViewGroup.LayoutParams(mDimension, mDimension));
-            int padding = (int) getResources().getDimension(R.dimen.custom_profile_padding);
-            mImageView.setPadding(padding, padding, padding, padding);
-            mIconGenerator.setContentView(mImageView);*/
         }
 
         @Override
         protected void onBeforeClusterItemRendered(Concert unConcert, MarkerOptions markerOptions) {
-            // Draw a single person.
-            // Set the info window to show their name.
-            //mImageView.setImageResource(person.profilePhoto);
-            //Bitmap icon = mIconGenerator.makeIcon();
-            markerOptions.title(unConcert.getTitle());
+
+            markerOptions.title(unConcert.title);
+            if(unConcert.id.contains("pij")){
+            markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN));
+            }
         }
         @Override
         protected boolean shouldRenderAsCluster(Cluster cluster) {
             // Always render clusters.
-            return cluster.getSize() > 1;
+            return cluster.getSize() > 5;
         }
     }
 
-    private void addIcon(IconGenerator iconFactory, String text, LatLng position) {
-        MarkerOptions markerOptions = new MarkerOptions().
-                icon(BitmapDescriptorFactory.fromBitmap(iconFactory.makeIcon(text))).
-                position(position).
-                anchor(iconFactory.getAnchorU(), iconFactory.getAnchorV());
+    private  void buildAlertMessageNoGps() {
+        final AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage("Utiliser ma position ?")
+                .setCancelable(false)
+                .setPositiveButton("OUI", new DialogInterface.OnClickListener() {
+                    public void onClick(final DialogInterface dialog,final int id) {
+                        startActivity(new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS));
+                    }
+                })
+                .setNegativeButton("NON", new DialogInterface.OnClickListener() {
+                    public void onClick(final DialogInterface dialog,final int id) {
+                        dialog.cancel();
+                    }
+                });
+        final AlertDialog alert = builder.create();
+        alert.show();
+    }
 
-        getMap().addMarker(markerOptions);
+    private void EnableGPSIfPossible()
+    {
+        final LocationManager manager = (LocationManager) getSystemService( Context.LOCATION_SERVICE );
+        if ( !manager.isProviderEnabled( LocationManager.GPS_PROVIDER ) ) {
+            buildAlertMessageNoGps();
+        }
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        mGoogleApiClient.connect();
+    }
+
+    @Override
+    protected void onStop() {
+        mGoogleApiClient.disconnect();
+        super.onStop();
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            if (mDrawerLayout.isDrawerOpen(mDrawerList))
+            {
+                mDrawerLayout.closeDrawer(mDrawerList);
+                //Clavier
+                InputMethodManager imm = (InputMethodManager) this
+                        .getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm.hideSoftInputFromWindow(this.getCurrentFocus().getWindowToken(),0);
+                return true;
+            }
+        }
+        return super.onKeyDown(keyCode, event);
+    }
+
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == PLACE_PICKER_REQUEST) {
+            if (resultCode == RESULT_OK) {
+                Place place = PlacePicker.getPlace(data, this);
+                String toastMsg = String.format("Place: %s", place.getName());
+                Toast.makeText(this, toastMsg, Toast.LENGTH_LONG).show();
+            }
+        }
     }
 }

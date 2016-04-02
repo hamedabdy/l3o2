@@ -74,9 +74,6 @@ findByUsername(username, function(err, user) {
       if (err) { return done(err); }
       if (!user) { return done(null, false, { message: 'Unknown user ' + username }); }
 
-      //console.log(user.password);
-      //console.log(password);
-      
 
       if(!passwordHash.verify(password,user.password))
       {
@@ -107,7 +104,7 @@ app.get('/concert', function(req, res){
     var dbQuery = { latlong: {
       $near:[parseFloat(req.query.lat), parseFloat(req.query.long)],
       $maxDistance: parseFloat(req.query.range)/111.12},
-      "_id" : /.*pij.*/};
+      "type" : "rij"};
   }else {
 
     var dbQuery = { latlong: {
@@ -121,14 +118,14 @@ app.get('/concert', function(req, res){
     dbQuery.artist = new RegExp(req.query.artist, 'i');
     db.concerts.find( dbQuery, { limit : 5000 }, function(err, result) {
 	  if(!err) {
-      console.log(result.length);
+      console.log(result.length +"result(s)");
       res.send(result); 
     } else console.log(err);
 	});
   } else {
   db.concerts.find( dbQuery, { limit : 5000 }, function(err, result) {
 	  if(!err) {
-      console.log(result.length);
+      console.log(result.length +"result(s)");
       res.send(result); 
     } else console.log(err);
 	});
@@ -149,17 +146,42 @@ app.get('/artist', function(req, res, next){
 	});
   }
 });
-app.get('/addusr', function(req, res){
 
 
+
+
+
+//app.get('/addusr', function(req, res){
   
-	   //addUser("kader","kader111");
+	   //addUser("xxxx","xxxx");
 
-     //var hashedPassword = passwordHash.generate('kader111');
-     //console.log(passwordHash.verify('kader111', hashedPassword));
-
-    console.log('user added succefully');
+     //var hashedPassword = passwordHash.generate('xxxxx');
+     //console.log(passwordHash.verify('xxxxx', hashedPassword));
+    //console.log('user added succefully');
 	//res.render('dashbord', {message: 'Yo' });
+//});
+
+
+app.get('/managepijconcerts', ensureAuthenticated, function(req,res){
+
+db.concerts.find( {type: "rij"}, { limit : 5000 }, function(err, result) {
+    if(!err) {
+      console.log(result.length);
+      res.render('managepijconcerts', { result : result});
+      //res.send(result); 
+    } else console.log(err);
+  });
+});
+
+app.get('/delete', ensureAuthenticated, function(req, res){
+
+
+  db.concerts.remove( {"_id" : req.query.id}, function(err, result) {
+    if(!err) {
+      console.log("concert No "+ req.query.id +" supprimé");
+       res.redirect('/managepijconcerts');
+    } else console.log(err);
+  });
 });
 
 
@@ -172,6 +194,7 @@ app.get('/maj', ensureAuthenticated, function(req, res){
 });
 
 app.get('/dashbord', function(req, res){
+
   res.render('dashbord', { user: req.user, message: ''});
 });
 
@@ -184,21 +207,44 @@ app.get('/addpijconcert', ensureAuthenticated, function(req, res){
 });
 
 app.post('/addpijconcert', ensureAuthenticated, function(req, res){
-  //console.log("Titre******"+req.body.titre);
-  //console.log("Latitude******"+req.body.lat);
-  //console.log("Longitude******"+req.body.long);
-  
-  //obj.push({"_id":"pij",title:req.body.titre,artist:req.body.artist,address:{name:myobject.venue.name,street:myobject.venue.location.street,postalcode:myobject.venue.location.postalcode,city:myobject.venue.location.city,country:myobject.venue.location.country},latlong:[parseFloat(myobject.venue.location['geo:point']['geo:lat']),parseFloat(myobject.venue.location['geo:point']['geo:long'])],url:myobject.url,startDate:myobject.startDate,image:myobject.image[1]["#text"]}); 
-  //{name:"Nanterre U",street:"200, Avenue de la République",postalcode:92000,city:"Nanterre",country:"France"}
-  //if (req.body.titre != "" || req.body.artist != "" || req.body.address !=""|| req.body.lat !=""|| req.body.date != ""){
 
+  
   var obj=[];
   var d = new Date();
   var seconds = d.getTime();  
-  obj.push({"_id":"pij"+seconds,title:req.body.titre,artist:req.body.artist,address:req.body.address,latlong:[parseFloat(req.body.lat),parseFloat(req.body.long)],url:req.body.url,startDate:req.body.date,image:""}); 
+  obj.push({"_id": "pij"+seconds, type: "rij", title:req.body.titre,artist:req.body.artist,address:req.body.address,latlong:[parseFloat(req.body.lat),parseFloat(req.body.long)],url:req.body.url,startDate:req.body.date,image:""}); 
   db.concerts.insert(obj,{continueOnError:true},function(err,docs){if(err)console.log('err: '+err+'\n');else console.log('concert inserted successfully!\n');});
   res.render('dashbord', {user: req.user, message: 'Concert ajouté avec succès!' });
   //}
+
+});
+
+
+app.get('/editconcert', ensureAuthenticated, function(req,res){
+
+  db.concerts.find( {"_id" : req.query.id }, { limit : 5000 }, function(err, result) {
+    if(!err) {
+      console.log(result.length);
+      res.render('editconcert', { result : result});
+      //res.send(result); 
+    } else console.log(err);
+  });
+
+});
+
+app.post('/editconcert', ensureAuthenticated, function(req,res){
+
+   
+  var obj=[];
+  var d = new Date();
+  //var seconds = d.getTime();  
+
+  
+
+
+  db.concerts.update({_id : req.query.id},{type: "rij", title:req.body.titre,artist:req.body.artist,address:req.body.address,latlong:[parseFloat(req.body.lat),parseFloat(req.body.long)],url:req.body.url,startDate:req.body.date,image:""}
+    ,{continueOnError:true},function(err,docs){if(err)console.log('err: '+err+'\n');else console.log('concert updated successfully!\n');});
+  res.render('dashbord', {user: req.user, message: 'Concert mis à jour avec succès!' });
 
 });
 
@@ -208,7 +254,7 @@ app.get('/login', function(req, res){
 });
 
 app.post('/login',
-  passport.authenticate('local', { failureRedirect: '/', failureFlash: true }),
+  passport.authenticate('local', { failureRedirect: '/login', failureFlash: true }),
   function(req, res) {
     res.redirect('/dashbord');
   });
@@ -232,7 +278,6 @@ function findById(id, fn) {
 
   var ObjectId = mongojs.ObjectId;
   
-  //console.log(id);
   db2.htpasswd.findOne({_id: ObjectId(id)}, function(err, results){
     if (results) {
       fn(null, results);

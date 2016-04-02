@@ -164,9 +164,9 @@ function closeInfoWindows(){
 function newPoint(carte, response, oms){
     var encodedURL = encodeURIComponent(document.URL+response.artist);
 
-    var str = response._id;
+    var type = response.type;
 
-     if (str.indexOf("pij") == 0){
+     if (type == "rij"){
 
         var image_252 = "images/cadrij.jpg";
      }
@@ -201,23 +201,33 @@ function newPoint(carte, response, oms){
 
     
 
-    if (str.indexOf("pij") == 0){
+    if (type == "rij"){
         
         lemarqueur.setIcon('images/marker-green-small.png');
         var imagetoshow =  "images/cadrij-small.jpg";
+            
+        if(response.url == ""){
+             var str = "";
+        }
+        else var str = '<br><a href="'+response.url+'"">Plus d\'informations</a>';
 
+
+            oms.addMarker(lemarqueur);
+            var WindowOptions = { content:'<table><tr><td><img src="'
+    +imagetoshow+'"/></td><td><div class="info-window-title">'
+    +response.title+'</div><div class="info-window-body"><b>Artists: </b>'
+    +response.artist+'<br><b>Date: </b>'+response.startDate+'<br>'
+    +response.address+''+str
+    +'</div></td></tr><tr><td></td><td>'+lastfm+'\t'+fb_share+'\t'+tw_share+'\t'+gplus
+    +'\t'+su+'</td></tr></table>' };
 
     }
     else {
         
         var imagetoshow = response.image;
-    }
 
-
-    oms.addMarker(lemarqueur);
-
-    if (response.address.street =! "undefined"){
-    var WindowOptions = { content:'<table><tr><td><img src="'
+        oms.addMarker(lemarqueur);
+     var WindowOptions = { content:'<table><tr><td><img src="'
     +imagetoshow+'"/></td><td><div class="info-window-title">'
     +response.title+'</div><div class="info-window-body"><b>Artists: </b>'
     +response.artist+'<br><b>Date: </b>'+response.startDate+'<br>'
@@ -225,16 +235,13 @@ function newPoint(carte, response, oms){
     +response.address.postalcode+', '+response.address.city+', '+response.address.country
     +'</div></td></tr><tr><td></td><td>'+lastfm+'\t'+fb_share+'\t'+tw_share+'\t'+gplus
     +'\t'+su+'</td></tr></table>' };
-}
-else {
-    var WindowOptions = { content:'<table><tr><td><img src="'
-    +imagetoshow+'"/></td><td><div class="info-window-title">'
-    +response.title+'</div><div class="info-window-body"><b>Artists: </b>'
-    +response.artist+'<br><b>Date: </b>'+response.startDate+'<br>'
-    +response.address
-    +'</div></td></tr><tr><td></td><td>'+lastfm+'\t'+fb_share+'\t'+tw_share+'\t'+gplus
-    +'\t'+su+'</td></tr></table>' };
-}
+
+    }
+
+
+    
+
+ 
 
 
     var InfoWindow = new google.maps.InfoWindow(WindowOptions);

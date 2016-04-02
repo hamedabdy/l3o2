@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Gerer mes concerts</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Loading Bootstrap -->
+   <link href="css/bootstrap.css" rel="stylesheet">
+    <link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.2/css/bootstrap-combined.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" media="screen" href="css/bootstrap-datetimepicker.min.css">
+    <link rel="stylesheet" type="text/css" href="css/listjs.css"/>
+  
+    <!-- Loading Flat UI -->
+    <link href="css/flat-ui.css" rel="stylesheet">
+    
+<style type="text/css">
+  
+#titre {
+     color: cadetblue;
+     font-weight: bold;
+  min-width: 30%;
+  text-align: left !important;
+
+}
+
+#titre a {
+  margin: 6px;
+}
+.table td, .table th {
+    border: none;
+}
+
+table.table.table-bordered {
+    border: 1px solid white;
+}
+
+.navbar a{
+    font-size: 20px;
+  height: auto;
+  padding: 15px 5px;
+  font-weight: bold;
+}
+.navbar-header {
+    background-color: white;
+}
+
+.monform{
+  background-color: white;
+  border-radius: 4px;
+padding: 8px 20px 8px 8px;
+  
+}
+</style>
+  </head>
+ 
+  <body>
+
+  <nav class="navbar navbar-default">
+  <div class="container">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="dashbord">
+        <img alt="CadriJ" src="images\cadrij-small.jpg">
+        Gerer les concerts CadriJ
+
+      </a>
+    </div>
+  </div>
+</nav>
+
+<div class="container-fluid">
+
+<div class="monform" id="text">
+<div id="users">
+  <input class="search" placeholder="Saisir des mots clefs..." style="width: 98%;"/>
+
+  <ul class="list">
+  <% result.forEach(function(result) { %>
+    <li>
+      <h6>Titre</h6>
+      <p class="title"><%= result.title %></p>
+      
+      <h6>Artiste(s)</h6> 
+      <p class="artist"><%= result.artist %></p>
+      
+      <h6>Adresse</h6> 
+      <p class="address"><%= result.address %></p>
+      
+      <h6>Date</h6>
+      <p class="startDate"><%= result.startDate %></p>
+      
+      <h6>URL</h6>
+      <p class="url"><%= result.url ? result.url : 'Aucune URL' %></p>
+
+       <a href="editconcert?id=<%= result._id %>" class="btn btn-success">Modifier</a>
+       <a href="delete?id=<%= result._id %>" class="btn btn-danger">Supprimer</a>
+
+    </li>
+<% }); %>    
+  </ul>
+
+  <a href="/dashbord" id="opener" class="btn btn-large btn-block btn-warning">Retour au menu principal</a>
+</div>
+</div>
+</div>
+
+
+
+<script src="js/main.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/list.js"></script>
+<script>
+  var options = {
+  valueNames: [ 'title', 'artist', 'address', 'startDate', 'url']
+};
+
+var userList = new List('users', options);
+  
+</script>
+  </body>
+
+</html>

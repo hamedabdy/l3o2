@@ -1,13 +1,11 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.example.ndiaab.concert.Information">
 
-    <item android:id="@+id/action_settings" android:title="@string/action_settings"
-        android:orderInCategory="100" app:showAsAction="never" />
-    <item
-        android:id="@+id/menu_search"
+    <item android:id="@+id/action_search"
+        android:title="Search"
         android:icon="@drawable/abc_ic_search_api_mtrl_alpha"
         android:showAsAction="ifRoom"
-        android:title="@string/menu_search"/>
+        android:focusable="false"
+        />
 </menu>

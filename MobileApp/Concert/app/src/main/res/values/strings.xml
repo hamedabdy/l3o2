@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">Concert</string>
+    <string name="app_name">Test</string>
     <string name="title_activity_main">Map</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
@@ -12,4 +12,11 @@
     <string name="menu_search">test</string>
     <string name="search_hint" />
     <string name="app_label" />
+    <string name="btn_image" />
+    <string name="title_activity_details">Details</string>
+    <string name="title_activity_recherche">Recherche</string>
+
+<!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_demarrage">Demarrage</string>
 </resources>

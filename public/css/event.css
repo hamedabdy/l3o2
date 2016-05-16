@@ -4,18 +4,15 @@ body {
 
 section {
     background: #EEE none repeat scroll 0% 0%;
-    margin-left: 50%;
-    transform: translate(-50%);
     padding: 3% 5% 5% 5%;
-    display: inline-block;
+    display: block;
     width: 50%;
+    margin: 0 auto;
 }
 
 button {
-    position: absolute;
-    right: 0;
-    margin-top: 10px;
-    transform: translate(-100%);
+    margin-top: 15px;
+    width: 100%;
 }
 
 .logo {
@@ -28,7 +25,7 @@ button {
 }
 
 .logo img {
-    width: 100%;
+    width: 80%;
 }
 
 .logo > h1 {
@@ -57,4 +54,16 @@ fieldset {
 
 #latlng {
     display: none;
+}
+
+.datepicker_table, .datepicker_timelist {
+    border-spacing: initial;
+    border-collapse: initial;
+    box-sizing: unset;
+    -moz-box-sizing: unset;
+    -webkit-box-sizing: unset;
+}
+
+.datepicker_table td {
+    padding: 5px;
 }

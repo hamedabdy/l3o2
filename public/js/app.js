@@ -359,15 +359,13 @@ function initLocation(query, concerts) {
 function setUserLocation(query, concerts) {
     newGoogleMap(query.lat, query.lng, function(carte) {
         carte.panTo(new google.maps.LatLng(query.lat, query.lng));
-        var pinColor = "#79CDCD";
-        var pinImage = new google.maps.MarkerImage(
-            "http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|"
-            + pinColor, new google.maps.Size(21, 34),
-            new google.maps.Point(0, 0), new google.maps.Point(10,34));
+        var pinImage = new google.maps.MarkerImage("images/pin01.png"
+            , new google.maps.Size(17, 24)
+            , new google.maps.Point(0, 0)
+            , new google.maps.Point(10,34));
         var marqueur = new google.maps.Marker({
             position : new google.maps.LatLng(query.lat, query.lng),
             map : carte,
-            title : "Your Location",
             icon : pinImage
         });
         var myWindowOptions = { content : '<h5>Your Location</h5>'};
@@ -397,9 +395,14 @@ function newOverlay(carte, concerts, oms){
     var share = {};
     shareButtons(concerts, function(shareBtns){ share = shareBtns });
     var loc = new google.maps.LatLng(concerts.latlng[0], concerts.latlng[1]);
+    var pinImage = new google.maps.MarkerImage("images/pin03.png"
+        , new google.maps.Size(32, 37)
+        , new google.maps.Point(0, 0)
+        , new google.maps.Point(15,34));
     var lemarqueur = new google.maps.Marker({
         position: loc,
-        title: concerts.title
+        title: concerts.title,
+        icon : pinImage
     });
     oms.addMarker(lemarqueur);
     var imageAlt = concerts.title;

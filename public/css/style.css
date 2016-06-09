@@ -461,6 +461,23 @@ input:invalid {
     background-color: #2A5DB0;
 }
 
+.tile-title > div {
+    white-space: nowrap;
+}
+
+.tile-txt:hover {
+    animation: tile-txt 5s linear infinite;
+}
+
+@keyframes tile-txt {
+    0% {
+        transform: translateX(0%);
+    }
+    100% {
+        transform: translateX(-100%);
+    }
+}
+
 .tile-body {
     font: 12px Lato, Arial, sans-serif;
     max-height: 90px;

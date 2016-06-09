@@ -29,16 +29,23 @@
 
 <%- include('footer', {location: '<p>Recommending events based on your ip location: ' + loc + '</p>', extra_deps: ''}); %>
     
-	<script type="text/javascript" src="//cdn.rawgit.com/WickyNilliams/headroom.js/v0.7.0/dist/headroom.min.js"></script>
-	<script>
+    <script type="text/javascript" src="//cdn.rawgit.com/WickyNilliams/headroom.js/v0.7.0/dist/headroom.min.js"></script>
+    <script>
         $(document).ready(function(){
-          	$( 'body' ).addClass( 'page-loaded' );
-          	//Headroom
-          	var topNav = document.querySelector('#top-nav');
-          	// construct an instance of Headroom, passing the element
-			var headroom  = new Headroom(topNav);
-			// initialise
-			headroom.init();
+            $( 'body' ).addClass( 'page-loaded' );
+            //Headroom
+            var topNav = document.querySelector('#top-nav');
+            // construct an instance of Headroom, passing the element
+            var headroom  = new Headroom(topNav);
+            // initialise
+            headroom.init();
+            // Text overflow detection
+            $('.tile-title').each(function(i, e) {
+                if (e.scrollWidth > $(e).innerWidth()) {
+                    $(this).find('div').addClass(' tile-txt ');
+                }
+            });
+
         });
     </script>
 </body>

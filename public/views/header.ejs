@@ -11,7 +11,7 @@
     <div class="main" id="infoBtn">
         <section>
             <button id="showRight" title="More info...">
-                <img src="images/menu.png" alt="Options">
+                <i class="fui-list"></i>
             </button>
         </section>
     </div>
@@ -24,10 +24,16 @@
         <div class="form-holder form-holder-transition" id="form-holder">
             <form class="form-wrapper cf" id="myForm" name="searchBar" method="GET" action="/m">
                 <button id="geolocate" class="form-wraper-location" type="button">
-                    <img src="images/marker.png" title="Press to get geolocated" alt="Press to get geolocated" />
+                    <i class="fui-location"></i>
                 </button>
-                <input id="address" name="address" type="text" class="form-wrapper-input" placeholder="Where?" required/>
-                <input type="text" name="artist" id="artist" class="form-wrapper-input artist-input" placeholder="Who?"/>
+                <div>
+                    <input id="address" name="address" type="text" class="form-wrapper-input" placeholder="Where?" required/>
+                    <i class="fui-cross-circle clear-address"></i>
+                </div>
+                <div>
+                    <input type="text" name="artist" id="artist" class="form-wrapper-input artist-input" placeholder="Who?"/>
+                    <i class="fui-cross-circle clear-artist"></i>
+                </div>
                 <input type="hidden" name="lat" id="lat" />
                 <input type="hidden" name="lng" id="lng" />
                 <div class="sliderContainer" title="Use the handle to change range">
@@ -35,7 +41,7 @@
                 </div>
                 <input type="text" id="amount" class="form-wraper-amount" title="Range" name="range" readonly="true" />
                 <button id="valider" class="form-wrapper-button" type="submit">
-                    <img src="images/search.png" alt="Search">
+                    <i class="flaticon-magnifying-glass"></i>
                 </button>
             </form>
         </div>

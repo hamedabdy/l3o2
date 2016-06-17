@@ -13,7 +13,7 @@
 </div>
 
 <div class="page-nav">
-    <a href="/?p=<%=(parseInt(p)-1)%>" id="prev-page" style="<% if ( parseInt(p) == 1 ){%>visibility:hidden;<%}%> font-family:web-symbols;"><</a>
+    <a href="/?p=<%=(parseInt(p)-1)%>" id="prev-page" style="<% if ( parseInt(p) == 1 ){%>visibility:hidden;<%}%>"><i class="fui-arrow-left"></i></a>
     <% if (parseInt(p) > 1 ){%><a href="/?p=1">1</a>
     <% } if(parseInt(p) >= 4 ) { %>
         <a href="/?p=<%=(parseInt(p)-2)%>"><%=(parseInt(p)-2)%></a>
@@ -24,7 +24,7 @@
     <%if(parseInt(p) <= totalPages-2){%> <a href="/?p=<%=(parseInt(p)+1)%>"><%=(parseInt(p)+1)%></a> <%}%>
     <%if(parseInt(p) <= (totalPages-3)){%> <a href="/?p=<%=(parseInt(p)+2)%>"><%=(parseInt(p)+2)%></a> <%}%>
     <%if(totalPages > 0 && parseInt(p) != totalPages ){%> <a href="/?p=<%=totalPages%>"><%=totalPages%>%> </a> <%}%>
-    <a href="/?p=<%=(parseInt(p)+1)%>" id="next-page" style="<% if( totalPages == 0 || parseInt(p) == totalPages ){%>visibility:hidden;<%}%> font-family:web-symbols;">></a>
+    <a href="/?p=<%=(parseInt(p)+1)%>" id="next-page" style="<% if( totalPages == 0 || parseInt(p) == totalPages ){%>visibility:hidden;<%}%>"><i class="fui-arrow-right"></i></a>
 </div>
 
 <%- include('footer', {location: '<p>Recommending events based on your ip location: ' + loc + '</p>', extra_deps: ''}); %>
@@ -39,13 +39,6 @@
             var headroom  = new Headroom(topNav);
             // initialise
             headroom.init();
-            // Text overflow detection
-            $('.tile-title').each(function(i, e) {
-                if (e.scrollWidth > $(e).innerWidth()) {
-                    $(this).find('div').addClass(' tile-txt ');
-                }
-            });
-
         });
     </script>
 </body>

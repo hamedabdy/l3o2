@@ -184,6 +184,24 @@ $('.shareBtns').children('a').on('click', function(e){
 
 
 // -------------  TOOLS  --------------
+
+// Text overflow detection
+$('.tile-title').each(function(i, e) {
+    if (e.scrollWidth > $(e).innerWidth()) {
+        $(this).find('div').addClass(' tile-txt ');
+    }
+});
+
+// Clear button for inputs
+$("#artist, #address").change(function(){
+    $(this).next().css('display', 'initial');
+});
+
+$('[class*=clear-').on('click', function(){
+    $(this).prev().val('');
+    $(this).css('display', 'none');
+});
+
 /*
  * Address AutoComplete JQuery
  */

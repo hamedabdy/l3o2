@@ -114,7 +114,6 @@ li {
 .logo {
     width: 150px;
     background-size: 200px 90px;
-    margin: 10px 0 0 0;
     position: relative;
     left: 2%;
     z-index: 1;
@@ -130,12 +129,11 @@ li {
 
 .header {
     width: 100%;
-    height: 100px;
+    height: 70px;
     margin-bottom: 5px;
     position: fixed;
     top: 0;
     z-index: 3;
-    background: url("../images/tweed.png");
 }
 
 .header::after {
@@ -148,10 +146,11 @@ li {
     background: transparent url("../images/tweed.png") repeat scroll 0% 0%;
 }
 
+
 .header-nav {
     width: inherit;
     background-color: #333;
-    margin-top: 17px;
+    margin-top: -2px;
     box-shadow: 0px 3px 3px #311 inset;
     padding-top: 7px;
     text-align: center;
@@ -250,29 +249,20 @@ li {
 /*-------------------------------------*/
 
 .form-holder {
-    transition: all 0.7s linear 0s;
-    position: fixed;
+    position: absolute;
     left: 50%;
     z-index: 2;
     height: 0;
-    top: 10px;
+    top: 15px;
     transform: translate(-50%);
 }
 
 .form-wrapper {
-    transition: all 0.3s ease 0s;
-    left: 350px;
-    width: 576px;
-    padding: 10px 10px 12px;
-    background: #444;
-    background: rgba(0,0,0,.2);
-    border-radius: 10px;
-    box-shadow: 0 1px 1px rgba(0,0,0,.4) inset, 0 1px 0 rgba(255,255,255,.2);
 }
 
 .form-wrapper-input {
     width: 340px;
-    height: 21px;
+    height: 15px;
     padding: 10px 190px 10px 45px;;
     float: left;
     font: bold 16px open-sans;
@@ -283,7 +273,7 @@ li {
 
 .clear-address, .clear-artist {
     position: absolute;
-    top: 23px;
+    top: 11px;
     display: none;
 }
 
@@ -320,16 +310,16 @@ input:invalid {
     border: 0;
     padding: 0;
     cursor: pointer;
-    height: 35px;
+    height: 42px;
     width: 35px;
     background: #d83c3c;
-    border-radius: 3px;
     color: #fff;
     font-size: 1.3em;
+    z-index: 1;
 }
 
 .form-wrapper-button {
-    margin: 3px -39px;
+    right: 0;
 }
 
 .form-wrapper-button:hover,
@@ -346,8 +336,6 @@ input:invalid {
 }
 
 .form-wraper-location {
-   margin: 3px;
-   left: 11px;
 }
 
 .form-wraper-amount {
@@ -357,6 +345,7 @@ input:invalid {
    text-align: center;
    margin: 42px -39px;
    font-weight: 300;
+   display: none;
 }
 
 .ui-widget-header {
@@ -367,26 +356,25 @@ input:invalid {
 .ui-widget-content {
     background: none;
     border: none;
+    height: 7px;
 }
 
 .sliderContainer {
     background: #eee;
-    width: 520px;
+    width: 561px;
     position: relative;
     float: left;
-    padding-right: 55px;
-    border-right: 0px solid #D83C3C;
-    border-bottom: 0px solid #D83C3C;
+    padding: 0 40px 0 35px;
 }
 
 .ui-slider-handle {
     margin-left: -2px !important;
-    width: 11px !important;
-    height: 11px !important;
+    width: 9px !important;
+    height: 9px !important;
     cursor: move !important;
     margin: 4px 0px 0px 0px;
-    border: 2px solid #FAFAFA !important;
-    box-shadow: 0px 1px 2px rgba(34, 25, 25, 0.4);
+    background: #aaa !important;
+    border: 0 !important;
 }
 
 .form-wraper-range-extended {
@@ -593,12 +581,13 @@ a {
     position: fixed;
     z-index: 5;
     right: 0;
-    top: 23px;
+    top: 15px;
 }
 
 .main > section button {
     transform: translateX(-100%);
     border-radius: 3px 0 0 3px;
+    height: 35px;
 }
 
 .main > section button:disabled {

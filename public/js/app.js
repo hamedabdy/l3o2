@@ -235,8 +235,8 @@ $( "#range" ).slider({
         range: "min",
         orientation: "horizontal",
         min: 5,
-        max: 500,
-        value: 10,
+        max: 150,
+        value: 20,
         animate : "slow",
         slide: function() {
                 $( "#amount" ).val($( "#range" ).slider( "value" ) + " km");

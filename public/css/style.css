@@ -356,7 +356,7 @@ input:invalid {
 .ui-widget-content {
     background: none;
     border: none;
-    height: 7px;
+    height: 100%;
 }
 
 .sliderContainer {
@@ -365,6 +365,7 @@ input:invalid {
     position: relative;
     float: left;
     padding: 0 40px 0 35px;
+    height: 7px;
 }
 
 .ui-slider-handle {
@@ -428,7 +429,7 @@ input:invalid {
 /* ------------ TILES.CSS ------------ */
 .tiles-container {
     text-align: center;
-    margin: 135px auto auto auto;
+    margin: 100px auto auto auto;
 }
 
 .tiles-box {
@@ -712,20 +713,17 @@ a {
 
 /* ------------- MEDIA.CSS ---------- */
 @media screen and (max-width: 900px){
+
     .header {
-        height: 81px;
+        height: 65px;
     }
 
     .logo {
         background: url(../images/logo-minimized.png) no-repeat;
-        width: 60px;
-        height: 60px;
-        background-size: 60px 60px;
+        width: 50px;
+        height: 50px;
+        background-size: 50px 50px;
         top: 10px;
-    }
-
-    .header {
-        height: 110px;
     }
 
     .logo img {
@@ -737,15 +735,20 @@ a {
     }
 
     .form-wrapper-input {
-       width: 195px;
-       height: 36px;
-       padding: 5px 190px 5px 45px;
+       width: 221px;
+       padding: 7px 3px 7px 35px;
     }
 
+    .form-wrapper-button,
+    .form-wraper-location, 
+    .main section button {
+       height: 36px;
+       width: 30px;
+    }
+
+
     .form-wrapper-button {
-       height: 35px;
-       width: 35px;
-       margin: 5px -38px;
+       right: -20px;
     }
 
     .sliderContainer {
@@ -754,6 +757,7 @@ a {
 
     .form-wraper-range {
        width: 380px;
+       left: -5px;
     }
 
     .form-wraper-amount {
@@ -764,23 +768,20 @@ a {
     }
 
     .form-wraper-location {
-        height: 35px;
-        width: 35px;
-        margin-top: 5px;
     }
 
     .artist-input {
-        right: 10px;
-        padding: 5px 38px 5px 10px;
-        width: 135px;
+        right: 0;
+        padding: 7px 13px 7px 7px;
+        width: 150px;
     }
 
     .header-nav {
-        margin-top: 40px;
+        margin-top: 15px;
     }
 
     .tiles-container {
-        margin-top: 140px;
+        margin-top: 100px;
     }
 
     #mini-tiles-box {
@@ -797,57 +798,45 @@ a {
 
 @media screen and (max-width: 480px){
     .header {
-        height: 81px;
+        height: 55px;
     }
 
     .form-wrapper {
-        margin-top: 0;
         width: 275px;
-        padding: 5px 5px 6px ;
-        border-radius: 5px;
     }
 
     .form-wrapper-input {
-        width: 110px;
-        height: 24px;
-        padding: 5px 130px 5px 35px;
+        width: 140px;
+        height: 20px;
+        padding: 3px 3px 3px 30px;
         font-size: 9pt;
     }
 
     .clear-address, .clear-artist {
-        top: 13px;
+        top: 10px;
     }
 
     .clear-address {
-        right: 135px;
+        right: 125px;
     }
 
     .form-wrapper-button,
     .form-wraper-location,
     .form-wraper-amount,
     .main > section button {
-        height: 25px;
+        height: 35px;
         width: 25px;
         font-size: 1em;
     }
 
-    .form-wrapper-button {
-        margin: 4px -29px;
-    }
-
-    .form-wraper-location {
-        margin: 4px;
-        left: 5px;
-    }
-
     .artist-input {
-        padding: 5px 35px 5px 10px;
-        width: 80px;
+        padding: 3px 3px 3px 5px;
+        width: 93px;
         right: 5px;
     }
 
     .clear-artist {
-        right: 40px;
+        right: 20px;
     }
 
     .form-wraper-amount {
@@ -858,18 +847,19 @@ a {
     }
 
     .sliderContainer {
-        width: 220px;
+        width: 205px;
+        height: 9px;
     }
 
     .form-wraper-range {
-        width: 235px;
-        height: 10px;
+        width: 122%;
+        left: -10px;
     }
 
     .ui-slider-handle {
-       top: -6px !important;
-       height: 10px !important;
-       width: 10px !important;
+       top: -5px !important;
+       height: 11px !important;
+       width: 11px !important;
     }
 
     .logo {
@@ -908,12 +898,12 @@ a {
     }
 
     .header-nav {
-        margin-top: 81px;
+        margin-top: 55px;
     }
 
     /*--------- TILES ---------*/
     .tiles-container {
-        margin-top: 110px;
+        margin-top: 85px;
     }
 
     .tile {

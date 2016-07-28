@@ -177,7 +177,7 @@ $('.shareBtns').children('a').on('click', function(e){
             g = (jQuery(window).width() - e) / 2,
             h = (jQuery(window).height() - f) / 2,
             i = "status=1,width=" + e + ",height=" + f + ",top=" + h + ",left=" + g;
-        window.open($(this).attr("href"), "Maf Business", i);
+        window.open($(this).attr("href"), "Le Concert d'a Coté", i);
     });
 
 // ------------ END of METHODS

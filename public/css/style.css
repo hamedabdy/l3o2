@@ -203,11 +203,7 @@ li {
 }
 
 #mini-tiles-box {
-    position: absolute;
-    left: 0;
-    bottom: 0;
-    width: 400px;
-    top: 135px;
+    margin-top: 100px;
 }
 
 .info-window-title {
@@ -257,13 +253,12 @@ li {
     transform: translate(-50%);
 }
 
-.form-wrapper {
-}
+.form-wrapper { max-width: 670px; }
 
 .form-wrapper-input {
-    width: 340px;
+    width: 360px;
     height: 15px;
-    padding: 10px 190px 10px 45px;;
+    padding: 18px 0 17px 10px;;
     float: left;
     font: bold 16px open-sans;
     border: 0;
@@ -271,19 +266,7 @@ li {
     border-radius: 0;
 }
 
-.clear-address, .clear-artist {
-    position: absolute;
-    top: 11px;
-    display: none;
-}
-
-.clear-address {
-    right: 205px;
-}
-
-.clear-artist {
-    right: 60px;
-}
+#address { margin-left: 35px; }
 
 input:invalid {
   box-shadow: none;
@@ -391,6 +374,7 @@ input:invalid {
     font-family: "Lato", "Lucida Grande", arial, sans-serif;
     background-color: #fff;
     z-index: 5;
+    height: initial;
 }
 
 .ui-menu-item {}
@@ -398,10 +382,9 @@ input:invalid {
 #ui-active-menuitem {}
 
 .artist-input {
-    padding: 10px 15px;
+    padding: 18px 0 17px 10px;
     position: absolute;
-    max-width: 150px;
-    right: 11px;
+    max-width: 240px;
     border-left: 1px dotted #d83c3c;
 }
 

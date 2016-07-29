@@ -515,7 +515,7 @@ a { text-decoration: none; }
     .logo img { display: none; }
     
     .form-wrapper { width: 430px; }
-    .form-wrapper-input {width: 194px; padding: 7px 30px 7px 5px; }
+    .form-wrapper-input {width: 194px; padding: 2px 30px 2px 5px; }
     #address { margin-left: 30px; }
     .clear-address, .clear-artist { top: 7px; }
     .clear-address { right: 174px; }
@@ -529,7 +529,7 @@ a { text-decoration: none; }
     .form-wraper-range { width: 380px; left: -5px; }
     .form-wraper-amount { margin: 47px -34px; width: 30px; font-weight: 300; font-size: 6pt; }
     .form-wraper-location {}
-    .artist-input { right: 10px; padding: 7px 5px 7px 25px; width: 130px; }
+    .artist-input { right: 10px; padding: 2px 5px 2px 25px; width: 130px; }
     
     .header-nav { margin-top: 15px; }
     

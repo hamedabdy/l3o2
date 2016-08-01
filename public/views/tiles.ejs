@@ -5,6 +5,7 @@
       for (var i = 0; i < l; i++) {
         var d = concerts[i];
         var cover = (d.img != null) ? (d.img).replace("/64/", "/126/") : 'noimage';
+        cover = cover.replace("http:", "");
         var latlng = 'lat=' + d.latlng[0] + '&lng=' + d.latlng[1];
         var artists = String(d.artist).replace(/,/g, ", ");
         if (artists.length > 40) artists = artists.substr(0, 40) + ' ...';
@@ -32,16 +33,16 @@
                         <span class="hidden" itemprop="description"><%-d.description%></span>
                     </div>
                     <div class="shareBtns">
-                        <a href="https://www.facebook.com/sharer/sharer.php?s=100&amp;p%5Burl%5D=<%=encodedURL%>&amp;p%5Btitle%5D=<%-String(d.title).replace(/ /g, '+').replace(/"/g, '')%>&amp;p%5Bsummary%5D=<%=summary%>&amp;p%5Bimages%5D%5B0%5D=<%=d.img%>" target="_blank">
+                        <a href="//www.facebook.com/sharer/sharer.php?s=100&amp;p%5Burl%5D=<%=encodedURL%>&amp;p%5Btitle%5D=<%-String(d.title).replace(/ /g, '+').replace(/"/g, '')%>&amp;p%5Bsummary%5D=<%=summary%>&amp;p%5Bimages%5D%5B0%5D=<%=d.img%>" target="_blank">
                             <img width="25" src="images/fb_1.png" alt="Share On Facebook" title="Share On Facebook"/>
                         </a>
-                        <a href="https://twitter.com/share?url=<%=encodedURL%>&amp;text=<%-String(d.title).replace(/ /g, '+').replace(/"/g, '')%>+<%-String(artists).replace(/ /g, '+')%>&amp;via=ConcertDaCote&amp;related=concertdacote,ConcertDaCote" target="_blank">
+                        <a href="//twitter.com/share?url=<%=encodedURL%>&amp;text=<%-String(d.title).replace(/ /g, '+').replace(/"/g, '')%>+<%-String(artists).replace(/ /g, '+')%>&amp;via=ConcertDaCote&amp;related=concertdacote,ConcertDaCote" target="_blank">
                             <img width="25" src="images/twitter_1.png" alt="Tweet" title="Tweet"/>
                         </a>
-                        <a href="https://plus.google.com/share?url=<%=encodedURL%>" target="_blank">
+                        <a href="//plus.google.com/share?url=<%=encodedURL%>" target="_blank">
                             <img width="25" src="images/google_plus.png" alt="Share on G+" title="Share On Google+"/>
                         </a>
-                        <a href="http://stumbleupon.com/submit?url=<%=encodedURL%>" target="_blank">
+                        <a href="//stumbleupon.com/submit?url=<%=encodedURL%>" target="_blank">
                             <img width="25" src="images/stumble_upon.png" alt="Stumble" title="Stumble"/>
                         </a>
                         <a target="_blank" href="<%=d.url%>">

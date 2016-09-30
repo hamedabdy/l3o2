@@ -63,7 +63,7 @@ module.exports = function(app) {
         if(Object.keys(q).length != 0){
             res.locals.query = q;
             if (q.artist)
-                db.concerts.findAndModify({ query: { artist: q.artist }, update: { $inc: { score: 1 } } });
+                db.concerts.findAndModify({ query: { artist: q.artist }, update: { $inc: { score: 1 } } }, function() {});
             q.range = parseInt(q.range.split(' ')[0]);
             getConcerts(q.lat, q.lng, q.range, q.artist, '', '', 1, function(err, results){
                 if(!err) 
@@ -78,8 +78,11 @@ module.exports = function(app) {
         }
     });
 
+    /**
+     * Get event address from client's Google geolocation if unknown.
+     */
     app.put('/location', function(req, res){
-        db.concerts.findAndModify({ query: { '_id' : req.body['_id'] }, update: { $set: { address: req.body.address } } });
+        db.concerts.findAndModify({ query: { '_id' : req.body['_id'] }, update: { $set: { address: req.body.address } } }, function() {});
     });
 
     /*

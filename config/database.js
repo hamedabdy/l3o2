@@ -1,6 +1,5 @@
 #!/usr/bin/env node
 
-
 var prot = 'mongodb://';
 var db_user = 'concertdacote';
 var db_pass = 'Concertdacote789';

@@ -31,7 +31,8 @@
   "contributors": [
     {
       "name": "Hamed",
-      "email": "freeze2ice@gmail.com"
+      "email": "freeze2ice@gmail.com",
+      "url": "concert-dacote.com"
     }
   ],
   "main": "./l3o2",
@@ -39,6 +40,7 @@
     "type": "git",
     "url": "git://github.com/hamedabdy/l3o2.git"
   },
+  "license": "MIT",
   "engines": {
     "node": "~6.6.0"
   }

@@ -40,6 +40,6 @@
     "url": "git://github.com/hamedabdy/l3o2.git"
   },
   "engines": {
-    "node": "~0.10.0"
+    "node": "~6.6.0"
   }
 }

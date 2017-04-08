@@ -13,7 +13,7 @@
         var date = new Date(d.startDate);
         // date = (date.toDateString()).substr(0,10) + ' at ' + (date.toLocaleTimeString()).substr(0,5);
         var tz = date.getTimezoneOffset();
-        date = date.toLocaleDateString() + '  ' + (date.getHours() + tz).toLocaleString('en-US', {minimumIntegerDigits: 2, userGrouping: false}) + ':' + (date.getMinutes()).toLocaleString('en-US', {minimumIntegerDigits: 2, userGrouping: false}) + "timezone offset : " + tz;
+        date = date.toLocaleDateString() + '  ' + (date.getHours() + tz).toLocaleString('en-US', {minimumIntegerDigits: 2, userGrouping: false}) + ':' + (date.getMinutes()).toLocaleString('en-US', {minimumIntegerDigits: 2, userGrouping: false});
         var uri = '/m?'+latlng+'&range=10&artist='+artists[0];
         var encodedURL = encodeURIComponent(url+uri);
         var summary = String(d.artist).replace(/ /g, "+")+'+-+'+String(date).replace(/ /g, '+')+'+-+'+String(d.address).replace(/ /g, '+');

@@ -101,7 +101,9 @@ function reverseGeocode (latlng, fn) {
 }
 
 /**
- * Google Geocoder
+ * Google Geocoder : convert address to geo coordinates.
+ * input: textual address
+ * output: [latitude, longitude]
  */
 function geocodeAddress(address, fn) {
     var geocoder = new google.maps.Geocoder();
@@ -116,23 +118,38 @@ function geocodeAddress(address, fn) {
     });
 }
 
+/**
+ * Update windows url upon clicking on a tile.
+ */
 function updateUrl (lat, lng, range, artist) {
     window.history.pushState("", "", "?lat="+lat+"&lng="+lng+"&range="
         +range+"&artist="+artist);
 };
 
+/**
+ * Equivalent to updateUrl
+ */
 function assignUrl (lat, lng, range, artist) {
     location.assign('/m?lat='+lat+'&lng='+lng+'&range='+range+'&artist='+artist);
 };
 
+/**
+ * Incoming trafic from a url with params, form is filled in using params
+ */
 function updateFormFields (address, range, artist) {
     document.getElementById("address").value = decodeURIComponent(address);
     document.getElementById("artist").value = artist;
     $('#range').slider('value', range);
 };
 
+/**
+ * Utility function to fill a var with a default value in case of undefined
+ */
 function defaultFor(arg, val) { return typeof arg !== 'undefined' ? arg : val; };
 
+/**
+ * Convert IP to geographical location using 3rd-party site
+ */
 function ipLocation(fn) {
     var url = '//ip-api.com/json/';
     $.ajax({
@@ -149,6 +166,9 @@ function ipLocation(fn) {
     });
 }
 
+/**
+ * Helper function: print alert messages on screen in HTML
+ */
 function printMsg(message) {
     $('#alert-msg').html(message);
     $('#alert-msg').delay(7000).slideUp('fast');
@@ -170,6 +190,9 @@ function shareButtons (data, fn) {
         return fn(shareBtns);
 };
 
+/*
+ * Open mini window for each social share button
+ */
 $('.shareBtns').children('a').on('click', function(e){
         e.preventDefault();
         var e = 575,
@@ -248,7 +271,7 @@ $( "#range" ).slider({
 $( "#amount" ).val($( "#range" ).slider( "value" ) + " km");
 
 /*
- * Right Pane
+ * Right slider Pane
  */
 var menuRight = document.getElementById( 'cbp-spmenu-s2' )
     , showRight = document.getElementById( 'showRight' )
@@ -338,6 +361,9 @@ $( '#geolocate' ).on( 'click', function(e){
     else printMsg("Your browser does not support HTML5 Geolocation!");
 });
 
+/**
+ * Initialze a new GMap using geo coords (inside map view)
+ */
 function newGoogleMap(ip_latitude, ip_longitude, fn) {
     var latlng = new google.maps.LatLng(ip_latitude, ip_longitude);
     var options = {
@@ -348,7 +374,9 @@ function newGoogleMap(ip_latitude, ip_longitude, fn) {
     carte = new google.maps.Map(document.getElementById("carte"), options);
     return fn(carte);
 };
-
+/**
+ * Initialize user location on GMap
+ */
 function initLocation(query, concerts) {
     if(query) {
         // Setting default values to range and artist

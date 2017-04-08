@@ -11,7 +11,8 @@
         if (artists.length > 40) artists = artists.substr(0, 40) + ' ...';
         var artists = artists.split(',');
         var date = new Date(d.startDate);
-        date = (date.toDateString()).substr(0,10) + ' at ' + (date.toLocaleTimeString()).substr(0,5);
+        // date = (date.toDateString()).substr(0,10) + ' at ' + (date.toLocaleTimeString()).substr(0,5);
+        
         var uri = '/m?'+latlng+'&range=10&artist='+artists[0];
         var encodedURL = encodeURIComponent(url+uri);
         var summary = String(d.artist).replace(/ /g, "+")+'+-+'+String(date).replace(/ /g, '+')+'+-+'+String(d.address).replace(/ /g, '+');

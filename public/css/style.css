@@ -444,7 +444,7 @@ a { text-decoration: none; }
     height: 35px;
 }
 .main > section button:disabled { background: #aaa; pointer-events: none; }
-.info {color: #fff; padding: 0.8em; font-size: 0.85em; }
+.info, .cookies {color: #fff; padding: 0.8em; font-size: 0.85em; }
 
 /* ------------ COMPONENT.CSS ------------- */
 /* General styles for all menus */
